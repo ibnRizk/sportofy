@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/features/splash/presentation/screens/splash_screen.dart';
+import 'package:sportify_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:sportify_app/features/home/presentation/screens/home_screen.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -32,6 +34,34 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const SplashScreen();
+            },
+      ),
+      GoRoute(
+        path: Routes.onboardingRoute,
+        name: 'onboarding',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const OnboardingScreen();
+            },
+      ),
+      GoRoute(
+        path: Routes.homeScreenRoute,
+        name: 'home',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const HomeScreen();
+            },
+      ),
+      GoRoute(
+        path: Routes.loginScreenRoute,
+        name: 'login',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return Scaffold(
+                body: Center(
+                  child: Text('Login Screen - Coming Soon'),
+                ),
+              );
             },
       ),
     ],

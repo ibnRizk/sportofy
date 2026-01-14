@@ -48,4 +48,14 @@ class ImgAssets {
       'assets/images/sportify.png';
   static const String logoWithText =
       'assets/images/logo_with_text.png';
+
+  // Onboarding Assets
+  static const String onBoarding1 =
+      'assets/images/on_boarding1.png';
+  static const String onBoarding2 =
+      'assets/images/on_boarding2.png';
+  static const String onBoarding3 =
+      'assets/images/on_boarding3.png';
+  static const String onBoarding4 =
+      'assets/images/on_boarding4.png';
 }

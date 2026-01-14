@@ -38,6 +38,8 @@ class MyColors {
   // shared
   static Color borderColor = const Color(0xffCBCBCB);
   static Color review = const Color(0xffFFA534);
+  static const Color greenButton = Color(0xFF4CAF50);
+  static const Color greyText = Color(0xFF6B7280);
 }
 
 @immutable
