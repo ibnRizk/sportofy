@@ -60,6 +60,49 @@ class ImgAssets {
       'assets/images/on_boarding4.png';
 
   // Auth Assets
-  static const String egyptFlag =
-      'assets/images/egypt.png';
+  static const String egyptFlag = 'assets/images/egypt.png';
+
+  // Home Assets
+  static const String stadiumsCategory =
+      'assets/images/staduims.png';
+  static const String matchesCategory =
+      'assets/images/matches.png';
+  static const String tournamentsCategory =
+      'assets/images/tournament.png';
+  static const String mohamedAhmed =
+      'assets/images/mohamed_ahmed.png';
+  static const String salahMostafa =
+      'assets/images/salah_mostafa.png';
+  static const String organization =
+      'assets/images/organization.png';
+  static const String team3 = 'assets/images/team3.png';
+  static const String team3Svg = 'assets/icons/team3.svg';
+  static const String team5Svg = 'assets/icons/team5.svg';
+  static const String userAvatar =
+      'assets/images/Ellipse 17.png';
+  static const String icNotification =
+      'assets/icons/notification.svg';
+  static const String icChat = 'assets/icons/Chat.svg';
+
+  // Drawer Menu Icons
+  static const String icMenuActivity =
+      'assets/icons/activity.svg';
+  static const String icMenuPoints =
+      'assets/icons/points-1.svg';
+  static const String icMenuWallet =
+      'assets/icons/wallet.svg';
+  static const String icMenuCart =
+      'assets/icons/My cart.svg';
+  static const String icMenuTournaments =
+      'assets/icons/Tournaments-1.svg';
+  static const String icMenuOrders =
+      'assets/icons/My Orders.svg';
+  static const String icMenuContact =
+      'assets/icons/Contact us.svg';
+  static const String icMenuAbout =
+      'assets/icons/About us.svg';
+  static const String icMenuLanguage =
+      'assets/icons/not setting.svg';
+  static const String icMenuLogout =
+      'assets/icons/log out.svg';
 }

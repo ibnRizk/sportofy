@@ -107,6 +107,7 @@ dev_dependencies:
   go_router_builder: ^2.7.1
   injectable_generator: ^2.6.2
   build_runner: ^2.4.13
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
 
@@ -133,3 +134,14 @@ flutter:
           weight: 500
         - asset: assets/fonts/Inter/Inter-Regular.ttf
           weight: 400
+
+# ═══════════════════════════════════════════════
+# LAUNCHER ICON CONFIGURATION
+# ═══════════════════════════════════════════════
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/sportify_app_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"
