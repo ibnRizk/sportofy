@@ -109,4 +109,16 @@ class ImgAssets {
   // Profile/Team Assets
   static const String imgConnectFriends =
       'assets/images/img_connect_friends.png';
+
+  // Payment Assets
+  static const String sportifyWallet =
+      'assets/images/sportfiy_wallet.png';
+  static const String vodafoneCash =
+      'assets/images/vod_cash.png';
+  static const String creditCard =
+      'assets/images/Credit Card.png';
+  static const String cashMoney =
+      'assets/images/Money.png';
+  static const String sharingSubscription =
+      'assets/images/sharing_subscribtion.png';
 }

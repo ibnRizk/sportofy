@@ -18,6 +18,11 @@ import 'package:sportify_app/features/wallet/presentation/views/wallet_view.dart
 import 'package:sportify_app/features/orders/presentation/views/my_orders_view.dart';
 import 'package:sportify_app/features/orders/presentation/views/order_details_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/my_tournaments_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/tournaments_list_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/match_details_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/tournament_details_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/joined_teams_view.dart';
+import 'package:sportify_app/features/payment/presentation/pages/payment_test_page.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -40,6 +45,13 @@ class Routes {
   static const String myOrdersRoute = '/my-orders';
   static const String orderDetailsRoute = '/order-details';
   static const String tournamentsRoute = '/tournaments';
+  static const String tournamentsListRoute =
+      '/tournaments-list';
+  static const String matchDetailsRoute = '/match-details';
+  static const String paymentTestRoute = '/payment-test';
+  static const String tournamentDetailsRoute =
+      '/tournament-details';
+  static const String joinedTeamsRoute = '/joined-teams';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -194,6 +206,46 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const MyTournamentsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.tournamentsListRoute,
+        name: 'tournamentsList',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const TournamentsListView();
+            },
+      ),
+      GoRoute(
+        path: Routes.matchDetailsRoute,
+        name: 'matchDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const MatchDetailsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.tournamentDetailsRoute,
+        name: 'tournamentDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const TournamentDetailsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.paymentTestRoute,
+        name: 'paymentTest',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const PaymentTestPage();
+            },
+      ),
+      GoRoute(
+        path: Routes.joinedTeamsRoute,
+        name: 'joinedTeams',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const JoinedTeamsView();
             },
       ),
     ],

@@ -1,0 +1,201 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class MatchDetailsView extends StatelessWidget {
+  const MatchDetailsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers: [
+          // Hero Image with AppBar
+          SliverAppBar(
+            expandedHeight: 200.h,
+            pinned: true,
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              icon: Container(
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 20.w,
+                ),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+            actions: [
+              IconButton(
+                icon: Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.share,
+                    color: Colors.black,
+                    size: 20.w,
+                  ),
+                ),
+                onPressed: () {
+                  // TODO: Implement share
+                },
+              ),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                'Tournament',
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              background: Image.asset(
+                'assets/images/yard_playground.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+
+          // Content
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // About Section
+                  Text(
+                    'About',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey[700],
+                      height: 1.5,
+                    ),
+                  ),
+
+                  SizedBox(height: 24.h),
+
+                  // Schedule Section
+                  Text(
+                    'Schedule',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+
+                  // Date Range
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Starting: 15 Aug 2023',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Ending: 25 Aug 2023',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Round Options
+                  _buildRoundOption('Round of 32'),
+                  SizedBox(height: 12.h),
+                  _buildRoundOption('Round of 16'),
+                  SizedBox(height: 12.h),
+                  _buildRoundOption('Round of 8'),
+                  SizedBox(height: 12.h),
+                  _buildRoundOption('Semi final'),
+                  SizedBox(height: 12.h),
+                  _buildRoundOption('Final'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRoundOption(String title) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 14.h,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.grey[300]!,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 16.w,
+            color: Colors.grey[600],
+          ),
+        ],
+      ),
+    );
+  }
+}

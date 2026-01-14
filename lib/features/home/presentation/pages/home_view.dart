@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/features/home/presentation/widgets/home_header.dart';
@@ -63,7 +65,11 @@ class HomeView extends StatelessWidget {
                         image:
                             ImgAssets.tournamentsCategory,
                         title: 'tournaments'.tr(context),
-                        onTap: () {},
+                        onTap: () {
+                          context.push(
+                            Routes.tournamentsListRoute,
+                          );
+                        },
                       ),
                     ),
                   ],
