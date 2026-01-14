@@ -58,4 +58,8 @@ class ImgAssets {
       'assets/images/on_boarding3.png';
   static const String onBoarding4 =
       'assets/images/on_boarding4.png';
+
+  // Auth Assets
+  static const String egyptFlag =
+      'assets/images/egypt.png';
 }

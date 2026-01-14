@@ -53,7 +53,7 @@ class _OnboardingScreenState
   }
 
   void _navigateToLogin() {
-    context.go(Routes.loginScreenRoute);
+    context.go(Routes.loginRoute);
   }
 
   void _skip() {

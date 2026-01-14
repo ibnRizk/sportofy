@@ -63,5 +63,22 @@
   "onboarding3_description": "Book your favorite stadium, and enjoy playing with your friends",
   "onboarding4_title": "Play and get points",
   "onboarding4_description": "Play and get points to get a discount on your purchases",
-  "login": "Login"
+  "login": "Login",
+  "welcome_emoji": "Welcome 😊",
+  "what_is_mobile": "What is your mobile number?",
+  "send_code_verify": "We will send a code to verify the mobile number below",
+  "enter_phone": "Enter your Phone number",
+  "continue": "Continue",
+  "enter_verification_code": "Enter the verification code",
+  "enter_code_sent": "Please enter the 4 digital code sent to your mobile number",
+  "confirm": "Confirm",
+  "didnt_receive_code": "Didn't receive a code?",
+  "send_again": "Send again",
+  "setup_profile": "Setup your profile",
+  "full_name": "Full name",
+  "email_optional": "Email Address (optional)",
+  "gender": "Gender",
+  "date_of_birth": "Date of birth",
+  "male": "Male",
+  "female": "Female"
 }

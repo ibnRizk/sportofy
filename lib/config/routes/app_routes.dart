@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:sportify_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:sportify_app/features/home/presentation/screens/home_screen.dart';
+import 'package:sportify_app/features/auth/presentation/pages/login_view.dart';
+import 'package:sportify_app/features/auth/presentation/pages/otp_view.dart';
+import 'package:sportify_app/features/auth/presentation/pages/setup_profile_view.dart';
+import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -12,6 +17,9 @@ class Routes {
   static const String initialRoute = '/';
   static const String onboardingRoute = '/onboarding';
   static const String homeScreenRoute = '/home';
+  static const String loginRoute = '/login';
+  static const String otpRoute = '/otp';
+  static const String setupProfileRoute = '/setup-profile';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -53,14 +61,38 @@ class AppRoutes {
             },
       ),
       GoRoute(
-        path: Routes.loginScreenRoute,
-        name: 'login',
+        path: Routes.loginRoute,
+        name: 'auth_login',
         builder:
             (BuildContext context, GoRouterState state) {
-              return Scaffold(
-                body: Center(
-                  child: Text('Login Screen - Coming Soon'),
-                ),
+              return BlocProvider(
+                create: (context) => AuthCubit(),
+                child: const LoginView(),
+              );
+            },
+      ),
+      GoRoute(
+        path: Routes.otpRoute,
+        name: 'otp',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final phoneNumber =
+                  state.extra as String? ?? '';
+              return BlocProvider(
+                create: (context) =>
+                    AuthCubit()..startOtpTimer(),
+                child: OtpView(phoneNumber: phoneNumber),
+              );
+            },
+      ),
+      GoRoute(
+        path: Routes.setupProfileRoute,
+        name: 'setup_profile',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return BlocProvider(
+                create: (context) => AuthCubit(),
+                child: const SetupProfileView(),
               );
             },
       ),
