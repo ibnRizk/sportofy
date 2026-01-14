@@ -38,6 +38,14 @@ class ImgAssets {
   static const String splashTennis =
       'assets/images/tennisball.png';
   static const String appLogo = 'assets/images/logo.png';
+  static const String splashText =
+      'assets/images/image_app_name.png';
+  static const String splashSmallBall =
+      'assets/images/miniball.png';
   static const String appLogoText =
       'assets/images/logo_text.png';
+  static const String sportifyText =
+      'assets/images/sportify.png';
+  static const String logoWithText =
+      'assets/images/logo_with_text.png';
 }

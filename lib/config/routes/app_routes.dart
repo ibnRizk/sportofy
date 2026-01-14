@@ -8,6 +8,7 @@ import 'navigator_observer.dart';
 
 class Routes {
   static const String initialRoute = '/';
+  static const String onboardingRoute = '/onboarding';
   static const String homeScreenRoute = '/home';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
