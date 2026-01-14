@@ -9,10 +9,7 @@ import 'package:sportify_app/injection_container.dart';
 class CustomDrawer extends StatelessWidget {
   final bool isGuest;
 
-  const CustomDrawer({
-    super.key,
-    this.isGuest = true,
-  });
+  const CustomDrawer({super.key, this.isGuest = true});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,9 @@ class CustomDrawer extends StatelessWidget {
       width: 280.w, // ✅ Minimized drawer width
       child: Drawer(
         backgroundColor: context.colors.white,
-        child: isGuest ? _buildGuestDrawer(context) : _buildUserDrawer(context),
+        child: isGuest
+            ? _buildGuestDrawer(context)
+            : _buildUserDrawer(context),
       ),
     );
   }
@@ -31,7 +30,10 @@ class CustomDrawer extends StatelessWidget {
   Widget _buildGuestDrawer(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 24.w,
+          vertical: 20.h,
+        ),
         child: Column(
           children: [
             // Language Selector (Top Right)
@@ -49,9 +51,12 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: context.colors.textColor.withOpacity(0.2),
+                        color: context.colors.textColor
+                            .withOpacity(0.2),
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(
+                        20.r,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -86,7 +91,9 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
-                color: context.colors.textColor.withOpacity(0.7),
+                color: context.colors.textColor.withOpacity(
+                  0.7,
+                ),
                 height: 1.5,
               ),
             ),
@@ -105,7 +112,9 @@ class CustomDrawer extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -128,7 +137,9 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: context.colors.textColor.withOpacity(0.6),
+                color: context.colors.textColor.withOpacity(
+                  0.6,
+                ),
               ),
             ),
 
@@ -150,7 +161,9 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
                   ),
                 ),
                 child: Text(
@@ -187,7 +200,9 @@ class CustomDrawer extends StatelessWidget {
                 // User Avatar
                 CircleAvatar(
                   radius: 28.r,
-                  backgroundImage: AssetImage(ImgAssets.userAvatar),
+                  backgroundImage: AssetImage(
+                    ImgAssets.userAvatar,
+                  ),
                 ),
 
                 SizedBox(width: 12.w),
@@ -195,7 +210,8 @@ class CustomDrawer extends StatelessWidget {
                 // User Info
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -204,13 +220,16 @@ class CustomDrawer extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
-                              color: context.colors.textColor,
+                              color:
+                                  context.colors.textColor,
                             ),
                           ),
                           SizedBox(width: 4.w),
                           Text(
                             '👋',
-                            style: TextStyle(fontSize: 16.sp),
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                            ),
                           ),
                         ],
                       ),
@@ -239,7 +258,9 @@ class CustomDrawer extends StatelessWidget {
           Divider(
             height: 1,
             thickness: 1,
-            color: context.colors.textColor.withOpacity(0.1),
+            color: context.colors.textColor.withOpacity(
+              0.1,
+            ),
           ),
 
           // Menu Items with Dividers
@@ -251,10 +272,15 @@ class CustomDrawer extends StatelessWidget {
                 height: 1,
                 thickness: 1,
                 indent: 60.w,
-                color: context.colors.textColor.withOpacity(0.05),
+                color: context.colors.textColor.withOpacity(
+                  0.05,
+                ),
               ),
               itemBuilder: (context, index) {
-                return _buildMenuItemByIndex(context, index);
+                return _buildMenuItemByIndex(
+                  context,
+                  index,
+                );
               },
             ),
           ),
@@ -278,7 +304,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                   borderRadius: BorderRadius.circular(12.r),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment:
+                        MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.logout,
@@ -306,15 +333,33 @@ class CustomDrawer extends StatelessWidget {
   }
 
   // Helper method to build menu items by index
-  Widget _buildMenuItemByIndex(BuildContext context, int index) {
+  Widget _buildMenuItemByIndex(
+    BuildContext context,
+    int index,
+  ) {
     final menuItems = [
       {'iconData': Icons.refresh, 'title': 'My Activity'},
       {'iconData': Icons.star_border, 'title': 'Points'},
-      {'iconData': Icons.account_balance_wallet_outlined, 'title': 'Wallet'},
-      {'iconData': Icons.shopping_cart_outlined, 'title': 'My Cart'},
-      {'iconData': Icons.emoji_events_outlined, 'title': 'Tournaments'},
-      {'iconData': Icons.receipt_long_outlined, 'title': 'My Orders'},
-      {'iconData': Icons.phone_outlined, 'title': 'Contact us'},
+      {
+        'iconData': Icons.account_balance_wallet_outlined,
+        'title': 'Wallet',
+      },
+      {
+        'iconData': Icons.shopping_cart_outlined,
+        'title': 'My Cart',
+      },
+      {
+        'iconData': Icons.emoji_events_outlined,
+        'title': 'Tournaments',
+      },
+      {
+        'iconData': Icons.receipt_long_outlined,
+        'title': 'My Orders',
+      },
+      {
+        'iconData': Icons.phone_outlined,
+        'title': 'Contact us',
+      },
       {'iconData': Icons.info_outline, 'title': 'About'},
       {'iconData': Icons.language, 'title': 'Language'},
     ];
@@ -326,9 +371,35 @@ class CustomDrawer extends StatelessWidget {
       title: item['title'] as String,
       onTap: () {
         Navigator.pop(context);
-        if (index == 8) {
-          // Language
-          _showLanguageDialog(context);
+        // Navigate based on index
+        switch (index) {
+          case 0: // My Activity
+            context.push('/my-activity');
+            break;
+          case 1: // Points
+            context.push('/points');
+            break;
+          case 2: // Wallet
+            context.push('/wallet');
+            break;
+          case 3: // My Cart
+            // TODO: Navigate to My Cart screen
+            break;
+          case 4: // Tournaments
+            context.push('/tournaments');
+            break;
+          case 5: // My Orders
+            context.push('/my-orders');
+            break;
+          case 6: // Contact us
+            // TODO: Navigate to Contact us screen
+            break;
+          case 7: // About
+            // TODO: Navigate to About screen
+            break;
+          case 8: // Language
+            _showLanguageDialog(context);
+            break;
         }
       },
     );
@@ -346,13 +417,18 @@ class CustomDrawer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+          vertical: 16.h,
+        ),
         child: Row(
           children: [
             Icon(
               iconData,
               size: 24.w,
-              color: context.colors.textColor.withOpacity(0.6),
+              color: context.colors.textColor.withOpacity(
+                0.6,
+              ),
             ),
             SizedBox(width: 16.w),
             Expanded(
@@ -452,7 +528,9 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
-                color: context.colors.textColor.withOpacity(0.6),
+                color: context.colors.textColor.withOpacity(
+                  0.6,
+                ),
               ),
             ),
           ),

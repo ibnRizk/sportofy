@@ -8,10 +8,16 @@ import 'package:sportify_app/features/auth/presentation/pages/login_view.dart';
 import 'package:sportify_app/features/auth/presentation/pages/otp_view.dart';
 import 'package:sportify_app/features/auth/presentation/pages/setup_profile_view.dart';
 import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:sportify_app/features/activity/presentation/views/my_activity_view.dart';
 import 'package:sportify_app/features/profile/presentation/pages/profile_view.dart';
 import 'package:sportify_app/features/profile/presentation/pages/my_team_view.dart';
 import 'package:sportify_app/features/profile/presentation/pages/edit_profile_view.dart';
 import 'package:sportify_app/features/community/presentation/pages/friends_view.dart';
+import 'package:sportify_app/features/points/presentation/views/points_view.dart';
+import 'package:sportify_app/features/wallet/presentation/views/wallet_view.dart';
+import 'package:sportify_app/features/orders/presentation/views/my_orders_view.dart';
+import 'package:sportify_app/features/orders/presentation/views/order_details_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/my_tournaments_view.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -28,6 +34,12 @@ class Routes {
   static const String friendsRoute = '/friends';
   static const String myTeamRoute = '/my-team';
   static const String editProfileRoute = '/edit-profile';
+  static const String myActivityRoute = '/my-activity';
+  static const String pointsRoute = '/points';
+  static const String walletRoute = '/wallet';
+  static const String myOrdersRoute = '/my-orders';
+  static const String orderDetailsRoute = '/order-details';
+  static const String tournamentsRoute = '/tournaments';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -134,6 +146,54 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const EditProfileView();
+            },
+      ),
+      GoRoute(
+        path: Routes.myActivityRoute,
+        name: 'myActivity',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const MyActivityView();
+            },
+      ),
+      GoRoute(
+        path: Routes.pointsRoute,
+        name: 'points',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const PointsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.walletRoute,
+        name: 'wallet',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const WalletView();
+            },
+      ),
+      GoRoute(
+        path: Routes.myOrdersRoute,
+        name: 'myOrders',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const MyOrdersView();
+            },
+      ),
+      GoRoute(
+        path: Routes.orderDetailsRoute,
+        name: 'orderDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const OrderDetailsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.tournamentsRoute,
+        name: 'tournaments',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const MyTournamentsView();
             },
       ),
     ],
