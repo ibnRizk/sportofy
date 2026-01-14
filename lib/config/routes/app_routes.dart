@@ -9,6 +9,8 @@ import 'package:sportify_app/features/auth/presentation/pages/otp_view.dart';
 import 'package:sportify_app/features/auth/presentation/pages/setup_profile_view.dart';
 import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:sportify_app/features/profile/presentation/pages/profile_view.dart';
+import 'package:sportify_app/features/profile/presentation/pages/my_team_view.dart';
+import 'package:sportify_app/features/profile/presentation/pages/edit_profile_view.dart';
 import 'package:sportify_app/features/community/presentation/pages/friends_view.dart';
 
 import '../../core/utils/app_strings.dart';
@@ -24,6 +26,8 @@ class Routes {
   static const String setupProfileRoute = '/setup-profile';
   static const String profileRoute = '/profile';
   static const String friendsRoute = '/friends';
+  static const String myTeamRoute = '/my-team';
+  static const String editProfileRoute = '/edit-profile';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -114,6 +118,22 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const FriendsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.myTeamRoute,
+        name: 'myTeam',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const MyTeamView();
+            },
+      ),
+      GoRoute(
+        path: Routes.editProfileRoute,
+        name: 'editProfile',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const EditProfileView();
             },
       ),
     ],

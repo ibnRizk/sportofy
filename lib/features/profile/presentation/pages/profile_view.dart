@@ -348,32 +348,38 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.w,
                 ),
-                child: _buildProfileCard(
-                  child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'My Teams',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700,
-                          color: context.colors.textColor,
+                child: InkWell(
+                  onTap: () {
+                    context.push(Routes.myTeamRoute);
+                  },
+                  borderRadius: BorderRadius.circular(12.r),
+                  child: _buildProfileCard(
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'My Teams',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                            color: context.colors.textColor,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        'This teams to join the tournaments',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: context.colors.textColor
-                              .withOpacity(0.5),
+                        SizedBox(height: 4.h),
+                        Text(
+                          'This teams to join the tournaments',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: context.colors.textColor
+                                .withOpacity(0.5),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 16.h),
-                      _buildTeamItem(),
-                    ],
+                        SizedBox(height: 16.h),
+                        _buildTeamItem(),
+                      ],
+                    ),
                   ),
                 ),
               ),

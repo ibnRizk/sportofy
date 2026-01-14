@@ -105,4 +105,8 @@ class ImgAssets {
       'assets/icons/not setting.svg';
   static const String icMenuLogout =
       'assets/icons/log out.svg';
+
+  // Profile/Team Assets
+  static const String imgConnectFriends =
+      'assets/images/img_connect_friends.png';
 }

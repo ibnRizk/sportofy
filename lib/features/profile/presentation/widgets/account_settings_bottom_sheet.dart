@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/notification_settings_bottom_sheet.dart';
 
 class AccountSettingsBottomSheet extends StatelessWidget {
@@ -49,7 +50,10 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   borderColor: Colors.grey.withOpacity(0.4),
                   textColor: Colors.black87,
                   onTap: () {
-                    // TODO: Navigate to Edit Account
+                    // Close current sheet
+                    context.pop();
+                    // Navigate to Edit Profile
+                    context.push(Routes.editProfileRoute);
                   },
                 ),
                 _buildQuickActionItem(
