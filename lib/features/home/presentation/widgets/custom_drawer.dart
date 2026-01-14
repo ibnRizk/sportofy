@@ -218,7 +218,7 @@ class CustomDrawer extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          // Navigate to profile
+                          context.push(Routes.profileRoute);
                         },
                         child: Text(
                           'View profile',

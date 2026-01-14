@@ -8,6 +8,8 @@ import 'package:sportify_app/features/auth/presentation/pages/login_view.dart';
 import 'package:sportify_app/features/auth/presentation/pages/otp_view.dart';
 import 'package:sportify_app/features/auth/presentation/pages/setup_profile_view.dart';
 import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:sportify_app/features/profile/presentation/pages/profile_view.dart';
+import 'package:sportify_app/features/community/presentation/pages/friends_view.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -20,6 +22,8 @@ class Routes {
   static const String loginRoute = '/login';
   static const String otpRoute = '/otp';
   static const String setupProfileRoute = '/setup-profile';
+  static const String profileRoute = '/profile';
+  static const String friendsRoute = '/friends';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -94,6 +98,22 @@ class AppRoutes {
                 create: (context) => AuthCubit(),
                 child: const SetupProfileView(),
               );
+            },
+      ),
+      GoRoute(
+        path: Routes.profileRoute,
+        name: 'profile',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const ProfileView();
+            },
+      ),
+      GoRoute(
+        path: Routes.friendsRoute,
+        name: 'friends',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const FriendsView();
             },
       ),
     ],
