@@ -125,4 +125,8 @@ class ImgAssets {
   static const String mapPlaceholder = 'assets/images/mark_loca.png';
   static const String lightYard = 'assets/images/light_yard.png';
   static const String nightYard = 'assets/images/night_yard.png';
+
+  // Community Assets
+  static const String communityPariOnly =
+      'assets/images/community_pari_only.png';
 }

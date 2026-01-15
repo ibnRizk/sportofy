@@ -10,12 +10,15 @@ class ReservationView extends StatefulWidget {
   const ReservationView({super.key});
 
   @override
-  State<ReservationView> createState() => _ReservationViewState();
+  State<ReservationView> createState() =>
+      _ReservationViewState();
 }
 
 class _ReservationViewState extends State<ReservationView> {
-  int _selectedPaymentMethod = 0; // 0: Sportify Wallet, 1: Vodafone, 2: Card, 3: Cash
-  final TextEditingController _voucherController = TextEditingController();
+  int _selectedPaymentMethod =
+      0; // 0: Sportify Wallet, 1: Vodafone, 2: Card, 3: Cash
+  final TextEditingController _voucherController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -31,7 +34,9 @@ class _ReservationViewState extends State<ReservationView> {
         title: const Text('Reservation'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(
+          color: Colors.black87,
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.w),
@@ -73,7 +78,9 @@ class _ReservationViewState extends State<ReservationView> {
             // Payment Summary
             _buildPaymentSummary(),
 
-            SizedBox(height: 100.h), // Space for fixed button
+            SizedBox(
+              height: 100.h,
+            ), // Space for fixed button
           ],
         ),
       ),
@@ -86,7 +93,10 @@ class _ReservationViewState extends State<ReservationView> {
             child: ElevatedButton(
               onPressed: () {
                 // Capture root navigator context before any navigation
-                final rootNavigator = Navigator.of(context, rootNavigator: true);
+                final rootNavigator = Navigator.of(
+                  context,
+                  rootNavigator: true,
+                );
                 final rootContext = rootNavigator.context;
 
                 // Check if Vodafone cash is selected (index 1)
@@ -95,7 +105,8 @@ class _ReservationViewState extends State<ReservationView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const WalletPhoneNumberView(),
+                      builder: (context) =>
+                          const WalletPhoneNumberView(),
                     ),
                   );
                 } else {
@@ -109,7 +120,8 @@ class _ReservationViewState extends State<ReservationView> {
                         top: Radius.circular(30.r),
                       ),
                     ),
-                    builder: (context) => const PaymentSuccessSheet(),
+                    builder: (context) =>
+                        const PaymentSuccessSheet(),
                   );
                 }
               },
@@ -148,7 +160,7 @@ class _ReservationViewState extends State<ReservationView> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -170,7 +182,10 @@ class _ReservationViewState extends State<ReservationView> {
                   width: 80.w,
                   height: 80.w,
                   color: Colors.grey[200],
-                  child: Icon(Icons.image, color: Colors.grey[400]),
+                  child: Icon(
+                    Icons.image,
+                    color: Colors.grey[400],
+                  ),
                 );
               },
             ),
@@ -222,7 +237,9 @@ class _ReservationViewState extends State<ReservationView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                      ),
                       child: VerticalDivider(
                         width: 1,
                         thickness: 1,
@@ -304,7 +321,9 @@ class _ReservationViewState extends State<ReservationView> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.w,
+                ),
                 child: VerticalDivider(
                   width: 1,
                   thickness: 1,
@@ -320,7 +339,9 @@ class _ReservationViewState extends State<ReservationView> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.w,
+                ),
                 child: VerticalDivider(
                   width: 1,
                   thickness: 1,
@@ -354,7 +375,7 @@ class _ReservationViewState extends State<ReservationView> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -410,7 +431,8 @@ class _ReservationViewState extends State<ReservationView> {
           _PaymentMethodTile(
             iconPath: ImgAssets.cashMoney,
             title: 'Cash Payment',
-            subtitle: 'Will need the approval of the stadium owner first',
+            subtitle:
+                'Will need the approval of the stadium owner first',
             isSelected: _selectedPaymentMethod == 3,
             onTap: () {
               setState(() {
@@ -433,7 +455,8 @@ class _ReservationViewState extends State<ReservationView> {
                     top: Radius.circular(25.r),
                   ),
                 ),
-                builder: (context) => const SharingCostSheet(),
+                builder: (context) =>
+                    const SharingCostSheet(),
               );
             },
             borderRadius: BorderRadius.circular(12.r),
@@ -472,13 +495,14 @@ class _ReservationViewState extends State<ReservationView> {
                         ImgAssets.sharingSubscription,
                         width: 28.w,
                         height: 28.w,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(
-                            Icons.handshake,
-                            color: MyColors.greenButton,
-                            size: 24.sp,
-                          );
-                        },
+                        errorBuilder:
+                            (context, error, stackTrace) {
+                              return Icon(
+                                Icons.handshake,
+                                color: MyColors.greenButton,
+                                size: 24.sp,
+                              );
+                            },
                       ),
                       SizedBox(width: 8.w),
                       Icon(
@@ -535,15 +559,21 @@ class _ReservationViewState extends State<ReservationView> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: Colors.grey[300]!),
+              borderSide: BorderSide(
+                color: Colors.grey[300]!,
+              ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: Colors.grey[300]!),
+              borderSide: BorderSide(
+                color: Colors.grey[300]!,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: MyColors.greenButton),
+              borderSide: BorderSide(
+                color: MyColors.greenButton,
+              ),
             ),
           ),
         ),
@@ -564,7 +594,7 @@ class _ReservationViewState extends State<ReservationView> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -576,7 +606,8 @@ class _ReservationViewState extends State<ReservationView> {
         children: [
           // Total Cost
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Total Cost',
@@ -601,7 +632,8 @@ class _ReservationViewState extends State<ReservationView> {
 
           // Your Cost
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Your Cost',
@@ -639,13 +671,14 @@ class _ReservationViewState extends State<ReservationView> {
                   ImgAssets.sharingSubscription,
                   width: 40.w,
                   height: 40.w,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.people,
-                      size: 40.sp,
-                      color: MyColors.greenButton,
-                    );
-                  },
+                  errorBuilder:
+                      (context, error, stackTrace) {
+                        return Icon(
+                          Icons.people,
+                          size: 40.sp,
+                          color: MyColors.greenButton,
+                        );
+                      },
                 ),
                 SizedBox(width: 12.w),
                 Expanded(
@@ -695,7 +728,10 @@ class _PaymentMethodTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 16.w,
+          vertical: 16.h,
+        ),
         child: Row(
           children: [
             // Icon
@@ -709,7 +745,9 @@ class _PaymentMethodTile extends StatelessWidget {
                   height: 40.w,
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(
+                      8.r,
+                    ),
                   ),
                   child: Icon(
                     Icons.payment,
@@ -725,7 +763,8 @@ class _PaymentMethodTile extends StatelessWidget {
             // Title and Subtitle
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,

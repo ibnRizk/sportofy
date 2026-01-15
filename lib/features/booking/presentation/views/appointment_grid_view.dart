@@ -8,19 +8,26 @@ class AppointmentGridView extends StatefulWidget {
   const AppointmentGridView({super.key});
 
   @override
-  State<AppointmentGridView> createState() => _AppointmentGridViewState();
+  State<AppointmentGridView> createState() =>
+      _AppointmentGridViewState();
 }
 
-class _AppointmentGridViewState extends State<AppointmentGridView> {
-  bool _isFindMemberMode = true; // "Find member" is selected by default
+class _AppointmentGridViewState
+    extends State<AppointmentGridView> {
+  bool _isFindMemberMode =
+      true; // "Find member" is selected by default
   int _selectedTeamOption = 1; // "Find member" is selected
 
   // Find Member Form State
   int _playersPresent = 2;
   int _playersRequired = 3;
   String _showMatchTo = 'Friends';
-  List<String> _selectedAgeGroups = ['Less than 25', '25 - 35'];
-  final TextEditingController _specialNoteController = TextEditingController();
+  List<String> _selectedAgeGroups = [
+    'Less than 25',
+    '25 - 35',
+  ];
+  final TextEditingController _specialNoteController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -36,7 +43,9 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
         title: const Text('Appointment'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(
+          color: Colors.black87,
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.w),
@@ -87,9 +96,12 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
           // Scrollable Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20.h),
 
@@ -99,7 +111,10 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
                   SizedBox(height: 20.h),
 
                   // Divider
-                  Divider(height: 1, color: Colors.grey[300]),
+                  Divider(
+                    height: 1,
+                    color: Colors.grey[300],
+                  ),
 
                   SizedBox(height: 20.h),
 
@@ -122,7 +137,8 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
                       playersRequired: _playersRequired,
                       showMatchTo: _showMatchTo,
                       selectedAgeGroups: _selectedAgeGroups,
-                      specialNoteController: _specialNoteController,
+                      specialNoteController:
+                          _specialNoteController,
                       onPlayersPresentChanged: (value) {
                         setState(() {
                           _playersPresent = value;
@@ -140,8 +156,12 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
                       },
                       onAgeGroupToggled: (group) {
                         setState(() {
-                          if (_selectedAgeGroups.contains(group)) {
-                            _selectedAgeGroups.remove(group);
+                          if (_selectedAgeGroups.contains(
+                            group,
+                          )) {
+                            _selectedAgeGroups.remove(
+                              group,
+                            );
                           } else {
                             _selectedAgeGroups.add(group);
                           }
@@ -150,7 +170,9 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
                     ),
                   ],
 
-                  SizedBox(height: 100.h), // Space for footer button
+                  SizedBox(
+                    height: 100.h,
+                  ), // Space for footer button
                 ],
               ),
             ),
@@ -163,7 +185,9 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(
+                    alpha: 0.05,
+                  ),
                   blurRadius: 10,
                   offset: const Offset(0, -2),
                 ),
@@ -183,14 +207,17 @@ class _AppointmentGridViewState extends State<AppointmentGridView> {
                           top: Radius.circular(30.r),
                         ),
                       ),
-                      builder: (context) => const BookingTypeSheet(),
+                      builder: (context) =>
+                          const BookingTypeSheet(),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(
+                        10.r,
+                      ),
                     ),
                   ),
                   child: Text(
@@ -262,14 +289,15 @@ class _WeekHeader extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: List.generate(
               _dates.length,
               (index) => Expanded(
@@ -365,11 +393,7 @@ class _ScheduleGrid extends StatelessWidget {
 }
 
 // Cell State Enum
-enum CellState {
-  empty,
-  booked,
-  resell,
-}
+enum CellState { empty, booked, resell }
 
 // Grid Row Widget
 class _GridRow extends StatelessWidget {
@@ -392,7 +416,9 @@ class _GridRow extends StatelessWidget {
             child: _GridCell(
               dayIndex: dayIndex,
               hourIndex: hourIndex,
-              state: bookedSlots[dayIndex]?[hourIndex] ?? CellState.empty,
+              state:
+                  bookedSlots[dayIndex]?[hourIndex] ??
+                  CellState.empty,
             ),
           ),
         ),
@@ -420,8 +446,8 @@ class _GridCell extends StatelessWidget {
         color: state == CellState.booked
             ? MyColors.greenButton
             : (state == CellState.resell
-                ? Colors.blue[50]
-                : Colors.grey[200]),
+                  ? Colors.blue[50]
+                  : Colors.grey[200]),
         border: Border.all(
           color: Colors.grey[300]!,
           width: 0.5,
@@ -651,7 +677,9 @@ class _FindMemberForm extends StatelessWidget {
             value: playersRequired,
             onDecrement: () {
               if (playersRequired > 0) {
-                onPlayersRequiredChanged(playersRequired - 1);
+                onPlayersRequiredChanged(
+                  playersRequired - 1,
+                );
               }
             },
             onIncrement: () {
@@ -675,18 +703,20 @@ class _FindMemberForm extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: () async {
-                  final result = await showModalBottomSheet<String>(
-                    context: context,
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30.r),
-                      ),
-                    ),
-                    builder: (context) => AudienceSheet(
-                      selected: showMatchTo,
-                    ),
-                  );
+                  final result =
+                      await showModalBottomSheet<String>(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(
+                                top: Radius.circular(30.r),
+                              ),
+                        ),
+                        builder: (context) => AudienceSheet(
+                          selected: showMatchTo,
+                        ),
+                      );
 
                   if (result != null) {
                     onShowMatchToChanged(result);
@@ -702,7 +732,9 @@ class _FindMemberForm extends StatelessWidget {
                       color: MyColors.greenButton,
                       width: 1,
                     ),
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(
+                      8.r,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -751,35 +783,41 @@ class _FindMemberForm extends StatelessWidget {
           Wrap(
             spacing: 12.w,
             runSpacing: 12.h,
-            children: [
-              'Less than 25',
-              '25 - 35',
-              'More than 35',
-              'All',
-            ].map((group) {
-              final isSelected = selectedAgeGroups.contains(group);
-              return SizedBox(
-                width: (MediaQuery.of(context).size.width - 72.w) / 2,
-                child: CheckboxListTile(
-                  title: Text(
-                    group,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black87,
+            children:
+                [
+                  'Less than 25',
+                  '25 - 35',
+                  'More than 35',
+                  'All',
+                ].map((group) {
+                  final isSelected = selectedAgeGroups
+                      .contains(group);
+                  return SizedBox(
+                    width:
+                        (MediaQuery.of(context).size.width -
+                            72.w) /
+                        2,
+                    child: CheckboxListTile(
+                      title: Text(
+                        group,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      value: isSelected,
+                      onChanged: (value) {
+                        onAgeGroupToggled(group);
+                      },
+                      controlAffinity:
+                          ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      activeColor: MyColors.greenButton,
+                      dense: true,
                     ),
-                  ),
-                  value: isSelected,
-                  onChanged: (value) {
-                    onAgeGroupToggled(group);
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                  contentPadding: EdgeInsets.zero,
-                  activeColor: MyColors.greenButton,
-                  dense: true,
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
 
           SizedBox(height: 24.h),

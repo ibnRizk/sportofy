@@ -106,7 +106,13 @@ class _SplashScreenState extends State<SplashScreen>
 
     // 4500ms: Navigate to Onboarding
     Future.delayed(const Duration(milliseconds: 4500), () {
-      if (mounted) context.go(Routes.onboardingRoute);
+      if (!mounted) return;
+      if (!context.mounted) return;
+      try {
+        context.go(Routes.onboardingRoute);
+      } catch (e) {
+        debugPrint('Navigation error from splash: $e');
+      }
     });
   }
 

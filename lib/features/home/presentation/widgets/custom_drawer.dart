@@ -52,7 +52,7 @@ class CustomDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: context.colors.textColor
-                            .withOpacity(0.2),
+                            .withValues(alpha: 0.2),
                       ),
                       borderRadius: BorderRadius.circular(
                         20.r,
@@ -91,9 +91,10 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
-                color: context.colors.textColor.withOpacity(
-                  0.7,
+                color: context.colors.textColor.withValues(
+                  alpha: 0.7,
                 ),
+
                 height: 1.5,
               ),
             ),

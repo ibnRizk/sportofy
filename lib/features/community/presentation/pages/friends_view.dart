@@ -111,12 +111,14 @@ class FriendsView extends StatelessWidget {
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  color: context.colors.textColor.withOpacity(0.4),
+                  color: context.colors.textColor
+                      .withValues(alpha: 0.4),
                 ),
                 prefixIcon: Icon(
                   Icons.search,
                   size: 22.w,
-                  color: context.colors.textColor.withOpacity(0.4),
+                  color: context.colors.textColor
+                      .withValues(alpha: 0.4),
                 ),
                 filled: true,
                 fillColor: context.colors.white,
@@ -127,21 +129,24 @@ class FriendsView extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor.withOpacity(0.2),
+                    color: context.colors.textColor
+                        .withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor.withOpacity(0.2),
+                    color: context.colors.textColor
+                        .withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor.withOpacity(0.4),
+                    color: context.colors.textColor
+                        .withValues(alpha: 0.4),
                     width: 1,
                   ),
                 ),
@@ -160,7 +165,9 @@ class FriendsView extends StatelessWidget {
                 height: 1,
                 thickness: 1,
                 indent: 72.w,
-                color: context.colors.textColor.withOpacity(0.08),
+                color: context.colors.textColor.withValues(
+                  alpha: 0.08,
+                ),
               ),
               itemBuilder: (context, index) {
                 return FriendListTile(
@@ -181,10 +188,7 @@ class FriendsView extends StatelessWidget {
 class FriendListTile extends StatelessWidget {
   final FriendModel friend;
 
-  const FriendListTile({
-    super.key,
-    required this.friend,
-  });
+  const FriendListTile({super.key, required this.friend});
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +214,8 @@ class FriendListTile extends StatelessWidget {
             // Name and Mutual Friends
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   Text(
                     friend.name,
@@ -227,7 +232,8 @@ class FriendListTile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
-                        color: context.colors.textColor.withOpacity(0.5),
+                        color: context.colors.textColor
+                            .withValues(alpha: 0.5),
                       ),
                     ),
                   ],

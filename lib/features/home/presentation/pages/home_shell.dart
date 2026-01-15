@@ -7,6 +7,8 @@ import 'package:sportify_app/features/home/presentation/pages/home_view.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_drawer.dart';
 import 'package:sportify_app/features/home/presentation/widgets/location_permission_dialog.dart';
+import 'package:sportify_app/features/community/presentation/views/community_view.dart';
+import 'package:sportify_app/features/matches/presentation/views/matches_view.dart';
 import 'package:sportify_app/features/stadiums/presentation/views/stadiums_view.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -31,11 +33,15 @@ class _HomeShellState extends State<HomeShell> {
   Future<void> _checkLocationPermission() async {
     // Wait a bit for UI to settle
     await Future.delayed(const Duration(milliseconds: 800));
-    if (mounted) {
+    if (!mounted) return;
+    if (!context.mounted) return;
+    try {
       final cubit = context.read<HomeCubit>();
       if (!cubit.state.hasLocationPermission) {
         _showLocationPermissionDialog();
       }
+    } catch (e) {
+      debugPrint('Location permission check error: $e');
     }
   }
 
@@ -82,11 +88,9 @@ class _HomeShellState extends State<HomeShell> {
                 onMenuTap: _openDrawer,
               ), // ← Pass callback
               _buildPlaceholderPage('market'.tr(context)),
-              _buildPlaceholderPage(
-                'community'.tr(context),
-              ),
+              const CommunityView(),
               const StadiumsView(),
-              _buildPlaceholderPage('matches'.tr(context)),
+              const MatchesView(),
             ],
           );
         },

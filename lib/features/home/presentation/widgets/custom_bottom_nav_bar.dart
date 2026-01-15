@@ -18,7 +18,7 @@ class CustomBottomNavBar extends StatelessWidget {
             color: context.colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 10,
                 offset: const Offset(0, -2),
               ),
@@ -28,7 +28,8 @@ class CustomBottomNavBar extends StatelessWidget {
             child: SizedBox(
               height: 70.h,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
                 children: [
                   _buildNavItem(
                     context: context,
@@ -89,7 +90,9 @@ class CustomBottomNavBar extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: () {
-        context.read<HomeCubit>().changeBottomNavIndex(index);
+        context.read<HomeCubit>().changeBottomNavIndex(
+          index,
+        );
       },
       behavior: HitTestBehavior.opaque,
       child: Container(
@@ -130,7 +133,9 @@ class CustomBottomNavBar extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 11.sp,
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                fontWeight: isActive
+                    ? FontWeight.w600
+                    : FontWeight.w400,
                 color: isActive
                     ? MyColors.greenButton
                     : MyColors.greyText,

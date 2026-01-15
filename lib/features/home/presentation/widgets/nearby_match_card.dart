@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
+import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class NearbyMatchCard extends StatelessWidget {
@@ -15,20 +17,26 @@ class NearbyMatchCard extends StatelessWidget {
     final progressPercentage =
         match.currentPlayers / match.totalPlayers;
 
-    return Container(
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: context.colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
+    return InkWell(
+      onTap: () {
+        // Navigate to matches screen in bottom navigation bar (index 4)
+        context.read<HomeCubit>().changeBottomNavIndex(4);
+      },
+      borderRadius: BorderRadius.circular(12.r),
+      child: Container(
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: context.colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ═══════════════════════════════════════════════
@@ -308,6 +316,7 @@ class NearbyMatchCard extends StatelessWidget {
             ),
           ),
         ],
+        ),
       ),
     );
   }

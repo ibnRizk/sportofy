@@ -9,21 +9,30 @@ class AppointmentView extends StatefulWidget {
   const AppointmentView({super.key});
 
   @override
-  State<AppointmentView> createState() => _AppointmentViewState();
+  State<AppointmentView> createState() =>
+      _AppointmentViewState();
 }
 
 class _AppointmentViewState extends State<AppointmentView> {
-  int _selectedDateIndex = 2; // "Mon 10" is selected by default
-  List<int> _selectedTimeSlots = [0]; // 5 AM - 6 AM is selected
+  int _selectedDateIndex =
+      2; // "Mon 10" is selected by default
+  List<int> _selectedTimeSlots = [
+    0,
+  ]; // 5 AM - 6 AM is selected
   int _selectedTeamOption = 0; // "Full Team" is selected
-  bool _isFindMemberMode = false; // Show form when "Find member" is selected
+  bool _isFindMemberMode =
+      false; // Show form when "Find member" is selected
 
   // Find Member Form State
   int _playersPresent = 2;
   int _playersRequired = 3;
   String _showMatchTo = 'Friends';
-  List<String> _selectedAgeGroups = ['Less than 25', '25 - 35'];
-  final TextEditingController _specialNoteController = TextEditingController();
+  List<String> _selectedAgeGroups = [
+    'Less than 25',
+    '25 - 35',
+  ];
+  final TextEditingController _specialNoteController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,9 @@ class _AppointmentViewState extends State<AppointmentView> {
         title: const Text('Appointment'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(
+          color: Colors.black87,
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.w),
@@ -42,7 +53,8 @@ class _AppointmentViewState extends State<AppointmentView> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const AppointmentGridView(),
+                    builder: (context) =>
+                        const AppointmentGridView(),
                   ),
                 );
               },
@@ -108,8 +120,10 @@ class _AppointmentViewState extends State<AppointmentView> {
                   } else {
                     // Only allow consecutive hours
                     if (_selectedTimeSlots.isEmpty ||
-                        index == _selectedTimeSlots.last + 1 ||
-                        index == _selectedTimeSlots.first - 1) {
+                        index ==
+                            _selectedTimeSlots.last + 1 ||
+                        index ==
+                            _selectedTimeSlots.first - 1) {
                       _selectedTimeSlots.add(index);
                       _selectedTimeSlots.sort();
                     }
@@ -126,7 +140,9 @@ class _AppointmentViewState extends State<AppointmentView> {
               onOptionSelected: (index) {
                 setState(() {
                   _selectedTeamOption = index;
-                  _isFindMemberMode = index == 1; // Show form when "Find member" is selected
+                  _isFindMemberMode =
+                      index ==
+                      1; // Show form when "Find member" is selected
                 });
               },
             ),
@@ -139,7 +155,8 @@ class _AppointmentViewState extends State<AppointmentView> {
                 playersRequired: _playersRequired,
                 showMatchTo: _showMatchTo,
                 selectedAgeGroups: _selectedAgeGroups,
-                specialNoteController: _specialNoteController,
+                specialNoteController:
+                    _specialNoteController,
                 onPlayersPresentChanged: (value) {
                   setState(() {
                     _playersPresent = value;
@@ -157,7 +174,9 @@ class _AppointmentViewState extends State<AppointmentView> {
                 },
                 onAgeGroupToggled: (group) {
                   setState(() {
-                    if (_selectedAgeGroups.contains(group)) {
+                    if (_selectedAgeGroups.contains(
+                      group,
+                    )) {
                       _selectedAgeGroups.remove(group);
                     } else {
                       _selectedAgeGroups.add(group);
@@ -183,14 +202,17 @@ class _AppointmentViewState extends State<AppointmentView> {
                         top: Radius.circular(30.r),
                       ),
                     ),
-                    builder: (context) => const BookingTypeSheet(),
+                    builder: (context) =>
+                        const BookingTypeSheet(),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: BorderRadius.circular(
+                      10.r,
+                    ),
                   ),
                 ),
                 child: Text(
@@ -277,14 +299,15 @@ class _BookingCalendar extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: List.generate(
               _dates.length,
               (index) => Expanded(
@@ -337,10 +360,12 @@ class _TimeSlotsSection extends StatefulWidget {
   });
 
   @override
-  State<_TimeSlotsSection> createState() => _TimeSlotsSectionState();
+  State<_TimeSlotsSection> createState() =>
+      _TimeSlotsSectionState();
 }
 
-class _TimeSlotsSectionState extends State<_TimeSlotsSection> {
+class _TimeSlotsSectionState
+    extends State<_TimeSlotsSection> {
   bool _showResellHours = true;
 
   @override
@@ -433,18 +458,19 @@ class _TimeSlotsSectionState extends State<_TimeSlotsSection> {
         Wrap(
           spacing: 12.w,
           runSpacing: 12.h,
-          children: List.generate(
-            _timeSlots.length,
-            (index) {
-              final slot = _timeSlots[index];
-              return _TimeChip(
-                timeRange: slot['time'] as String,
-                state: slot['state'] as TimeSlotState,
-                isSelected: widget.selectedSlots.contains(index),
-                onTap: () => widget.onSlotSelected(index),
-              );
-            },
-          ),
+          children: List.generate(_timeSlots.length, (
+            index,
+          ) {
+            final slot = _timeSlots[index];
+            return _TimeChip(
+              timeRange: slot['time'] as String,
+              state: slot['state'] as TimeSlotState,
+              isSelected: widget.selectedSlots.contains(
+                index,
+              ),
+              onTap: () => widget.onSlotSelected(index),
+            );
+          }),
         ),
       ],
     );
@@ -452,28 +478,54 @@ class _TimeSlotsSectionState extends State<_TimeSlotsSection> {
 
   // Mock time slots data matching the image
   static const List<Map<String, dynamic>> _timeSlots = [
-    {'time': '5 AM - 6 AM', 'state': TimeSlotState.resell, 'selected': true},
-    {'time': '6 AM - 7 AM', 'state': TimeSlotState.disabled},
-    {'time': '7 AM - 8 AM', 'state': TimeSlotState.available},
-    {'time': '8 AM - 9 AM', 'state': TimeSlotState.available},
-    {'time': '9 AM - 10 AM', 'state': TimeSlotState.available},
-    {'time': '10 AM - 11 AM', 'state': TimeSlotState.pending},
-    {'time': '11 AM - 12 PM', 'state': TimeSlotState.available},
+    {
+      'time': '5 AM - 6 AM',
+      'state': TimeSlotState.resell,
+      'selected': true,
+    },
+    {
+      'time': '6 AM - 7 AM',
+      'state': TimeSlotState.disabled,
+    },
+    {
+      'time': '7 AM - 8 AM',
+      'state': TimeSlotState.available,
+    },
+    {
+      'time': '8 AM - 9 AM',
+      'state': TimeSlotState.available,
+    },
+    {
+      'time': '9 AM - 10 AM',
+      'state': TimeSlotState.available,
+    },
+    {
+      'time': '10 AM - 11 AM',
+      'state': TimeSlotState.pending,
+    },
+    {
+      'time': '11 AM - 12 PM',
+      'state': TimeSlotState.available,
+    },
     {'time': '12 PM - 1 PM', 'state': TimeSlotState.resell},
     {'time': '1 PM - 2 PM', 'state': TimeSlotState.pending},
-    {'time': '2 PM - 3 PM', 'state': TimeSlotState.disabled},
-    {'time': '3 PM - 4 PM', 'state': TimeSlotState.available},
-    {'time': '4 PM - 5 PM', 'state': TimeSlotState.available},
+    {
+      'time': '2 PM - 3 PM',
+      'state': TimeSlotState.disabled,
+    },
+    {
+      'time': '3 PM - 4 PM',
+      'state': TimeSlotState.available,
+    },
+    {
+      'time': '4 PM - 5 PM',
+      'state': TimeSlotState.available,
+    },
   ];
 }
 
 // Time Slot State Enum
-enum TimeSlotState {
-  available,
-  disabled,
-  pending,
-  resell,
-}
+enum TimeSlotState { available, disabled, pending, resell }
 
 // Time Chip Widget
 class _TimeChip extends StatelessWidget {
@@ -493,7 +545,9 @@ class _TimeChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDisabled = state == TimeSlotState.disabled;
     final isPending = state == TimeSlotState.pending;
-    final hasBadge = state == TimeSlotState.resell || state == TimeSlotState.pending;
+    final hasBadge =
+        state == TimeSlotState.resell ||
+        state == TimeSlotState.pending;
 
     return SizedBox(
       width: 100.w, // Fixed width for 3 columns
@@ -509,21 +563,23 @@ class _TimeChip extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? MyColors.greenButton.withOpacity(0.1)
+                    ? MyColors.greenButton.withValues(
+                        alpha: 0.1,
+                      )
                     : (isDisabled
-                        ? Colors.grey[100]
-                        : (isPending
-                            ? Colors.amber[50]
-                            : Colors.white)),
+                          ? Colors.grey[100]
+                          : (isPending
+                                ? Colors.amber[50]
+                                : Colors.white)),
                 borderRadius: BorderRadius.circular(8.r),
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
                       : (isDisabled
-                          ? Colors.grey[300]!
-                          : (isPending
-                              ? Colors.amber[700]!
-                              : Colors.grey[300]!)),
+                            ? Colors.grey[300]!
+                            : (isPending
+                                  ? Colors.amber[700]!
+                                  : Colors.grey[300]!)),
                   width: 1,
                 ),
               ),
@@ -536,10 +592,10 @@ class _TimeChip extends StatelessWidget {
                     color: isSelected
                         ? MyColors.greenButton
                         : (isDisabled
-                            ? Colors.grey[400]
-                            : (isPending
-                                ? Colors.amber[700]
-                                : Colors.black87)),
+                              ? Colors.grey[400]
+                              : (isPending
+                                    ? Colors.amber[700]
+                                    : Colors.black87)),
                   ),
                 ),
               ),
@@ -778,7 +834,9 @@ class _FindMemberForm extends StatelessWidget {
             value: playersRequired,
             onDecrement: () {
               if (playersRequired > 0) {
-                onPlayersRequiredChanged(playersRequired - 1);
+                onPlayersRequiredChanged(
+                  playersRequired - 1,
+                );
               }
             },
             onIncrement: () {
@@ -802,18 +860,20 @@ class _FindMemberForm extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: () async {
-                  final result = await showModalBottomSheet<String>(
-                    context: context,
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30.r),
-                      ),
-                    ),
-                    builder: (context) => AudienceSheet(
-                      selected: showMatchTo,
-                    ),
-                  );
+                  final result =
+                      await showModalBottomSheet<String>(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(
+                                top: Radius.circular(30.r),
+                              ),
+                        ),
+                        builder: (context) => AudienceSheet(
+                          selected: showMatchTo,
+                        ),
+                      );
 
                   if (result != null) {
                     onShowMatchToChanged(result);
@@ -829,7 +889,9 @@ class _FindMemberForm extends StatelessWidget {
                       color: MyColors.greenButton,
                       width: 1,
                     ),
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(
+                      8.r,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -878,35 +940,41 @@ class _FindMemberForm extends StatelessWidget {
           Wrap(
             spacing: 12.w,
             runSpacing: 12.h,
-            children: [
-              'Less than 25',
-              '25 - 35',
-              'More than 35',
-              'All',
-            ].map((group) {
-              final isSelected = selectedAgeGroups.contains(group);
-              return SizedBox(
-                width: (MediaQuery.of(context).size.width - 72.w) / 2,
-                child: CheckboxListTile(
-                  title: Text(
-                    group,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black87,
+            children:
+                [
+                  'Less than 25',
+                  '25 - 35',
+                  'More than 35',
+                  'All',
+                ].map((group) {
+                  final isSelected = selectedAgeGroups
+                      .contains(group);
+                  return SizedBox(
+                    width:
+                        (MediaQuery.of(context).size.width -
+                            72.w) /
+                        2,
+                    child: CheckboxListTile(
+                      title: Text(
+                        group,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      value: isSelected,
+                      onChanged: (value) {
+                        onAgeGroupToggled(group);
+                      },
+                      controlAffinity:
+                          ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      activeColor: MyColors.greenButton,
+                      dense: true,
                     ),
-                  ),
-                  value: isSelected,
-                  onChanged: (value) {
-                    onAgeGroupToggled(group);
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                  contentPadding: EdgeInsets.zero,
-                  activeColor: MyColors.greenButton,
-                  dense: true,
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
 
           SizedBox(height: 24.h),

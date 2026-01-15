@@ -58,7 +58,9 @@ class HomeView extends StatelessWidget {
                       child: HomeCategoryCard(
                         image: ImgAssets.matchesCategory,
                         title: 'matches'.tr(context),
-                        onTap: () {},
+                        onTap: () {
+                          context.read<HomeCubit>().changeBottomNavIndex(4);
+                        },
                       ),
                     ),
                     SizedBox(width: 12.w),

@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/features/matches/presentation/widgets/join_request_sheet.dart';
 import 'package:sportify_app/features/payment/presentation/views/wallet_phone_number_view.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/payment_success_sheet.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/sharing_cost_sheet.dart';
 
 class PaymentMethodsSheet extends StatefulWidget {
-  const PaymentMethodsSheet({super.key});
+  final String? organizerName;
+  final String? organizerAvatar;
+
+  const PaymentMethodsSheet({
+    super.key,
+    this.organizerName,
+    this.organizerAvatar,
+  });
 
   @override
   State<PaymentMethodsSheet> createState() => _PaymentMethodsSheetState();
@@ -204,18 +212,38 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                       ),
                     );
                   } else {
-                    // Show Payment Success sheet for other payment methods
-                    showModalBottomSheet(
-                      context: rootNavigator.context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(30.r),
+                    // Show Join Request Sheet if organizer info is provided (for match join flow)
+                    // Otherwise show Payment Success Sheet (for other flows)
+                    if (widget.organizerName != null &&
+                        widget.organizerAvatar != null) {
+                      showModalBottomSheet(
+                        context: rootNavigator.context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(30.r),
+                          ),
                         ),
-                      ),
-                      builder: (context) => const PaymentSuccessSheet(),
-                    );
+                        builder: (context) => JoinRequestSheet(
+                          organizerName: widget.organizerName!,
+                          organizerAvatar: widget.organizerAvatar!,
+                        ),
+                      );
+                    } else {
+                      // Show Payment Success sheet for other payment methods
+                      showModalBottomSheet(
+                        context: rootNavigator.context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(30.r),
+                          ),
+                        ),
+                        builder: (context) => const PaymentSuccessSheet(),
+                      );
+                    }
                   }
                 });
               },

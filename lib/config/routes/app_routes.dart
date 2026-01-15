@@ -19,7 +19,7 @@ import 'package:sportify_app/features/orders/presentation/views/my_orders_view.d
 import 'package:sportify_app/features/orders/presentation/views/order_details_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/my_tournaments_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/tournaments_list_view.dart';
-import 'package:sportify_app/features/tournaments/presentation/views/match_details_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/match_details_view.dart' as tournaments;
 import 'package:sportify_app/features/tournaments/presentation/views/tournament_details_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/joined_teams_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/round_of_32_view.dart';
@@ -29,8 +29,11 @@ import 'package:sportify_app/features/tournaments/presentation/views/semi_final_
 import 'package:sportify_app/features/tournaments/presentation/views/final_view.dart';
 import 'package:sportify_app/features/payment/presentation/pages/payment_test_page.dart';
 import 'package:sportify_app/features/stadiums/presentation/views/stadium_details_view.dart';
+import 'package:sportify_app/features/matches/presentation/views/match_details_view.dart';
 import 'package:sportify_app/features/booking/presentation/views/appointment_view.dart';
 import 'package:sportify_app/features/booking/presentation/views/reservation_view.dart';
+import 'package:sportify_app/features/community/presentation/views/comments_view.dart';
+import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -67,8 +70,10 @@ class Routes {
   static const String finalRoute = '/final';
   static const String stadiumDetailsRoute =
       '/stadium-details';
+  static const String matchesDetailsRoute = '/matches-details';
   static const String appointmentRoute = '/appointment';
   static const String reservationRoute = '/reservation';
+  static const String commentsRoute = '/comments';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -226,6 +231,23 @@ class AppRoutes {
             },
       ),
       GoRoute(
+        path: Routes.matchesDetailsRoute,
+        name: 'matchesDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final match = state.extra as MatchEntity?;
+              if (match == null) {
+                // Fallback to a default match if none provided
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Match not found'),
+                  ),
+                );
+              }
+              return MatchDetailsView(match: match);
+            },
+      ),
+      GoRoute(
         path: Routes.appointmentRoute,
         name: 'appointment',
         builder:
@@ -239,6 +261,27 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const ReservationView();
+            },
+      ),
+      GoRoute(
+        path: Routes.commentsRoute,
+        name: 'comments',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final args = state.extra as Map<String, dynamic>?;
+              if (args == null) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Comments data not provided'),
+                  ),
+                );
+              }
+              return CommentsView(
+                postId: args['postId'] as int? ?? 0,
+                likedBy: args['likedBy'] as String? ?? '',
+                likesCount: args['likesCount'] as int? ?? 0,
+                commentsCount: args['commentsCount'] as int? ?? 0,
+              );
             },
       ),
       GoRoute(
@@ -262,7 +305,7 @@ class AppRoutes {
         name: 'matchDetails',
         builder:
             (BuildContext context, GoRouterState state) {
-              return const MatchDetailsView();
+              return const tournaments.MatchDetailsView();
             },
       ),
       GoRoute(
