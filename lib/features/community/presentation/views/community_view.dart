@@ -5,6 +5,7 @@ import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/community/presentation/widgets/post_card.dart';
 import 'package:sportify_app/features/community/presentation/widgets/player_story_item.dart';
+import 'package:sportify_app/features/community/presentation/widgets/post_type_selection_sheet.dart';
 
 class CommunityView extends StatefulWidget {
   const CommunityView({super.key});
@@ -113,7 +114,18 @@ class _CommunityViewState extends State<CommunityView> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO: Navigate to create post screen
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30.r),
+              ),
+            ),
+            builder: (context) =>
+                const PostTypeSelectionSheet(),
+          );
         },
         backgroundColor: MyColors.greenButton,
         icon: Icon(

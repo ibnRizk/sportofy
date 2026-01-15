@@ -33,6 +33,9 @@ import 'package:sportify_app/features/matches/presentation/views/match_details_v
 import 'package:sportify_app/features/booking/presentation/views/appointment_view.dart';
 import 'package:sportify_app/features/booking/presentation/views/reservation_view.dart';
 import 'package:sportify_app/features/community/presentation/views/comments_view.dart';
+import 'package:sportify_app/features/community/presentation/views/create_post_view.dart';
+import 'package:sportify_app/features/market/presentation/views/product_details_view.dart';
+import 'package:sportify_app/features/market/presentation/views/cart_view.dart';
 import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
 
 import '../../core/utils/app_strings.dart';
@@ -74,6 +77,9 @@ class Routes {
   static const String appointmentRoute = '/appointment';
   static const String reservationRoute = '/reservation';
   static const String commentsRoute = '/comments';
+  static const String createPostRoute = '/create-post';
+  static const String productDetailsRoute = '/product-details';
+  static const String cartRoute = '/cart';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -282,6 +288,52 @@ class AppRoutes {
                 likesCount: args['likesCount'] as int? ?? 0,
                 commentsCount: args['commentsCount'] as int? ?? 0,
               );
+            },
+      ),
+      GoRoute(
+        path: Routes.createPostRoute,
+        name: 'createPost',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final args = state.extra as Map<String, dynamic>?;
+              if (args == null) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Post type not provided'),
+                  ),
+                );
+              }
+              return CreatePostView(
+                postType: args['postType'] as String? ?? 'usual',
+                helpAreas: (args['helpAreas'] as List<dynamic>?)
+                        ?.map((e) => e.toString())
+                        .toList() ??
+                    [],
+              );
+            },
+      ),
+      GoRoute(
+        path: Routes.productDetailsRoute,
+        name: 'productDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final args = state.extra as Map<String, dynamic>?;
+              if (args == null) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Product data not provided'),
+                  ),
+                );
+              }
+              return ProductDetailsView(product: args);
+            },
+      ),
+      GoRoute(
+        path: Routes.cartRoute,
+        name: 'cart',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const CartView();
             },
       ),
       GoRoute(

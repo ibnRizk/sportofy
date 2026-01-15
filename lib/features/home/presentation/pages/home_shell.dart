@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/features/home/presentation/pages/home_view.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
@@ -10,6 +9,7 @@ import 'package:sportify_app/features/home/presentation/widgets/location_permiss
 import 'package:sportify_app/features/community/presentation/views/community_view.dart';
 import 'package:sportify_app/features/matches/presentation/views/matches_view.dart';
 import 'package:sportify_app/features/stadiums/presentation/views/stadiums_view.dart';
+import 'package:sportify_app/features/market/presentation/views/market_view.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class HomeShell extends StatefulWidget {
@@ -87,7 +87,7 @@ class _HomeShellState extends State<HomeShell> {
               HomeView(
                 onMenuTap: _openDrawer,
               ), // ← Pass callback
-              _buildPlaceholderPage('market'.tr(context)),
+              const MarketView(),
               const CommunityView(),
               const StadiumsView(),
               const MatchesView(),
@@ -96,19 +96,6 @@ class _HomeShellState extends State<HomeShell> {
         },
       ),
       bottomNavigationBar: const CustomBottomNavBar(),
-    );
-  }
-
-  Widget _buildPlaceholderPage(String title) {
-    return Center(
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 24.sp,
-          fontWeight: FontWeight.w700,
-          color: context.colors.textColor,
-        ),
-      ),
     );
   }
 }

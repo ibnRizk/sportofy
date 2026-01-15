@@ -129,4 +129,10 @@ class ImgAssets {
   // Community Assets
   static const String communityPariOnly =
       'assets/images/community_pari_only.png';
+  static const String pana = 'assets/images/pana.png';
+
+  // Market Assets
+  static const String smallShoes = 'assets/images/small_shoes.png';
+  static const String whiteShoes = 'assets/images/white_shoes.png';
+  static const String shoes = 'assets/images/shoes.png';
 }
