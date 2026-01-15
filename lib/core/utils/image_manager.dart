@@ -117,8 +117,12 @@ class ImgAssets {
       'assets/images/vod_cash.png';
   static const String creditCard =
       'assets/images/Credit Card.png';
-  static const String cashMoney =
-      'assets/images/Money.png';
+  static const String cashMoney = 'assets/images/Money.png';
   static const String sharingSubscription =
       'assets/images/sharing_subscribtion.png';
+
+  // Stadium Assets
+  static const String mapPlaceholder = 'assets/images/mark_loca.png';
+  static const String lightYard = 'assets/images/light_yard.png';
+  static const String nightYard = 'assets/images/night_yard.png';
 }

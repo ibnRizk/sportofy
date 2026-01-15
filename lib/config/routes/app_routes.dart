@@ -22,7 +22,15 @@ import 'package:sportify_app/features/tournaments/presentation/views/tournaments
 import 'package:sportify_app/features/tournaments/presentation/views/match_details_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/tournament_details_view.dart';
 import 'package:sportify_app/features/tournaments/presentation/views/joined_teams_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/round_of_32_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/round_of_16_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/round_of_8_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/semi_final_view.dart';
+import 'package:sportify_app/features/tournaments/presentation/views/final_view.dart';
 import 'package:sportify_app/features/payment/presentation/pages/payment_test_page.dart';
+import 'package:sportify_app/features/stadiums/presentation/views/stadium_details_view.dart';
+import 'package:sportify_app/features/booking/presentation/views/appointment_view.dart';
+import 'package:sportify_app/features/booking/presentation/views/reservation_view.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../injection_container.dart';
@@ -52,6 +60,15 @@ class Routes {
   static const String tournamentDetailsRoute =
       '/tournament-details';
   static const String joinedTeamsRoute = '/joined-teams';
+  static const String roundOf32Route = '/round-of-32';
+  static const String roundOf16Route = '/round-of-16';
+  static const String roundOf8Route = '/round-of-8';
+  static const String semiFinalRoute = '/semi-final';
+  static const String finalRoute = '/final';
+  static const String stadiumDetailsRoute =
+      '/stadium-details';
+  static const String appointmentRoute = '/appointment';
+  static const String reservationRoute = '/reservation';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -201,6 +218,30 @@ class AppRoutes {
             },
       ),
       GoRoute(
+        path: Routes.stadiumDetailsRoute,
+        name: 'stadiumDetails',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const StadiumDetailsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.appointmentRoute,
+        name: 'appointment',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const AppointmentView();
+            },
+      ),
+      GoRoute(
+        path: Routes.reservationRoute,
+        name: 'reservation',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const ReservationView();
+            },
+      ),
+      GoRoute(
         path: Routes.tournamentsRoute,
         name: 'tournaments',
         builder:
@@ -246,6 +287,46 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const JoinedTeamsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.roundOf32Route,
+        name: 'roundOf32',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const RoundOf32View();
+            },
+      ),
+      GoRoute(
+        path: Routes.roundOf16Route,
+        name: 'roundOf16',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const RoundOf16View();
+            },
+      ),
+      GoRoute(
+        path: Routes.roundOf8Route,
+        name: 'roundOf8',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const RoundOf8View();
+            },
+      ),
+      GoRoute(
+        path: Routes.semiFinalRoute,
+        name: 'semiFinal',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const SemiFinalView();
+            },
+      ),
+      GoRoute(
+        path: Routes.finalRoute,
+        name: 'final',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const FinalView();
             },
       ),
     ],

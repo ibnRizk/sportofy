@@ -174,28 +174,35 @@ class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
               height: 50.h,
               child: ElevatedButton(
               onPressed: () {
-                // TODO: Implement phone number validation and payment processing
-                if (_phoneController.text.isNotEmpty) {
-                  // Close the wallet phone number screen
-                  Navigator.pop(context);
-
-                  // Show Payment Success sheet
-                  Future.delayed(const Duration(milliseconds: 300), () {
-                    if (context.mounted) {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(30.r),
-                          ),
-                        ),
-                        builder: (context) => const PaymentSuccessSheet(),
-                      );
-                    }
-                  });
+                // 1. Basic Validation
+                if (_phoneController.text.isEmpty) {
+                  // Optionally show error message
+                  return;
                 }
+
+                // 2. Capture root navigator context BEFORE popping
+                final rootNavigator = Navigator.of(context, rootNavigator: true);
+                final rootContext = rootNavigator.context;
+
+                // 3. Close the Wallet Screen
+                Navigator.pop(context);
+
+                // 4. Show Success Sheet after a short delay
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  if (rootContext.mounted) {
+                    showModalBottomSheet(
+                      context: rootContext,
+                      isScrollControlled: false,
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(30.r),
+                        ),
+                      ),
+                      builder: (context) => const PaymentSuccessSheet(),
+                    );
+                  }
+                });
               },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,

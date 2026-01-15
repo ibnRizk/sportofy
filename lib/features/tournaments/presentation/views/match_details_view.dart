@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 
 class MatchDetailsView extends StatelessWidget {
   const MatchDetailsView({super.key});
@@ -146,15 +148,30 @@ class MatchDetailsView extends StatelessWidget {
                   SizedBox(height: 16.h),
 
                   // Round Options
-                  _buildRoundOption('Round of 32'),
+                  _buildRoundOption(
+                    'Round of 32',
+                    () => context.push(Routes.roundOf32Route),
+                  ),
                   SizedBox(height: 12.h),
-                  _buildRoundOption('Round of 16'),
+                  _buildRoundOption(
+                    'Round of 16',
+                    () => context.push(Routes.roundOf16Route),
+                  ),
                   SizedBox(height: 12.h),
-                  _buildRoundOption('Round of 8'),
+                  _buildRoundOption(
+                    'Round of 8',
+                    () => context.push(Routes.roundOf8Route),
+                  ),
                   SizedBox(height: 12.h),
-                  _buildRoundOption('Semi final'),
+                  _buildRoundOption(
+                    'Semi final',
+                    () => context.push(Routes.semiFinalRoute),
+                  ),
                   SizedBox(height: 12.h),
-                  _buildRoundOption('Final'),
+                  _buildRoundOption(
+                    'Final',
+                    () => context.push(Routes.finalRoute),
+                  ),
                 ],
               ),
             ),
@@ -164,37 +181,41 @@ class MatchDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildRoundOption(String title) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 14.h,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          color: Colors.grey[300]!,
-          width: 1,
+  Widget _buildRoundOption(String title, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10.r),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16.w,
+          vertical: 14.h,
         ),
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.grey[300]!,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            size: 16.w,
-            color: Colors.grey[600],
-          ),
-        ],
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16.w,
+              color: Colors.grey[600],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:sportify_app/features/home/presentation/pages/home_view.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_drawer.dart';
 import 'package:sportify_app/features/home/presentation/widgets/location_permission_dialog.dart';
+import 'package:sportify_app/features/stadiums/presentation/views/stadiums_view.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class HomeShell extends StatefulWidget {
@@ -84,7 +85,7 @@ class _HomeShellState extends State<HomeShell> {
               _buildPlaceholderPage(
                 'community'.tr(context),
               ),
-              _buildPlaceholderPage('stadiums'.tr(context)),
+              const StadiumsView(),
               _buildPlaceholderPage('matches'.tr(context)),
             ],
           );

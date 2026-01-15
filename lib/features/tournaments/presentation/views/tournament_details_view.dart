@@ -186,6 +186,52 @@ class TournamentDetailsView extends StatelessWidget {
 
                   SizedBox(height: 24.h),
 
+                  // Schedule Section - Navigate to MatchDetailsView which has the Schedule
+                  InkWell(
+                    onTap: () {
+                      context.push(
+                        Routes.matchDetailsRoute,
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(16.w),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(
+                          12.r,
+                        ),
+                        border: Border.all(
+                          color: Colors.grey[200]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Schedule',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16.sp,
+                            color: Colors.grey[600],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 24.h),
+
                   // The Date Section
                   Text(
                     'The Date',
@@ -315,7 +361,8 @@ class TournamentDetailsView extends StatelessWidget {
                         top: Radius.circular(30.r),
                       ),
                     ),
-                    builder: (context) => const JoinTeamSheet(),
+                    builder: (context) =>
+                        const JoinTeamSheet(),
                   );
                 },
                 style: ElevatedButton.styleFrom(
