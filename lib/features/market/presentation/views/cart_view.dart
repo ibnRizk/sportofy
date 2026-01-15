@@ -4,6 +4,7 @@ import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_item_tile.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_summary_section.dart';
+import 'package:sportify_app/features/market/presentation/widgets/delivery_address_sheet.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -67,22 +68,17 @@ class _CartViewState extends State<CartView> {
   void _handleCheckout() {
     if (_cartItems.isEmpty) return;
 
-    // TODO: Navigate to checkout/payment screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Proceeding to checkout...',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        backgroundColor: MyColors.greenButton,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+    // Show Delivery Address Sheet
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30.r),
         ),
       ),
+      builder: (context) => const DeliveryAddressSheet(),
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/payment_methods_sheet.dart';
+import 'package:sportify_app/features/market/presentation/widgets/address_option_tile.dart';
 
 class DeliveryAddressSheet extends StatelessWidget {
   const DeliveryAddressSheet({super.key});
@@ -66,8 +67,7 @@ class DeliveryAddressSheet extends StatelessWidget {
           Column(
             children: [
               // Option 1: Saved Address
-              _buildAddressOption(
-                context: context,
+              AddressOptionTile(
                 icon: Icons.location_on_outlined,
                 text: 'region, street',
                 onTap: () {
@@ -84,8 +84,7 @@ class DeliveryAddressSheet extends StatelessWidget {
               ),
 
               // Option 2: Current Location
-              _buildAddressOption(
-                context: context,
+              AddressOptionTile(
                 icon: Icons.my_location,
                 text: 'Deliver to current location',
                 onTap: () {
@@ -102,8 +101,7 @@ class DeliveryAddressSheet extends StatelessWidget {
               ),
 
               // Option 3: Different Location
-              _buildAddressOption(
-                context: context,
+              AddressOptionTile(
                 icon: Icons.pin_drop_outlined,
                 text: 'Deliver to different location',
                 onTap: () {
@@ -115,43 +113,6 @@ class DeliveryAddressSheet extends StatelessWidget {
 
           SizedBox(height: 20.h),
         ],
-      ),
-    );
-  }
-
-  Widget _buildAddressOption({
-    required BuildContext context,
-    required IconData icon,
-    required String text,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 16.h,
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 24.sp,
-              color: Colors.black87,
-            ),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
