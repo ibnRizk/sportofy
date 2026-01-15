@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/injection_container.dart';
@@ -74,7 +76,9 @@ class HomeHeader extends StatelessWidget {
           Spacer(),
           // Notification Icon
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              context.push(Routes.notificationsRoute);
+            },
             child: SvgPicture.asset(
               ImgAssets.icNotification,
               width: 24.w,
@@ -86,7 +90,9 @@ class HomeHeader extends StatelessWidget {
 
           // Chat Icon
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push(Routes.chatsRoute);
+            },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             icon: SvgPicture.asset(

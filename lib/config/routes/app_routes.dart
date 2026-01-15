@@ -36,6 +36,11 @@ import 'package:sportify_app/features/community/presentation/views/comments_view
 import 'package:sportify_app/features/community/presentation/views/create_post_view.dart';
 import 'package:sportify_app/features/market/presentation/views/product_details_view.dart';
 import 'package:sportify_app/features/market/presentation/views/cart_view.dart';
+import 'package:sportify_app/features/market/presentation/views/new_address_view.dart';
+import 'package:sportify_app/features/market/presentation/views/checkout_summary_view.dart';
+import 'package:sportify_app/features/notifications/presentation/views/notifications_view.dart';
+import 'package:sportify_app/features/chat/presentation/views/chats_view.dart';
+import 'package:sportify_app/features/chat/presentation/views/personal_chat_view.dart';
 import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
 
 import '../../core/utils/app_strings.dart';
@@ -80,6 +85,11 @@ class Routes {
   static const String createPostRoute = '/create-post';
   static const String productDetailsRoute = '/product-details';
   static const String cartRoute = '/cart';
+  static const String newAddressRoute = '/new-address';
+  static const String checkoutSummaryRoute = '/checkout-summary';
+  static const String notificationsRoute = '/notifications';
+  static const String chatsRoute = '/chats';
+  static const String personalChatRoute = '/personal-chat';
   static const String loginScreenRoute = '/login';
   static const String loginWithEmailScreenRoute =
       '/login-with-email';
@@ -334,6 +344,52 @@ class AppRoutes {
         builder:
             (BuildContext context, GoRouterState state) {
               return const CartView();
+            },
+      ),
+      GoRoute(
+        path: Routes.newAddressRoute,
+        name: 'newAddress',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const NewAddressView();
+            },
+      ),
+      GoRoute(
+        path: Routes.checkoutSummaryRoute,
+        name: 'checkoutSummary',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final args = state.extra as Map<String, dynamic>?;
+              return CheckoutSummaryView(addressData: args);
+            },
+      ),
+      GoRoute(
+        path: Routes.notificationsRoute,
+        name: 'notifications',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const NotificationsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.chatsRoute,
+        name: 'chats',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              return const ChatsView();
+            },
+      ),
+      GoRoute(
+        path: Routes.personalChatRoute,
+        name: 'personalChat',
+        builder:
+            (BuildContext context, GoRouterState state) {
+              final args = state.extra as Map<String, dynamic>?;
+              return PersonalChatView(
+                userName: args?['userName'] as String?,
+                userAvatar: args?['userAvatar'] as String?,
+                isOnline: args?['isOnline'] as bool? ?? false,
+              );
             },
       ),
       GoRoute(

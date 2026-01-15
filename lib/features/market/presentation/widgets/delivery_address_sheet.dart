@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/payment_methods_sheet.dart';
 import 'package:sportify_app/features/market/presentation/widgets/address_option_tile.dart';
 
@@ -139,24 +141,12 @@ class DeliveryAddressSheet extends StatelessWidget {
         );
       });
     } else if (option == 'different') {
-      // Navigate to Map Screen (placeholder for now)
-      // TODO: Navigate to map screen when implemented
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Map screen coming soon',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          backgroundColor: Colors.grey[700],
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-        ),
-      );
+      // Navigate to New Address View
+      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 300), () {
+        if (!context.mounted) return;
+        context.push(Routes.newAddressRoute);
+      });
     }
   }
 }
