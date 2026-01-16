@@ -58,6 +58,7 @@ class MatchesView extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: () {
           // Navigate to Stadium screen (index 3 in bottom navigation)
           if (context.mounted) {

@@ -23,7 +23,6 @@ class FullPhotoScreen extends StatelessWidget {
         child: PhotoView(
           imageProvider: NetworkImage(image),
           // initialScale: PhotoViewComputedScale.contained * 0.8,
-          heroAttributes: PhotoViewHeroAttributes(tag: image),
           loadingBuilder: (_, event) => Center(
             child: const CircularProgressIndicator().appLoading,
           ),

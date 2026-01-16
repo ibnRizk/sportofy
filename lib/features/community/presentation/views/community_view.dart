@@ -115,6 +115,7 @@ class _CommunityViewState extends State<CommunityView> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: () {
           showModalBottomSheet(
             context: context,

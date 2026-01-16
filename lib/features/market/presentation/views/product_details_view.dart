@@ -282,7 +282,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   Widget _buildImageSection() {
     return Stack(
       children: [
-        // Image Slider with Hero
+        // Image Slider
         SizedBox(
           height: 350.h,
           child: PageView.builder(
@@ -294,23 +294,23 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             },
             itemCount: _productImages.length,
             itemBuilder: (context, index) {
-              return Hero(
-                tag: 'product_${widget.product['id']}_$index',
-                child: Image.asset(
-                  _productImages[index],
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey[200],
-                      child: Icon(
-                        Icons.image,
-                        size: 50.sp,
-                        color: Colors.grey[400],
-                      ),
-                    );
-                  },
-                ),
+              final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+              return Image.asset(
+                _productImages[index],
+                width: double.infinity,
+                fit: BoxFit.cover,
+                cacheWidth: (350.h * devicePixelRatio).toInt(),
+                cacheHeight: (350.h * devicePixelRatio).toInt(),
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[200],
+                    child: Icon(
+                      Icons.image,
+                      size: 50.sp,
+                      color: Colors.grey[400],
+                    ),
+                  );
+                },
               );
             },
           ),

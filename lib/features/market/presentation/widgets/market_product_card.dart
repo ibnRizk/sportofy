@@ -7,7 +7,7 @@ class MarketProductCard extends StatelessWidget {
   final String name;
   final String price;
   final int quantity; // 0 means not in cart
-  final String productId; // For Hero tag
+  final String productId;
   final VoidCallback onTap;
   final VoidCallback? onAdd;
   final VoidCallback? onRemove;
@@ -54,26 +54,25 @@ class MarketProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(12.r),
                   ),
-                  child: Hero(
-                    tag: 'product_${productId}_0',
-                    child: Image.asset(
-                      imageUrl,
-                      width: double.infinity,
-                      height: 150.h,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          width: double.infinity,
-                          height: 150.h,
-                          color: Colors.grey[200],
-                          child: Icon(
-                            Icons.image,
-                            size: 40.sp,
-                            color: Colors.grey[400],
-                          ),
-                        );
-                      },
-                    ),
+                  child: Image.asset(
+                    imageUrl,
+                    width: double.infinity,
+                    height: 150.h,
+                    fit: BoxFit.cover,
+                    cacheWidth: (150.h * MediaQuery.of(context).devicePixelRatio).toInt(),
+                    cacheHeight: (150.h * MediaQuery.of(context).devicePixelRatio).toInt(),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: double.infinity,
+                        height: 150.h,
+                        color: Colors.grey[200],
+                        child: Icon(
+                          Icons.image,
+                          size: 40.sp,
+                          color: Colors.grey[400],
+                        ),
+                      );
+                    },
                   ),
                 ),
                 // Quantity Selector Overlay

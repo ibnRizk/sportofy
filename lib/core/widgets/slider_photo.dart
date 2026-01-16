@@ -40,12 +40,6 @@ class SliderPhotoScreen extends StatelessWidget {
                   ? Image.file(imagesFiles![index]).image
                   : CachedNetworkImageProvider(getPath(index)),
               initialScale: PhotoViewComputedScale.contained * 0.8,
-              heroAttributes: PhotoViewHeroAttributes(
-                  tag: imagesFiles != null
-                      ? imagesFiles![index].path
-                      : path == ImgPath.noKey
-                          ? index
-                          : images[index].id),
             );
           },
           itemCount: imagesFiles != null ? imagesFiles!.length : images.length,

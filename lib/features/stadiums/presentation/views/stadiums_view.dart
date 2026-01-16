@@ -88,6 +88,7 @@ class _StadiumsViewState extends State<StadiumsView> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: () {
           setState(() {
             _isMapView = !_isMapView;
