@@ -74,7 +74,7 @@ class DetectLocationView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.12),
+                      color: Colors.black.withValues(alpha:0.12),
                       blurRadius: 10,
                       offset: const Offset(0, 2),
                     ),
@@ -147,7 +147,7 @@ class DetectLocationView extends StatelessWidget {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.12),
+                            color: Colors.black.withValues(alpha:0.12),
                             blurRadius: 10,
                             offset: const Offset(0, 2),
                           ),

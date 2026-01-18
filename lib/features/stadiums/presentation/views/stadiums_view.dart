@@ -586,7 +586,7 @@ class _DateFilterItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? MyColors.greenButton.withOpacity(0.1)
+              ? MyColors.greenButton.withValues(alpha: 0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8.r),
         ),
@@ -675,7 +675,7 @@ class _StadiumCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),

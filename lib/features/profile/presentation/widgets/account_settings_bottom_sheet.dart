@@ -29,7 +29,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
               width: 40.w,
               height: 4.h,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(2.r),
               ),
             ),
@@ -47,7 +47,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   icon: Icons.edit_outlined,
                   label: 'Edit Account',
                   iconColor: Colors.black87,
-                  borderColor: Colors.grey.withOpacity(0.4),
+                  borderColor: Colors.grey.withValues(alpha:0.4),
                   textColor: Colors.black87,
                   onTap: () {
                     // Close current sheet
@@ -60,7 +60,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   icon: Icons.share_outlined,
                   label: 'Share Account',
                   iconColor: Colors.black87,
-                  borderColor: Colors.grey.withOpacity(0.4),
+                  borderColor: Colors.grey.withValues(alpha:0.4),
                   textColor: Colors.black87,
                   onTap: () {
                     // TODO: Implement Share Account
@@ -70,7 +70,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   icon: Icons.link,
                   label: 'Account Link',
                   iconColor: Colors.black87,
-                  borderColor: Colors.grey.withOpacity(0.4),
+                  borderColor: Colors.grey.withValues(alpha:0.4),
                   textColor: Colors.black87,
                   onTap: () {
                     // TODO: Implement Account Link
@@ -97,7 +97,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Divider(
             thickness: 1,
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha:0.2),
             height: 1,
           ),
 
@@ -158,7 +158,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Divider(
             thickness: 1,
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha:0.2),
             height: 1,
           ),
 

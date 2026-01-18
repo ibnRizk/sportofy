@@ -239,7 +239,7 @@ class ProfileView extends StatelessWidget {
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: context.colors.textColor
-                              .withOpacity(0.6),
+                              .withValues(alpha:0.6),
                           height: 1.5,
                         ),
                       ),
@@ -283,7 +283,7 @@ class ProfileView extends StatelessWidget {
                               color: context
                                   .colors
                                   .textColor
-                                  .withOpacity(0.5),
+                                  .withValues(alpha:0.5),
                             ),
                           ),
                         ],
@@ -296,7 +296,7 @@ class ProfileView extends StatelessWidget {
                         child: LinearProgressIndicator(
                           value: 0.6,
                           backgroundColor: Colors.grey
-                              .withOpacity(0.2),
+                              .withValues(alpha:0.2),
                           valueColor:
                               const AlwaysStoppedAnimation<
                                 Color
@@ -373,7 +373,7 @@ class ProfileView extends StatelessWidget {
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: context.colors.textColor
-                                .withOpacity(0.5),
+                                .withValues(alpha:0.5),
                           ),
                         ),
                         SizedBox(height: 16.h),
@@ -474,7 +474,7 @@ class ProfileView extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha:0.03),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -514,7 +514,7 @@ class ProfileView extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha:0.03),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

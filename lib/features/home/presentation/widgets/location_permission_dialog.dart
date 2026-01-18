@@ -30,7 +30,7 @@ class LocationPermissionDialog extends StatelessWidget {
               width: 60.w,
               height: 60.h,
               decoration: BoxDecoration(
-                color: MyColors.greenButton.withOpacity(0.1),
+                color: MyColors.greenButton.withValues(alpha:0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(

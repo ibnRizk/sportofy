@@ -69,7 +69,7 @@ class MatchBookingCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha:0.05),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -173,7 +173,7 @@ class MatchBookingCard extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: progressPercentage,
                       backgroundColor: MyColors.greyText
-                          .withOpacity(0.2),
+                          .withValues(alpha:0.2),
                       valueColor:
                           const AlwaysStoppedAnimation<
                             Color
@@ -309,7 +309,7 @@ class MatchBookingCard extends StatelessWidget {
                                 color: context
                                     .colors
                                     .textColor
-                                    .withOpacity(0.3),
+                                    .withValues(alpha:0.3),
                                 width: 1,
                               ),
                               shape: RoundedRectangleBorder(

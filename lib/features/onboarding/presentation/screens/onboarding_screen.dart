@@ -250,7 +250,7 @@ class _OnboardingScreenState
       decoration: BoxDecoration(
         color: isActive
             ? MyColors.greenButton
-            : MyColors.greyText.withOpacity(0.3),
+            : MyColors.greyText.withValues(alpha:0.3),
         borderRadius: BorderRadius.circular(4.r),
       ),
     );

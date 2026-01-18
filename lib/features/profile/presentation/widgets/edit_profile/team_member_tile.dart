@@ -24,7 +24,7 @@ class TeamMemberTile extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
         border: Border.all(
-          color: Colors.grey.withOpacity(0.2),
+          color: Colors.grey.withValues(alpha:0.2),
           width: 1,
         ),
       ),

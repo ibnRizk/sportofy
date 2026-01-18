@@ -37,7 +37,7 @@ class ContactInfoBottomSheet extends StatelessWidget {
               width: 40.w,
               height: 4.h,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(2.r),
               ),
             ),
@@ -133,7 +133,7 @@ class ContactInfoBottomSheet extends StatelessWidget {
           width: 40.w,
           height: 40.h,
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha:0.1),
             borderRadius: BorderRadius.circular(8.r),
           ),
           child: Icon(

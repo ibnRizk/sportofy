@@ -129,7 +129,7 @@ class _AddSportFilterSheetState extends State<AddSportFilterSheet> {
               Divider(
                 height: 1.h,
                 thickness: 1,
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withValues(alpha:0.2),
               ),
               SizedBox(height: 15.h),
               Padding(

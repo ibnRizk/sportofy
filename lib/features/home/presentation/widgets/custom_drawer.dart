@@ -138,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: context.colors.textColor.withOpacity(
+                color: context.colors.textColor.withValues(alpha:
                   0.6,
                 ),
               ),
@@ -259,7 +259,7 @@ class CustomDrawer extends StatelessWidget {
           Divider(
             height: 1,
             thickness: 1,
-            color: context.colors.textColor.withOpacity(
+            color: context.colors.textColor.withValues(alpha:
               0.1,
             ),
           ),
@@ -273,7 +273,7 @@ class CustomDrawer extends StatelessWidget {
                 height: 1,
                 thickness: 1,
                 indent: 60.w,
-                color: context.colors.textColor.withOpacity(
+                color: context.colors.textColor.withValues(alpha:
                   0.05,
                 ),
               ),
@@ -427,7 +427,7 @@ class CustomDrawer extends StatelessWidget {
             Icon(
               iconData,
               size: 24.w,
-              color: context.colors.textColor.withOpacity(
+              color: context.colors.textColor.withValues(alpha:
                 0.6,
               ),
             ),
@@ -529,7 +529,7 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
-                color: context.colors.textColor.withOpacity(
+                color: context.colors.textColor.withValues(alpha:
                   0.6,
                 ),
               ),

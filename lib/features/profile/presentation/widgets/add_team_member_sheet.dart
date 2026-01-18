@@ -128,7 +128,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(
-                          color: Colors.grey.withOpacity(0.3),
+                          color: Colors.grey.withValues(alpha:0.3),
                           width: 1,
                         ),
                       ),
@@ -176,7 +176,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(
-                          color: Colors.grey.withOpacity(0.3),
+                          color: Colors.grey.withValues(alpha:0.3),
                           width: 1,
                         ),
                       ),
@@ -231,7 +231,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                 separatorBuilder: (context, index) => Divider(
                   height: 1.h,
                   thickness: 1,
-                  color: Colors.grey.withOpacity(0.2),
+                  color: Colors.grey.withValues(alpha:0.2),
                 ),
                 itemBuilder: (context, index) {
                   final member = _allMembers[index];
@@ -259,7 +259,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha:0.05),
                     blurRadius: 10,
                     offset: const Offset(0, -2),
                   ),

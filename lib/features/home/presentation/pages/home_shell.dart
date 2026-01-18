@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/features/home/presentation/pages/home_view.dart';
 import 'package:sportify_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';

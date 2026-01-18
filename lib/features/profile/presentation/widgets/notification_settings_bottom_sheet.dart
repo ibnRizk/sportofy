@@ -59,7 +59,7 @@ class _NotificationSettingsBottomSheetState
               width: 40.w,
               height: 4.h,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(2.r),
               ),
             ),
@@ -116,7 +116,7 @@ class _NotificationSettingsBottomSheetState
           // Divider
           Divider(
             thickness: 1,
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha:0.2),
             height: 1,
             indent: 16.w,
             endIndent: 16.w,
@@ -178,9 +178,9 @@ class _NotificationSettingsBottomSheetState
             value: value,
             onChanged: onChanged,
             activeColor: MyColors.greenButton,
-            activeTrackColor: MyColors.greenButton.withOpacity(0.5),
+            activeTrackColor: MyColors.greenButton.withValues(alpha:0.5),
             inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.withOpacity(0.3),
+            inactiveTrackColor: Colors.grey.withValues(alpha:0.3),
           ),
         ],
       ),

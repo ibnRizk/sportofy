@@ -20,7 +20,7 @@ class ProjectTagChip extends StatelessWidget {
         vertical: 8.h,
       ),
       decoration: BoxDecoration(
-        color: MyColors.greenButton.withOpacity(0.1),
+        color: MyColors.greenButton.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
           color: MyColors.greenButton,

@@ -8,7 +8,8 @@ import 'package:sportify_app/features/community/presentation/widgets/media_attac
 
 class CreatePostView extends StatefulWidget {
   final String postType; // 'project' or 'usual'
-  final List<String> helpAreas; // Selected help areas for project posts
+  final List<String>
+  helpAreas; // Selected help areas for project posts
 
   const CreatePostView({
     super.key,
@@ -17,11 +18,13 @@ class CreatePostView extends StatefulWidget {
   });
 
   @override
-  State<CreatePostView> createState() => _CreatePostViewState();
+  State<CreatePostView> createState() =>
+      _CreatePostViewState();
 }
 
 class _CreatePostViewState extends State<CreatePostView> {
-  final TextEditingController _postController = TextEditingController();
+  final TextEditingController _postController =
+      TextEditingController();
   final FocusNode _focusNode = FocusNode();
   String _selectedPrivacy = 'Friends';
   late List<String> _helpAreas;
@@ -40,7 +43,8 @@ class _CreatePostViewState extends State<CreatePostView> {
     super.dispose();
   }
 
-  bool get _canPost => _postController.text.trim().isNotEmpty && !_isPosting;
+  bool get _canPost =>
+      _postController.text.trim().isNotEmpty && !_isPosting;
 
   Future<void> _handlePost() async {
     if (!_canPost) return;
@@ -93,9 +97,21 @@ class _CreatePostViewState extends State<CreatePostView> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildPrivacyOption(context, 'Public', Icons.public),
-            _buildPrivacyOption(context, 'Friends', Icons.people),
-            _buildPrivacyOption(context, 'Only me', Icons.lock),
+            _buildPrivacyOption(
+              context,
+              'Public',
+              Icons.public,
+            ),
+            _buildPrivacyOption(
+              context,
+              'Friends',
+              Icons.people,
+            ),
+            _buildPrivacyOption(
+              context,
+              'Only me',
+              Icons.lock,
+            ),
           ],
         ),
       ),
@@ -111,15 +127,21 @@ class _CreatePostViewState extends State<CreatePostView> {
     return ListTile(
       leading: Icon(
         icon,
-        color: isSelected ? MyColors.greenButton : Colors.grey[600],
+        color: isSelected
+            ? MyColors.greenButton
+            : Colors.grey[600],
         size: 24.sp,
       ),
       title: Text(
         option,
         style: TextStyle(
           fontSize: 16.sp,
-          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-          color: isSelected ? MyColors.greenButton : Colors.black87,
+          fontWeight: isSelected
+              ? FontWeight.w600
+              : FontWeight.w400,
+          color: isSelected
+              ? MyColors.greenButton
+              : Colors.black87,
         ),
       ),
       trailing: isSelected
@@ -194,9 +216,10 @@ class _CreatePostViewState extends State<CreatePostView> {
                       height: 16.h,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.white,
-                        ),
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
                       ),
                     )
                   : Text(
@@ -219,7 +242,8 @@ class _CreatePostViewState extends State<CreatePostView> {
                 vertical: 16.h,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // User Header
                   UserHeader(
@@ -230,7 +254,8 @@ class _CreatePostViewState extends State<CreatePostView> {
                   ),
 
                   // Project Tags (Help Areas) - Only for project posts
-                  if (widget.postType == 'project' && _helpAreas.isNotEmpty) ...[
+                  if (widget.postType == 'project' &&
+                      _helpAreas.isNotEmpty) ...[
                     SizedBox(height: 20.h),
                     Wrap(
                       spacing: 8.w,
@@ -274,7 +299,9 @@ class _CreatePostViewState extends State<CreatePostView> {
                       contentPadding: EdgeInsets.zero,
                     ),
                     onChanged: (value) {
-                      setState(() {}); // Rebuild to update Post button state
+                      setState(
+                        () {},
+                      ); // Rebuild to update Post button state
                     },
                   ),
                 ],

@@ -230,7 +230,7 @@ class _PersonalChatViewState extends State<PersonalChatView> {
           vertical: 32.h,
         ),
         decoration: BoxDecoration(
-          color: Colors.cyan.withOpacity(0.1),
+          color: Colors.cyan.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(

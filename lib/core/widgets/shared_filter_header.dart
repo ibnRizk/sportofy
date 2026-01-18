@@ -397,7 +397,7 @@ class _DateFilterItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? MyColors.greenButton.withOpacity(0.1)
+              ? MyColors.greenButton.withValues(alpha: 0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8.r),
         ),

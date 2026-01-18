@@ -432,10 +432,10 @@ class MatchDetailsView extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black.withOpacity(0.3),
+                  Colors.black.withValues(alpha: 0.3),
                   Colors.transparent,
                   Colors.transparent,
-                  Colors.black.withOpacity(0.2),
+                  Colors.black.withValues(alpha: 0.2),
                 ],
               ),
             ),
@@ -528,7 +528,9 @@ class MatchDetailsView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: index == 0
                         ? Colors.white
-                        : Colors.white.withOpacity(0.5),
+                        : Colors.white.withValues(
+                            alpha: 0.5,
+                          ),
                     borderRadius: BorderRadius.circular(
                       4.r,
                     ),
@@ -633,7 +635,7 @@ class MatchDetailsView extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
