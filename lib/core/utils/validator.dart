@@ -9,7 +9,7 @@ abstract class Validator {
   }) {
     String? validateNotEmpty = _notEmpty(value, context);
     if (validateNotEmpty == null) {
-      return type.condition.call(value!) ??
+      return type.condition.call(value!, context) ??
           validateNotEmpty;
     }
     return validateNotEmpty;
@@ -23,17 +23,25 @@ abstract class Validator {
   }
 
   static String? _name(String value, context) {
-    if (value.trim().split(' ').length < 2) {
+    final trimmedValue = value.trim();
+    if (trimmedValue.length < 3) {
       return 'error_valid_name'.tr(context);
     }
     return null;
   }
 
   static String? _phone(String value, context) {
-    const pattern =
-        r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$';
-    final regExp = RegExp(pattern);
-    if (!regExp.hasMatch(value)) {
+    // Egyptian phone number: 11 digits starting with 01
+    // Format: 01XXXXXXXXX (e.g., 01234567890)
+    final trimmedValue = value.trim();
+    if (trimmedValue.length != 11) {
+      return 'error_valid_phone_number'.tr(context);
+    }
+    if (!trimmedValue.startsWith('01')) {
+      return 'error_valid_phone_number'.tr(context);
+    }
+    final regExp = RegExp(r'^[0-9]+$');
+    if (!regExp.hasMatch(trimmedValue)) {
       return 'error_valid_phone_number'.tr(context);
     }
     return null;
@@ -114,6 +122,51 @@ abstract class Validator {
       }
     }
     return null;
+  }
+
+  // Helper functions for easier use
+  static String? validatePhoneNumber(
+    String? value,
+    BuildContext context,
+  ) {
+    return call(
+      value: value,
+      type: ValidatorType.phone,
+      context: context,
+    );
+  }
+
+  static String? validateEmail(
+    String? value,
+    BuildContext context,
+  ) {
+    return call(
+      value: value,
+      type: ValidatorType.email,
+      context: context,
+    );
+  }
+
+  static String? validateRequired(
+    String? value,
+    BuildContext context,
+  ) {
+    return call(
+      value: value,
+      type: ValidatorType.standard,
+      context: context,
+    );
+  }
+
+  static String? validateName(
+    String? value,
+    BuildContext context,
+  ) {
+    return call(
+      value: value,
+      type: ValidatorType.name,
+      context: context,
+    );
   }
 }
 

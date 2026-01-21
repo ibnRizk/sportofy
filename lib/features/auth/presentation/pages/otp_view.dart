@@ -60,142 +60,176 @@ class _OtpViewState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
+    // Detect if keyboard is open
+    final bool isKeyboardOpen =
+        MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: context.colors.white,
+      appBar: AppBar(
         backgroundColor: context.colors.white,
-        appBar: AppBar(
-          backgroundColor: context.colors.white,
-          elevation: AppDimens.elevation0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: context.colors.black,
-            ),
-            onPressed: () => context.pop(),
+        elevation: AppDimens.elevation0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: context.colors.black,
           ),
-          title: Text(
-            'login'.tr(context),
-            style: TextStyles.semiBold18(color: context.colors.black),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          'login'.tr(context),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
           ),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: AppPadding.h20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: AppDimens.h24),
-
-                // Title
-                Text(
-                  'enter_verification_code'.tr(context),
-                  style: TextStyles.bold20(color: context.colors.textColor),
+      ),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
                 ),
-
-                SizedBox(height: AppDimens.h12),
-
-                // Subtitle
-                RichText(
-                  text: TextSpan(
-                    style: TextStyles.regular14(color: MyColors.greyText).copyWith(
-                      height: 1.5,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'enter_code_sent'.tr(context) + ' ',
-                      ),
-                      TextSpan(
-                        text: '+20 ${widget.phoneNumber}',
-                        style: TextStyles.semiBold14(color: context.colors.textColor),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: AppDimens.h32),
-
-                // OTP Input Boxes
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    4,
-                    (index) => _buildOtpBox(index),
-                  ),
-                ),
-
-                SizedBox(height: AppDimens.h24),
-
-                // Resend Code
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: AppPadding.h20,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'didnt_receive_code'.tr(context) + '  ',
-                          style: TextStyles.regular14(color: MyColors.greyText),
+                  SizedBox(height: AppDimens.h24),
+
+                  // Title
+                  Text(
+                    'enter_verification_code'.tr(context),
+                    style: TextStyles.bold20(
+                      color: MyColors.darkGrayColor,
+                    ),
+                  ),
+
+                  SizedBox(height: AppDimens.h12),
+
+                  // Subtitle
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyles.regular16(
+                        color: MyColors.darkGrayColor,
+                      ).copyWith(
+                        height: 1.5,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'enter_code_sent'.tr(context) + ' ',
                         ),
-                        GestureDetector(
-                          onTap: state.otpCountdown == 0
-                              ? () {
-                                  context.read<AuthCubit>().resendOtp();
-                                }
-                              : null,
-                          child: Text(
-                            '${'send_again'.tr(context)} (${state.otpCountdown})',
-                            style: TextStyles.semiBold14(
-                              color: state.otpCountdown == 0
-                                  ? MyColors.greenButton
-                                  : MyColors.greyText,
-                            ),
+                        TextSpan(
+                          text: '+20 ${widget.phoneNumber}',
+                          style: TextStyles.regular16(
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                       ],
-                    );
-                  },
-                ),
+                    ),
+                  ),
 
-                const Spacer(),
+                  SizedBox(height: AppDimens.h32),
 
-                // Confirm Button
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    return SizedBox(
-                      width: double.infinity,
-                      height: AppDimens.buttonHeight56,
-                      child: ElevatedButton(
-                        onPressed: state.isOtpValid
-                            ? () {
-                                context.go(Routes.setupProfileRoute);
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: state.isOtpValid
-                              ? MyColors.greenButton
-                              : MyColors.grey300,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.r12,
+                  // OTP Input Boxes
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      4,
+                      (index) => _buildOtpBox(index),
+                    ),
+                  ),
+
+                  SizedBox(height: AppDimens.h24),
+
+                  // Resend Code
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'didnt_receive_code'.tr(context) + '  ',
+                            style: TextStyles.regular16(
+                              color: MyColors.darkGrayColor,
+                            ),
                           ),
-                          elevation: AppDimens.elevation0,
-                          disabledBackgroundColor: MyColors.grey300,
-                        ),
-                        child: Text(
-                          'confirm'.tr(context),
-                          style: TextStyles.semiBold16(
-                            color: state.isOtpValid
-                                ? MyColors.white
-                                : MyColors.grey500,
+                          GestureDetector(
+                            onTap: state.otpCountdown == 0
+                                ? () {
+                                    context.read<AuthCubit>().resendOtp();
+                                  }
+                                : null,
+                            child: Text(
+                              '${'send_again'.tr(context)} (${state.otpCountdown})',
+                              style: TextStyles.regular16(
+                                color: state.otpCountdown == 0
+                                    ? MyColors.greenButton
+                                    : MyColors.darkGrayColor,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      );
+                    },
                       ),
-                    );
-                  },
-                ),
 
-                SizedBox(height: AppDimens.h32),
-              ],
-            ),
-          ),
+                        // Dynamic Spacing
+                        if (isKeyboardOpen)
+                          SizedBox(height: AppDimens.h24)
+                        else
+                          const Spacer(),
+
+                        // Confirm Button
+                        BlocBuilder<AuthCubit, AuthState>(
+                          builder: (context, state) {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: AppDimens.buttonHeight56,
+                              child: ElevatedButton(
+                                onPressed: state.isOtpValid
+                                    ? () {
+                                        context.go(Routes.setupProfileRoute);
+                                      }
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: state.isOtpValid
+                                      ? MyColors.greenButton
+                                      : MyColors.grey300,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: AppRadius.r12,
+                                  ),
+                                  elevation: AppDimens.elevation0,
+                                  disabledBackgroundColor: MyColors.grey300,
+                                ),
+                                child: Text(
+                                  'confirm'.tr(context),
+                                  style: TextStyles.semiBold20(
+                                    color: state.isOtpValid
+                                        ? Colors.white
+                                        : MyColors.grey500,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        // Bottom padding for aesthetics when keyboard is closed
+                        if (!isKeyboardOpen)
+                          SizedBox(height: AppDimens.h32),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
+      ),
     );
   }
 
@@ -221,7 +255,9 @@ class _OtpViewState extends State<OtpView> {
           border: InputBorder.none,
           counterText: '',
         ),
-        style: TextStyles.semiBold24(color: context.colors.textColor),
+        style: TextStyles.regular16(
+          color: MyColors.darkGrayColor,
+        ),
       ),
     );
   }
