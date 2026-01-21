@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
@@ -7,8 +8,7 @@ import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
-import 'package:sportify_app/core/utils/image_manager.dart';
-import 'package:sportify_app/core/widgets/app_image.dart';
+import 'package:sportify_app/core/widgets/frame_animated_widget.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -26,25 +26,49 @@ class _OnboardingScreenState
 
   List<OnboardingData> _getPages(BuildContext context) {
     return [
+      // Screen 1: Reserving stadiums nearby
       OnboardingData(
-        image: ImgAssets.onBoarding1,
-        titleKey: 'onboarding3_title',
-        descriptionKey: 'onboarding1_description',
+        images: [
+          'assets/images/onboarding1_1.png',
+          'assets/images/onboarding1_2.png',
+          'assets/images/onboarding1_3.png',
+        ],
+        title: 'Reserving stadiums nearby',
+        body:
+            'Book your favorite stadium, and enjoy playing with your friends',
       ),
+      // Screen 2: Get to know amazing people
       OnboardingData(
-        image: ImgAssets.onBoarding2,
-        titleKey: 'onboarding2_title',
-        descriptionKey: 'onboarding2_description',
+        images: [
+          'assets/images/onboarding2_1.png',
+          'assets/images/onboarding2_2.png',
+          'assets/images/onboarding2_3.png',
+        ],
+        title: 'Get to know amazing people',
+        body:
+            'Play and interact with others who share your talent',
       ),
+      // Screen 3: Play and get points
       OnboardingData(
-        image: ImgAssets.onBoarding3,
-        titleKey: 'onboarding4_title',
-        descriptionKey: 'onboarding3_description',
+        images: [
+          'assets/images/onboarding3_1.png',
+          'assets/images/onboarding3_2.png',
+          'assets/images/onboarding3_3.png',
+          'assets/images/onboarding3_4.png',
+        ],
+        title: 'Play and get points',
+        body:
+            'Play and get points to get a discount on your purchases',
       ),
+      // Screen 4: The best sports equipment
       OnboardingData(
-        image: ImgAssets.onBoarding4,
-        titleKey: 'onboarding1_title',
-        descriptionKey: 'onboarding4_description',
+        images: [
+          'assets/images/onboarding4_1.png',
+          'assets/images/onboarding4_2.png',
+          'assets/images/onboarding4_3.png',
+        ],
+        title: 'The best sports equipment',
+        body: 'Get everything you need in our sports store',
       ),
     ];
   }
@@ -176,12 +200,13 @@ class _OnboardingScreenState
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Illustration Image
-        AppImage.asset(
-          imageAsset: data.image,
+        // Illustration Image - Always use FrameAnimatedWidget
+        FrameAnimatedWidget(
+          imagePaths: data.images,
           width: AppDimens.w320,
           height: AppDimens.h280,
           fit: BoxFit.contain,
+          interval: const Duration(milliseconds: 1500),
         ),
 
         SizedBox(height: AppDimens.h40),
@@ -190,25 +215,29 @@ class _OnboardingScreenState
         Padding(
           padding: AppPadding.h40,
           child: Text(
-            data.titleKey.tr(context),
+            data.title,
             textAlign: TextAlign.center,
-            style: TextStyles.bold24(
-              color: context.colors.textColor,
-            ).copyWith(height: 1.3),
+            style: TextStyle(
+              fontSize: 24.sp,
+              fontWeight: FontWeight.bold,
+              color: MyColors.darkGrayColor,
+            ),
           ),
         ),
 
         SizedBox(height: AppDimens.h16),
 
-        // Description
+        // Body
         Padding(
           padding: AppPadding.h40,
           child: Text(
-            data.descriptionKey.tr(context),
+            data.body,
             textAlign: TextAlign.center,
-            style: TextStyles.regular14(
-              color: MyColors.greyText,
-            ).copyWith(height: 1.5),
+            style: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w400,
+              color: MyColors.darkGrayColor,
+            ),
           ),
         ),
       ],
@@ -244,13 +273,17 @@ class _OnboardingScreenState
 }
 
 class OnboardingData {
-  final String image;
-  final String titleKey;
-  final String descriptionKey;
+  /// List of image paths for frame-by-frame animation
+  /// Even if a page has only 1 frame, pass it as a list of one string
+  final List<String> images;
+  final String
+  title; // Direct string instead of translation key
+  final String
+  body; // Direct string instead of translation key
 
   const OnboardingData({
-    required this.image,
-    required this.titleKey,
-    required this.descriptionKey,
+    required this.images,
+    required this.title,
+    required this.body,
   });
 }

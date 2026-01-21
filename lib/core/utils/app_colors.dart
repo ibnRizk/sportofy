@@ -93,6 +93,9 @@ class MyColors {
   static const Color amber50 = Color(0xFFFFF8E1);
   static const Color amber700 = Color(0xFFFFA000);
   static const Color transparent = Colors.transparent;
+
+  // Figma Design System Colors
+  static const Color darkGrayColor = Color(0xFF333333);
 }
 
 @immutable
