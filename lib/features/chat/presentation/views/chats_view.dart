@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/chat/presentation/widgets/chat_list_tile.dart';
 import 'package:sportify_app/features/chat/presentation/widgets/online_user_bubble.dart';
 
@@ -65,15 +69,15 @@ class ChatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black87,
-            size: 24.sp,
+            color: MyColors.black87,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () {
             if (Navigator.canPop(context)) {
@@ -83,19 +87,15 @@ class ChatsView extends StatelessWidget {
         ),
         title: Text(
           'Chat',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold18(color: MyColors.black87),
         ),
         centerTitle: false,
         actions: [
           // User Avatar (Trailing)
           Padding(
-            padding: EdgeInsets.only(right: 16.w),
+            padding: AppPadding.right16,
             child: CircleAvatar(
-              radius: 18.r,
+              radius: AppDimens.avatarSize18,
               backgroundImage: AssetImage(ImgAssets.userAvatar),
               onBackgroundImageError: (exception, stackTrace) {
                 // Handle error silently
@@ -108,37 +108,28 @@ class ChatsView extends StatelessWidget {
         children: [
           // Search Bar
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 16.h,
-            ),
+            padding: AppPadding.h20v16,
             child: Container(
-              height: 45.h,
+              height: AppDimens.containerHeight45,
               decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(12.r),
+                color: MyColors.grey50,
+                borderRadius: AppRadius.r12,
                 border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
+                  color: MyColors.grey300,
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.grey[500],
-                  ),
+                  hintStyle: TextStyles.regular14(color: MyColors.grey500),
                   prefixIcon: Icon(
                     Icons.search,
-                    size: 20.sp,
-                    color: Colors.grey[500],
+                    size: AppDimens.iconSize20,
+                    color: MyColors.grey500,
                   ),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 12.h,
-                  ),
+                  contentPadding: AppPadding.h16v12,
                   isDense: true,
                 ),
               ),
@@ -147,10 +138,10 @@ class ChatsView extends StatelessWidget {
 
           // Online Users (Horizontal List)
           SizedBox(
-            height: 90.h,
+            height: AppDimens.containerHeight90,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: AppPadding.h20,
               itemCount: _onlineUsers.length,
               itemBuilder: (context, index) {
                 final user = _onlineUsers[index];
@@ -172,17 +163,17 @@ class ChatsView extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Recent Chats (Vertical List)
           Expanded(
             child: ListView.separated(
               itemCount: _chats.length,
               separatorBuilder: (context, index) => Divider(
-                height: 1,
-                thickness: 1,
-                color: Colors.grey[200],
-                indent: 72.w, // Align with content (avatar + spacing)
+                height: AppDimens.dividerThickness1,
+                thickness: AppDimens.dividerThickness1,
+                color: MyColors.grey200,
+                indent: AppDimens.w72, // Align with content (avatar + spacing)
               ),
               itemBuilder: (context, index) {
                 final chat = _chats[index];

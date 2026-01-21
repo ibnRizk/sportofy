@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
 class PostCard extends StatelessWidget {
@@ -29,11 +32,8 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 16.h,
-      ),
+      margin: EdgeInsets.only(bottom: AppDimens.h16),
+      padding: AppPadding.h20v16,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,39 +41,35 @@ class PostCard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                radius: 25.r,
+                radius: AppDimens.avatarSize25,
                 backgroundImage: AssetImage(authorAvatar),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppDimens.w12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       authorName,
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                      style: TextStyles.bold15(
+                        color: MyColors.black87,
                       ),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: AppDimens.h2),
                     Row(
                       children: [
                         Text(
                           timestamp,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey[600],
+                          style: TextStyles.regular12(
+                            color: MyColors.grey600,
                           ),
                         ),
                         if (isPublic) ...[
-                          SizedBox(width: 4.w),
+                          SizedBox(width: AppDimens.w4),
                           Icon(
                             Icons.public,
-                            size: 12.sp,
-                            color: Colors.grey[600],
+                            size: AppDimens.badgeSize12,
+                            color: MyColors.grey600,
                           ),
                         ],
                       ],
@@ -84,20 +80,17 @@ class PostCard extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Content Text
           Text(
             content,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.black87,
-              height: 1.5,
-            ),
+            style: TextStyles.regular14(
+              color: MyColors.black87,
+            ).copyWith(height: 1.5),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Social Stats Row
           Row(
@@ -111,28 +104,28 @@ class PostCard extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Container(
-                        width: 20.w,
-                        height: 20.w,
+                        width: AppDimens.badgeSize20,
+                        height: AppDimens.badgeSize20,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.white,
-                            width: 1.5,
+                            color: MyColors.white,
+                            width: AppDimens.borderWidth1 + 0.5,
                           ),
                         ),
                         child: ClipOval(
                           child: Image.asset(
                             ImgAssets.communityPariOnly,
-                            width: 20.w,
-                            height: 20.w,
+                            width: AppDimens.badgeSize20,
+                            height: AppDimens.badgeSize20,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
-                                color: Colors.blue[100],
+                                color: MyColors.blue100,
                                 child: Icon(
                                   Icons.thumb_up,
-                                  size: 12.sp,
-                                  color: Colors.blue[700],
+                                  size: AppDimens.badgeSize12,
+                                  color: MyColors.blue700,
                                 ),
                               );
                             },
@@ -140,34 +133,32 @@ class PostCard extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        left: 12.w,
+                        left: AppDimens.w12,
                         child: Container(
-                          width: 20.w,
-                          height: 20.w,
+                          width: AppDimens.badgeSize20,
+                          height: AppDimens.badgeSize20,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.red[100],
+                            color: MyColors.red100,
                             border: Border.all(
-                              color: Colors.white,
-                              width: 1.5,
+                              color: MyColors.white,
+                              width: AppDimens.borderWidth1 + 0.5,
                             ),
                           ),
                           child: Icon(
                             Icons.favorite,
-                            size: 12.sp,
-                            color: Colors.red[700],
+                            size: AppDimens.badgeSize12,
+                            color: MyColors.red700,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(width: 8.w),
+                  SizedBox(width: AppDimens.w8),
                   Text(
                     '$likedBy and $likesCount others',
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                    style: TextStyles.medium13(
+                      color: MyColors.black87,
                     ),
                   ),
                 ],
@@ -193,26 +184,24 @@ class PostCard extends StatelessWidget {
                 },
                 child: Text(
                   '$commentsCount comments',
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                  style: TextStyles.medium13(
+                    color: MyColors.black87,
                   ),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Divider
           Divider(
-            height: 1,
-            color: Colors.grey[300],
-            thickness: 1,
+            height: AppDimens.dividerThickness1,
+            color: MyColors.grey300,
+            thickness: AppDimens.dividerThickness1,
           ),
 
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
 
           // Action Buttons
           Row(
@@ -225,26 +214,24 @@ class PostCard extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.thumb_up_outlined,
-                    size: 20.sp,
-                    color: Colors.grey[700],
+                    size: AppDimens.iconSize20,
+                    color: MyColors.grey700,
                   ),
                   label: Text(
                     'Like',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
+                    style: TextStyles.medium14(
+                      color: MyColors.grey700,
                     ),
                   ),
                 ),
               ),
               // Vertical Divider between buttons
               VerticalDivider(
-                width: 1,
-                thickness: 1,
-                color: Colors.grey[300],
-                indent: 8.h,
-                endIndent: 8.h,
+                width: AppDimens.borderWidth1,
+                thickness: AppDimens.dividerThickness1,
+                color: MyColors.grey300,
+                indent: AppDimens.h8,
+                endIndent: AppDimens.h8,
               ),
               // Comment Button
               Expanded(
@@ -268,15 +255,13 @@ class PostCard extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.comment_outlined,
-                    size: 20.sp,
-                    color: Colors.grey[700],
+                    size: AppDimens.iconSize20,
+                    color: MyColors.grey700,
                   ),
                   label: Text(
                     'Comment',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
+                    style: TextStyles.medium14(
+                      color: MyColors.grey700,
                     ),
                   ),
                 ),
@@ -286,9 +271,9 @@ class PostCard extends StatelessWidget {
 
           // Divider under buttons
           Divider(
-            height: 1,
-            color: Colors.grey[300],
-            thickness: 1,
+            height: AppDimens.dividerThickness1,
+            color: MyColors.grey300,
+            thickness: AppDimens.dividerThickness1,
           ),
         ],
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class SizePicker extends StatelessWidget {
   final List<int> sizes;
@@ -21,48 +24,44 @@ class SizePicker extends StatelessWidget {
       children: [
         Text(
           'Choose the Size',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+          style: TextStyles.bold16(
+            color: context.colors.textColor,
           ),
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: AppDimens.h12),
         SizedBox(
-          height: 50.h,
+          height: AppDimens.buttonHeight50,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: sizes.length,
-            separatorBuilder: (context, index) => SizedBox(width: 12.w),
+            separatorBuilder: (context, index) => SizedBox(width: AppDimens.w12),
             itemBuilder: (context, index) {
               final size = sizes[index];
               final isSelected = selectedSize == size;
               return GestureDetector(
                 onTap: () => onSizeSelected(size),
                 child: Container(
-                  width: 50.w,
-                  height: 50.w,
+                  width: AppDimens.containerHeight50,
+                  height: AppDimens.containerHeight50,
                   decoration: BoxDecoration(
                     color: isSelected
                         ? MyColors.greenButton
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
+                        : context.colors.white,
+                    borderRadius: AppRadius.r8,
                     border: Border.all(
                       color: isSelected
                           ? MyColors.greenButton
-                          : Colors.grey[300]!,
-                      width: 1,
+                          : MyColors.grey300,
+                      width: AppDimens.borderWidth1,
                     ),
                   ),
                   child: Center(
                     child: Text(
                       size.toString(),
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
+                      style: TextStyles.semiBold16(
                         color: isSelected
-                            ? Colors.white
-                            : Colors.black87,
+                            ? MyColors.white
+                            : context.colors.textColor,
                       ),
                     ),
                   ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -14,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 280.w, // ✅ Minimized drawer width
+      width: AppDimens.w280, // ✅ Minimized drawer width
       child: Drawer(
         backgroundColor: context.colors.white,
         child: isGuest
@@ -30,10 +33,7 @@ class CustomDrawer extends StatelessWidget {
   Widget _buildGuestDrawer(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 20.h,
-        ),
+        padding: AppPadding.h24v20,
         child: Column(
           children: [
             // Language Selector (Top Right)
@@ -45,34 +45,25 @@ class CustomDrawer extends StatelessWidget {
                     _showLanguageDialog(context);
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                      vertical: 6.h,
-                    ),
+                    padding: AppPadding.h12v6,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: context.colors.textColor
-                            .withValues(alpha: 0.2),
+                            .withValues(alpha: AppDimens.opacity2),
                       ),
-                      borderRadius: BorderRadius.circular(
-                        20.r,
-                      ),
+                      borderRadius: AppRadius.r20,
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           'عربي',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            color: context.colors.textColor,
-                          ),
+                          style: TextStyles.medium14(color: context.colors.textColor),
                         ),
-                        SizedBox(width: 6.w),
+                        SizedBox(width: AppDimens.w6),
                         Icon(
                           Icons.language,
-                          size: 18.w,
+                          size: AppDimens.iconSize18,
                           color: context.colors.textColor,
                         ),
                       ],
@@ -88,23 +79,21 @@ class CustomDrawer extends StatelessWidget {
             Text(
               'Log in and be part of an amazing\nsports community',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
+              style: TextStyles.regular16(
                 color: context.colors.textColor.withValues(
-                  alpha: 0.7,
+                  alpha: AppDimens.opacity7,
                 ),
-
+              ).copyWith(
                 height: 1.5,
               ),
             ),
 
-            SizedBox(height: 32.h),
+            SizedBox(height: AppDimens.h32),
 
             // Sign Up Button (Green Background)
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -113,43 +102,33 @@ class CustomDrawer extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      12.r,
-                    ),
+                    borderRadius: AppRadius.r12,
                   ),
-                  elevation: 0,
+                  elevation: AppDimens.elevation0,
                 ),
                 child: Text(
                   'Sign up',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+                  style: TextStyles.semiBold16(color: MyColors.white),
                 ),
               ),
             ),
 
-            SizedBox(height: 16.h),
+            SizedBox(height: AppDimens.h16),
 
             // "Already have an account" Text
             Text(
               'Already have an account',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: context.colors.textColor.withValues(alpha:
-                  0.6,
-                ),
+              style: TextStyles.regular14(
+                color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
               ),
             ),
 
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
 
             // Login Button (Outlined)
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: OutlinedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -158,22 +137,16 @@ class CustomDrawer extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
                     color: MyColors.greenButton,
-                    width: 1.5,
+                    width: AppDimens.borderWidth2,
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      12.r,
-                    ),
+                    borderRadius: AppRadius.r12,
                   ),
                 ),
                 child: Text(
                   'Login',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: MyColors.greenButton,
-                  ),
+                  style: TextStyles.semiBold16(color: MyColors.greenButton),
                 ),
               ),
             ),
@@ -194,19 +167,19 @@ class CustomDrawer extends StatelessWidget {
         children: [
           // Header Section
           Container(
-            padding: EdgeInsets.all(20.w),
+            padding: AppPadding.p20,
             color: context.colors.white,
             child: Row(
               children: [
                 // User Avatar
                 CircleAvatar(
-                  radius: 28.r,
+                  radius: AppDimens.avatarSize28,
                   backgroundImage: AssetImage(
                     ImgAssets.userAvatar,
                   ),
                 ),
 
-                SizedBox(width: 12.w),
+                SizedBox(width: AppDimens.w12),
 
                 // User Info
                 Expanded(
@@ -218,23 +191,18 @@ class CustomDrawer extends StatelessWidget {
                         children: [
                           Text(
                             'Hi, Ahmed Hassen',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                              color:
-                                  context.colors.textColor,
+                            style: TextStyles.semiBold16(
+                              color: context.colors.textColor,
                             ),
                           ),
-                          SizedBox(width: 4.w),
+                          SizedBox(width: AppDimens.w4),
                           Text(
                             '👋',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                            ),
+                            style: TextStyles.regular16(),
                           ),
                         ],
                       ),
-                      SizedBox(height: 4.h),
+                      SizedBox(height: AppDimens.h4),
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
@@ -242,11 +210,7 @@ class CustomDrawer extends StatelessWidget {
                         },
                         child: Text(
                           'View profile',
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MyColors.greenButton,
-                          ),
+                          style: TextStyles.medium13(color: MyColors.greenButton),
                         ),
                       ),
                     ],
@@ -257,25 +221,21 @@ class CustomDrawer extends StatelessWidget {
           ),
 
           Divider(
-            height: 1,
-            thickness: 1,
-            color: context.colors.textColor.withValues(alpha:
-              0.1,
-            ),
+            height: AppDimens.dividerThickness1,
+            thickness: AppDimens.dividerThickness1,
+            color: context.colors.textColor.withValues(alpha: AppDimens.opacity1),
           ),
 
           // Menu Items with Dividers
           Expanded(
             child: ListView.separated(
-              padding: EdgeInsets.zero,
+              padding: AppPadding.zero,
               itemCount: 9,
               separatorBuilder: (context, index) => Divider(
-                height: 1,
-                thickness: 1,
-                indent: 60.w,
-                color: context.colors.textColor.withValues(alpha:
-                  0.05,
-                ),
+                height: AppDimens.dividerThickness1,
+                thickness: AppDimens.dividerThickness1,
+                indent: AppDimens.w60,
+                color: context.colors.textColor.withValues(alpha: AppDimens.opacity05),
               ),
               itemBuilder: (context, index) {
                 return _buildMenuItemByIndex(
@@ -288,39 +248,35 @@ class CustomDrawer extends StatelessWidget {
 
           // Logout Button (Red Container at Bottom)
           Container(
-            padding: EdgeInsets.all(16.w),
+            padding: AppPadding.p16,
             child: Container(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(12.r),
+                color: MyColors.red,
+                borderRadius: AppRadius.r12,
               ),
               child: Material(
-                color: Colors.transparent,
+                color: MyColors.transparent,
                 child: InkWell(
                   onTap: () {
                     Navigator.pop(context);
                     _showLogoutDialog(context);
                   },
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   child: Row(
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.logout,
-                        size: 20.w,
-                        color: Colors.white,
+                        size: AppDimens.iconSize20,
+                        color: MyColors.white,
                       ),
-                      SizedBox(width: 8.w),
+                      SizedBox(width: AppDimens.w8),
                       Text(
                         'Logout',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                        style: TextStyles.semiBold16(color: MyColors.white),
                       ),
                     ],
                   ),
@@ -418,28 +374,19 @@ class CustomDrawer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 16.h,
-        ),
+        padding: AppPadding.h20v16,
         child: Row(
           children: [
             Icon(
               iconData,
-              size: 24.w,
-              color: context.colors.textColor.withValues(alpha:
-                0.6,
-              ),
+              size: AppDimens.iconSize24,
+              color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
             ),
-            SizedBox(width: 16.w),
+            SizedBox(width: AppDimens.w16),
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w400,
-                  color: context.colors.textColor,
-                ),
+                style: TextStyles.regular15(color: context.colors.textColor),
               ),
             ),
             // ✅ NO TRAILING ARROW
@@ -457,14 +404,11 @@ class CustomDrawer extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: AppRadius.r16,
         ),
         title: Text(
           'Select Language',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyles.semiBold18(),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -503,21 +447,15 @@ class CustomDrawer extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: AppRadius.r16,
         ),
         title: Text(
           'Logout',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyles.semiBold18(),
         ),
         content: Text(
           'Are you sure you want to logout?',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w400,
-          ),
+          style: TextStyles.regular14(),
         ),
         actions: [
           TextButton(
@@ -526,12 +464,8 @@ class CustomDrawer extends StatelessWidget {
             },
             child: Text(
               'Cancel',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: context.colors.textColor.withValues(alpha:
-                  0.6,
-                ),
+              style: TextStyles.semiBold14(
+                color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
               ),
             ),
           ),
@@ -543,11 +477,7 @@ class CustomDrawer extends StatelessWidget {
             },
             child: Text(
               'Logout',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.red,
-              ),
+              style: TextStyles.semiBold14(color: MyColors.red),
             ),
           ),
         ],

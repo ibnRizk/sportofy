@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class HelpAreasSheet extends StatefulWidget {
   const HelpAreasSheet({super.key});
@@ -18,30 +21,25 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 20.h,
-      ),
+      padding: AppPadding.h20v20,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top30,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Drag Handle
           Container(
-            width: 40.w,
-            height: 4.h,
+            width: AppDimens.w40,
+            height: AppDimens.h4,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2.r),
+              color: MyColors.grey300,
+              borderRadius: AppRadius.r2,
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Header
           Row(
@@ -49,28 +47,24 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
               IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.black,
-                  size: 24.sp,
+                  color: MyColors.black,
+                  size: AppDimens.iconSize24,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                padding: EdgeInsets.zero,
+                padding: AppPadding.zero,
                 constraints: const BoxConstraints(),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppDimens.w12),
               Text(
                 'Help Areas',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold18(color: MyColors.black87),
               ),
             ],
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Options List
           ListView.separated(
@@ -78,9 +72,9 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _allHelpAreas.length,
             separatorBuilder: (context, index) => Divider(
-              height: 1,
-              color: Colors.grey[200],
-              thickness: 1,
+              height: AppDimens.dividerThickness1,
+              color: MyColors.grey200,
+              thickness: AppDimens.dividerThickness1,
             ),
             itemBuilder: (context, index) {
               final area = _allHelpAreas[index];
@@ -89,16 +83,12 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
               return CheckboxListTile(
                 title: Text(
                   area,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.medium16(color: MyColors.black87),
                 ),
                 value: isSelected,
                 activeColor: MyColors.greenButton,
                 controlAffinity: ListTileControlAffinity.trailing,
-                contentPadding: EdgeInsets.zero,
+                contentPadding: AppPadding.zero,
                 onChanged: (bool? value) {
                   setState(() {
                     if (value == true) {
@@ -112,16 +102,16 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
             },
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Divider
           Divider(
-            height: 1,
-            color: Colors.grey[200],
-            thickness: 1,
+            height: AppDimens.dividerThickness1,
+            color: MyColors.grey200,
+            thickness: AppDimens.dividerThickness1,
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Footer Actions
           Row(
@@ -136,11 +126,7 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
                 },
                 child: Text(
                   'Clear All',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: MyColors.greenButton,
-                  ),
+                  style: TextStyles.semiBold14(color: MyColors.greenButton),
                 ),
               ),
 
@@ -153,28 +139,22 @@ class _HelpAreasSheetState extends State<HelpAreasSheet> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
-                  foregroundColor: Colors.white,
+                  foregroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: AppRadius.r12,
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.w,
-                    vertical: 12.h,
-                  ),
+                  padding: AppPadding.h24v12,
                   elevation: 0,
                 ),
                 child: Text(
                   'Add',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyles.semiBold14(),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 10.h),
+          SizedBox(height: AppDimens.h10),
         ],
       ),
     );

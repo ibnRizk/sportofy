@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/notification_settings_bottom_sheet.dart';
 
 class AccountSettingsBottomSheet extends StatelessWidget {
@@ -11,11 +15,8 @@ class AccountSettingsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top25,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,12 +26,12 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 10.h, bottom: 20.h),
-              width: 40.w,
-              height: 4.h,
+              margin: AppPadding.top10.copyWith(bottom: AppDimens.h20),
+              width: AppDimens.w40,
+              height: AppDimens.h4,
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha:0.3),
-                borderRadius: BorderRadius.circular(2.r),
+                color: MyColors.grey.withValues(alpha: AppDimens.opacity3),
+                borderRadius: AppRadius.r2,
               ),
             ),
           ),
@@ -39,16 +40,16 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // SECTION A: QUICK ACTIONS (4 Items Row)
           // ═══════════════════════════════════════════════
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildQuickActionItem(
                   icon: Icons.edit_outlined,
                   label: 'Edit Account',
-                  iconColor: Colors.black87,
-                  borderColor: Colors.grey.withValues(alpha:0.4),
-                  textColor: Colors.black87,
+                  iconColor: MyColors.black87,
+                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
+                  textColor: MyColors.black87,
                   onTap: () {
                     // Close current sheet
                     context.pop();
@@ -59,9 +60,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                 _buildQuickActionItem(
                   icon: Icons.share_outlined,
                   label: 'Share Account',
-                  iconColor: Colors.black87,
-                  borderColor: Colors.grey.withValues(alpha:0.4),
-                  textColor: Colors.black87,
+                  iconColor: MyColors.black87,
+                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
+                  textColor: MyColors.black87,
                   onTap: () {
                     // TODO: Implement Share Account
                   },
@@ -69,9 +70,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                 _buildQuickActionItem(
                   icon: Icons.link,
                   label: 'Account Link',
-                  iconColor: Colors.black87,
-                  borderColor: Colors.grey.withValues(alpha:0.4),
-                  textColor: Colors.black87,
+                  iconColor: MyColors.black87,
+                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
+                  textColor: MyColors.black87,
                   onTap: () {
                     // TODO: Implement Account Link
                   },
@@ -79,9 +80,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                 _buildQuickActionItem(
                   icon: Icons.delete_outline,
                   label: 'Delete Account',
-                  iconColor: Colors.red,
-                  borderColor: Colors.red,
-                  textColor: Colors.red,
+                  iconColor: MyColors.red,
+                  borderColor: MyColors.red,
+                  textColor: MyColors.red,
                   onTap: () {
                     // TODO: Show Delete Account Confirmation
                   },
@@ -90,15 +91,15 @@ class AccountSettingsBottomSheet extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // ═══════════════════════════════════════════════
           // DIVIDER 1
           // ═══════════════════════════════════════════════
           Divider(
-            thickness: 1,
-            color: Colors.grey.withValues(alpha:0.2),
-            height: 1,
+            thickness: AppDimens.dividerThickness1,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity2),
+            height: AppDimens.dividerThickness1,
           ),
 
           // ═══════════════════════════════════════════════
@@ -116,37 +117,30 @@ class AccountSettingsBottomSheet extends StatelessWidget {
               Future.delayed(const Duration(milliseconds: 250), () {
                 showModalBottomSheet(
                   context: rootNavigator.context,
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: MyColors.transparent,
                   isScrollControlled: true,
                   enableDrag: true,
                   isDismissible: true,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25.r),
-                      topRight: Radius.circular(25.r),
-                    ),
+                    borderRadius: AppRadius.top25,
                   ),
                   builder: (ctx) => const NotificationSettingsBottomSheet(),
                 );
               });
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              padding: AppPadding.h20v16,
               child: Row(
                 children: [
                   Icon(
                     Icons.notifications_outlined,
-                    size: 24.w,
-                    color: Colors.black87,
+                    size: AppDimens.iconSize24,
+                    color: MyColors.black87,
                   ),
-                  SizedBox(width: 16.w),
+                  SizedBox(width: AppDimens.w16),
                   Text(
                     'Notification Setting',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.medium16(color: MyColors.black87),
                   ),
                 ],
               ),
@@ -157,9 +151,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // DIVIDER 2
           // ═══════════════════════════════════════════════
           Divider(
-            thickness: 1,
-            color: Colors.grey.withValues(alpha:0.2),
-            height: 1,
+            thickness: AppDimens.dividerThickness1,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity2),
+            height: AppDimens.dividerThickness1,
           ),
 
           // ═══════════════════════════════════════════════
@@ -172,29 +166,25 @@ class AccountSettingsBottomSheet extends StatelessWidget {
               // Show logout confirmation or proceed with logout
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              padding: AppPadding.h20v16,
               child: Row(
                 children: [
                   Icon(
                     Icons.logout,
-                    size: 24.w,
-                    color: Colors.red,
+                    size: AppDimens.iconSize24,
+                    color: MyColors.red,
                   ),
-                  SizedBox(width: 16.w),
+                  SizedBox(width: AppDimens.w16),
                   Text(
                     'Logout',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.red,
-                    ),
+                    style: TextStyles.medium16(color: MyColors.red),
                   ),
                 ],
               ),
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
         ],
       ),
     );
@@ -211,39 +201,35 @@ class AccountSettingsBottomSheet extends StatelessWidget {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(50.r),
+      borderRadius: AppRadius.r50,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Circular Icon Container
           Container(
-            width: 56.w,
-            height: 56.h,
+            width: AppDimens.containerHeight56,
+            height: AppDimens.containerHeight56,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: borderColor,
-                width: 1.5,
+                width: AppDimens.borderWidth2,
               ),
             ),
             child: Icon(
               icon,
-              size: 24.w,
+              size: AppDimens.iconSize24,
               color: iconColor,
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
           // Label Text
           SizedBox(
-            width: 70.w,
+            width: AppDimens.w70,
             child: Text(
               label,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-                color: textColor,
-              ),
+              style: TextStyles.regular12(color: textColor),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -257,15 +243,12 @@ class AccountSettingsBottomSheet extends StatelessWidget {
   static void show(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyColors.transparent,
       isScrollControlled: true,
       enableDrag: true,
       isDismissible: true,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
+        borderRadius: AppRadius.top25,
       ),
       builder: (context) => const AccountSettingsBottomSheet(),
     );

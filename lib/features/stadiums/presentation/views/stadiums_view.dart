@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/filter_sheet.dart';
@@ -52,25 +55,21 @@ class _StadiumsViewState extends State<StadiumsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.sp,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
         ),
         title: Text(
           'Stadiums',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -97,16 +96,12 @@ class _StadiumsViewState extends State<StadiumsView> {
         backgroundColor: MyColors.greenButton,
         icon: Icon(
           _isMapView ? Icons.list : Icons.map,
-          color: Colors.white,
-          size: 20.sp,
+          color: MyColors.white,
+          size: AppDimens.iconSize20,
         ),
         label: Text(
           _isMapView ? 'List' : 'Map',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
+          style: TextStyles.semiBold14(color: MyColors.white),
         ),
       ),
       floatingActionButtonLocation:
@@ -135,82 +130,71 @@ class _StadiumsViewState extends State<StadiumsView> {
         children: [
           // Search Bar
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 12.h,
-            ),
+            padding: AppPadding.h20v12,
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[600],
-                ),
+                hintStyle: TextStyles.regular14(color: MyColors.grey600),
                 prefixIcon: Icon(
                   Icons.search,
-                  color: Colors.grey[600],
-                  size: 24.sp,
+                  color: MyColors.grey600,
+                  size: AppDimens.iconSize24,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.tune,
                     color: MyColors.greenButton,
-                    size: 24.sp,
+                    size: AppDimens.iconSize24,
                   ),
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: MyColors.transparent,
                       builder: (context) =>
                           const FilterSheet(),
                     );
                   },
                 ),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: MyColors.white,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: MyColors.grey300,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: MyColors.grey300,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
                     color: MyColors.greenButton,
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 12.h,
-                ),
+                contentPadding: AppPadding.h16v12,
               ),
             ),
           ),
 
           // Sports Filter
           SizedBox(
-            height: 80.h,
+            height: AppDimens.containerHeight80,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
+              padding: AppPadding.h20,
               itemCount:
                   _sports.length + 1, // +1 for "Add Sport"
               itemBuilder: (context, index) {
                 if (index == _sports.length) {
                   // "Add Sport" item
                   return Padding(
-                    padding: EdgeInsets.only(right: 12.w),
+                    padding: AppPadding.right12,
                     child: _SportFilterItem(
                       icon: Icons.add,
                       label: 'Add Sport',
@@ -221,7 +205,7 @@ class _StadiumsViewState extends State<StadiumsView> {
                           context: context,
                           isScrollControlled: true,
                           backgroundColor:
-                              Colors.transparent,
+                              MyColors.transparent,
                           builder: (context) =>
                               const AddSportSheet(),
                         ).then((selectedSports) {
@@ -239,7 +223,7 @@ class _StadiumsViewState extends State<StadiumsView> {
                 }
 
                 return Padding(
-                  padding: EdgeInsets.only(right: 12.w),
+                  padding: AppPadding.right12,
                   child: _SportFilterItem(
                     icon: _getSportIcon(_sports[index]),
                     label: _sports[index],
@@ -256,11 +240,11 @@ class _StadiumsViewState extends State<StadiumsView> {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Date Filter Section
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Column(
               children: [
                 // Header Row
@@ -270,11 +254,7 @@ class _StadiumsViewState extends State<StadiumsView> {
                   children: [
                     Text(
                       'July 2023',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.semiBold16(color: MyColors.black87),
                     ),
                     TextButton(
                       onPressed: () {
@@ -288,28 +268,22 @@ class _StadiumsViewState extends State<StadiumsView> {
                       },
                       child: Text(
                         'Clear All',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.greenButton,
-                        ),
+                        style: TextStyles.medium14(color: MyColors.greenButton),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: AppDimens.h12),
 
                 // Date List
                 SizedBox(
-                  height: 70.h,
+                  height: AppDimens.containerHeight70,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: _dates.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.only(
-                          right: 12.w,
-                        ),
+                        padding: AppPadding.right12,
                         child: _DateFilterItem(
                           date: _dates[index],
                           isSelected:
@@ -328,38 +302,32 @@ class _StadiumsViewState extends State<StadiumsView> {
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Date/Time Display
           if (_selectedDateIndex > 0)
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
+              padding: AppPadding.h20,
               child: Column(
                 children: [
                   Text(
                     'Sat 08 Jul 12:30 am - 11:30 pm',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
-                    ),
+                    style: TextStyles.medium14(color: MyColors.grey700),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppDimens.h8),
                   Divider(
-                    height: 1,
-                    color: Colors.grey[300],
+                    height: AppDimens.dividerThickness1,
+                    color: MyColors.grey300,
                   ),
                 ],
               ),
             ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Time Range Section
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Column(
               children: [
                 // Time Header
@@ -369,23 +337,15 @@ class _StadiumsViewState extends State<StadiumsView> {
                   children: [
                     Text(
                       '12 : 00 am',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.medium12(color: MyColors.grey600),
                     ),
                     Text(
                       '11 : 30 pm',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.medium12(color: MyColors.grey600),
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
 
                 // Range Slider
                 RangeSlider(
@@ -396,7 +356,7 @@ class _StadiumsViewState extends State<StadiumsView> {
                     });
                   },
                   activeColor: MyColors.greenButton,
-                  inactiveColor: Colors.grey[300],
+                  inactiveColor: MyColors.grey300,
                   min: 0.0,
                   max: 1.0,
                 ),
@@ -404,7 +364,7 @@ class _StadiumsViewState extends State<StadiumsView> {
             ),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
         ],
       ),
     );
@@ -413,10 +373,7 @@ class _StadiumsViewState extends State<StadiumsView> {
   // Build Stadiums List View
   Widget _buildStadiumsList() {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 16.h,
-      ),
+      padding: AppPadding.h20v16,
       itemCount: 2, // Mock data count
       itemBuilder: (context, index) {
         // Alternate between light_yard and night_yard
@@ -424,7 +381,7 @@ class _StadiumsViewState extends State<StadiumsView> {
             ? ImgAssets.lightYard
             : ImgAssets.nightYard;
         return Padding(
-          padding: EdgeInsets.only(bottom: 16.h),
+          padding: AppPadding.bottom16,
           child: _StadiumCard(
             name: 'Stadium name',
             location: 'Arab Elmaadi',
@@ -522,37 +479,35 @@ class _SportFilterItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 50.w,
-            height: 50.w,
+            width: AppDimens.containerWidth50,
+            height: AppDimens.containerWidth50,
             decoration: BoxDecoration(
               color: isSelected
                   ? MyColors.greenButton
                   : (isAddButton
-                        ? Colors.grey[200]
-                        : Colors.grey[100]),
+                        ? MyColors.grey200
+                        : MyColors.grey100),
               shape: BoxShape.circle,
             ),
             child: Icon(
               icon,
               color: isSelected
-                  ? Colors.white
+                  ? MyColors.white
                   : (isAddButton
                         ? MyColors.greenButton
-                        : Colors.grey[700]),
-              size: 24.sp,
+                        : MyColors.grey700),
+              size: AppDimens.iconSize24,
             ),
           ),
-          SizedBox(height: 6.h),
+          SizedBox(height: AppDimens.h6),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
+            style: TextStyles.medium12(
               color: isSelected
                   ? MyColors.greenButton
                   : (isAddButton
                         ? MyColors.greenButton
-                        : Colors.grey[700]),
+                        : MyColors.grey700),
             ),
           ),
         ],
@@ -580,15 +535,12 @@ class _DateFilterItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 8.h,
-        ),
+        padding: AppPadding.h16v8,
         decoration: BoxDecoration(
           color: isSelected
-              ? MyColors.greenButton.withValues(alpha: 0.1)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.r),
+              ? MyColors.greenButton.withValues(alpha: AppDimens.opacity1)
+              : MyColors.transparent,
+          borderRadius: AppRadius.r8,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -596,45 +548,39 @@ class _DateFilterItem extends StatelessWidget {
             if (isAllDates)
               Text(
                 'All',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                style: TextStyles.semiBold14(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[600],
+                      : MyColors.grey600,
                 ),
               )
             else ...[
               Text(
                 date.split(' ')[0],
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w500,
+                style: TextStyles.medium12(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[600],
+                      : MyColors.grey600,
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppDimens.h2),
               Text(
                 date.split(' ')[1],
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                style: TextStyles.semiBold14(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.black87,
+                      : MyColors.black87,
                 ),
               ),
             ],
             if (isSelected)
               Container(
-                margin: EdgeInsets.only(top: 4.h),
-                height: 2.h,
-                width: isAllDates ? 20.w : 30.w,
+                margin: AppPadding.top4,
+                height: AppDimens.h2,
+                width: isAllDates ? AppDimens.w20 : AppDimens.w30,
                 decoration: BoxDecoration(
                   color: MyColors.greenButton,
-                  borderRadius: BorderRadius.circular(1.r),
+                  borderRadius: AppRadius.r3,
                 ),
               ),
           ],
@@ -668,15 +614,15 @@ class _StadiumCard extends StatelessWidget {
       onTap: () {
         context.push(Routes.stadiumDetailsRoute);
       },
-      borderRadius: BorderRadius.circular(12.r),
+      borderRadius: AppRadius.r12,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          color: MyColors.white,
+          borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
+              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+              blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
           ],
@@ -688,24 +634,22 @@ class _StadiumCard extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(12.r),
-                  ),
+                  borderRadius: AppRadius.top12,
                   child: Image.asset(
                     image,
                     width: double.infinity,
-                    height: 180.h,
+                    height: AppDimens.containerHeight180,
                     fit: BoxFit.cover,
                     errorBuilder:
                         (context, error, stackTrace) {
                           return Container(
                             width: double.infinity,
-                            height: 180.h,
-                            color: Colors.grey[300],
+                            height: AppDimens.containerHeight180,
+                            color: MyColors.grey300,
                             child: Icon(
                               Icons.image,
-                              size: 48.sp,
-                              color: Colors.grey[600],
+                              size: AppDimens.iconSize50,
+                              color: MyColors.grey600,
                             ),
                           );
                         },
@@ -713,7 +657,7 @@ class _StadiumCard extends StatelessWidget {
                 ),
                 // Map Button (floating at bottom-center of image)
                 Positioned(
-                  bottom: 12.h,
+                  bottom: AppDimens.h12,
                   left: 0,
                   right: 0,
                   child: Center(
@@ -723,27 +667,20 @@ class _StadiumCard extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.map,
-                        size: 16.sp,
-                        color: Colors.white,
+                        size: AppDimens.iconSize16,
+                        color: MyColors.white,
                       ),
                       label: Text(
                         'Map',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                        style: TextStyles.semiBold12(color: MyColors.white),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             MyColors.greenButton,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 10.h,
-                        ),
+                        padding: AppPadding.h16v10,
                         shape: RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.circular(20.r),
+                              AppRadius.r20,
                         ),
                       ),
                     ),
@@ -754,7 +691,7 @@ class _StadiumCard extends StatelessWidget {
 
             // Info Section
             Padding(
-              padding: EdgeInsets.all(16.w),
+              padding: AppPadding.p16,
               child: Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
@@ -769,11 +706,7 @@ class _StadiumCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           name,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+                          style: TextStyles.bold16(color: MyColors.black87),
                         ),
                       ),
                       Row(
@@ -781,44 +714,36 @@ class _StadiumCard extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.star,
-                            color: Colors.amber,
-                            size: 18.sp,
+                            color: MyColors.amber,
+                            size: AppDimens.iconSize18,
                           ),
-                          SizedBox(width: 4.w),
+                          SizedBox(width: AppDimens.w4),
                           Text(
                             rating.toStringAsFixed(2),
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black87,
-                            ),
+                            style: TextStyles.semiBold14(color: MyColors.black87),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppDimens.h8),
 
                   // Location Row
                   Row(
                     children: [
                       Icon(
                         Icons.location_on,
-                        size: 16.sp,
-                        color: Colors.grey[600],
+                        size: AppDimens.iconSize16,
+                        color: MyColors.grey600,
                       ),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: AppDimens.w4),
                       Text(
                         location,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyles.regular14(color: MyColors.grey600),
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppDimens.h8),
 
                   // Tags Row
                   Row(
@@ -832,21 +757,15 @@ class _StadiumCard extends StatelessWidget {
                         children: [
                           Text(
                             tag,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[700],
-                            ),
+                            style: TextStyles.medium12(color: MyColors.grey700),
                           ),
                           if (index < tags.length - 1) ...[
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                              ),
+                              padding: AppPadding.h8,
                               child: Container(
-                                width: 1.w,
-                                height: 12.h,
-                                color: Colors.grey[300],
+                                width: AppDimens.w1,
+                                height: AppDimens.h12,
+                                color: MyColors.grey300,
                               ),
                             ),
                           ],
@@ -854,16 +773,12 @@ class _StadiumCard extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  SizedBox(height: 12.h),
+                  SizedBox(height: AppDimens.h12),
 
                   // Price Row
                   Text(
                     'Starting from ${price.toStringAsFixed(2)} EGP',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.greenButton,
-                    ),
+                    style: TextStyles.semiBold14(color: MyColors.greenButton),
                   ),
                 ],
               ),

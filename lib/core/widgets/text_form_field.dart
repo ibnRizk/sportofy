@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_dimens.dart';
+import '../utils/app_padding.dart';
+import '../utils/app_radius.dart';
+import '../utils/values/text_styles.dart';
 import '../utils/validator.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -80,8 +84,6 @@ class AppTextFormField extends StatelessWidget {
             : context.colors.body;
     Color labelColor =
         focusNode!.hasFocus ? context.colors.main : context.colors.body;
-    TextTheme theme = Theme.of(context).textTheme;
-    double myFontSize = 14.sp;
     return TextFormField(
       controller: controller,
       maxLines: maxLines ?? 1,
@@ -107,42 +109,50 @@ class AppTextFormField extends StatelessWidget {
             ? prefixWidget
             : prefix != null
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    padding: AppPadding.h4,
                     child: Icon(
                       prefix,
-                      size: 16,
-                      color: Colors.grey,
+                      size: AppDimens.iconSize16,
+                      color: MyColors.grey,
                     ),
                   )
                 : null,
         fillColor: backgroundColor ?? context.colors.upBackGround,
         filled: true,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius ?? 10),
+          borderRadius: radius != null
+              ? BorderRadius.circular(radius!)
+              : AppRadius.r10,
           borderSide: BorderSide(
             color: borderColor ?? context.colors.borderColor,
-            width: 1.0,
+            width: AppDimens.borderWidth1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius ?? 10),
+          borderRadius: radius != null
+              ? BorderRadius.circular(radius!)
+              : AppRadius.r10,
           borderSide: BorderSide(
             color: borderColor ?? context.colors.main,
-            width: 1.0,
+            width: AppDimens.borderWidth1,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius ?? 10),
+          borderRadius: radius != null
+              ? BorderRadius.circular(radius!)
+              : AppRadius.r10,
           borderSide: BorderSide(
             color: context.colors.errorColor,
-            width: 1.0,
+            width: AppDimens.borderWidth1,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(radius ?? 10)),
+          borderRadius: radius != null
+              ? BorderRadius.all(Radius.circular(radius!))
+              : AppRadius.r10,
           borderSide: BorderSide(
             color: context.colors.errorColor,
-            width: 1.0,
+            width: AppDimens.borderWidth1,
           ),
         ),
         floatingLabelBehavior: labelText != null
@@ -151,24 +161,15 @@ class AppTextFormField extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         errorMaxLines: 2,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
-        labelStyle: theme.bodyMedium!.copyWith(
-          color: labelColor,
-          fontSize: myFontSize,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: AppDimens.w16,
+          vertical: AppDimens.h18,
         ),
-        errorStyle: theme.bodySmall!.copyWith(
-          color: Colors.red,
-          fontSize: myFontSize - 4,
-        ),
-        hintStyle: theme.bodyMedium!.copyWith(
-          color: Colors.grey,
-          fontSize: myFontSize,
-        ),
+        labelStyle: TextStyles.regular14(color: labelColor),
+        errorStyle: TextStyles.regular10(color: MyColors.red),
+        hintStyle: TextStyles.regular14(color: MyColors.grey),
       ),
-      style: theme.bodyMedium!.copyWith(
-        color: color,
-        fontSize: myFontSize,
-      ),
+      style: TextStyles.regular14(color: color),
       focusNode: focusNode,
       onSaved: onSaved,
       onTap: onTap,

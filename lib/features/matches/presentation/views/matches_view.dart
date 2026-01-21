@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/widgets/shared_filter_header.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/features/matches/presentation/widgets/match_booking_card.dart';
 
@@ -12,17 +14,13 @@ class MatchesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
         title: Text(
           'Matches',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -36,12 +34,9 @@ class MatchesView extends StatelessWidget {
             child: BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
                 return ListView.separated(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 16.h,
-                  ),
+                  padding: AppPadding.h20v16,
                   itemCount: state.nearbyMatches.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 16.h),
+                  separatorBuilder: (context, index) => SizedBox(height: AppDimens.h16),
                   itemBuilder: (context, index) {
                     return MatchBookingCard(
                       match: state.nearbyMatches[index],
@@ -72,16 +67,12 @@ class MatchesView extends StatelessWidget {
         backgroundColor: MyColors.greenButton,
         icon: Icon(
           Icons.add,
-          color: Colors.white,
-          size: 20.sp,
+          color: MyColors.white,
+          size: AppDimens.iconSize20,
         ),
         label: Text(
           'Create Match',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
+          style: TextStyles.semiBold14(color: MyColors.white),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

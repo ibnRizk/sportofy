@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -54,7 +57,7 @@ class SetupProfileViewBody extends StatelessWidget {
       backgroundColor: context.colors.white,
       appBar: AppBar(
         backgroundColor: context.colors.white,
-        elevation: 0,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -64,19 +67,15 @@ class SetupProfileViewBody extends StatelessWidget {
         ),
         title: Text(
           'setup_profile'.tr(context),
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-            color: context.colors.black,
-          ),
+          style: TextStyles.semiBold18(color: context.colors.black),
         ),
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: AppPadding.h20,
           child: Column(
             children: [
-              SizedBox(height: 24.h),
+              SizedBox(height: AppDimens.h24),
 
               // Full Name
               BlocBuilder<AuthCubit, AuthState>(
@@ -87,41 +86,35 @@ class SetupProfileViewBody extends StatelessWidget {
                     },
                     decoration: InputDecoration(
                       hintText: 'full_name'.tr(context),
-                      hintStyle: TextStyle(
-                        fontSize: 14.sp,
-                        color: MyColors.greyText,
-                      ),
+                      hintStyle: TextStyles.regular14(color: MyColors.greyText),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.borderColor,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.borderColor,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.greenButton,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 16.h,
-                      ),
+                      contentPadding: AppPadding.h16v16,
                     ),
                   );
                 },
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: AppDimens.h20),
 
               // Email (Optional)
               TextFormField(
@@ -131,39 +124,33 @@ class SetupProfileViewBody extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: 'email_optional'.tr(context),
-                  hintStyle: TextStyle(
-                    fontSize: 14.sp,
-                    color: MyColors.greyText,
-                  ),
+                  hintStyle: TextStyles.regular14(color: MyColors.greyText),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: AppRadius.r10,
                     borderSide: BorderSide(
                       color: MyColors.borderColor,
-                      width: 1.5,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: AppRadius.r10,
                     borderSide: BorderSide(
                       color: MyColors.borderColor,
-                      width: 1.5,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: AppRadius.r10,
                     borderSide: BorderSide(
                       color: MyColors.greenButton,
-                      width: 1.5,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 16.h,
-                  ),
+                  contentPadding: AppPadding.h16v16,
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: AppDimens.h20),
 
               // Gender Dropdown
               BlocBuilder<AuthCubit, AuthState>(
@@ -172,37 +159,31 @@ class SetupProfileViewBody extends StatelessWidget {
                     value: state.gender,
                     hint: Text(
                       'gender'.tr(context),
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: MyColors.greyText,
-                      ),
+                      style: TextStyles.regular14(color: MyColors.greyText),
                     ),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.borderColor,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.borderColor,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                         borderSide: BorderSide(
                           color: MyColors.greenButton,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 16.h,
-                      ),
+                      contentPadding: AppPadding.h16v16,
                     ),
                     items: [
                       DropdownMenuItem(
@@ -221,7 +202,7 @@ class SetupProfileViewBody extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: AppDimens.h20),
 
               // Date of Birth
               BlocBuilder<AuthCubit, AuthState>(
@@ -229,16 +210,13 @@ class SetupProfileViewBody extends StatelessWidget {
                   return InkWell(
                     onTap: () => _selectDate(context),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 16.h,
-                      ),
+                      padding: AppPadding.h16v16,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: MyColors.borderColor,
-                          width: 1.5,
+                          width: AppDimens.borderWidth2,
                         ),
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: AppRadius.r10,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,8 +225,7 @@ class SetupProfileViewBody extends StatelessWidget {
                             state.dateOfBirth != null
                                 ? _formatDate(state.dateOfBirth)
                                 : 'date_of_birth'.tr(context),
-                            style: TextStyle(
-                              fontSize: 14.sp,
+                            style: TextStyles.regular14(
                               color: state.dateOfBirth != null
                                   ? context.colors.textColor
                                   : MyColors.greyText,
@@ -257,7 +234,7 @@ class SetupProfileViewBody extends StatelessWidget {
                           Icon(
                             Icons.keyboard_arrow_down,
                             color: MyColors.greyText,
-                            size: 20.w,
+                            size: AppDimens.w20,
                           ),
                         ],
                       ),
@@ -273,7 +250,7 @@ class SetupProfileViewBody extends StatelessWidget {
                 builder: (context, state) {
                   return SizedBox(
                     width: double.infinity,
-                    height: 56.h,
+                    height: AppDimens.buttonHeight56,
                     child: ElevatedButton(
                       onPressed: state.isProfileValid
                           ? () {
@@ -283,21 +260,19 @@ class SetupProfileViewBody extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: state.isProfileValid
                             ? MyColors.greenButton
-                            : Colors.grey[300],
+                            : MyColors.grey300,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
+                          borderRadius: AppRadius.r12,
                         ),
-                        elevation: 0,
-                        disabledBackgroundColor: Colors.grey[300],
+                        elevation: AppDimens.elevation0,
+                        disabledBackgroundColor: MyColors.grey300,
                       ),
                       child: Text(
                         'continue'.tr(context),
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
+                        style: TextStyles.semiBold16(
                           color: state.isProfileValid
-                              ? Colors.white
-                              : Colors.grey[500],
+                              ? MyColors.white
+                              : MyColors.grey500,
                         ),
                       ),
                     ),
@@ -305,7 +280,7 @@ class SetupProfileViewBody extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 32.h),
+              SizedBox(height: AppDimens.h32),
             ],
           ),
         ),

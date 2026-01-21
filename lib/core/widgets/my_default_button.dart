@@ -4,6 +4,9 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../config/locale/app_localizations.dart';
 import '../../injection_container.dart';
+import '../utils/app_dimens.dart';
+import '../utils/app_radius.dart';
+import '../utils/values/text_styles.dart';
 
 class MyDefaultButton extends StatelessWidget {
   final String? btnText;
@@ -39,18 +42,20 @@ class MyDefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     AppLocalizations locale = AppLocalizations.of(context)!;
-    TextTheme textTheme = Theme.of(context).textTheme;
     return SizedBox(
       width: width ?? screenWidth,
-      height: (height ?? 55.0).h,
+      height: height ?? AppDimens.buttonHeight56,
       child: ElevatedButton(
         style: ButtonStyle(
           alignment: Alignment.center,
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius?.r ?? 12.r),
+              borderRadius: borderRadius != null
+                  ? BorderRadius.circular(borderRadius!.r)
+                  : AppRadius.r12,
               side: BorderSide(
                 color: borderColor ?? context.colors.borderColor,
+                width: AppDimens.borderWidth1,
               ),
             ),
           ),
@@ -66,9 +71,8 @@ class MyDefaultButton extends StatelessWidget {
                 localeText ? btnText! : locale.text(btnText!),
                 textAlign: TextAlign.center,
                 style: textStyle ??
-                    textTheme.bodyMedium!.copyWith(
+                    TextStyles.regular16(
                       color: textColor ?? context.colors.upBackGround,
-                      fontSize: 16.sp,
                     ),
               )
             : Row(
@@ -77,21 +81,20 @@ class MyDefaultButton extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     svgAsset!,
-                    height: 16.h,
-                    width: 16.w,
+                    height: AppDimens.iconSize16,
+                    width: AppDimens.w16,
                     colorFilter: ColorFilter.mode(
                       textColor ?? context.colors.upBackGround,
                       BlendMode.srcIn,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: AppDimens.w10),
                   Text(
                     localeText ? btnText! : locale.text(btnText!),
                     textAlign: TextAlign.center,
                     style: textStyle ??
-                        textTheme.bodyMedium!.copyWith(
+                        TextStyles.regular16(
                           color: textColor ?? context.colors.textColor,
-                          fontSize: 16.sp,
                         ),
                   ),
                 ],

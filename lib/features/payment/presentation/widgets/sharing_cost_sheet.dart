@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 // Simple User Model
 class _User {
@@ -126,30 +129,28 @@ class _SharingCostSheetState
               MediaQuery.of(context).size.height * 0.9,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25.r),
-          ),
+          color: MyColors.white,
+          borderRadius: AppRadius.top25,
         ),
         child: Column(
           children: [
             // Drag Handle
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
             Container(
-              width: 40.w,
-              height: 4.h,
+              width: AppDimens.w40,
+              height: AppDimens.h4,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2.r),
+                color: MyColors.grey300,
+                borderRadius: AppRadius.r2,
               ),
             ),
 
             // Header
             Padding(
               padding: EdgeInsets.only(
-                top: 16.h,
-                left: 20.w,
-                right: 20.w,
+                top: AppDimens.h16,
+                left: AppDimens.w20,
+                right: AppDimens.w20,
               ),
               child: Row(
                 children: [
@@ -157,21 +158,17 @@ class _SharingCostSheetState
                     onPressed: () => Navigator.pop(context),
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Colors.black,
-                      size: 24.sp,
+                      color: MyColors.black,
+                      size: AppDimens.iconSize24,
                     ),
-                    padding: EdgeInsets.zero,
+                    padding: AppPadding.zero,
                     constraints: const BoxConstraints(),
                   ),
-                  SizedBox(width: 12.w),
+                  SizedBox(width: AppDimens.w12),
                   Expanded(
                     child: Text(
                       'Sharing the cost',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: TextStyles.bold18(color: MyColors.black),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -180,56 +177,42 @@ class _SharingCostSheetState
               ),
             ),
 
-            SizedBox(height: 16.h),
+            SizedBox(height: AppDimens.h16),
 
             // Search Bar
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
+              padding: AppPadding.h20,
               child: TextField(
                 controller: _searchController,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.grey[500],
-                  ),
+                  hintStyle: TextStyles.regular14(color: MyColors.grey500),
                   prefixIcon: Icon(
                     Icons.search,
-                    color: Colors.grey[500],
-                    size: 22.sp,
+                    color: MyColors.grey500,
+                    size: AppDimens.iconSize22,
                   ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 12.h,
-                  ),
+                  contentPadding: AppPadding.h16v12,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    borderRadius: AppRadius.r8,
                     borderSide: BorderSide(
-                      color: Colors.grey[300]!,
-                      width: 1,
+                      color: MyColors.grey300,
+                      width: AppDimens.borderWidth1,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    borderRadius: AppRadius.r8,
                     borderSide: BorderSide(
-                      color: Colors.grey[300]!,
-                      width: 1,
+                      color: MyColors.grey300,
+                      width: AppDimens.borderWidth1,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    borderRadius: AppRadius.r8,
                     borderSide: BorderSide(
                       color: MyColors.greenButton,
-                      width: 1.5,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
                 ),
@@ -238,21 +221,19 @@ class _SharingCostSheetState
 
             // Selected Users Section (Horizontal List)
             if (_selectedUsers.isNotEmpty) ...[
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
               SizedBox(
-                height: 82.h,
+                height: AppDimens.containerHeight82,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                  ),
+                  padding: AppPadding.h20,
                   itemCount: _selectedUsers.length,
                   separatorBuilder: (context, index) =>
-                      SizedBox(width: 12.w),
+                      SizedBox(width: AppDimens.w12),
                   itemBuilder: (context, index) {
                     final user = _selectedUsers[index];
                     return SizedBox(
-                      width: 70.w,
+                      width: AppDimens.w70,
                       child: _SelectedUserItem(
                         user: user,
                         onRemove: () =>
@@ -264,19 +245,17 @@ class _SharingCostSheetState
               ),
             ],
 
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
 
             // Main User List
             Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
+                padding: AppPadding.h20,
                 itemCount: _filteredUsers.length,
                 separatorBuilder: (context, index) =>
                     Divider(
-                      height: 1,
-                      color: Colors.grey[300],
+                      height: AppDimens.dividerThickness1,
+                      color: MyColors.grey300,
                     ),
                 itemBuilder: (context, index) {
                   final user = _filteredUsers[index];
@@ -286,14 +265,12 @@ class _SharingCostSheetState
                   return InkWell(
                     onTap: () => _toggleUserSelection(user),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12.h,
-                      ),
+                      padding: AppPadding.v12,
                       child: Row(
                         children: [
                           // Avatar
                           CircleAvatar(
-                            radius: 25.r,
+                            radius: AppDimens.avatarSize25,
                             backgroundImage: AssetImage(
                               user.avatar,
                             ),
@@ -303,7 +280,7 @@ class _SharingCostSheetState
                                 },
                           ),
 
-                          SizedBox(width: 12.w),
+                          SizedBox(width: AppDimens.w12),
 
                           // User Info
                           Expanded(
@@ -315,25 +292,15 @@ class _SharingCostSheetState
                               children: [
                                 Text(
                                   '${user.name} ( ID:${user.userId} )',
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight:
-                                        FontWeight.w600,
-                                    color: Colors.black87,
-                                  ),
+                                  style: TextStyles.semiBold15(color: MyColors.black87),
                                   maxLines: 1,
                                   overflow:
                                       TextOverflow.ellipsis,
                                 ),
-                                SizedBox(height: 4.h),
+                                SizedBox(height: AppDimens.h4),
                                 Text(
                                   user.phone,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight:
-                                        FontWeight.w400,
-                                    color: Colors.grey[600],
-                                  ),
+                                  style: TextStyles.regular12(color: MyColors.grey600),
                                   maxLines: 1,
                                   overflow:
                                       TextOverflow.ellipsis,
@@ -347,7 +314,7 @@ class _SharingCostSheetState
                             Icon(
                               Icons.check_circle,
                               color: MyColors.greenButton,
-                              size: 22.sp,
+                              size: AppDimens.iconSize22,
                             ),
                         ],
                       ),
@@ -360,14 +327,14 @@ class _SharingCostSheetState
             // Share Button (Footer)
             Padding(
               padding: EdgeInsets.fromLTRB(
-                20.w,
-                16.h,
-                20.w,
-                16.h,
+                AppDimens.w20,
+                AppDimens.h16,
+                AppDimens.w20,
+                AppDimens.h16,
               ),
               child: SizedBox(
                 width: double.infinity,
-                height: 50.h,
+                height: AppDimens.buttonHeight50,
                 child: ElevatedButton(
                   onPressed: _selectedUsers.isNotEmpty
                       ? () {
@@ -380,9 +347,7 @@ class _SharingCostSheetState
                             SnackBar(
                               content: Text(
                                 'Subscription cost sharing request sent!',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                ),
+                                style: TextStyles.regular14(),
                               ),
                               backgroundColor:
                                   MyColors.greenButton,
@@ -396,21 +361,15 @@ class _SharingCostSheetState
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
                     disabledBackgroundColor:
-                        Colors.grey[300],
+                        MyColors.grey300,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10.r,
-                      ),
+                      borderRadius: AppRadius.r10,
                     ),
-                    elevation: 0,
+                    elevation: AppDimens.elevation0,
                   ),
                   child: Text(
                     'Share',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: TextStyles.bold16(color: MyColors.white),
                   ),
                 ),
               ),
@@ -442,7 +401,7 @@ class _SelectedUserItem extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             CircleAvatar(
-              radius: 30.r,
+              radius: AppDimens.avatarSize30,
               backgroundImage: AssetImage(user.avatar),
               onBackgroundImageError:
                   (exception, stackTrace) {
@@ -451,43 +410,39 @@ class _SelectedUserItem extends StatelessWidget {
             ),
             // Remove Button (X icon)
             Positioned(
-              top: -4,
-              right: -4,
+              top: -AppDimens.h4,
+              right: -AppDimens.h4,
               child: InkWell(
                 onTap: onRemove,
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: AppRadius.r12,
                 child: Container(
-                  width: 24.w,
-                  height: 24.w,
+                  width: AppDimens.iconSize24,
+                  height: AppDimens.iconSize24,
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: MyColors.red,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white,
-                      width: 2,
+                      color: MyColors.white,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
                   child: Icon(
                     Icons.close,
-                    size: 14.sp,
-                    color: Colors.white,
+                    size: AppDimens.iconSize14,
+                    color: MyColors.white,
                   ),
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 6.h),
+        SizedBox(height: AppDimens.h6),
         // User Name
         Text(
           user.name
               .split(' ')
               .first, // Show only first name
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
+          style: TextStyles.medium12(color: MyColors.black87),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

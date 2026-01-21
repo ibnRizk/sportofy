@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/matches/presentation/widgets/join_request_sheet.dart';
 import 'package:sportify_app/features/payment/presentation/views/wallet_phone_number_view.dart';
@@ -29,16 +32,14 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
     return SafeArea(
       child: Container(
         padding: EdgeInsets.only(
-          top: 20.h,
-          left: 20.w,
-          right: 20.w,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
+          top: AppDimens.h20,
+          left: AppDimens.w20,
+          right: AppDimens.w20,
+          bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.h20,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(30.r),
-          ),
+          color: MyColors.white,
+          borderRadius: AppRadius.top30,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -51,25 +52,21 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                     onPressed: () => Navigator.pop(context),
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Colors.black,
-                      size: 24.sp,
+                      color: MyColors.black,
+                      size: AppDimens.iconSize24,
                     ),
-                    padding: EdgeInsets.zero,
+                    padding: AppPadding.zero,
                     constraints: const BoxConstraints(),
                   ),
-                  SizedBox(width: 12.w),
+                  SizedBox(width: AppDimens.w12),
                   Text(
                     'Payment methods',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: TextStyles.bold18(color: MyColors.black),
                   ),
                 ],
               ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Payment Options List
           _buildPaymentOption(
@@ -78,15 +75,11 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
             title: 'Spotify Wallet',
             trailing: Text(
               '100 EGP',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: MyColors.greenButton,
-              ),
+              style: TextStyles.semiBold14(color: MyColors.greenButton),
             ),
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           _buildPaymentOption(
             id: 'vodafone_cash',
@@ -94,7 +87,7 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
             title: 'Vodafone cash, WE Pay ...',
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           _buildPaymentOption(
             id: 'card',
@@ -102,7 +95,7 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
             title: 'Debit / Credit Card',
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           _buildPaymentOption(
             id: 'cash',
@@ -111,7 +104,7 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
             subtitle: 'Will need the approval of the owner first',
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // The Special Action Card (Sharing Cost)
           InkWell(
@@ -119,28 +112,23 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
-                backgroundColor: Colors.transparent,
+                backgroundColor: MyColors.transparent,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25.r),
-                  ),
+                  borderRadius: AppRadius.top25,
                 ),
                 builder: (context) => const SharingCostSheet(),
               );
             },
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: AppRadius.r12,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 14.h,
-              ),
+              padding: AppPadding.h16v14,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: MyColors.white,
                 border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
+                  color: MyColors.grey300,
+                  width: AppDimens.borderWidth1,
                 ),
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: AppRadius.r12,
               ),
               child: Row(
                 children: [
@@ -148,11 +136,7 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                   Expanded(
                     child: Text(
                       'Sharing the subscription cost',
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.medium15(color: MyColors.black87),
                     ),
                   ),
 
@@ -162,21 +146,21 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                     children: [
                       Image.asset(
                         ImgAssets.sharingSubscription,
-                        width: 28.w,
-                        height: 28.w,
+                        width: AppDimens.w28,
+                        height: AppDimens.w28,
                         errorBuilder: (context, error, stackTrace) {
                           return Icon(
                             Icons.handshake,
                             color: MyColors.greenButton,
-                            size: 24.sp,
+                            size: AppDimens.iconSize24,
                           );
                         },
                       ),
-                      SizedBox(width: 8.w),
+                      SizedBox(width: AppDimens.w8),
                       Icon(
                         Icons.chevron_right,
-                        color: Colors.grey[600],
-                        size: 20.sp,
+                        color: MyColors.grey600,
+                        size: AppDimens.iconSize20,
                       ),
                     ],
                   ),
@@ -185,12 +169,12 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Confirm Button
           SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: () {
                 // Store the selected method and root navigator before popping
@@ -219,11 +203,9 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                       showModalBottomSheet(
                         context: rootNavigator.context,
                         isScrollControlled: true,
-                        backgroundColor: Colors.white,
+                        backgroundColor: MyColors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(30.r),
-                          ),
+                          borderRadius: AppRadius.top30,
                         ),
                         builder: (context) => JoinRequestSheet(
                           organizerName: widget.organizerName!,
@@ -235,11 +217,9 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                       showModalBottomSheet(
                         context: rootNavigator.context,
                         isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: MyColors.transparent,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(30.r),
-                          ),
+                          borderRadius: AppRadius.top30,
                         ),
                         builder: (context) => const PaymentSuccessSheet(),
                       );
@@ -250,17 +230,13 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                 ),
-                elevation: 0,
+                elevation: AppDimens.elevation0,
               ),
               child: Text(
                 'Confirm',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: TextStyles.bold16(color: MyColors.white),
               ),
             ),
           ),
@@ -287,20 +263,20 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
         });
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
+        padding: AppPadding.v12,
         child: Row(
           children: [
             // Icon/Logo
             Container(
-              width: 45.w,
-              height: 45.w,
-              padding: EdgeInsets.all(8.w),
+              width: AppDimens.containerHeight45,
+              height: AppDimens.containerHeight45,
+              padding: AppPadding.p8,
               decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(8.r),
+                color: MyColors.grey50,
+                borderRadius: AppRadius.r8,
                 border: Border.all(
-                  color: Colors.grey[200]!,
-                  width: 1,
+                  color: MyColors.grey200,
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: Image.asset(
@@ -310,13 +286,13 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                   return Icon(
                     Icons.payment,
                     color: MyColors.greenButton,
-                    size: 24.sp,
+                    size: AppDimens.iconSize24,
                   );
                 },
               ),
             ),
 
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
 
             // Title & Subtitle
             Expanded(
@@ -326,57 +302,49 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.medium15(color: MyColors.black87),
                   ),
                   if (subtitle != null) ...[
-                    SizedBox(height: 2.h),
+                    SizedBox(height: AppDimens.h2),
                     Text(
                       subtitle,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.regular12(color: MyColors.grey600),
                     ),
                   ],
                 ],
               ),
             ),
 
-            SizedBox(width: 8.w),
+            SizedBox(width: AppDimens.w8),
 
             // Trailing (Balance or Radio)
             if (trailing != null)
               trailing
             else
-              SizedBox(width: 4.w),
+              SizedBox(width: AppDimens.w4),
 
-            SizedBox(width: 8.w),
+            SizedBox(width: AppDimens.w8),
 
             // Radio Button
             Container(
-              width: 20.w,
-              height: 20.w,
+              width: AppDimens.w20,
+              height: AppDimens.w20,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? MyColors.greenButton : Colors.grey[400]!,
-                  width: isSelected ? 6.w : 2.w,
+                  color: isSelected ? MyColors.greenButton : MyColors.grey400,
+                  width: isSelected ? AppDimens.w6 : AppDimens.borderWidth2,
                 ),
-                color: isSelected ? MyColors.greenButton : Colors.transparent,
+                color: isSelected ? MyColors.greenButton : MyColors.transparent,
               ),
               child: isSelected
                   ? Center(
                       child: Container(
-                        width: 8.w,
-                        height: 8.w,
+                        width: AppDimens.w8,
+                        height: AppDimens.w8,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: MyColors.white,
                         ),
                       ),
                     )

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class WalletView extends StatefulWidget {
   const WalletView({super.key});
@@ -12,7 +15,12 @@ class WalletView extends StatefulWidget {
 class _WalletViewState extends State<WalletView> {
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['All', 'Received', 'Used', 'Refund'];
+  final List<String> _filters = [
+    'All',
+    'Received',
+    'Used',
+    'Refund',
+  ];
 
   final List<Map<String, dynamic>> _transactions = [
     {
@@ -20,49 +28,45 @@ class _WalletViewState extends State<WalletView> {
       'date': 'June 30, 2023',
       'amount': '+ 50.00 EGP',
       'icon': Icons.undo,
-      'iconBg': const Color(0xFFE3F5FF), // Light Blue
-      'iconColor': const Color(0xFF2196F3),
+      'iconBg': MyColors.lightBlue100, // Light Blue
+      'iconColor': MyColors.blue,
     },
     {
       'type': 'Recharge',
       'date': 'June 30, 2023',
       'amount': '+ 35.00 EGP',
       'icon': Icons.download,
-      'iconBg': const Color(0xFFE3F5FF), // Light Blue
-      'iconColor': const Color(0xFF2196F3),
+      'iconBg': MyColors.lightBlue100, // Light Blue
+      'iconColor': MyColors.blue,
     },
     {
       'type': 'Payment',
       'date': 'June 30, 2023',
       'amount': '+ 40.00 EGP',
       'icon': Icons.north_east,
-      'iconBg': const Color(0xFFE3F5FF), // Light Blue
-      'iconColor': const Color(0xFF2196F3),
+      'iconBg': MyColors.lightBlue100, // Light Blue
+      'iconColor': MyColors.blue,
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.w,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Wallet',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -72,32 +76,28 @@ class _WalletViewState extends State<WalletView> {
           // Balance Card (Hero Section)
           _buildBalanceCard(),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Filter Chips
           _buildFilterChips(),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Section Title
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Text(
               'Recent transaction',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+              style: TextStyles.bold16(
+                color: MyColors.black87,
               ),
             ),
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Transaction List
-          Expanded(
-            child: _buildTransactionList(),
-          ),
+          Expanded(child: _buildTransactionList()),
         ],
       ),
     );
@@ -106,11 +106,11 @@ class _WalletViewState extends State<WalletView> {
   Widget _buildBalanceCard() {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
-      padding: EdgeInsets.all(20.w),
+      margin: AppPadding.h20,
+      padding: AppPadding.p20,
       decoration: BoxDecoration(
-        color: const Color(0xFFEBFDFD), // Light Cyan/Mint
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.cyanMint, // Light Cyan/Mint
+        borderRadius: AppRadius.r12,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,19 +121,15 @@ class _WalletViewState extends State<WalletView> {
             children: [
               Text(
                 'Balance Available',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[600],
+                style: TextStyles.medium14(
+                  color: MyColors.grey600,
                 ),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: AppDimens.h8),
               Text(
                 '50 EGP',
-                style: TextStyle(
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                style: TextStyles.bold32(
+                  color: MyColors.black87,
                 ),
               ),
             ],
@@ -145,25 +141,19 @@ class _WalletViewState extends State<WalletView> {
               // TODO: Implement recharge logic
             },
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.black87,
+              foregroundColor: MyColors.black87,
               side: BorderSide(
-                color: Colors.grey[400]!,
-                width: 1.5,
+                color: MyColors.grey400,
+                width: AppDimens.borderWidth2,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: AppRadius.r8,
               ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 12.h,
-              ),
+              padding: AppPadding.h16v12,
             ),
             child: Text(
               'Recharge Wallet',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyles.medium14(),
             ),
           ),
         ],
@@ -173,12 +163,13 @@ class _WalletViewState extends State<WalletView> {
 
   Widget _buildFilterChips() {
     return SizedBox(
-      height: 40.h,
+      height: AppDimens.h40,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        padding: AppPadding.h20,
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
+        separatorBuilder: (context, index) =>
+            SizedBox(width: AppDimens.w10),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -188,26 +179,25 @@ class _WalletViewState extends State<WalletView> {
               });
             },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 8.h,
-              ),
+              padding: AppPadding.h20v8,
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : Colors.white,
+                color: isSelected
+                    ? MyColors.greenButton
+                    : MyColors.white,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[300]!,
+                      : MyColors.grey300,
                 ),
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: AppRadius.r20,
               ),
               child: Center(
                 child: Text(
                   _filters[index],
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: isSelected ? Colors.white : Colors.grey[600],
+                  style: TextStyles.medium14(
+                    color: isSelected
+                        ? MyColors.white
+                        : MyColors.grey600,
                   ),
                 ),
               ),
@@ -220,12 +210,12 @@ class _WalletViewState extends State<WalletView> {
 
   Widget _buildTransactionList() {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: AppPadding.h20,
       itemCount: _transactions.length,
       separatorBuilder: (context, index) => Divider(
-        height: 1,
-        thickness: 1,
-        color: Colors.grey[200],
+        height: AppDimens.dividerThickness1,
+        thickness: AppDimens.dividerThickness1,
+        color: MyColors.grey200,
       ),
       itemBuilder: (context, index) {
         final transaction = _transactions[index];
@@ -262,13 +252,13 @@ class _TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+      padding: AppPadding.v12,
       child: Row(
         children: [
           // Icon Circle
           Container(
-            width: 40.w,
-            height: 40.w,
+            width: AppDimens.containerHeight40,
+            height: AppDimens.containerHeight40,
             decoration: BoxDecoration(
               color: iconBg,
               shape: BoxShape.circle,
@@ -276,11 +266,11 @@ class _TransactionTile extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor,
-              size: 20.w,
+              size: AppDimens.iconSize20,
             ),
           ),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Type and Date
           Expanded(
@@ -289,19 +279,15 @@ class _TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   type,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                  style: TextStyles.bold15(
+                    color: MyColors.black87,
                   ),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: AppDimens.h4),
                 Text(
                   date,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey[500],
+                  style: TextStyles.regular13(
+                    color: MyColors.grey500,
                   ),
                 ),
               ],
@@ -311,10 +297,8 @@ class _TransactionTile extends StatelessWidget {
           // Amount
           Text(
             amount,
-            style: TextStyle(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            style: TextStyles.bold15(
+              color: MyColors.black87,
             ),
           ),
         ],

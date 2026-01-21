@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class EmptyMatchesWidget extends StatelessWidget {
@@ -10,14 +13,14 @@ class EmptyMatchesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
-      padding: EdgeInsets.all(40.w),
+      margin: EdgeInsets.symmetric(horizontal: AppDimens.w16),
+      padding: AppPadding.p40,
       decoration: BoxDecoration(
         color: context.colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: AppRadius.r16,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -27,9 +30,7 @@ class EmptyMatchesWidget extends StatelessWidget {
         child: Text(
           'no_matches_near'.tr(context),
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
+          style: TextStyles.medium14(
             color: MyColors.greyText,
           ),
         ),

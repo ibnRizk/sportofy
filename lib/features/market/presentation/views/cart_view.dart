@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_item_tile.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_summary_section.dart';
@@ -72,11 +75,9 @@ class _CartViewState extends State<CartView> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyColors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
+        borderRadius: AppRadius.top30,
       ),
       builder: (context) => const DeliveryAddressSheet(),
     );
@@ -85,15 +86,15 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: MyColors.grey50,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black87,
-            size: 24.sp,
+            color: MyColors.black87,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () {
             if (Navigator.canPop(context)) {
@@ -103,11 +104,7 @@ class _CartViewState extends State<CartView> {
         ),
         title: Text(
           'My Cart',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold18(color: MyColors.black87),
         ),
         centerTitle: true,
       ),
@@ -118,7 +115,7 @@ class _CartViewState extends State<CartView> {
                 // Cart Items List
                 Expanded(
                   child: ListView.builder(
-                    padding: EdgeInsets.all(20.w),
+                    padding: AppPadding.p20,
                     itemCount: _cartItems.length,
                     itemBuilder: (context, index) {
                       final item = _cartItems[index];
@@ -162,38 +159,30 @@ class _CartViewState extends State<CartView> {
   Widget _buildEmptyState() {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(40.w),
+        padding: AppPadding.p40,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.shopping_cart_outlined,
-              size: 100.sp,
-              color: Colors.grey[400],
+              size: AppDimens.iconSize100,
+              color: MyColors.grey400,
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
             Text(
               'Your cart is empty',
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold20(color: MyColors.black87),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
             Text(
               'Add some products to your cart to continue shopping',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
-              ),
+              style: TextStyles.regular14(color: MyColors.grey600),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 32.h),
+            SizedBox(height: AppDimens.h32),
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: ElevatedButton(
                 onPressed: () {
                   if (Navigator.canPop(context)) {
@@ -202,18 +191,15 @@ class _CartViewState extends State<CartView> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
-                  foregroundColor: Colors.white,
+                  foregroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: AppRadius.r12,
                   ),
-                  elevation: 0,
+                  elevation: AppDimens.elevation0,
                 ),
                 child: Text(
                   'Go Shopping',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyles.bold16(),
                 ),
               ),
             ),

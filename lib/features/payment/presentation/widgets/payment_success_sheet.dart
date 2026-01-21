@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class PaymentSuccessSheet extends StatelessWidget {
   const PaymentSuccessSheet({super.key});
@@ -10,53 +13,44 @@ class PaymentSuccessSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.w,
-        vertical: 40.h,
-      ),
+      padding: AppPadding.h30v40,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top30,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Success Icon
           Container(
-            width: 80.w,
-            height: 80.w,
+            width: AppDimens.iconSize80,
+            height: AppDimens.iconSize80,
             decoration: BoxDecoration(
               color: MyColors.greenButton,
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.check,
-              color: Colors.white,
-              size: 50.sp,
+              color: MyColors.white,
+              size: AppDimens.iconSize50,
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Success Message
           Text(
             'Your request has been sent successfully',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
+            style: TextStyles.medium16(color: MyColors.black87),
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: 30.h),
+          SizedBox(height: AppDimens.h30),
 
           // Back to Home Button
           SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: () {
                 // Close the success sheet first
@@ -68,17 +62,13 @@ class PaymentSuccessSheet extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                 ),
-                elevation: 0,
+                elevation: AppDimens.elevation0,
               ),
               child: Text(
                 'Back to home',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: TextStyles.bold16(color: MyColors.white),
               ),
             ),
           ),

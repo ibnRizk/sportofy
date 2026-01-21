@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class UserHeader extends StatelessWidget {
   final String userName;
@@ -22,10 +25,10 @@ class UserHeader extends StatelessWidget {
       children: [
         // Avatar
         CircleAvatar(
-          radius: 25.r,
+          radius: AppDimens.avatarSize25,
           backgroundImage: AssetImage(userAvatar),
         ),
-        SizedBox(width: 12.w),
+        SizedBox(width: AppDimens.w12),
         // Name and Privacy Dropdown
         Expanded(
           child: Column(
@@ -34,27 +37,20 @@ class UserHeader extends StatelessWidget {
             children: [
               Text(
                 userName,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: AppDimens.h8),
               // Privacy Dropdown
               GestureDetector(
                 onTap: onPrivacyTap,
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 6.h,
-                  ),
+                  padding: AppPadding.h12v6,
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(20.r),
+                    color: MyColors.grey100,
+                    borderRadius: AppRadius.r20,
                     border: Border.all(
-                      color: Colors.grey[300]!,
-                      width: 1,
+                      color: MyColors.grey300,
+                      width: AppDimens.borderWidth1,
                     ),
                   ),
                   child: Row(
@@ -62,23 +58,19 @@ class UserHeader extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.people,
-                        size: 16.sp,
+                        size: AppDimens.iconSize16,
                         color: MyColors.greenButton,
                       ),
-                      SizedBox(width: 6.w),
+                      SizedBox(width: AppDimens.w6),
                       Text(
                         selectedPrivacy,
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
-                        ),
+                        style: TextStyles.medium13(color: MyColors.black87),
                       ),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: AppDimens.w4),
                       Icon(
                         Icons.arrow_drop_down,
-                        size: 18.sp,
-                        color: Colors.grey[600],
+                        size: AppDimens.iconSize18,
+                        color: MyColors.grey600,
                       ),
                     ],
                   ),

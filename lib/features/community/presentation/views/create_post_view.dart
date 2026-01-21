@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/community/presentation/widgets/user_header.dart';
 import 'package:sportify_app/features/community/presentation/widgets/project_tag_chip.dart';
 import 'package:sportify_app/features/community/presentation/widgets/media_attachment_picker.dart';
@@ -63,15 +66,12 @@ class _CreatePostViewState extends State<CreatePostView> {
       SnackBar(
         content: Text(
           'Post created successfully!',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyles.medium14(),
         ),
         backgroundColor: MyColors.greenButton,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: AppRadius.r8,
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -86,14 +86,12 @@ class _CreatePostViewState extends State<CreatePostView> {
   void _showPrivacyOptions() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20.r),
-        ),
+        borderRadius: AppRadius.top20,
       ),
       builder: (context) => Container(
-        padding: EdgeInsets.symmetric(vertical: 20.h),
+        padding: AppPadding.v20,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -129,26 +127,20 @@ class _CreatePostViewState extends State<CreatePostView> {
         icon,
         color: isSelected
             ? MyColors.greenButton
-            : Colors.grey[600],
-        size: 24.sp,
+            : MyColors.grey600,
+        size: AppDimens.iconSize24,
       ),
       title: Text(
         option,
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontWeight: isSelected
-              ? FontWeight.w600
-              : FontWeight.w400,
-          color: isSelected
-              ? MyColors.greenButton
-              : Colors.black87,
-        ),
+        style: isSelected
+            ? TextStyles.semiBold16(color: MyColors.greenButton)
+            : TextStyles.regular16(color: MyColors.black87),
       ),
       trailing: isSelected
           ? Icon(
               Icons.check,
               color: MyColors.greenButton,
-              size: 20.sp,
+              size: AppDimens.iconSize20,
             )
           : null,
       onTap: () {
@@ -163,16 +155,16 @@ class _CreatePostViewState extends State<CreatePostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.sp,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () {
             if (!context.mounted) return;
@@ -183,51 +175,41 @@ class _CreatePostViewState extends State<CreatePostView> {
         ),
         title: Text(
           'Create Post',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold18(color: MyColors.black87),
         ),
         centerTitle: true,
         actions: [
           // Post Button
           Padding(
-            padding: EdgeInsets.only(right: 16.w),
+            padding: AppPadding.right16,
             child: ElevatedButton(
               onPressed: _canPost ? _handlePost : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
-                foregroundColor: Colors.white,
-                disabledBackgroundColor: Colors.grey[300],
-                disabledForegroundColor: Colors.grey[600],
+                foregroundColor: MyColors.white,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.grey600,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: AppRadius.r8,
                 ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 8.h,
-                ),
+                padding: AppPadding.h16v8,
                 elevation: 0,
               ),
               child: _isPosting
                   ? SizedBox(
-                      width: 16.w,
-                      height: 16.h,
+                      width: AppDimens.w16,
+                      height: AppDimens.h16,
                       child: CircularProgressIndicator(
-                        strokeWidth: 2,
+                        strokeWidth: AppDimens.borderWidth2,
                         valueColor:
                             AlwaysStoppedAnimation<Color>(
-                              Colors.white,
+                              MyColors.white,
                             ),
                       ),
                     )
                   : Text(
                       'Post',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: TextStyles.semiBold14(),
                     ),
             ),
           ),
@@ -237,10 +219,7 @@ class _CreatePostViewState extends State<CreatePostView> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 16.h,
-              ),
+              padding: AppPadding.h20v16,
               child: Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
@@ -256,10 +235,10 @@ class _CreatePostViewState extends State<CreatePostView> {
                   // Project Tags (Help Areas) - Only for project posts
                   if (widget.postType == 'project' &&
                       _helpAreas.isNotEmpty) ...[
-                    SizedBox(height: 20.h),
+                    SizedBox(height: AppDimens.h20),
                     Wrap(
-                      spacing: 8.w,
-                      runSpacing: 8.h,
+                      spacing: AppDimens.w8,
+                      runSpacing: AppDimens.h8,
                       children: _helpAreas.map((area) {
                         return ProjectTagChip(
                           label: area,
@@ -273,7 +252,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                     ),
                   ],
 
-                  SizedBox(height: 24.h),
+                  SizedBox(height: AppDimens.h24),
 
                   // Post Input Area
                   TextField(
@@ -281,22 +260,16 @@ class _CreatePostViewState extends State<CreatePostView> {
                     focusNode: _focusNode,
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.regular16(color: MyColors.black87),
                     decoration: InputDecoration(
                       hintText: 'What is in your mind ?',
-                      hintStyle: TextStyle(
-                        fontSize: 16.sp,
-                        color: Colors.grey[600],
-                      ),
+                      hintStyle: TextStyles.regular16(color: MyColors.grey600),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.zero,
+                      contentPadding: AppPadding.zero,
                     ),
                     onChanged: (value) {
                       setState(

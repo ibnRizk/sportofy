@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class ProjectTagChip extends StatelessWidget {
   final String label;
@@ -15,16 +18,13 @@ class ProjectTagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-        vertical: 8.h,
-      ),
+      padding: AppPadding.h12v8,
       decoration: BoxDecoration(
-        color: MyColors.greenButton.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20.r),
+        color: MyColors.greenButton.withValues(alpha: AppDimens.opacity1),
+        borderRadius: AppRadius.r20,
         border: Border.all(
           color: MyColors.greenButton,
-          width: 1,
+          width: AppDimens.borderWidth1,
         ),
       ),
       child: Row(
@@ -32,19 +32,15 @@ class ProjectTagChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w500,
-              color: MyColors.greenButton,
-            ),
+            style: TextStyles.medium13(color: MyColors.greenButton),
           ),
           if (onDeleted != null) ...[
-            SizedBox(width: 6.w),
+            SizedBox(width: AppDimens.w6),
             GestureDetector(
               onTap: onDeleted,
               child: Icon(
                 Icons.close,
-                size: 16.sp,
+                size: AppDimens.iconSize16,
                 color: MyColors.greenButton,
               ),
             ),

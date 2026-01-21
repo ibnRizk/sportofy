@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class ChatInputBar extends StatelessWidget {
   final TextEditingController controller;
@@ -24,16 +28,13 @@ class ChatInputBar extends StatelessWidget {
     final hasText = controller.text.trim().isNotEmpty;
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 8.h,
-      ),
+      padding: AppPadding.h16v8,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyColors.white,
         border: Border(
           top: BorderSide(
-            color: Colors.grey[300]!,
-            width: 1,
+            color: MyColors.grey300,
+            width: AppDimens.borderWidth1,
           ),
         ),
       ),
@@ -43,29 +44,29 @@ class ChatInputBar extends StatelessWidget {
           IconButton(
             onPressed: onPlusTap,
             icon: Container(
-              width: 36.w,
-              height: 36.w,
+              width: AppDimens.w36,
+              height: AppDimens.w36,
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: MyColors.grey200,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.add,
-                size: 24.sp,
-                color: Colors.black87,
+                size: AppDimens.iconSize24,
+                color: MyColors.black87,
               ),
             ),
-            padding: EdgeInsets.zero,
+            padding: AppPadding.zero,
             constraints: const BoxConstraints(),
           ),
-          SizedBox(width: 8.w),
+          SizedBox(width: AppDimens.w8),
 
           // Text Input Field
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(24.r),
+                color: MyColors.grey100,
+                borderRadius: AppRadius.r24,
               ),
               child: Row(
                 children: [
@@ -74,13 +75,13 @@ class ChatInputBar extends StatelessWidget {
                     onPressed: onEmojiTap,
                     icon: Icon(
                       Icons.emoji_emotions_outlined,
-                      size: 20.sp,
-                      color: Colors.grey[600],
+                      size: AppDimens.iconSize20,
+                      color: MyColors.grey600,
                     ),
-                    padding: EdgeInsets.zero,
+                    padding: AppPadding.zero,
                     constraints: const BoxConstraints(),
                   ),
-                  SizedBox(width: 4.w),
+                  SizedBox(width: AppDimens.w4),
 
                   // Text Field
                   Expanded(
@@ -88,39 +89,31 @@ class ChatInputBar extends StatelessWidget {
                       controller: controller,
                       decoration: InputDecoration(
                         hintText: 'Message',
-                        hintStyle: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.grey[500],
-                        ),
+                        hintStyle: TextStyles.regular14(color: MyColors.grey500),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 10.h,
-                        ),
+                        contentPadding: AppPadding.v10,
                         isDense: true,
                       ),
                       maxLines: null,
                       textInputAction: TextInputAction.newline,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.regular14(color: MyColors.black87),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(width: 8.w),
+          SizedBox(width: AppDimens.w8),
 
           // Send or Microphone Icon
           IconButton(
             onPressed: hasText ? onSendTap : onMicTap,
             icon: Icon(
               hasText ? Icons.send : Icons.mic,
-              size: 24.sp,
-              color: Colors.black87,
+              size: AppDimens.iconSize24,
+              color: MyColors.black87,
             ),
-            padding: EdgeInsets.zero,
+            padding: AppPadding.zero,
             constraints: const BoxConstraints(),
           ),
         ],

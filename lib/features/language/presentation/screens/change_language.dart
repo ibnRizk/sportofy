@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
-
-import '../../../../core/utils/values/text_styles.dart';
-import '../../../../core/widgets/app_elevated_button.dart';
-import '../../../../injection_container.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/core/widgets/app_elevated_button.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class ChangeLanguage extends StatefulWidget {
   const ChangeLanguage({super.key});
@@ -36,7 +36,7 @@ class ChangeLanguageState extends State<ChangeLanguage> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.r),
+        padding: AppPadding.p16,
         child: Column(
           children: [
             InkWell(
@@ -50,7 +50,7 @@ class ChangeLanguageState extends State<ChangeLanguage> {
                   Expanded(
                     child: Container(
                       alignment: alignmentGeometry,
-                      height: 50.h,
+                      height: AppDimens.buttonHeight50,
                       child: Text(
                         'english'.tr(context),
                         style: TextStyles.medium20(),
@@ -82,7 +82,7 @@ class ChangeLanguageState extends State<ChangeLanguage> {
                   Expanded(
                     child: Container(
                       alignment: alignmentGeometry,
-                      height: 50.h,
+                      height: AppDimens.buttonHeight50,
                       child: Text(
                         'arabic'.tr(context),
                         style: TextStyles.medium20(),
@@ -102,9 +102,7 @@ class ChangeLanguageState extends State<ChangeLanguage> {
               ),
             ),
             SizedBox(
-              height:
-                  MediaQuery.sizeOf(context).height *
-                  0.02111,
+              height: AppDimens.h20,
             ),
             AppElevatedButton(
               onPressed: () {

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/color_picker.dart';
 import 'package:sportify_app/features/market/presentation/widgets/size_picker.dart';
 
@@ -14,10 +18,12 @@ class ProductDetailsView extends StatefulWidget {
   });
 
   @override
-  State<ProductDetailsView> createState() => _ProductDetailsViewState();
+  State<ProductDetailsView> createState() =>
+      _ProductDetailsViewState();
 }
 
-class _ProductDetailsViewState extends State<ProductDetailsView> {
+class _ProductDetailsViewState
+    extends State<ProductDetailsView> {
   final PageController _pageController = PageController();
   int _currentImageIndex = 0;
   String _selectedColor = 'Green';
@@ -50,55 +56,58 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.white,
       body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // Image Section
                   _buildImageSection(),
 
                   // Product Info
                   Padding(
-                    padding: EdgeInsets.all(20.w),
+                    padding: AppPadding.p20,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
                       children: [
                         // Product Name and Quantity Selector Row
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               child: Text(
-                                widget.product['name'] as String? ??
+                                widget.product['name']
+                                        as String? ??
                                     'Product Name',
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
+                                style: TextStyles.bold18(
+                                  color: context
+                                      .colors
+                                      .textColor,
                                 ),
                               ),
                             ),
-                            SizedBox(width: 12.w),
+                            SizedBox(width: AppDimens.w12),
                             // Quantity Selector
                             Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
-                              ),
+                              padding: AppPadding.h8v4,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20.r),
+                                color: context.colors.white,
+                                borderRadius: AppRadius.r20,
                                 border: Border.all(
-                                  color: Colors.grey[300]!,
-                                  width: 1,
+                                  color: MyColors.grey300,
+                                  width: AppDimens
+                                      .borderWidth1,
                                 ),
                               ),
                               child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisSize:
+                                    MainAxisSize.min,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
@@ -114,26 +123,36 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                     },
                                     child: Icon(
                                       _quantity == 1
-                                          ? Icons.delete_outline
+                                          ? Icons
+                                                .delete_outline
                                           : Icons.remove,
-                                      size: 18.sp,
-                                      color: Colors.black87,
+                                      size: AppDimens
+                                          .iconSize18,
+                                      color: context
+                                          .colors
+                                          .textColor,
                                     ),
                                   ),
-                                  SizedBox(width: 12.w),
+                                  SizedBox(
+                                    width: AppDimens.w12,
+                                  ),
                                   Text(
                                     _quantity.toString(),
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black87,
-                                    ),
+                                    style:
+                                        TextStyles.semiBold14(
+                                          color: context
+                                              .colors
+                                              .textColor,
+                                        ),
                                   ),
-                                  SizedBox(width: 12.w),
+                                  SizedBox(
+                                    width: AppDimens.w12,
+                                  ),
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (_quantity == 0) {
+                                        if (_quantity ==
+                                            0) {
                                           _quantity = 1;
                                         } else {
                                           _quantity++;
@@ -142,8 +161,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                     },
                                     child: Icon(
                                       Icons.add,
-                                      size: 18.sp,
-                                      color: Colors.black87,
+                                      size: AppDimens
+                                          .iconSize18,
+                                      color: context
+                                          .colors
+                                          .textColor,
                                     ),
                                   ),
                                 ],
@@ -151,19 +173,19 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: AppDimens.h8),
 
                         // Price
                         Text(
-                          widget.product['price'] as String? ?? '0 EGP',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                          widget.product['price']
+                                  as String? ??
+                              '0 EGP',
+                          style: TextStyles.bold16(
+                            color: context.colors.textColor,
                           ),
                         ),
 
-                        SizedBox(height: 32.h),
+                        SizedBox(height: AppDimens.h32),
 
                         // Color Picker
                         ColorPicker(
@@ -176,7 +198,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           },
                         ),
 
-                        SizedBox(height: 32.h),
+                        SizedBox(height: AppDimens.h32),
 
                         // Size Picker
                         SizePicker(
@@ -189,29 +211,26 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           },
                         ),
 
-                        SizedBox(height: 32.h),
+                        SizedBox(height: AppDimens.h32),
 
                         // Description Section
                         Text(
                           'Description',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                          style: TextStyles.bold16(
+                            color: context.colors.textColor,
                           ),
                         ),
-                        SizedBox(height: 12.h),
+                        SizedBox(height: AppDimens.h12),
                         Text(
                           'High-quality football shoes designed for optimal performance on the field. Features advanced cushioning and durable materials.',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey[700],
-                            height: 1.5,
-                          ),
+                          style: TextStyles.regular14(
+                            color: MyColors.grey600,
+                          ).copyWith(height: 1.5),
                         ),
 
-                        SizedBox(height: 100.h), // Space for bottom button
+                        SizedBox(
+                          height: AppDimens.h100,
+                        ), // Space for bottom button
                       ],
                     ),
                   ),
@@ -222,12 +241,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
           // Sticky Add to Cart Button
           Container(
-            padding: EdgeInsets.all(20.w),
+            padding: AppPadding.p20,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: MyColors.black.withValues(
+                    alpha: AppDimens.opacity05,
+                  ),
                   blurRadius: 10,
                   offset: const Offset(0, -2),
                 ),
@@ -235,41 +256,37 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             ),
             child: SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: ElevatedButton(
                 onPressed: () {
                   // TODO: Add to cart logic
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(
                     SnackBar(
                       content: Text(
                         'Added to cart successfully!',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: TextStyles.medium14(),
                       ),
                       backgroundColor: MyColors.greenButton,
                       behavior: SnackBarBehavior.floating,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: AppRadius.r8,
                       ),
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
-                  foregroundColor: Colors.white,
+                  foregroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: AppRadius.r12,
                   ),
-                  elevation: 0,
+                  elevation: AppDimens.elevation0,
                 ),
                 child: Text(
                   'Add to Cart',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyles.bold16(),
                 ),
               ),
             ),
@@ -284,7 +301,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       children: [
         // Image Slider
         SizedBox(
-          height: 350.h,
+          height: AppDimens.containerHeight350,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
@@ -294,20 +311,28 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             },
             itemCount: _productImages.length,
             itemBuilder: (context, index) {
-              final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+              final devicePixelRatio = MediaQuery.of(
+                context,
+              ).devicePixelRatio;
               return Image.asset(
                 _productImages[index],
                 width: double.infinity,
                 fit: BoxFit.cover,
-                cacheWidth: (350.h * devicePixelRatio).toInt(),
-                cacheHeight: (350.h * devicePixelRatio).toInt(),
+                cacheWidth:
+                    (AppDimens.containerHeight350 *
+                            devicePixelRatio)
+                        .toInt(),
+                cacheHeight:
+                    (AppDimens.containerHeight350 *
+                            devicePixelRatio)
+                        .toInt(),
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
-                    color: Colors.grey[200],
+                    color: MyColors.grey200,
                     child: Icon(
                       Icons.image,
-                      size: 50.sp,
-                      color: Colors.grey[400],
+                      size: AppDimens.iconSize50,
+                      color: MyColors.grey400,
                     ),
                   );
                 },
@@ -318,18 +343,20 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
         // Back Button
         Positioned(
-          top: 40.h,
-          left: 20.w,
+          top: AppDimens.h40,
+          left: AppDimens.w20,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.9),
+              color: context.colors.white.withValues(
+                alpha: AppDimens.opacity9,
+              ),
               shape: BoxShape.circle,
             ),
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back,
-                color: Colors.black87,
-                size: 24.sp,
+                color: context.colors.textColor,
+                size: AppDimens.iconSize24,
               ),
               onPressed: () {
                 if (Navigator.canPop(context)) {
@@ -342,18 +369,20 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
         // Share Button
         Positioned(
-          top: 40.h,
-          right: 20.w,
+          top: AppDimens.h40,
+          right: AppDimens.w20,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.9),
+              color: context.colors.white.withValues(
+                alpha: AppDimens.opacity9,
+              ),
               shape: BoxShape.circle,
             ),
             child: IconButton(
               icon: Icon(
                 Icons.share_outlined,
-                color: Colors.black87,
-                size: 24.sp,
+                color: context.colors.textColor,
+                size: AppDimens.iconSize24,
               ),
               onPressed: () {
                 // TODO: Implement share
@@ -364,7 +393,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
         // Page Indicator (Circular Dots)
         Positioned(
-          bottom: 20.h,
+          bottom: AppDimens.h20,
           left: 0,
           right: 0,
           child: Row(
@@ -372,13 +401,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             children: List.generate(
               _productImages.length,
               (index) => Container(
-                margin: EdgeInsets.symmetric(horizontal: 4.w),
-                width: _currentImageIndex == index ? 10.w : 8.w,
-                height: _currentImageIndex == index ? 10.w : 8.w,
+                margin: EdgeInsets.symmetric(
+                  horizontal: AppDimens.w4,
+                ),
+                width: _currentImageIndex == index
+                    ? AppDimens.w10
+                    : AppDimens.w8,
+                height: _currentImageIndex == index
+                    ? AppDimens.h10
+                    : AppDimens.h8,
                 decoration: BoxDecoration(
                   color: _currentImageIndex == index
-                      ? Colors.white
-                      : Colors.white.withValues(alpha: 0.5),
+                      ? context.colors.white
+                      : context.colors.white.withValues(
+                          alpha: AppDimens.opacity5,
+                        ),
                   shape: BoxShape.circle,
                 ),
               ),

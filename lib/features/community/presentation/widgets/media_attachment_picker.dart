@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class MediaAttachmentPicker extends StatelessWidget {
   final VoidCallback? onPhotoVideoTap;
@@ -15,11 +18,11 @@ class MediaAttachmentPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyColors.white,
         border: Border(
           top: BorderSide(
-            color: Colors.grey[200]!,
-            width: 1,
+            color: MyColors.grey200,
+            width: AppDimens.borderWidth1,
           ),
         ),
       ),
@@ -28,51 +31,37 @@ class MediaAttachmentPicker extends StatelessWidget {
         children: [
           // Photo / Video Option
           ListTile(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 8.h,
-            ),
+            contentPadding: AppPadding.h20v8,
             leading: Icon(
               Icons.photo_library_outlined,
-              size: 24.sp,
-              color: Colors.black87,
+              size: AppDimens.iconSize24,
+              color: MyColors.black87,
             ),
             title: Text(
               'Photo / Video',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
+              style: TextStyles.medium16(color: MyColors.black87),
             ),
             onTap: onPhotoVideoTap,
           ),
           // Divider
           Divider(
-            height: 1,
-            thickness: 1,
-            color: Colors.grey[200],
-            indent: 20.w,
-            endIndent: 20.w,
+            height: AppDimens.dividerThickness1,
+            thickness: AppDimens.dividerThickness1,
+            color: MyColors.grey200,
+            indent: AppDimens.w20,
+            endIndent: AppDimens.w20,
           ),
           // Camera Option
           ListTile(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 8.h,
-            ),
+            contentPadding: AppPadding.h20v8,
             leading: Icon(
               Icons.camera_alt_outlined,
-              size: 24.sp,
-              color: Colors.black87,
+              size: AppDimens.iconSize24,
+              color: MyColors.black87,
             ),
             title: Text(
               'Camera',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
+              style: TextStyles.medium16(color: MyColors.black87),
             ),
             onTap: onCameraTap,
           ),

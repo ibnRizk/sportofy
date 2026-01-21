@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/payment_success_sheet.dart';
 
@@ -8,11 +11,14 @@ class WalletPhoneNumberView extends StatefulWidget {
   const WalletPhoneNumberView({super.key});
 
   @override
-  State<WalletPhoneNumberView> createState() => _WalletPhoneNumberViewState();
+  State<WalletPhoneNumberView> createState() =>
+      _WalletPhoneNumberViewState();
 }
 
-class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
-  final TextEditingController _phoneController = TextEditingController();
+class _WalletPhoneNumberViewState
+    extends State<WalletPhoneNumberView> {
+  final TextEditingController _phoneController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -23,47 +29,40 @@ class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.sp,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
         ),
         title: Text(
           'Wallet Phone Number',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        padding: AppPadding.h20,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
 
             // Instruction Text
             Text(
               'Please enter the phone number registered with your mobile wallet',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[700],
-                height: 1.5,
-              ),
+              style: TextStyles.medium16(
+                color: MyColors.grey700,
+              ).copyWith(height: 1.5),
             ),
 
-            SizedBox(height: 30.h),
+            SizedBox(height: AppDimens.h30),
 
             // Phone Input Field
             TextFormField(
@@ -71,14 +70,13 @@ class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 hintText: 'Enter your Phone number',
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[400],
+                hintStyle: TextStyles.regular14(
+                  color: MyColors.grey400,
                 ),
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(
-                    left: 16.w,
-                    right: 12.w,
+                    left: AppDimens.w16,
+                    right: AppDimens.w12,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -86,68 +84,67 @@ class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
                       // Egypt Flag
                       Image.asset(
                         ImgAssets.egyptFlag,
-                        width: 24.w,
-                        height: 24.w,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            width: 24.w,
-                            height: 24.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            child: Icon(
-                              Icons.flag,
-                              size: 16.sp,
-                              color: Colors.grey[600],
-                            ),
-                          );
-                        },
+                        width: AppDimens.iconSize24,
+                        height: AppDimens.iconSize24,
+                        errorBuilder:
+                            (context, error, stackTrace) {
+                              return Container(
+                                width: AppDimens.iconSize24,
+                                height:
+                                    AppDimens.iconSize24,
+                                decoration: BoxDecoration(
+                                  color: MyColors.grey300,
+                                  borderRadius:
+                                      AppRadius.r4,
+                                ),
+                                child: Icon(
+                                  Icons.flag,
+                                  size:
+                                      AppDimens.iconSize16,
+                                  color: MyColors.grey600,
+                                ),
+                              );
+                            },
                       ),
-                      SizedBox(width: 8.w),
+                      SizedBox(width: AppDimens.w8),
                       // Country Code
                       Text(
                         '+20',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                        style: TextStyles.bold16(
+                          color: MyColors.black,
                         ),
                       ),
-                      SizedBox(width: 12.w),
+                      SizedBox(width: AppDimens.w12),
                       // Vertical Divider
                       Container(
-                        width: 1,
-                        height: 20.h,
-                        color: Colors.grey[300],
+                        width: AppDimens.w1,
+                        height: AppDimens.h20,
+                        color: MyColors.grey300,
                       ),
-                      SizedBox(width: 12.w),
+                      SizedBox(width: AppDimens.w12),
                     ],
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
+                contentPadding: AppPadding.h16v16,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
-                    width: 1,
+                    color: MyColors.grey300,
+                    width: AppDimens.borderWidth1,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
-                    width: 1,
+                    color: MyColors.grey300,
+                    width: AppDimens.borderWidth1,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                   borderSide: BorderSide(
                     color: MyColors.greenButton,
-                    width: 1.5,
+                    width: AppDimens.borderWidth2,
                   ),
                 ),
               ),
@@ -158,71 +155,72 @@ class _WalletPhoneNumberViewState extends State<WalletPhoneNumberView> {
             // Disclaimer Text
             Text(
               'Payment with mobile digital wallets is only available for Egypt',
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
+              style: TextStyles.regular12(
+                color: MyColors.grey600,
               ),
               textAlign: TextAlign.center,
             ),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
 
             // Confirm Button
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: ElevatedButton(
-              onPressed: () {
-                // 1. Basic Validation
-                if (_phoneController.text.isEmpty) {
-                  // Optionally show error message
-                  return;
-                }
-
-                // 2. Capture root navigator context BEFORE popping
-                final rootNavigator = Navigator.of(context, rootNavigator: true);
-                final rootContext = rootNavigator.context;
-
-                // 3. Close the Wallet Screen
-                Navigator.pop(context);
-
-                // 4. Show Success Sheet after a short delay
-                Future.delayed(const Duration(milliseconds: 300), () {
-                  if (rootContext.mounted) {
-                    showModalBottomSheet(
-                      context: rootContext,
-                      isScrollControlled: false,
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(30.r),
-                        ),
-                      ),
-                      builder: (context) => const PaymentSuccessSheet(),
-                    );
+                onPressed: () {
+                  // 1. Basic Validation
+                  if (_phoneController.text.isEmpty) {
+                    // Optionally show error message
+                    return;
                   }
-                });
-              },
+
+                  // 2. Capture root navigator context BEFORE popping
+                  final rootNavigator = Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  );
+                  final rootContext = rootNavigator.context;
+
+                  // 3. Close the Wallet Screen
+                  Navigator.pop(context);
+
+                  // 4. Show Success Sheet after a short delay
+                  Future.delayed(
+                    const Duration(milliseconds: 300),
+                    () {
+                      if (rootContext.mounted) {
+                        showModalBottomSheet(
+                          context: rootContext,
+                          isScrollControlled: false,
+                          backgroundColor: MyColors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: AppRadius.top30,
+                          ),
+                          builder: (context) =>
+                              const PaymentSuccessSheet(),
+                        );
+                      }
+                    },
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: AppRadius.r10,
                   ),
-                  elevation: 0,
+                  elevation: AppDimens.elevation0,
                 ),
                 child: Text(
                   'Confirm',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  style: TextStyles.bold16(
+                    color: MyColors.white,
                   ),
                 ),
               ),
             ),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
           ],
         ),
       ),

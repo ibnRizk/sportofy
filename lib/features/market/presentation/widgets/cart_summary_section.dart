@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class CartSummarySection extends StatelessWidget {
   final double subtotal;
@@ -19,13 +22,13 @@ class CartSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.w),
+      padding: AppPadding.p20,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyColors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, -2),
           ),
         ],
@@ -39,20 +42,16 @@ class CartSummarySection extends StatelessWidget {
               Icon(
                 Icons.keyboard_arrow_down,
                 color: MyColors.greenButton,
-                size: 24.sp,
+                size: AppDimens.iconSize24,
               ),
-              SizedBox(width: 8.w),
+              SizedBox(width: AppDimens.w8),
               Text(
                 'Payment summary',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
             ],
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Subtotal
           Row(
@@ -60,23 +59,15 @@ class CartSummarySection extends StatelessWidget {
             children: [
               Text(
                 'Subtotal',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
-                ),
+                style: TextStyles.medium14(color: MyColors.grey700),
               ),
               Text(
                 '${subtotal.toStringAsFixed(0)} EGP',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.semiBold14(color: MyColors.black87),
               ),
             ],
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Delivery Fees
           Row(
@@ -84,44 +75,33 @@ class CartSummarySection extends StatelessWidget {
             children: [
               Text(
                 'Delivery Fees',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
-                ),
+                style: TextStyles.medium14(color: MyColors.grey700),
               ),
               Text(
                 '${deliveryFees.toStringAsFixed(0)} EGP',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.semiBold14(color: MyColors.black87),
               ),
             ],
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Checkout Button
           SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: onCheckout,
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
-                foregroundColor: Colors.white,
+                foregroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                 ),
-                elevation: 0,
+                elevation: AppDimens.elevation0,
               ),
               child: Text(
                 'Checkout',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyles.bold16(),
               ),
             ),
           ),

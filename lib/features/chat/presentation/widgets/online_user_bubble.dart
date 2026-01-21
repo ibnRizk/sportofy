@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class OnlineUserBubble extends StatelessWidget {
   final String userAvatar;
@@ -32,7 +34,7 @@ class OnlineUserBubble extends StatelessWidget {
             );
           },
       child: Container(
-        margin: EdgeInsets.only(right: 16.w),
+        margin: AppPadding.right16,
         child: Column(
           children: [
             // Avatar with Online Indicator
@@ -40,7 +42,7 @@ class OnlineUserBubble extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 CircleAvatar(
-                  radius: 30.r,
+                  radius: AppDimens.avatarSize30,
                   backgroundImage: AssetImage(userAvatar),
                   onBackgroundImageError: (exception, stackTrace) {
                     // Handle error silently
@@ -51,29 +53,25 @@ class OnlineUserBubble extends StatelessWidget {
                   bottom: -2,
                   right: -2,
                   child: Container(
-                    width: 16.w,
-                    height: 16.w,
+                    width: AppDimens.badgeSize16,
+                    height: AppDimens.badgeSize16,
                     decoration: BoxDecoration(
                       color: MyColors.greenButton,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Colors.white,
-                        width: 2.w,
+                        color: MyColors.white,
+                        width: AppDimens.borderWidth2,
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: AppDimens.h8),
             // User Name (First name only)
             Text(
               userName.split(' ').first,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
+              style: TextStyles.medium12(color: MyColors.black87),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

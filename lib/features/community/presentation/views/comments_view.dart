@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/community/presentation/widgets/comment_tile.dart';
 
 class CommentsView extends StatefulWidget {
@@ -110,16 +113,16 @@ class _CommentsViewState extends State<CommentsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.sp,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () {
             if (!context.mounted) return;
@@ -130,11 +133,7 @@ class _CommentsViewState extends State<CommentsView> {
         ),
         title: Text(
           'Comments',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold18(color: MyColors.black87),
         ),
         centerTitle: false,
       ),
@@ -146,7 +145,7 @@ class _CommentsViewState extends State<CommentsView> {
           // Comments List
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.symmetric(vertical: 8.h),
+              padding: AppPadding.v8,
               itemCount: _comments.length,
               itemBuilder: (context, index) {
                 final comment = _comments[index];
@@ -187,16 +186,13 @@ class _CommentsViewState extends State<CommentsView> {
         // TODO: Show people who reacted
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 12.h,
-        ),
+        padding: AppPadding.h20v12,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: MyColors.white,
           border: Border(
             bottom: BorderSide(
-              color: Colors.grey[200]!,
-              width: 1,
+              color: MyColors.grey200,
+              width: AppDimens.borderWidth1,
             ),
           ),
         ),
@@ -207,46 +203,42 @@ class _CommentsViewState extends State<CommentsView> {
             Row(
               children: [
                 Container(
-                  width: 20.w,
-                  height: 20.w,
+                  width: AppDimens.avatarSize20,
+                  height: AppDimens.avatarSize20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.blue[100],
+                    color: MyColors.blue100,
                     border: Border.all(
-                      color: Colors.white,
-                      width: 1.5,
+                      color: MyColors.white,
+                      width: AppDimens.borderWidth1,
                     ),
                   ),
                   child: ClipOval(
                     child: Image.asset(
                       ImgAssets.communityPariOnly,
-                      width: 20.w,
-                      height: 20.w,
+                      width: AppDimens.avatarSize20,
+                      height: AppDimens.avatarSize20,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(
                           Icons.thumb_up,
-                          size: 12.sp,
-                          color: Colors.blue[700],
+                          size: AppDimens.iconSize12,
+                          color: MyColors.blue700,
                         );
                       },
                     ),
                   ),
                 ),
-                SizedBox(width: 8.w),
+                SizedBox(width: AppDimens.w8),
                 Text(
                   '${widget.likedBy} and ${widget.likesCount} others',
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.medium13(color: MyColors.black87),
                 ),
-                SizedBox(width: 4.w),
+                SizedBox(width: AppDimens.w4),
                 Icon(
                   Icons.arrow_forward_ios,
-                  size: 12.sp,
-                  color: Colors.grey[600],
+                  size: AppDimens.iconSize12,
+                  color: MyColors.grey600,
                 ),
               ],
             ),
@@ -254,8 +246,8 @@ class _CommentsViewState extends State<CommentsView> {
             IconButton(
               icon: Icon(
                 Icons.thumb_up_outlined,
-                size: 24.sp,
-                color: Colors.grey[700],
+                size: AppDimens.iconSize24,
+                color: MyColors.grey700,
               ),
               onPressed: () {
                 // TODO: Handle like post action
@@ -270,17 +262,17 @@ class _CommentsViewState extends State<CommentsView> {
   Widget _buildInputBar() {
     return Container(
       padding: EdgeInsets.only(
-        left: 20.w,
-        right: 20.w,
-        top: 12.h,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 12.h,
+        left: AppDimens.w20,
+        right: AppDimens.w20,
+        top: AppDimens.h12,
+        bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.h12,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyColors.white,
         border: Border(
           top: BorderSide(
-            color: Colors.grey[200]!,
-            width: 1,
+            color: MyColors.grey200,
+            width: AppDimens.borderWidth1,
           ),
         ),
       ),
@@ -291,31 +283,22 @@ class _CommentsViewState extends State<CommentsView> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25.r),
+                  color: MyColors.white,
+                  borderRadius: AppRadius.r25,
                   border: Border.all(
-                    color: Colors.grey[300]!,
-                    width: 1,
+                    color: MyColors.grey300,
+                    width: AppDimens.borderWidth1,
                   ),
                 ),
                 child: TextField(
                   controller: _commentController,
                   focusNode: _commentFocusNode,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.regular14(color: MyColors.black87),
                   decoration: InputDecoration(
                     hintText: 'Write a comment ...',
-                    hintStyle: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.grey[600],
-                    ),
+                    hintStyle: TextStyles.regular14(color: MyColors.grey600),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 12.h,
-                    ),
+                    contentPadding: AppPadding.h16v12,
                     isDense: true,
                   ),
                   maxLines: null,
@@ -324,12 +307,12 @@ class _CommentsViewState extends State<CommentsView> {
                 ),
               ),
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
             // Send Button
             IconButton(
               icon: Icon(
                 Icons.send,
-                size: 24.sp,
+                size: AppDimens.iconSize24,
                 color: MyColors.greenButton,
               ),
               onPressed: _sendComment,

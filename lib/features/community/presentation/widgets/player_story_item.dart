@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class PlayerStoryItem extends StatelessWidget {
   final String name;
@@ -22,7 +23,7 @@ class PlayerStoryItem extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             CircleAvatar(
-              radius: 35.r,
+              radius: AppDimens.avatarSize35,
               backgroundImage: AssetImage(avatar),
             ),
             // Green Online Indicator
@@ -30,28 +31,26 @@ class PlayerStoryItem extends StatelessWidget {
               bottom: 0,
               right: 0,
               child: Container(
-                width: 16.w,
-                height: 16.w,
+                width: AppDimens.badgeSize16,
+                height: AppDimens.badgeSize16,
                 decoration: BoxDecoration(
                   color: MyColors.greenButton,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white,
-                    width: 2,
+                    color: MyColors.white,
+                    width: AppDimens.borderWidth2,
                   ),
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: AppDimens.h8),
         // Name
         Text(
           name,
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
+          style: TextStyles.medium12(
+            color: MyColors.black87,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

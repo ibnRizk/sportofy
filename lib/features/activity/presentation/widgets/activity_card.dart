@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
 class ActivityCard extends StatelessWidget {
@@ -37,15 +41,15 @@ class ActivityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(16.w),
+      margin: AppPadding.bottom16,
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -57,43 +61,32 @@ class ActivityCard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                radius: 20.r,
+                radius: AppDimens.avatarSize20,
                 backgroundImage: userImage != null
                     ? AssetImage(userImage!)
                     : AssetImage(ImgAssets.userAvatar),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppDimens.w12),
               Text(
                 userName,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.semiBold16(color: MyColors.black87),
               ),
               const Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 6.h,
-                ),
+                padding: AppPadding.h12v6,
                 decoration: BoxDecoration(
                   color: statusBgColor,
-                  borderRadius: BorderRadius.circular(6.r),
+                  borderRadius: AppRadius.r6,
                 ),
                 child: Text(
                   statusLabel,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: statusTextColor,
-                  ),
+                  style: TextStyles.medium12(color: statusTextColor),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Info Grid (2x2)
           Row(
@@ -106,7 +99,7 @@ class ActivityCard extends StatelessWidget {
                       icon: Icons.stadium_outlined,
                       text: stadiumName,
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: AppDimens.h8),
                     _InfoRow(
                       icon: Icons.access_time,
                       text: time,
@@ -114,7 +107,7 @@ class ActivityCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: AppDimens.w16),
               // Column 2
               Expanded(
                 child: Column(
@@ -123,7 +116,7 @@ class ActivityCard extends StatelessWidget {
                       icon: Icons.calendar_today_outlined,
                       text: date,
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: AppDimens.h8),
                     _InfoRow(
                       icon: Icons.timer_outlined,
                       text: duration,
@@ -134,16 +127,16 @@ class ActivityCard extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Divider
           Divider(
-            height: 1.h,
-            thickness: 1,
-            color: Colors.grey.withValues(alpha: 0.2),
+            height: AppDimens.dividerThickness1,
+            thickness: AppDimens.dividerThickness1,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity2),
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Footer Row (Date + Action Button)
           Row(
@@ -152,10 +145,7 @@ class ActivityCard extends StatelessWidget {
             children: [
               Text(
                 footerDate,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyles.regular13(color: MyColors.grey600),
               ),
               if (actionButtonText != null)
                 _ActionButton(
@@ -182,15 +172,12 @@ class _InfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 16.sp, color: Colors.grey[600]),
-        SizedBox(width: 6.w),
+        Icon(icon, size: AppDimens.iconSize16, color: MyColors.grey600),
+        SizedBox(width: AppDimens.w6),
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
-              fontSize: 13.sp,
-              color: Colors.grey[700],
-            ),
+            style: TextStyles.regular13(color: MyColors.grey700),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -216,18 +203,15 @@ class _ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8.r),
+      borderRadius: AppRadius.r8,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 8.h,
-        ),
+        padding: AppPadding.h16v8,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.r),
+          color: MyColors.white,
+          borderRadius: AppRadius.r8,
           border: Border.all(
-            color: Colors.grey[300]!,
-            width: 1,
+            color: MyColors.grey300,
+            width: AppDimens.borderWidth1,
           ),
         ),
         child: Row(
@@ -236,18 +220,14 @@ class _ActionButton extends StatelessWidget {
             if (showResellIcon) ...[
               Icon(
                 Icons.refresh,
-                size: 16.sp,
-                color: Colors.black87,
+                size: AppDimens.iconSize16,
+                color: MyColors.black87,
               ),
-              SizedBox(width: 6.w),
+              SizedBox(width: AppDimens.w6),
             ],
             Text(
               text,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
+              style: TextStyles.medium14(color: MyColors.black87),
             ),
           ],
         ),

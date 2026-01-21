@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 enum MessageType { sent, received }
 
@@ -22,10 +25,7 @@ class MessageBubble extends StatelessWidget {
     final isSent = type == MessageType.sent;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 4.h,
-      ),
+      padding: AppPadding.h20v4,
       child: Row(
         mainAxisAlignment:
             isSent ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -34,9 +34,9 @@ class MessageBubble extends StatelessWidget {
           // Avatar (only for received messages, on the left)
           if (!isSent && userAvatar != null)
             Padding(
-              padding: EdgeInsets.only(right: 8.w),
+              padding: AppPadding.right8,
               child: CircleAvatar(
-                radius: 16.r,
+                radius: AppDimens.avatarSize16,
                 backgroundImage: AssetImage(userAvatar!),
                 onBackgroundImageError: (exception, stackTrace) {
                   // Handle error silently
@@ -47,29 +47,21 @@ class MessageBubble extends StatelessWidget {
           // Message Bubble
           Flexible(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 10.h,
-              ),
+              padding: AppPadding.h16v10,
               decoration: BoxDecoration(
                 color: isSent
                     ? const Color(0xFF2F9DA5) // Teal/Blue for sent
-                    : const Color(0xFFF2F4F5), // Light grey for received
+                    : MyColors.grey100, // Light grey for received
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.r),
-                  topRight: Radius.circular(16.r),
-                  bottomLeft: isSent ? Radius.circular(16.r) : Radius.circular(4.r),
-                  bottomRight: isSent ? Radius.circular(4.r) : Radius.circular(16.r),
+                  topLeft: Radius.circular(AppDimens.h16),
+                  topRight: Radius.circular(AppDimens.h16),
+                  bottomLeft: isSent ? Radius.circular(AppDimens.h16) : Radius.circular(AppDimens.h4),
+                  bottomRight: isSent ? Radius.circular(AppDimens.h4) : Radius.circular(AppDimens.h16),
                 ),
               ),
               child: Text(
                 message,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: isSent ? Colors.white : Colors.black87,
-                  height: 1.4,
-                ),
+                style: TextStyles.regular14(color: isSent ? MyColors.white : MyColors.black87).copyWith(height: 1.4),
               ),
             ),
           ),
@@ -77,9 +69,9 @@ class MessageBubble extends StatelessWidget {
           // Avatar (only for sent messages, on the right - optional)
           if (isSent && userAvatar != null)
             Padding(
-              padding: EdgeInsets.only(left: 8.w),
+              padding: AppPadding.left8,
               child: CircleAvatar(
-                radius: 16.r,
+                radius: AppDimens.avatarSize16,
                 backgroundImage: AssetImage(userAvatar!),
                 onBackgroundImageError: (exception, stackTrace) {
                   // Handle error silently

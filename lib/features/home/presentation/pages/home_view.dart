@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/features/home/presentation/widgets/home_header.dart';
 import 'package:sportify_app/features/home/presentation/widgets/match_result_slider.dart';
@@ -30,18 +32,16 @@ class HomeView extends StatelessWidget {
               // Header
               HomeHeader(onMenuTap: onMenuTap),
 
-              SizedBox(height: 16.h),
+              SizedBox(height: AppDimens.h16),
 
               // Match Result Slider
               const MatchResultSlider(),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: AppDimens.h24),
 
               // Categories
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
+                padding: AppPadding.h16,
                 child: Row(
                   children: [
                     Expanded(
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: AppDimens.w12),
                     Expanded(
                       child: HomeCategoryCard(
                         image: ImgAssets.matchesCategory,
@@ -63,16 +63,13 @@ class HomeView extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: AppDimens.w12),
                     Expanded(
                       child: HomeCategoryCard(
-                        image:
-                            ImgAssets.tournamentsCategory,
+                        image: ImgAssets.tournamentsCategory,
                         title: 'tournaments'.tr(context),
                         onTap: () {
-                          context.push(
-                            Routes.tournamentsListRoute,
-                          );
+                          context.push(Routes.tournamentsListRoute);
                         },
                       ),
                     ),
@@ -80,22 +77,17 @@ class HomeView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: AppDimens.h24),
 
               // Matches Near You Section
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
+                padding: AppPadding.h16,
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'matches_near_you'.tr(context),
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w700,
+                      style: TextStyles.bold18(
                         color: context.colors.textColor,
                       ),
                     ),
@@ -103,9 +95,7 @@ class HomeView extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         'view_all'.tr(context),
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
+                        style: TextStyles.semiBold14(
                           color: MyColors.greenButton,
                         ),
                       ),
@@ -114,7 +104,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
 
               // Matches List (Always Show Mock Data)
               BlocBuilder<HomeCubit, HomeState>(
@@ -122,14 +112,11 @@ class HomeView extends StatelessWidget {
                   // Force show matches - UI Layer Only
                   return ListView.separated(
                     shrinkWrap: true,
-                    physics:
-                        const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                    ),
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: AppPadding.h16,
                     itemCount: state.nearbyMatches.length,
                     separatorBuilder: (context, index) =>
-                        SizedBox(height: 16.h),
+                        SizedBox(height: AppDimens.h16),
                     itemBuilder: (context, index) {
                       return NearbyMatchCard(
                         match: state.nearbyMatches[index],
@@ -139,7 +126,7 @@ class HomeView extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: AppDimens.h24),
             ],
           ),
         ),

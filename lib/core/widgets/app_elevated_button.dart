@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_dimens.dart';
+import '../utils/app_padding.dart';
+import '../utils/app_radius.dart';
 import '../utils/values/text_styles.dart';
 
 class AppElevatedButton extends StatelessWidget {
@@ -49,27 +52,29 @@ class AppElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: sidePadding ?? 0.0),
+      padding: sidePadding != null
+          ? EdgeInsets.symmetric(horizontal: sidePadding!)
+          : AppPadding.zero,
       child: ElevatedButton(
         onPressed: onPressed,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         style: ElevatedButton.styleFrom(
-          padding:
-              padding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          padding: padding ?? AppPadding.h16v12,
           foregroundColor: context.colors.baseColor,
           backgroundColor: buttonColor ?? context.colors.main,
-          elevation: elevation ?? 0,
+          elevation: elevation ?? AppDimens.elevation0,
           side: borderColor != null
               ? BorderSide(
                   color: borderColor ?? context.colors.main,
-                  width: 1,
+                  width: AppDimens.borderWidth1,
                 )
               : null,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-                Radius.circular(buttonRadius == null ? 8.r : buttonRadius!.r)),
+            borderRadius: buttonRadius != null
+                ? BorderRadius.circular(buttonRadius!.r)
+                : AppRadius.r8,
           ),
-          minimumSize: minimumSize ?? Size(double.infinity, 56.h),
+          minimumSize: minimumSize ?? Size(double.infinity, AppDimens.buttonHeight56),
           maximumSize: maximumSize,
         ),
         child: Center(
@@ -103,7 +108,7 @@ class AppElevatedButton extends StatelessWidget {
                         }
                       },
                     ),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: AppDimens.w8),
                     Text(
                       text,
                       style: textStyle ??

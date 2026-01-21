@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/community/presentation/widgets/post_card.dart';
 import 'package:sportify_app/features/community/presentation/widgets/player_story_item.dart';
@@ -74,16 +77,16 @@ class _CommunityViewState extends State<CommunityView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       body: CustomScrollView(
         slivers: [
           // Custom AppBar
           SliverAppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
+            backgroundColor: MyColors.white,
+            elevation: AppDimens.elevation0,
             pinned: true,
             floating: false,
-            expandedHeight: 120.h,
+            expandedHeight: AppDimens.containerHeight120,
             flexibleSpace: _buildCustomAppBar(),
           ),
 
@@ -120,11 +123,9 @@ class _CommunityViewState extends State<CommunityView> {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            backgroundColor: Colors.transparent,
+            backgroundColor: MyColors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(30.r),
-              ),
+              borderRadius: AppRadius.top30,
             ),
             builder: (context) =>
                 const PostTypeSelectionSheet(),
@@ -133,15 +134,13 @@ class _CommunityViewState extends State<CommunityView> {
         backgroundColor: MyColors.greenButton,
         icon: Icon(
           Icons.add,
-          color: Colors.white,
-          size: 20.sp,
+          color: MyColors.white,
+          size: AppDimens.iconSize20,
         ),
         label: Text(
           'Create Post',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+          style: TextStyles.semiBold14(
+            color: MyColors.white,
           ),
         ),
       ),
@@ -153,72 +152,70 @@ class _CommunityViewState extends State<CommunityView> {
   Widget _buildCustomAppBar() {
     return Container(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 10.h,
-        left: 20.w,
-        right: 20.w,
-        bottom: 16.h,
+        top: MediaQuery.of(context).padding.top + AppDimens.h10,
+        left: AppDimens.w20,
+        right: AppDimens.w20,
+        bottom: AppDimens.h16,
       ),
       child: Row(
         children: [
           // User Avatar
           CircleAvatar(
-            radius: 20.r,
+            radius: AppDimens.avatarSize20,
             backgroundImage: AssetImage(
               ImgAssets.mohamedAhmed,
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Search Field
           Expanded(
             child: Container(
-              height: 40.h,
+              height: AppDimens.containerHeight40,
               decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(25.r),
+                color: MyColors.grey100,
+                borderRadius: AppRadius.r25,
                 border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
+                  color: MyColors.grey300,
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: TextField(
                 controller: _searchController,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.black87,
+                style: TextStyles.regular14(
+                  color: MyColors.black87,
                 ),
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.grey[600],
+                  hintStyle: TextStyles.regular14(
+                    color: MyColors.grey600,
                   ),
                   prefixIcon: Padding(
-                    padding: EdgeInsets.all(12.w),
+                    padding: AppPadding.p12,
                     child: Icon(
                       Icons.search,
-                      size: 20.sp,
-                      color: Colors.grey[600],
+                      size: AppDimens.iconSize20,
+                      color: MyColors.grey600,
                     ),
                   ),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 10.h,
+                    horizontal: AppDimens.w16,
+                    vertical: AppDimens.h10,
                   ),
                   isDense: true,
                 ),
               ),
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Notification Icon (SVG)
           IconButton(
             icon: SvgPicture.asset(
               ImgAssets.icNotification,
-              width: 24.w,
-              height: 24.w,
+              width: AppDimens.iconSize24,
+              height: AppDimens.iconSize24,
               colorFilter: const ColorFilter.mode(
-                Colors.black87,
+                MyColors.black87,
                 BlendMode.srcIn,
               ),
             ),
@@ -230,10 +227,10 @@ class _CommunityViewState extends State<CommunityView> {
           IconButton(
             icon: SvgPicture.asset(
               ImgAssets.icChat,
-              width: 24.w,
-              height: 24.w,
+              width: AppDimens.iconSize24,
+              height: AppDimens.iconSize24,
               colorFilter: const ColorFilter.mode(
-                Colors.black87,
+                MyColors.black87,
                 BlendMode.srcIn,
               ),
             ),
@@ -248,13 +245,13 @@ class _CommunityViewState extends State<CommunityView> {
 
   Widget _buildFilterTabs() {
     return Container(
-      height: 50.h,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      height: AppDimens.containerHeight50,
+      padding: AppPadding.h20,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
         separatorBuilder: (context, index) =>
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
         itemBuilder: (context, index) {
           final filter = _filters[index];
           final isSelected = _selectedFilter == filter;
@@ -265,32 +262,29 @@ class _CommunityViewState extends State<CommunityView> {
               });
             },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 10.h,
-              ),
+              padding: AppPadding.h20v10,
               decoration: BoxDecoration(
                 color: isSelected
                     ? MyColors.greenButton
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(20.r),
+                    : MyColors.white,
+                borderRadius: AppRadius.r20,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[300]!,
-                  width: 1,
+                      : MyColors.grey300,
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: Center(
                 child: Text(
                   filter,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: isSelected
-                        ? Colors.white
-                        : Colors.black87,
-                  ),
+                  style: isSelected
+                      ? TextStyles.medium14(
+                          color: MyColors.white,
+                        )
+                      : TextStyles.medium14(
+                          color: MyColors.black87,
+                        ),
                 ),
               ),
             ),
@@ -306,26 +300,24 @@ class _CommunityViewState extends State<CommunityView> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 16.h,
+            horizontal: AppDimens.w20,
+            vertical: AppDimens.h16,
           ),
           child: Text(
             'Players near you',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            style: TextStyles.bold16(
+              color: MyColors.black87,
             ),
           ),
         ),
         SizedBox(
-          height: 100.h,
+          height: AppDimens.containerHeight100,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: AppDimens.w20),
             itemCount: _nearbyPlayers.length,
             separatorBuilder: (context, index) =>
-                SizedBox(width: 16.w),
+                SizedBox(width: AppDimens.w16),
             itemBuilder: (context, index) {
               final player = _nearbyPlayers[index];
               return PlayerStoryItem(
@@ -335,7 +327,7 @@ class _CommunityViewState extends State<CommunityView> {
             },
           ),
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: AppDimens.h16),
       ],
     );
   }

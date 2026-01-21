@@ -3,7 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/market_product_card.dart';
 
 class MarketView extends StatefulWidget {
@@ -84,17 +89,13 @@ class _MarketViewState extends State<MarketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: context.colors.white,
         elevation: 0,
         title: Text(
           'Market',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold18(color: context.colors.textColor),
         ),
         centerTitle: true,
         actions: [
@@ -104,8 +105,8 @@ class _MarketViewState extends State<MarketView> {
               IconButton(
                 icon: Icon(
                   Icons.shopping_cart_outlined,
-                  size: 24.sp,
-                  color: Colors.black87,
+                  size: AppDimens.iconSize24,
+                  color: context.colors.textColor,
                 ),
                  onPressed: () {
                    context.push(Routes.cartRoute);
@@ -113,26 +114,22 @@ class _MarketViewState extends State<MarketView> {
               ),
               if (_cartItemCount > 0)
                 Positioned(
-                  right: 8.w,
-                  top: 8.h,
+                  right: AppDimens.w8,
+                  top: AppDimens.h8,
                   child: Container(
-                    padding: EdgeInsets.all(4.w),
+                    padding: AppPadding.p4,
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: MyColors.red,
                       shape: BoxShape.circle,
                     ),
                     constraints: BoxConstraints(
-                      minWidth: 16.w,
-                      minHeight: 16.h,
+                      minWidth: AppDimens.w16,
+                      minHeight: AppDimens.h16,
                     ),
                     child: Center(
                       child: Text(
                         _cartItemCount > 9 ? '9+' : _cartItemCount.toString(),
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: TextStyles.bold10(color: MyColors.white),
                       ),
                     ),
                   ),
@@ -145,42 +142,36 @@ class _MarketViewState extends State<MarketView> {
         children: [
           // Search Bar
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+            padding: AppPadding.h20v16,
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[600],
-                ),
+                hintStyle: TextStyles.regular14(color: MyColors.grey600),
                 prefixIcon: Icon(
                   Icons.search,
                   size: 20.sp,
-                  color: Colors.grey[600],
+                  color: MyColors.grey600,
                 ),
                 filled: true,
-                fillColor: Colors.grey[100],
+                fillColor: MyColors.grey100,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 12.h,
-                ),
+                contentPadding: AppPadding.h16v12,
               ),
             ),
           ),
 
           // Categories
           SizedBox(
-            height: 50.h,
+            height: AppDimens.containerHeight50,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: AppPadding.h20,
               itemCount: _categories.length,
-              separatorBuilder: (context, index) => SizedBox(width: 12.w),
+              separatorBuilder: (context, index) => SizedBox(width: AppDimens.w12),
               itemBuilder: (context, index) {
                 final category = _categories[index];
                 final isSelected = _selectedCategory == category;
@@ -191,31 +182,26 @@ class _MarketViewState extends State<MarketView> {
                     });
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 12.h,
-                    ),
+                    padding: AppPadding.h20v12,
                     decoration: BoxDecoration(
                       color: isSelected
                           ? MyColors.greenButton
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(20.r),
+                          : context.colors.white,
+                      borderRadius: AppRadius.r20,
                       border: Border.all(
                         color: isSelected
                             ? MyColors.greenButton
-                            : Colors.grey[300]!,
-                        width: 1,
+                            : MyColors.grey300,
+                        width: AppDimens.borderWidth1,
                       ),
                     ),
                     child: Center(
                       child: Text(
                         category,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
+                        style: TextStyles.medium14(
                           color: isSelected
-                              ? Colors.white
-                              : Colors.black87,
+                              ? MyColors.white
+                              : context.colors.textColor,
                         ),
                       ),
                     ),
@@ -225,32 +211,28 @@ class _MarketViewState extends State<MarketView> {
             ),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Category Title
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Text(
               _selectedCategory,
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold18(color: context.colors.textColor),
             ),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Products Grid
           Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: AppPadding.h20,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.75,
-                crossAxisSpacing: 12.w,
-                mainAxisSpacing: 16.h,
+                crossAxisSpacing: AppDimens.w12,
+                mainAxisSpacing: AppDimens.h16,
               ),
               itemCount: _filteredProducts.length,
               itemBuilder: (context, index) {

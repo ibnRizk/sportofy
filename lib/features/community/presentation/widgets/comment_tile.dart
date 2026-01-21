@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class CommentReply {
   final String id;
@@ -208,26 +213,26 @@ class CommentTile extends StatelessWidget {
 
   Widget _buildReplyTile(CommentReply reply) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 12.h),
+      padding: AppPadding.bottom12,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Smaller Avatar for Reply
           CircleAvatar(
-            radius: 16.r,
+            radius: AppDimens.avatarSize16,
             backgroundImage: AssetImage(reply.authorAvatar),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Reply Bubble
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(10.w),
+              padding: EdgeInsets.all(AppDimens.w10),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12.r),
+                color: MyColors.white,
+                borderRadius: AppRadius.r12,
                 border: Border.all(
-                  color: Colors.grey[200]!,
-                  width: 1,
+                  color: MyColors.grey200,
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: Column(
@@ -236,22 +241,17 @@ class CommentTile extends StatelessWidget {
                   // Author Name
                   Text(
                     reply.authorName,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                    style: TextStyles.bold13(
+                      color: MyColors.black87,
                     ),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: AppDimens.h4),
                   // Reply Content
                   Text(
                     reply.content,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black87,
-                      height: 1.4,
-                    ),
+                    style: TextStyles.regular13(
+                      color: MyColors.black87,
+                    ).copyWith(height: 1.4),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

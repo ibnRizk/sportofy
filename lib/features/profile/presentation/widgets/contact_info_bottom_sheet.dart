@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class ContactInfoBottomSheet extends StatelessWidget {
   final String email;
@@ -18,11 +21,8 @@ class ContactInfoBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top25,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,12 +33,12 @@ class ContactInfoBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 12.h, bottom: 8.h),
-              width: 40.w,
-              height: 4.h,
+              margin: AppPadding.top12.copyWith(bottom: AppDimens.h8),
+              width: AppDimens.w40,
+              height: AppDimens.h4,
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha:0.3),
-                borderRadius: BorderRadius.circular(2.r),
+                color: MyColors.grey.withValues(alpha: AppDimens.opacity3),
+                borderRadius: AppRadius.r2,
               ),
             ),
           ),
@@ -47,10 +47,8 @@ class ContactInfoBottomSheet extends StatelessWidget {
           // CONTENT PADDING
           // ═══════════════════════════════════════════════
           Padding(
-            padding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
+            padding: AppPadding.h20.copyWith(
+              bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.h20,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -63,23 +61,19 @@ class ContactInfoBottomSheet extends StatelessWidget {
                       onTap: () => Navigator.pop(context),
                       child: Icon(
                         Icons.arrow_back,
-                        size: 24.w,
-                        color: Colors.black87,
+                        size: AppDimens.iconSize24,
+                        color: MyColors.black87,
                       ),
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: AppDimens.w16),
                     Text(
                       'Contact Info',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.semiBold18(color: MyColors.black87),
                     ),
                   ],
                 ),
 
-                SizedBox(height: 32.h),
+                SizedBox(height: AppDimens.h32),
 
                 // Email Section
                 _buildInfoRow(
@@ -89,7 +83,7 @@ class ContactInfoBottomSheet extends StatelessWidget {
                   value: email,
                 ),
 
-                SizedBox(height: 28.h),
+                SizedBox(height: AppDimens.h28),
 
                 // Phone Section
                 _buildInfoRow(
@@ -99,7 +93,7 @@ class ContactInfoBottomSheet extends StatelessWidget {
                   value: phone,
                 ),
 
-                SizedBox(height: 28.h),
+                SizedBox(height: AppDimens.h28),
 
                 // Connected Section
                 _buildInfoRow(
@@ -109,7 +103,7 @@ class ContactInfoBottomSheet extends StatelessWidget {
                   value: connectedDate,
                 ),
 
-                SizedBox(height: 20.h),
+                SizedBox(height: AppDimens.h20),
               ],
             ),
           ),
@@ -130,20 +124,20 @@ class ContactInfoBottomSheet extends StatelessWidget {
       children: [
         // Icon
         Container(
-          width: 40.w,
-          height: 40.h,
+          width: AppDimens.containerHeight40,
+          height: AppDimens.containerHeight40,
           decoration: BoxDecoration(
-            color: Colors.grey.withValues(alpha:0.1),
-            borderRadius: BorderRadius.circular(8.r),
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity1),
+            borderRadius: AppRadius.r8,
           ),
           child: Icon(
             icon,
-            size: 20.w,
-            color: Colors.black54,
+            size: AppDimens.iconSize20,
+            color: MyColors.black54,
           ),
         ),
 
-        SizedBox(width: 16.w),
+        SizedBox(width: AppDimens.w16),
 
         // Label + Value Column
         Expanded(
@@ -152,20 +146,12 @@ class ContactInfoBottomSheet extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium14(color: MyColors.black87),
               ),
-              SizedBox(height: 6.h),
+              SizedBox(height: AppDimens.h6),
               Text(
                 value,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: MyColors.greenButton,
-                ),
+                style: TextStyles.regular14(color: MyColors.greenButton),
               ),
             ],
           ),
@@ -183,15 +169,12 @@ class ContactInfoBottomSheet extends StatelessWidget {
   }) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyColors.transparent,
       isScrollControlled: true,
       enableDrag: true, // ✅ Allow drag to dismiss
       isDismissible: true, // ✅ Allow tap outside to dismiss
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
+        borderRadius: AppRadius.top25,
       ),
       builder: (context) => ContactInfoBottomSheet(
         email: email,

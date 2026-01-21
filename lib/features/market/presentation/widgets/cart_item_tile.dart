@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class CartItemTile extends StatelessWidget {
   final String imageUrl;
@@ -29,14 +32,14 @@ class CartItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(12.w),
+      margin: AppPadding.bottom16,
+      padding: AppPadding.p12,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+          color: MyColors.grey200,
+          width: AppDimens.borderWidth1,
         ),
       ),
       child: Row(
@@ -44,27 +47,27 @@ class CartItemTile extends StatelessWidget {
         children: [
           // Product Image
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: AppRadius.r8,
             child: Image.asset(
               imageUrl,
-              width: 80.w,
-              height: 80.w,
+              width: AppDimens.containerWidth80,
+              height: AppDimens.containerWidth80,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 80.w,
-                  height: 80.w,
-                  color: Colors.grey[200],
+                  width: AppDimens.containerWidth80,
+                  height: AppDimens.containerWidth80,
+                  color: MyColors.grey200,
                   child: Icon(
                     Icons.image,
-                    size: 30.sp,
-                    color: Colors.grey[400],
+                    size: AppDimens.iconSize32,
+                    color: MyColors.grey400,
                   ),
                 );
               },
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Product Details
           Expanded(
@@ -74,72 +77,57 @@ class CartItemTile extends StatelessWidget {
                 // Product Name
                 Text(
                   name,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold16(color: MyColors.black87),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: AppDimens.h4),
 
                 // Color and Size
                 Row(
                   children: [
                     // Color Swatch
                     Container(
-                      width: 16.w,
-                      height: 16.w,
+                      width: AppDimens.w16,
+                      height: AppDimens.w16,
                       decoration: BoxDecoration(
                         color: _getColorFromString(color),
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.grey[300]!,
-                          width: 1,
+                          color: MyColors.grey300,
+                          width: AppDimens.borderWidth1,
                         ),
                       ),
                     ),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: AppDimens.w6),
                     Text(
                       '$size',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.medium12(color: MyColors.grey600),
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
 
                 // Price
                 Text(
                   price,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: MyColors.greenButton,
-                  ),
+                  style: TextStyles.bold14(color: MyColors.greenButton),
                 ),
               ],
             ),
           ),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Quantity Selector
           Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 8.w,
-              vertical: 4.h,
-            ),
+            padding: AppPadding.h8v4,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20.r),
+              color: MyColors.white,
+              borderRadius: AppRadius.r20,
               border: Border.all(
-                color: Colors.grey[300]!,
-                width: 1,
+                color: MyColors.grey300,
+                width: AppDimens.borderWidth1,
               ),
             ),
             child: Column(
@@ -150,27 +138,23 @@ class CartItemTile extends StatelessWidget {
                   onTap: quantity == 1 ? onDelete : onDecrease,
                   child: Icon(
                     quantity == 1 ? Icons.delete_outline : Icons.remove,
-                    size: 18.sp,
+                    size: AppDimens.iconSize18,
                     color: MyColors.greenButton,
                   ),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
                 // Quantity
                 Text(
                   quantity.toString(),
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.semiBold14(color: MyColors.black87),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
                 // Add Button
                 GestureDetector(
                   onTap: onIncrease,
                   child: Icon(
                     Icons.add,
-                    size: 18.sp,
+                    size: AppDimens.iconSize18,
                     color: MyColors.greenButton,
                   ),
                 ),
@@ -185,17 +169,17 @@ class CartItemTile extends StatelessWidget {
   Color _getColorFromString(String colorName) {
     switch (colorName.toLowerCase()) {
       case 'green':
-        return Colors.green;
+        return MyColors.green;
       case 'white':
-        return Colors.white;
+        return MyColors.white;
       case 'black':
-        return Colors.black;
+        return MyColors.black;
       case 'red':
-        return Colors.red;
+        return MyColors.red;
       case 'blue':
-        return Colors.blue;
+        return MyColors.blue;
       default:
-        return Colors.grey;
+        return MyColors.grey;
     }
   }
 }

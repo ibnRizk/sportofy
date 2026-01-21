@@ -3,6 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_dimens.dart';
+import '../utils/app_padding.dart';
+import '../utils/app_radius.dart';
+import '../utils/values/text_styles.dart';
 
 class MySearchBar extends StatelessWidget {
   final TextEditingController? controller;
@@ -25,15 +29,9 @@ class MySearchBar extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    TextTheme theme = Theme.of(context).textTheme;
-    double myFontSize = 14.sp;
-    double raduis = 15.r;
     return Container(
       width: ScreenUtil().screenWidth,
-      padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 12.h,
-      ),
+      padding: AppPadding.h16v12,
       alignment: Alignment.centerRight,
       child: TextFormField(
         controller: controller,
@@ -44,43 +42,33 @@ class MySearchBar extends StatelessWidget {
         onChanged: autoComplete == true ? onTap : null,
         decoration: InputDecoration(
           filled: true,
-          fillColor: const Color(0x26B2B8B4),
+          fillColor: MyColors.grey.withValues(alpha: AppDimens.opacity1),
           hintText: hintText,
           contentPadding: EdgeInsets.symmetric(
-            horizontal: 16.w,
-            vertical: 14.h,
+            horizontal: AppDimens.w16,
+            vertical: AppDimens.h14,
           ),
-          hintStyle: theme.bodyMedium!.copyWith(
-            color: context.colors.body,
-            fontSize: myFontSize,
-          ),
+          hintStyle: TextStyles.regular14(color: context.colors.body),
           prefixIcon: const Icon(
             Icons.search,
             color: MyColors.main,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(raduis),
-            ),
+            borderRadius: AppRadius.r12,
             borderSide: BorderSide(
               color: context.colors.dividerColor,
-              width: 1.0,
+              width: AppDimens.borderWidth1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(raduis),
-            ),
+            borderRadius: AppRadius.r12,
             borderSide: BorderSide(
               color: context.colors.dividerColor,
-              width: 1.0,
+              width: AppDimens.borderWidth1,
             ),
           ),
         ),
-        style: theme.bodyMedium!.copyWith(
-          color: context.colors.body,
-          fontSize: myFontSize,
-        ),
+        style: TextStyles.regular14(color: context.colors.body),
       ),
     );
   }

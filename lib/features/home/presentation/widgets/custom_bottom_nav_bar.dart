@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -18,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
             color: context.colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
+                color: MyColors.black.withValues(alpha: AppDimens.opacity05),
                 blurRadius: 10,
                 offset: const Offset(0, -2),
               ),
@@ -26,10 +28,9 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
           child: SafeArea(
             child: SizedBox(
-              height: 70.h,
+              height: AppDimens.bottomNavBarHeight + AppDimens.h10,
               child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildNavItem(
                     context: context,
@@ -96,26 +97,26 @@ class CustomBottomNavBar extends StatelessWidget {
       },
       behavior: HitTestBehavior.opaque,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        padding: AppPadding.h12,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Active Top Border
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              height: 3.h,
-              width: 40.w,
+              height: AppDimens.h3,
+              width: AppDimens.w40,
               decoration: BoxDecoration(
                 color: isActive
                     ? MyColors.greenButton
-                    : Colors.transparent,
+                    : MyColors.transparent,
                 borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(2.r),
+                  bottom: Radius.circular(AppDimens.w2),
                 ),
               ),
             ),
 
-            SizedBox(height: 8.h),
+            SizedBox(height: AppDimens.h8),
 
             // Icon
             Icon(
@@ -123,23 +124,21 @@ class CustomBottomNavBar extends StatelessWidget {
               color: isActive
                   ? MyColors.greenButton
                   : MyColors.greyText,
-              size: 24.w,
+              size: AppDimens.iconSize24,
             ),
 
-            SizedBox(height: 4.h),
+            SizedBox(height: AppDimens.h4),
 
             // Label
             Text(
               label,
-              style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: isActive
-                    ? FontWeight.w600
-                    : FontWeight.w400,
-                color: isActive
-                    ? MyColors.greenButton
-                    : MyColors.greyText,
-              ),
+              style: isActive
+                  ? TextStyles.semiBold11(
+                      color: MyColors.greenButton,
+                    )
+                  : TextStyles.regular11(
+                      color: MyColors.greyText,
+                    ),
             ),
           ],
         ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/account_settings_bottom_sheet.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/contact_info_bottom_sheet.dart';
@@ -14,7 +17,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: MyColors.grey100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -24,7 +27,7 @@ class ProfileView extends StatelessWidget {
               // HEADER SECTION
               // ═══════════════════════════════════════════════
               Container(
-                padding: EdgeInsets.all(20.w),
+                padding: AppPadding.p20,
                 color: context.colors.white,
                 child: Column(
                   children: [
@@ -38,7 +41,7 @@ class ProfileView extends StatelessWidget {
                               Navigator.pop(context),
                           icon: Icon(
                             Icons.arrow_back,
-                            size: 24.w,
+                            size: AppDimens.iconSize24,
                             color: context.colors.textColor,
                           ),
                         ),
@@ -50,14 +53,14 @@ class ProfileView extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.more_vert,
-                            size: 24.w,
+                            size: AppDimens.iconSize24,
                             color: context.colors.textColor,
                           ),
                         ),
                       ],
                     ),
 
-                    SizedBox(height: 8.h),
+                    SizedBox(height: AppDimens.h8),
 
                     // Profile Info Row
                     Row(
@@ -70,7 +73,7 @@ class ProfileView extends StatelessWidget {
                         _buildBadge(
                           icon: Icons.monetization_on,
                           text: '336',
-                          color: const Color(0xFF00BCD4),
+                          color: MyColors.cyan,
                         ),
 
                         // Center: Avatar + Name
@@ -79,7 +82,7 @@ class ProfileView extends StatelessWidget {
                             Stack(
                               children: [
                                 CircleAvatar(
-                                  radius: 50.r,
+                                  radius: AppDimens.avatarSize50,
                                   backgroundImage:
                                       AssetImage(
                                         ImgAssets
@@ -90,44 +93,38 @@ class ProfileView extends StatelessWidget {
                                   bottom: 0,
                                   right: 0,
                                   child: Container(
-                                    width: 32.w,
-                                    height: 32.h,
+                                    width: AppDimens.w32,
+                                    height: AppDimens.h32,
                                     decoration:
                                         const BoxDecoration(
                                           shape: BoxShape
                                               .circle,
                                           color:
-                                              Colors.white,
+                                              MyColors.white,
                                         ),
-                                    padding: EdgeInsets.all(
-                                      2.w,
-                                    ),
+                                    padding: AppPadding.p2,
                                     child: Image.asset(
                                       ImgAssets.egyptFlag,
-                                      width: 28.w,
-                                      height: 28.h,
+                                      width: AppDimens.w28,
+                                      height: AppDimens.h28,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 12.h),
+                            SizedBox(height: AppDimens.h12),
                             Text(
                               'Ahmed Hassan',
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700,
+                              style: TextStyles.bold18(
                                 color: context
                                     .colors
                                     .textColor,
                               ),
                             ),
-                            SizedBox(height: 4.h),
+                            SizedBox(height: AppDimens.h4),
                             Text(
                               'ID: Rmk4C1',
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
+                              style: TextStyles.medium14(
                                 color: MyColors.greenButton,
                               ),
                             ),
@@ -138,12 +135,12 @@ class ProfileView extends StatelessWidget {
                         _buildBadge(
                           icon: Icons.male,
                           text: '24',
-                          color: const Color(0xFF00BCD4),
+                          color: MyColors.cyan,
                         ),
                       ],
                     ),
 
-                    SizedBox(height: 20.h),
+                    SizedBox(height: AppDimens.h20),
 
                     // Action Buttons
                     Row(
@@ -159,7 +156,7 @@ class ProfileView extends StatelessWidget {
                             },
                           ),
                         ),
-                        SizedBox(width: 12.w),
+                        SizedBox(width: AppDimens.w12),
                         Expanded(
                           child: _buildOutlinedButton(
                             icon: Icons.phone_outlined,
@@ -182,15 +179,13 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
               // HEIGHT & ADDRESS ROW
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
+                padding: AppPadding.h20,
                 child: Row(
                   children: [
                     Expanded(
@@ -199,7 +194,7 @@ class ProfileView extends StatelessWidget {
                         value: '183 CM',
                       ),
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: AppDimens.w12),
                     Expanded(
                       child: _buildInfoCard(
                         title: 'Address',
@@ -210,15 +205,13 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
               // ABOUT ME SECTION
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
+                padding: AppPadding.h20,
                 child: _buildProfileCard(
                   child: Column(
                     crossAxisAlignment:
@@ -226,20 +219,17 @@ class ProfileView extends StatelessWidget {
                     children: [
                       Text(
                         'About me',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w700,
+                        style: TextStyles.bold16(
                           color: context.colors.textColor,
                         ),
                       ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: AppDimens.h12),
                       Text(
                         'Lorem Ipsum is simply a printable and proforma text typesetting industry. Lorem Ipsum was the master of the industry Standard dummy text since the fifteenth century AD.',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                        style: TextStyles.regular14(
                           color: context.colors.textColor
-                              .withValues(alpha:0.6),
+                              .withValues(alpha: AppDimens.opacity6),
+                        ).copyWith(
                           height: 1.5,
                         ),
                       ),
@@ -248,15 +238,13 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
               // SPORTS SECTION
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
+                padding: AppPadding.h20,
                 child: _buildProfileCard(
                   child: Column(
                     crossAxisAlignment:
@@ -268,52 +256,43 @@ class ProfileView extends StatelessWidget {
                         children: [
                           Text(
                             'Sports',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700,
-                              color:
-                                  context.colors.textColor,
+                            style: TextStyles.bold16(
+                              color: context.colors.textColor,
                             ),
                           ),
                           Text(
                             'Level 60',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
+                            style: TextStyles.medium14(
                               color: context
                                   .colors
                                   .textColor
-                                  .withValues(alpha:0.5),
+                                  .withValues(alpha: AppDimens.opacity5),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: AppDimens.h12),
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          10.r,
-                        ),
+                        borderRadius: AppRadius.r10,
                         child: LinearProgressIndicator(
                           value: 0.6,
-                          backgroundColor: Colors.grey
-                              .withValues(alpha:0.2),
+                          backgroundColor: MyColors.grey
+                              .withValues(alpha: AppDimens.opacity2),
                           valueColor:
                               const AlwaysStoppedAnimation<
                                 Color
-                              >(Color(0xFF00BCD4)),
-                          minHeight: 6.h,
+                              >(MyColors.cyan),
+                          minHeight: AppDimens.h6,
                         ),
                       ),
-                      SizedBox(height: 16.h),
+                      SizedBox(height: AppDimens.h16),
                       Text(
                         'Football : Goalkeeper',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w600,
+                        style: TextStyles.semiBold15(
                           color: context.colors.textColor,
                         ),
                       ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: AppDimens.h12),
                       Row(
                         children: [
                           _buildStatItem(
@@ -321,13 +300,13 @@ class ProfileView extends StatelessWidget {
                                 .sports_soccer_outlined,
                             text: '53 Matches',
                           ),
-                          SizedBox(width: 16.w),
+                          SizedBox(width: AppDimens.w16),
                           _buildStatItem(
                             icon:
                                 Icons.emoji_events_outlined,
                             text: '13 Tournament',
                           ),
-                          SizedBox(width: 16.w),
+                          SizedBox(width: AppDimens.w16),
                           _buildStatItem(
                             icon: Icons.sports_outlined,
                             text: '15 Organized',
@@ -339,20 +318,18 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 12.h),
+              SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
               // MY TEAMS SECTION
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
+                padding: AppPadding.h20,
                 child: InkWell(
                   onTap: () {
                     context.push(Routes.myTeamRoute);
                   },
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   child: _buildProfileCard(
                     child: Column(
                       crossAxisAlignment:
@@ -360,23 +337,19 @@ class ProfileView extends StatelessWidget {
                       children: [
                         Text(
                           'My Teams',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w700,
+                          style: TextStyles.bold16(
                             color: context.colors.textColor,
                           ),
                         ),
-                        SizedBox(height: 4.h),
+                        SizedBox(height: AppDimens.h4),
                         Text(
                           'This teams to join the tournaments',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
+                          style: TextStyles.regular12(
                             color: context.colors.textColor
-                                .withValues(alpha:0.5),
+                                .withValues(alpha: AppDimens.opacity5),
                           ),
                         ),
-                        SizedBox(height: 16.h),
+                        SizedBox(height: AppDimens.h16),
                         _buildTeamItem(),
                       ],
                     ),
@@ -384,7 +357,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: AppDimens.h20),
             ],
           ),
         ),
@@ -402,26 +375,19 @@ class ProfileView extends StatelessWidget {
     required Color color,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-        vertical: 6.h,
-      ),
+      padding: AppPadding.h12v6,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: AppRadius.r20,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18.w, color: Colors.white),
-          SizedBox(width: 4.w),
+          Icon(icon, size: AppDimens.iconSize18, color: MyColors.white),
+          SizedBox(width: AppDimens.w4),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
+            style: TextStyles.semiBold14(color: MyColors.white),
           ),
         ],
       ),
@@ -436,27 +402,23 @@ class ProfileView extends StatelessWidget {
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
-        side: const BorderSide(
-          color: Colors.grey,
-          width: 1,
+        side: BorderSide(
+          color: MyColors.grey,
+          width: AppDimens.borderWidth1,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: AppRadius.r8,
         ),
-        padding: EdgeInsets.symmetric(vertical: 12.h),
+        padding: AppPadding.v12,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 20.w, color: Colors.black87),
-          SizedBox(width: 6.w),
+          Icon(icon, size: AppDimens.iconSize20, color: MyColors.black87),
+          SizedBox(width: AppDimens.w6),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
+            style: TextStyles.medium14(color: MyColors.black87),
           ),
         ],
       ),
@@ -468,14 +430,14 @@ class ProfileView extends StatelessWidget {
     required String value,
   }) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.03),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity03),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -485,20 +447,12 @@ class ProfileView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
-              color: Colors.black87,
-            ),
+            style: TextStyles.bold14(color: MyColors.black87),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
           Text(
             value,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.black54,
-            ),
+            style: TextStyles.regular14(color: MyColors.black54),
           ),
         ],
       ),
@@ -508,14 +462,14 @@ class ProfileView extends StatelessWidget {
   Widget _buildProfileCard({required Widget child}) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.03),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity03),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -531,15 +485,11 @@ class ProfileView extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 18.w, color: Colors.black54),
-        SizedBox(width: 4.w),
+        Icon(icon, size: AppDimens.iconSize18, color: MyColors.black54),
+        SizedBox(width: AppDimens.w4),
         Text(
           text,
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: Colors.black54,
-          ),
+          style: TextStyles.medium12(color: MyColors.black54),
         ),
       ],
     );
@@ -549,51 +499,43 @@ class ProfileView extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          radius: 24.r,
+          radius: AppDimens.avatarSize24,
           backgroundImage: AssetImage(ImgAssets.team3),
         ),
-        SizedBox(width: 12.w),
+        SizedBox(width: AppDimens.w12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Team Name',
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.semiBold15(color: MyColors.black87),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppDimens.h2),
               Text(
                 'Football team',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w500,
-                  color: MyColors.greenButton,
-                ),
+                style: TextStyles.medium12(color: MyColors.greenButton),
               ),
             ],
           ),
         ),
         // Overlapping Avatars
         SizedBox(
-          width: 80.w,
-          height: 32.h,
+          width: AppDimens.containerWidth80,
+          height: AppDimens.h32,
           child: Stack(
             children: [
               ...List.generate(3, (index) {
                 return Positioned(
-                  left: index * 20.0.w,
+                  left: index * AppDimens.w20,
                   child: Container(
-                    width: 32.w,
-                    height: 32.h,
+                    width: AppDimens.w32,
+                    height: AppDimens.h32,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Colors.white,
-                        width: 2,
+                        color: MyColors.white,
+                        width: AppDimens.borderWidth2,
                       ),
                       image: DecorationImage(
                         image: AssetImage(
@@ -606,26 +548,22 @@ class ProfileView extends StatelessWidget {
                 );
               }),
               Positioned(
-                left: 60.w,
+                left: AppDimens.w60,
                 child: Container(
-                  width: 32.w,
-                  height: 32.h,
+                  width: AppDimens.w32,
+                  height: AppDimens.h32,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.grey[700],
+                    color: MyColors.grey700,
                     border: Border.all(
-                      color: Colors.white,
-                      width: 2,
+                      color: MyColors.white,
+                      width: AppDimens.borderWidth2,
                     ),
                   ),
                   child: Center(
                     child: Text(
                       '+6',
-                      style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
+                      style: TextStyles.bold10(color: MyColors.white),
                     ),
                   ),
                 ),
@@ -633,11 +571,11 @@ class ProfileView extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(width: 8.w),
+        SizedBox(width: AppDimens.w8),
         Icon(
           Icons.arrow_forward_ios,
-          size: 16.w,
-          color: Colors.black38,
+          size: AppDimens.iconSize16,
+          color: MyColors.black38,
         ),
       ],
     );

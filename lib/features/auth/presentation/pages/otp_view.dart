@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -61,7 +64,7 @@ class _OtpViewState extends State<OtpView> {
         backgroundColor: context.colors.white,
         appBar: AppBar(
           backgroundColor: context.colors.white,
-          elevation: 0,
+          elevation: AppDimens.elevation0,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -71,40 +74,29 @@ class _OtpViewState extends State<OtpView> {
           ),
           title: Text(
             'login'.tr(context),
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-              color: context.colors.black,
-            ),
+            style: TextStyles.semiBold18(color: context.colors.black),
           ),
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 24.h),
+                SizedBox(height: AppDimens.h24),
 
                 // Title
                 Text(
                   'enter_verification_code'.tr(context),
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,
-                    color: context.colors.textColor,
-                  ),
+                  style: TextStyles.bold20(color: context.colors.textColor),
                 ),
 
-                SizedBox(height: 12.h),
+                SizedBox(height: AppDimens.h12),
 
                 // Subtitle
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: MyColors.greyText,
+                    style: TextStyles.regular14(color: MyColors.greyText).copyWith(
                       height: 1.5,
                     ),
                     children: [
@@ -113,16 +105,13 @@ class _OtpViewState extends State<OtpView> {
                       ),
                       TextSpan(
                         text: '+20 ${widget.phoneNumber}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: context.colors.textColor,
-                        ),
+                        style: TextStyles.semiBold14(color: context.colors.textColor),
                       ),
                     ],
                   ),
                 ),
 
-                SizedBox(height: 32.h),
+                SizedBox(height: AppDimens.h32),
 
                 // OTP Input Boxes
                 Row(
@@ -133,7 +122,7 @@ class _OtpViewState extends State<OtpView> {
                   ),
                 ),
 
-                SizedBox(height: 24.h),
+                SizedBox(height: AppDimens.h24),
 
                 // Resend Code
                 BlocBuilder<AuthCubit, AuthState>(
@@ -143,10 +132,7 @@ class _OtpViewState extends State<OtpView> {
                       children: [
                         Text(
                           'didnt_receive_code'.tr(context) + '  ',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: MyColors.greyText,
-                          ),
+                          style: TextStyles.regular14(color: MyColors.greyText),
                         ),
                         GestureDetector(
                           onTap: state.otpCountdown == 0
@@ -156,9 +142,7 @@ class _OtpViewState extends State<OtpView> {
                               : null,
                           child: Text(
                             '${'send_again'.tr(context)} (${state.otpCountdown})',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
+                            style: TextStyles.semiBold14(
                               color: state.otpCountdown == 0
                                   ? MyColors.greenButton
                                   : MyColors.greyText,
@@ -177,7 +161,7 @@ class _OtpViewState extends State<OtpView> {
                   builder: (context, state) {
                     return SizedBox(
                       width: double.infinity,
-                      height: 56.h,
+                      height: AppDimens.buttonHeight56,
                       child: ElevatedButton(
                         onPressed: state.isOtpValid
                             ? () {
@@ -187,21 +171,19 @@ class _OtpViewState extends State<OtpView> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: state.isOtpValid
                               ? MyColors.greenButton
-                              : Colors.grey[300],
+                              : MyColors.grey300,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r),
+                            borderRadius: AppRadius.r12,
                           ),
-                          elevation: 0,
-                          disabledBackgroundColor: Colors.grey[300],
+                          elevation: AppDimens.elevation0,
+                          disabledBackgroundColor: MyColors.grey300,
                         ),
                         child: Text(
                           'confirm'.tr(context),
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
+                          style: TextStyles.semiBold16(
                             color: state.isOtpValid
-                                ? Colors.white
-                                : Colors.grey[500],
+                                ? MyColors.white
+                                : MyColors.grey500,
                           ),
                         ),
                       ),
@@ -209,7 +191,7 @@ class _OtpViewState extends State<OtpView> {
                   },
                 ),
 
-                SizedBox(height: 32.h),
+                SizedBox(height: AppDimens.h32),
               ],
             ),
           ),
@@ -219,14 +201,14 @@ class _OtpViewState extends State<OtpView> {
 
   Widget _buildOtpBox(int index) {
     return Container(
-      width: 70.w,
-      height: 70.h,
+      width: AppDimens.w70,
+      height: AppDimens.h70,
       decoration: BoxDecoration(
         border: Border.all(
           color: MyColors.borderColor,
-          width: 1.5,
+          width: AppDimens.borderWidth2,
         ),
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: AppRadius.r12,
       ),
       child: TextField(
         controller: _controllers[index],
@@ -239,11 +221,7 @@ class _OtpViewState extends State<OtpView> {
           border: InputBorder.none,
           counterText: '',
         ),
-        style: TextStyle(
-          fontSize: 24.sp,
-          fontWeight: FontWeight.w600,
-          color: context.colors.textColor,
-        ),
+        style: TextStyles.semiBold24(color: context.colors.textColor),
       ),
     );
   }

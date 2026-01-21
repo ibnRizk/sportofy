@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class NotificationTile extends StatelessWidget {
   final String userAvatar;
@@ -23,89 +26,69 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 12.h,
-      ),
+      padding: AppPadding.h20v12,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // User Avatar
           CircleAvatar(
-            radius: 30.r,
+            radius: AppDimens.avatarSize30,
             backgroundImage: AssetImage(userAvatar),
             onBackgroundImageError: (exception, stackTrace) {
               // Handle error silently
             },
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Notification Text (Expanded)
           Expanded(
             child: RichText(
               text: TextSpan(
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.black87,
+                style: TextStyles.regular14(color: MyColors.black87).copyWith(
                   height: 1.5,
                 ),
                 children: [
                   // User Name (Bold)
                   TextSpan(
                     text: userName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.bold14(color: MyColors.black87),
                   ),
                   // Message (Regular Grey)
                   TextSpan(
                     text: ' $message',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
-                    ),
+                    style: TextStyles.regular14(color: MyColors.grey700),
                   ),
                   // Time (Blue/Light Blue)
                   TextSpan(
                     text: ' $time',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.lightBlue[700],
-                    ),
+                    style: TextStyles.regular14(color: MyColors.lightBlue400),
                   ),
                 ],
               ),
             ),
           ),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Action Button (Conditional)
           if (actionButtonText != null && onActionTap != null)
             SizedBox(
-              height: 36.h,
+              height: AppDimens.h36,
               child: ElevatedButton(
                 onPressed: onActionTap,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
-                  foregroundColor: Colors.white,
+                  foregroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: AppRadius.r8,
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 8.h,
-                  ),
-                  elevation: 0,
+                  padding: AppPadding.h16v8,
+                  elevation: AppDimens.elevation0,
                   visualDensity: VisualDensity.compact,
                 ),
                 child: Text(
                   actionButtonText!,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyles.semiBold12(),
                 ),
               ),
             ),

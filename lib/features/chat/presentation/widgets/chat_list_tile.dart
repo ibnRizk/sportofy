@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class ChatListTile extends StatelessWidget {
   final String userAvatar;
@@ -40,10 +42,7 @@ class ChatListTile extends StatelessWidget {
             );
           },
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 12.h,
-        ),
+        padding: AppPadding.h20v12,
         child: Row(
           children: [
             // Avatar with Online Indicator
@@ -51,7 +50,7 @@ class ChatListTile extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 CircleAvatar(
-                  radius: 30.r,
+                  radius: AppDimens.avatarSize30,
                   backgroundImage: AssetImage(userAvatar),
                   onBackgroundImageError: (exception, stackTrace) {
                     // Handle error silently
@@ -63,21 +62,21 @@ class ChatListTile extends StatelessWidget {
                     bottom: -2,
                     right: -2,
                     child: Container(
-                      width: 16.w,
-                      height: 16.w,
+                      width: AppDimens.badgeSize16,
+                      height: AppDimens.badgeSize16,
                       decoration: BoxDecoration(
                         color: MyColors.greenButton,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.white,
-                          width: 2.w,
+                          color: MyColors.white,
+                          width: AppDimens.borderWidth2,
                         ),
                       ),
                     ),
                   ),
               ],
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
             // Name and Message (Expanded)
             Expanded(
               child: Column(
@@ -86,30 +85,22 @@ class ChatListTile extends StatelessWidget {
                   // User Name (Bold)
                   Text(
                     userName,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.bold16(color: MyColors.black87),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: AppDimens.h4),
                   // Last Message Preview (Truncated, Grey)
                   Text(
                     lastMessage,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyles.regular14(color: MyColors.grey600),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
             // Timestamp and Unread Badge
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -117,30 +108,22 @@ class ChatListTile extends StatelessWidget {
                 // Timestamp
                 Text(
                   timestamp,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyles.regular12(color: MyColors.grey600),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: AppDimens.h4),
                 // Unread Badge (if unread messages exist)
                 if (unreadCount > 0)
                   Container(
-                    width: 24.w,
-                    height: 24.w,
+                    width: AppDimens.badgeSize24,
+                    height: AppDimens.badgeSize24,
                     decoration: BoxDecoration(
-                      color: Colors.lightBlue[400],
+                      color: MyColors.lightBlue400,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Text(
                         unreadCount.toString(),
-                        style: TextStyle(
-                          fontSize: 11.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: TextStyles.bold11(color: MyColors.white),
                       ),
                     ),
                   ),

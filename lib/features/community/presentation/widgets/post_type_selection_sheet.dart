@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/community/presentation/widgets/help_areas_sheet.dart';
 
 class PostTypeSelectionSheet extends StatelessWidget {
@@ -12,82 +15,68 @@ class PostTypeSelectionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 30.h,
-      ),
+      padding: AppPadding.h20v30,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top30,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Drag Handle
           Container(
-            width: 40.w,
-            height: 4.h,
+            width: AppDimens.w40,
+            height: AppDimens.h4,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2.r),
+              color: MyColors.grey300,
+              borderRadius: AppRadius.r2,
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Title
           Text(
             'Create your post as',
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style: TextStyles.bold18(color: MyColors.black87),
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Illustration
           Container(
-            height: 200.h,
+            height: AppDimens.containerHeight200,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: AppRadius.r12,
             ),
             child: Image.asset(
               ImgAssets.pana,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: Colors.grey[100],
+                  color: MyColors.grey100,
                   child: Icon(
                     Icons.person,
-                    size: 80.sp,
-                    color: Colors.grey[400],
+                    size: AppDimens.iconSize50,
+                    color: MyColors.grey400,
                   ),
                 );
               },
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Description
           Text(
             'You can create your post as a project to request experience and help others or as a usual post to interact with other players and get to know them more',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[600],
-              height: 1.5,
-            ),
+            style: TextStyles.regular14(color: MyColors.grey600).copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: 30.h),
+          SizedBox(height: AppDimens.h30),
 
           // Action Buttons
           Row(
@@ -102,25 +91,21 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(
                       color: MyColors.greenButton,
-                      width: 1.5,
+                      width: AppDimens.borderWidth1,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: AppRadius.r12,
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    padding: AppPadding.v14,
                   ),
                   child: Text(
                     'As Project',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.greenButton,
-                    ),
+                    style: TextStyles.semiBold16(color: MyColors.greenButton),
                   ),
                 ),
               ),
 
-              SizedBox(width: 16.w),
+              SizedBox(width: AppDimens.w16),
 
               // As Usual Button (Elevated)
               Expanded(
@@ -131,26 +116,23 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
-                    foregroundColor: Colors.white,
+                    foregroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: AppRadius.r12,
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    padding: AppPadding.v14,
                     elevation: 0,
                   ),
                   child: Text(
                     'As usual',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyles.semiBold16(),
                   ),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
         ],
       ),
     );
@@ -174,11 +156,9 @@ class PostTypeSelectionSheet extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyColors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
+        borderRadius: AppRadius.top30,
       ),
       builder: (context) => const HelpAreasSheet(),
     );

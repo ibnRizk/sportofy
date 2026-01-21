@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class DetectLocationView extends StatelessWidget {
   const DetectLocationView({super.key});
@@ -9,25 +12,21 @@ class DetectLocationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: Icon(
             Icons.arrow_back,
-            size: 24.sp,
-            color: Colors.black,
+            size: AppDimens.iconSize24,
+            color: MyColors.black,
           ),
         ),
         title: Text(
           'Detect location',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -40,7 +39,7 @@ class DetectLocationView extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              color: Colors.grey[200],
+              color: MyColors.grey200,
               // Optional: Add a map pattern image if available
               // decoration: BoxDecoration(
               //   image: DecorationImage(
@@ -52,10 +51,7 @@ class DetectLocationView extends StatelessWidget {
                 child: Text(
                   'Map Placeholder\n(Google Maps will be integrated here)',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyles.regular14(color: MyColors.grey600),
                 ),
               ),
             ),
@@ -66,47 +62,41 @@ class DetectLocationView extends StatelessWidget {
           // ═══════════════════════════════════════════════
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              padding: AppPadding.h20v20,
               child: Container(
-                height: 50.h,
+                height: AppDimens.buttonHeight50,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
+                  color: MyColors.white,
+                  borderRadius: AppRadius.r8,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha:0.12),
-                      blurRadius: 10,
+                      color: MyColors.black.withValues(alpha: AppDimens.opacity12),
+                      blurRadius: AppDimens.elevation8,
                       offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Row(
                   children: [
-                    SizedBox(width: 16.w),
+                    SizedBox(width: AppDimens.w16),
                     Icon(
                       Icons.search,
-                      size: 24.sp,
-                      color: Colors.grey[600],
+                      size: AppDimens.iconSize24,
+                      color: MyColors.grey600,
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: AppDimens.w12),
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Search',
-                          hintStyle: TextStyle(
-                            fontSize: 16.sp,
-                            color: Colors.grey[500],
-                          ),
+                          hintStyle: TextStyles.regular16(color: MyColors.grey500),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.zero,
+                          contentPadding: AppPadding.zero,
                         ),
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Colors.black87,
-                        ),
+                        style: TextStyles.regular16(color: MyColors.black87),
                       ),
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: AppDimens.w16),
                   ],
                 ),
               ),
@@ -119,7 +109,7 @@ class DetectLocationView extends StatelessWidget {
           Center(
             child: Icon(
               Icons.location_on,
-              size: 50.sp,
+              size: AppDimens.iconSize50,
               color: MyColors.greenButton,
             ),
           ),
@@ -138,17 +128,17 @@ class DetectLocationView extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 20.w, bottom: 20.h),
+                    padding: AppPadding.right20.copyWith(bottom: AppDimens.h20),
                     child: Container(
-                      width: 50.w,
-                      height: 50.h,
+                      width: AppDimens.containerHeight50,
+                      height: AppDimens.containerHeight50,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: MyColors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha:0.12),
-                            blurRadius: 10,
+                            color: MyColors.black.withValues(alpha: AppDimens.opacity12),
+                            blurRadius: AppDimens.elevation8,
                             offset: const Offset(0, 2),
                           ),
                         ],
@@ -159,10 +149,10 @@ class DetectLocationView extends StatelessWidget {
                         },
                         icon: Icon(
                           Icons.my_location,
-                          size: 24.sp,
-                          color: Colors.black87,
+                          size: AppDimens.iconSize24,
+                          color: MyColors.black87,
                         ),
-                        padding: EdgeInsets.zero,
+                        padding: AppPadding.zero,
                       ),
                     ),
                   ),
@@ -170,14 +160,10 @@ class DetectLocationView extends StatelessWidget {
 
                 // Select Button (Full width)
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: 20.w,
-                    right: 20.w,
-                    bottom: 20.h,
-                  ),
+                  padding: AppPadding.h20.copyWith(bottom: AppDimens.h20),
                   child: SizedBox(
                     width: double.infinity,
-                    height: 50.h,
+                    height: AppDimens.buttonHeight50,
                     child: ElevatedButton(
                       onPressed: () {
                         // Return selected location and close
@@ -187,17 +173,13 @@ class DetectLocationView extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MyColors.greenButton,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: AppRadius.r10,
                         ),
-                        elevation: 0,
+                        elevation: AppDimens.elevation0,
                       ),
                       child: Text(
                         'Select the location',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: TextStyles.bold16(color: MyColors.white),
                       ),
                     ),
                   ),

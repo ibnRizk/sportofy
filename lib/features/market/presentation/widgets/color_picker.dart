@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class ColorPicker extends StatelessWidget {
   final List<String> colors;
@@ -21,10 +23,8 @@ class ColorPicker extends StatelessWidget {
       children: [
         Text(
           'Choose the color',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+          style: TextStyles.bold16(
+            color: context.colors.textColor,
           ),
         ),
         SizedBox(height: 16.h),
@@ -46,7 +46,7 @@ class ColorPicker extends StatelessWidget {
                         border: Border.all(
                           color: isSelected
                               ? MyColors.greenButton
-                              : Colors.grey[300]!,
+                              : MyColors.grey300,
                           width: isSelected ? 3 : 1,
                         ),
                         boxShadow: isSelected
@@ -63,7 +63,7 @@ class ColorPicker extends StatelessWidget {
                       child: isSelected
                           ? Icon(
                               Icons.check,
-                              color: Colors.white,
+                              color: MyColors.white,
                               size: 20.sp,
                             )
                           : null,
@@ -71,10 +71,8 @@ class ColorPicker extends StatelessWidget {
                     SizedBox(height: 8.h),
                     Text(
                       color,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
+                      style: TextStyles.medium12(
+                        color: context.colors.textColor,
                       ),
                     ),
                   ],
@@ -90,17 +88,17 @@ class ColorPicker extends StatelessWidget {
   Color _getColorFromString(String colorName) {
     switch (colorName.toLowerCase()) {
       case 'green':
-        return Colors.green;
+        return MyColors.green;
       case 'white':
-        return Colors.white;
+        return MyColors.white;
       case 'black':
-        return Colors.black;
+        return MyColors.black;
       case 'red':
-        return Colors.red;
+        return MyColors.red;
       case 'blue':
-        return Colors.blue;
+        return MyColors.blue;
       default:
-        return Colors.grey;
+        return MyColors.grey;
     }
   }
 }

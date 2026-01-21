@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
@@ -22,15 +25,15 @@ class NearbyMatchCard extends StatelessWidget {
         // Navigate to matches screen in bottom navigation bar (index 4)
         context.read<HomeCubit>().changeBottomNavIndex(4);
       },
-      borderRadius: BorderRadius.circular(12.r),
+      borderRadius: AppRadius.r12,
       child: Container(
-        padding: EdgeInsets.all(16.w),
+        padding: AppPadding.p16,
         decoration: BoxDecoration(
           color: context.colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.05),
+              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -43,13 +46,13 @@ class NearbyMatchCard extends StatelessWidget {
           // SECTION 1: LEFT SIDE (ORGANIZER)
           // ═══════════════════════════════════════════════
           SizedBox(
-            width: 100.w,
+            width: AppDimens.containerWidth100,
             child: Column(
               children: [
                 // Organizer Avatar
                 Container(
-                  width: 40.w,
-                  height: 40.h,
+                  width: AppDimens.avatarSize40,
+                  height: AppDimens.avatarSize40,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -61,34 +64,30 @@ class NearbyMatchCard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
 
                 // Organizer Name
                 Text(
                   match.organizerName,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w600,
+                  style: TextStyles.semiBold13(
                     color: context.colors.textColor,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
 
-                SizedBox(height: 4.h),
+                SizedBox(height: AppDimens.h4),
 
                 // Organizer Label
                 Text(
                   'organizer'.tr(context),
-                  style: TextStyle(
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w500,
+                  style: TextStyles.medium11(
                     color: MyColors.greenButton,
                   ),
                 ),
 
-                SizedBox(height: 12.h),
+                SizedBox(height: AppDimens.h12),
 
                 // Overlapping Participant Avatars
                 _buildParticipantStack(),
@@ -96,7 +95,7 @@ class NearbyMatchCard extends StatelessWidget {
             ),
           ),
 
-          SizedBox(width: 16.w),
+          SizedBox(width: AppDimens.w16),
 
           // ═══════════════════════════════════════════════
           // SECTION 2: RIGHT SIDE (DETAILS)
@@ -113,33 +112,30 @@ class NearbyMatchCard extends StatelessWidget {
                   children: [
                     Text(
                       '${match.currentPlayers} ${'out_of'.tr(context)} ${match.totalPlayers}',
-                      style: TextStyle(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w600,
+                      style: TextStyles.semiBold10(
                         color: MyColors.greyText,
                       ),
                     ),
                   ],
                 ),
 
-                SizedBox(height: 6.h),
+                SizedBox(height: AppDimens.h6),
 
                 // Progress Bar
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                   child: LinearProgressIndicator(
                     value: progressPercentage,
                     backgroundColor: MyColors.greyText
-                        .withValues(alpha:0.2),
-                    valueColor:
-                        const AlwaysStoppedAnimation<Color>(
-                          MyColors.greenButton,
-                        ),
-                    minHeight: 8.h,
+                        .withValues(alpha: AppDimens.opacity2),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                      MyColors.greenButton,
+                    ),
+                    minHeight: AppDimens.h8,
                   ),
                 ),
 
-                SizedBox(height: 16.h),
+                SizedBox(height: AppDimens.h16),
 
                 // ─────────────────────────────────────────
                 // B. INFO & ACTION SECTION (THE SPLIT)
@@ -159,75 +155,58 @@ class NearbyMatchCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.stadium_outlined,
-                                size: 16.w,
+                                size: AppDimens.iconSize16,
                                 color: MyColors.greyText,
                               ),
-                              SizedBox(width: 6.w),
+                              SizedBox(width: AppDimens.w6),
                               Expanded(
                                 child: Text(
                                   match.stadiumName,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight:
-                                        FontWeight.w400,
-                                    color: context
-                                        .colors
-                                        .textColor,
+                                  style: TextStyles.regular12(
+                                    color: context.colors.textColor,
                                   ),
                                   maxLines: 1,
-                                  overflow:
-                                      TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
                           ),
 
-                          SizedBox(height: 6.h),
+                          SizedBox(height: AppDimens.h6),
 
                           // Date Row
                           Row(
                             children: [
                               Icon(
-                                Icons
-                                    .calendar_today_outlined,
-                                size: 16.w,
+                                Icons.calendar_today_outlined,
+                                size: AppDimens.iconSize16,
                                 color: MyColors.greyText,
                               ),
-                              SizedBox(width: 6.w),
+                              SizedBox(width: AppDimens.w6),
                               Text(
                                 match.date,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight:
-                                      FontWeight.w400,
-                                  color: context
-                                      .colors
-                                      .textColor,
+                                style: TextStyles.regular12(
+                                  color: context.colors.textColor,
                                 ),
                               ),
                             ],
                           ),
 
-                          SizedBox(height: 6.h),
+                          SizedBox(height: AppDimens.h6),
 
                           // Time Row
                           Row(
                             children: [
                               Icon(
                                 Icons.access_time_outlined,
-                                size: 16.w,
+                                size: AppDimens.iconSize16,
                                 color: MyColors.greyText,
                               ),
-                              SizedBox(width: 6.w),
+                              SizedBox(width: AppDimens.w6),
                               Text(
                                 match.time,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight:
-                                      FontWeight.w400,
-                                  color: context
-                                      .colors
-                                      .textColor,
+                                style: TextStyles.regular12(
+                                  color: context.colors.textColor,
                                 ),
                               ),
                             ],
@@ -236,74 +215,53 @@ class NearbyMatchCard extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(width: 12.w),
+                    SizedBox(width: AppDimens.w12),
 
                     // ─── RIGHT: PRICE & BUTTON COLUMN ───
                     Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // Price
                         Text(
                           '${match.price.toStringAsFixed(2)} ${'egp'.tr(context)}',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w700,
+                          style: TextStyles.bold18(
                             color: MyColors.greenButton,
-                            height: 1.2,
-                          ),
+                          ).copyWith(height: 1.2),
                         ),
 
-                        SizedBox(height: 8.h),
+                        SizedBox(height: AppDimens.h8),
 
                         // Join Button
                         OutlinedButton(
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(
-                              color: context
-                                  .colors
-                                  .textColor
-                                  .withValues(alpha:0.3),
-                              width: 1,
+                              color: context.colors.textColor
+                                  .withValues(alpha: AppDimens.opacity3),
+                              width: AppDimens.borderWidth1,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(
-                                    8.r,
-                                  ),
+                              borderRadius: AppRadius.r8,
                             ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16.w,
-                              vertical: 8.h,
-                            ),
+                            padding: AppPadding.h16v8,
                             minimumSize: Size(0, 0),
-                            tapTargetSize:
-                                MaterialTapTargetSize
-                                    .shrinkWrap,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 'join_now'.tr(context),
-                                style: TextStyle(
-                                  fontSize: 11.sp,
-                                  fontWeight:
-                                      FontWeight.w500,
-                                  color: context
-                                      .colors
-                                      .textColor,
+                                style: TextStyles.medium11(
+                                  color: context.colors.textColor,
                                 ),
                               ),
-                              SizedBox(width: 4.w),
+                              SizedBox(width: AppDimens.w4),
                               Icon(
                                 Icons.arrow_forward,
-                                size: 12.w,
-                                color: context
-                                    .colors
-                                    .textColor,
+                                size: AppDimens.iconSize12,
+                                color: context.colors.textColor,
                               ),
                             ],
                           ),
@@ -336,22 +294,22 @@ class NearbyMatchCard extends StatelessWidget {
         : 0;
 
     return SizedBox(
-      height: 32.h,
+      height: AppDimens.avatarSize32,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           // Show visible avatars
           ...List.generate(visibleAvatars, (index) {
             return Positioned(
-              left: index * 20.0.w,
+              left: index * AppDimens.w20,
               child: Container(
-                width: 32.w,
-                height: 32.h,
+                width: AppDimens.avatarSize32,
+                height: AppDimens.avatarSize32,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white,
-                    width: 2,
+                    color: MyColors.white,
+                    width: AppDimens.borderWidth2,
                   ),
                   image: DecorationImage(
                     image: AssetImage(
@@ -367,25 +325,23 @@ class NearbyMatchCard extends StatelessWidget {
           // Show count badge if there are more participants
           if (remainingCount > 0)
             Positioned(
-              left: visibleAvatars * 20.0.w,
+              left: visibleAvatars * AppDimens.w20,
               child: Container(
-                width: 32.w,
-                height: 32.h,
+                width: AppDimens.avatarSize32,
+                height: AppDimens.avatarSize32,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.grey[700],
+                  color: MyColors.grey800,
                   border: Border.all(
-                    color: Colors.white,
-                    width: 2,
+                    color: MyColors.white,
+                    width: AppDimens.borderWidth2,
                   ),
                 ),
                 child: Center(
                   child: Text(
                     '+$remainingCount',
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                    style: TextStyles.bold10(
+                      color: MyColors.white,
                     ),
                   ),
                 ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/payment/presentation/widgets/sharing_cost_sheet.dart';
 import 'package:sportify_app/features/payment/presentation/views/wallet_phone_number_view.dart';
@@ -29,67 +32,63 @@ class _ReservationViewState extends State<ReservationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
         title: const Text('Reservation'),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         iconTheme: const IconThemeData(
-          color: Colors.black87,
+          color: MyColors.black87,
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.w),
+        padding: AppPadding.p20,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Stadium Card
             _buildStadiumCard(),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
 
             // Reserved Time Card
             _buildReservedTimeCard(),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Payment Methods Section
             Text(
               'Payment methods',
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold18(color: MyColors.black87),
             ),
 
-            SizedBox(height: 16.h),
+            SizedBox(height: AppDimens.h16),
 
             // Payment Methods List
             _buildPaymentMethodsCard(),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Voucher Section
             _buildVoucherSection(),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Payment Summary
             _buildPaymentSummary(),
 
             SizedBox(
-              height: 100.h,
+              height: AppDimens.h100,
             ), // Space for fixed button
           ],
         ),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.w),
+          padding: AppPadding.p20,
           child: SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: () {
                 // Capture root navigator context before any navigation
@@ -114,11 +113,9 @@ class _ReservationViewState extends State<ReservationView> {
                   showModalBottomSheet(
                     context: rootContext,
                     isScrollControlled: false,
-                    backgroundColor: Colors.white,
+                    backgroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30.r),
-                      ),
+                      borderRadius: AppRadius.top30,
                     ),
                     builder: (context) =>
                         const PaymentSuccessSheet(),
@@ -127,18 +124,14 @@ class _ReservationViewState extends State<ReservationView> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
-                foregroundColor: Colors.white,
+                foregroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                 ),
               ),
               child: Text(
                 'Confirm',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: TextStyles.bold16(color: MyColors.white),
               ),
             ),
           ),
@@ -150,19 +143,19 @@ class _ReservationViewState extends State<ReservationView> {
   // Stadium Card
   Widget _buildStadiumCard() {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+          color: MyColors.grey200,
+          width: AppDimens.borderWidth1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity1),
+            spreadRadius: AppDimens.borderWidth1,
+            blurRadius: AppDimens.elevation4,
             offset: const Offset(0, 2),
           ),
         ],
@@ -171,27 +164,27 @@ class _ReservationViewState extends State<ReservationView> {
         children: [
           // Stadium Image
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: AppRadius.r8,
             child: Image.asset(
               ImgAssets.lightYard,
-              width: 80.w,
-              height: 80.w,
+              width: AppDimens.containerWidth80,
+              height: AppDimens.containerWidth80,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 80.w,
-                  height: 80.w,
-                  color: Colors.grey[200],
+                  width: AppDimens.containerWidth80,
+                  height: AppDimens.containerWidth80,
+                  color: MyColors.grey200,
                   child: Icon(
                     Icons.image,
-                    color: Colors.grey[400],
+                    color: MyColors.grey400,
                   ),
                 );
               },
             ),
           ),
 
-          SizedBox(width: 16.w),
+          SizedBox(width: AppDimens.w16),
 
           // Stadium Info
           Expanded(
@@ -200,59 +193,41 @@ class _ReservationViewState extends State<ReservationView> {
               children: [
                 Text(
                   'Stadium name',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold16(color: MyColors.black87),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
                 Row(
                   children: [
                     Icon(
                       Icons.location_on,
-                      size: 16.sp,
-                      color: Colors.grey[600],
+                      size: AppDimens.iconSize16,
+                      color: MyColors.grey600,
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: AppDimens.w4),
                     Text(
                       'Arab Elmaadi',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.regular14(color: MyColors.grey600),
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: AppDimens.h8),
                 Row(
                   children: [
                     Text(
                       '5 X 5',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.medium14(color: MyColors.black87),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
-                      ),
+                      padding: AppPadding.h8,
                       child: VerticalDivider(
-                        width: 1,
-                        thickness: 1,
-                        color: Colors.grey[300],
+                        width: AppDimens.borderWidth1,
+                        thickness: AppDimens.dividerThickness1,
+                        color: MyColors.grey300,
                       ),
                     ),
                     Text(
                       'Indoor',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.medium14(color: MyColors.black87),
                     ),
                   ],
                 ),
@@ -267,13 +242,13 @@ class _ReservationViewState extends State<ReservationView> {
   // Reserved Time Card
   Widget _buildReservedTimeCard() {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.grey50,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+          color: MyColors.grey200,
+          width: AppDimens.borderWidth1,
         ),
       ),
       child: Column(
@@ -284,11 +259,7 @@ class _ReservationViewState extends State<ReservationView> {
             children: [
               Text(
                 'Reserved time',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
               const Spacer(),
               TextButton(
@@ -297,64 +268,44 @@ class _ReservationViewState extends State<ReservationView> {
                 },
                 child: Text(
                   'Edit',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: MyColors.greenButton,
-                  ),
+                  style: TextStyles.semiBold14(color: MyColors.greenButton),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Time Details
           Row(
             children: [
               Text(
                 'Monday',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium14(color: MyColors.black87),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8.w,
-                ),
+                padding: AppPadding.h8,
                 child: VerticalDivider(
-                  width: 1,
-                  thickness: 1,
-                  color: Colors.grey[300],
+                  width: AppDimens.borderWidth1,
+                  thickness: AppDimens.dividerThickness1,
+                  color: MyColors.grey300,
                 ),
               ),
               Text(
                 '10 July 2023',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium14(color: MyColors.black87),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8.w,
-                ),
+                padding: AppPadding.h8,
                 child: VerticalDivider(
-                  width: 1,
-                  thickness: 1,
-                  color: Colors.grey[300],
+                  width: AppDimens.borderWidth1,
+                  thickness: AppDimens.dividerThickness1,
+                  color: MyColors.grey300,
                 ),
               ),
               Text(
                 '4 PM - 6 PM',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium14(color: MyColors.black87),
               ),
             ],
           ),
@@ -367,17 +318,17 @@ class _ReservationViewState extends State<ReservationView> {
   Widget _buildPaymentMethodsCard() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+          color: MyColors.grey200,
+          width: AppDimens.borderWidth1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity1),
+            spreadRadius: AppDimens.borderWidth1,
+            blurRadius: AppDimens.elevation4,
             offset: const Offset(0, 2),
           ),
         ],
@@ -397,7 +348,7 @@ class _ReservationViewState extends State<ReservationView> {
             },
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           // Vodafone Cash
           _PaymentMethodTile(
@@ -411,7 +362,7 @@ class _ReservationViewState extends State<ReservationView> {
             },
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           // Debit / Credit Card
           _PaymentMethodTile(
@@ -425,7 +376,7 @@ class _ReservationViewState extends State<ReservationView> {
             },
           ),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
           // Cash Payment
           _PaymentMethodTile(
@@ -441,7 +392,7 @@ class _ReservationViewState extends State<ReservationView> {
             },
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Sharing the Booking Cost Card
           InkWell(
@@ -449,29 +400,24 @@ class _ReservationViewState extends State<ReservationView> {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
-                backgroundColor: Colors.transparent,
+                backgroundColor: MyColors.transparent,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25.r),
-                  ),
+                  borderRadius: AppRadius.top25,
                 ),
                 builder: (context) =>
                     const SharingCostSheet(),
               );
             },
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: AppRadius.r12,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 14.h,
-              ),
+              padding: AppPadding.h16v14,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: MyColors.white,
                 border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
+                  color: MyColors.grey300,
+                  width: AppDimens.borderWidth1,
                 ),
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: AppRadius.r12,
               ),
               child: Row(
                 children: [
@@ -479,11 +425,7 @@ class _ReservationViewState extends State<ReservationView> {
                   Expanded(
                     child: Text(
                       'Sharing the booking cost',
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.medium15(color: MyColors.black87),
                     ),
                   ),
 
@@ -493,22 +435,22 @@ class _ReservationViewState extends State<ReservationView> {
                     children: [
                       Image.asset(
                         ImgAssets.sharingSubscription,
-                        width: 28.w,
-                        height: 28.w,
+                        width: AppDimens.w28,
+                        height: AppDimens.w28,
                         errorBuilder:
                             (context, error, stackTrace) {
                               return Icon(
                                 Icons.handshake,
                                 color: MyColors.greenButton,
-                                size: 24.sp,
+                                size: AppDimens.iconSize24,
                               );
                             },
                       ),
-                      SizedBox(width: 8.w),
+                      SizedBox(width: AppDimens.w8),
                       Icon(
                         Icons.chevron_right,
-                        color: Colors.grey[600],
-                        size: 20.sp,
+                        color: MyColors.grey600,
+                        size: AppDimens.iconSize20,
                       ),
                     ],
                   ),
@@ -528,21 +470,17 @@ class _ReservationViewState extends State<ReservationView> {
       children: [
         Text(
           'Add Voucher',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+          style: TextStyles.bold16(color: MyColors.black87),
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: AppDimens.h12),
         TextFormField(
           controller: _voucherController,
           decoration: InputDecoration(
             hintText: 'Enter voucher code',
             prefixIcon: Icon(
               Icons.card_giftcard,
-              color: Colors.grey[600],
-              size: 24.sp,
+              color: MyColors.grey600,
+              size: AppDimens.iconSize24,
             ),
             suffixIcon: TextButton(
               onPressed: () {
@@ -550,27 +488,23 @@ class _ReservationViewState extends State<ReservationView> {
               },
               child: Text(
                 'Submit',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.greenButton,
-                ),
+                style: TextStyles.bold14(color: MyColors.greenButton),
               ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: AppRadius.r12,
               borderSide: BorderSide(
-                color: Colors.grey[300]!,
+                color: MyColors.grey300,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: AppRadius.r12,
               borderSide: BorderSide(
-                color: Colors.grey[300]!,
+                color: MyColors.grey300,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: AppRadius.r12,
               borderSide: BorderSide(
                 color: MyColors.greenButton,
               ),
@@ -584,19 +518,19 @@ class _ReservationViewState extends State<ReservationView> {
   // Payment Summary
   Widget _buildPaymentSummary() {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
+          color: MyColors.grey200,
+          width: AppDimens.borderWidth1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
+            color: MyColors.grey.withValues(alpha: AppDimens.opacity1),
+            spreadRadius: AppDimens.borderWidth1,
+            blurRadius: AppDimens.elevation4,
             offset: const Offset(0, 2),
           ),
         ],
@@ -611,24 +545,16 @@ class _ReservationViewState extends State<ReservationView> {
             children: [
               Text(
                 'Total Cost',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium16(color: MyColors.black87),
               ),
               Text(
                 '100 EGP',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
             ],
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Your Cost
           Row(
@@ -637,28 +563,20 @@ class _ReservationViewState extends State<ReservationView> {
             children: [
               Text(
                 'Your Cost',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium16(color: MyColors.black87),
               ),
               Text(
                 '100 EGP',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
             ],
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
-          Divider(height: 1, color: Colors.grey[200]),
+          Divider(height: AppDimens.dividerThickness1, color: MyColors.grey200),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           // Sharing Cost Row
           InkWell(
@@ -669,32 +587,28 @@ class _ReservationViewState extends State<ReservationView> {
               children: [
                 Image.asset(
                   ImgAssets.sharingSubscription,
-                  width: 40.w,
-                  height: 40.w,
+                  width: AppDimens.containerHeight40,
+                  height: AppDimens.containerHeight40,
                   errorBuilder:
                       (context, error, stackTrace) {
                         return Icon(
                           Icons.people,
-                          size: 40.sp,
+                          size: AppDimens.iconSize40,
                           color: MyColors.greenButton,
                         );
                       },
                 ),
-                SizedBox(width: 12.w),
+                SizedBox(width: AppDimens.w12),
                 Expanded(
                   child: Text(
                     'Sharing the booking cost',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.medium16(color: MyColors.black87),
                   ),
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  size: 16.sp,
-                  color: Colors.grey[600],
+                  size: AppDimens.iconSize16,
+                  color: MyColors.grey600,
                 ),
               ],
             ),
@@ -728,37 +642,32 @@ class _PaymentMethodTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 16.h,
-        ),
+        padding: AppPadding.h16v16,
         child: Row(
           children: [
             // Icon
             Image.asset(
               iconPath,
-              width: 40.w,
-              height: 40.w,
+              width: AppDimens.containerHeight40,
+              height: AppDimens.containerHeight40,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 40.w,
-                  height: 40.w,
+                  width: AppDimens.containerHeight40,
+                  height: AppDimens.containerHeight40,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    color: MyColors.grey200,
+                    borderRadius: AppRadius.r8,
                   ),
                   child: Icon(
                     Icons.payment,
-                    size: 24.sp,
-                    color: Colors.grey[400],
+                    size: AppDimens.iconSize24,
+                    color: MyColors.grey400,
                   ),
                 );
               },
             ),
 
-            SizedBox(width: 16.w),
+            SizedBox(width: AppDimens.w16),
 
             // Title and Subtitle
             Expanded(
@@ -768,33 +677,23 @@ class _PaymentMethodTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyles.medium16(color: MyColors.black87),
                   ),
                   if (subtitle != null) ...[
-                    SizedBox(height: 4.h),
+                    SizedBox(height: AppDimens.h4),
                     Text(
                       subtitle!,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyles.regular12(color: MyColors.grey600),
                     ),
                   ],
                   if (price != null) ...[
-                    SizedBox(height: 4.h),
+                    SizedBox(height: AppDimens.h4),
                     Text(
                       price!,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
+                      style: TextStyles.semiBold14(
                         color: isSelected
                             ? MyColors.greenButton
-                            : Colors.grey[600],
+                            : MyColors.grey600,
                       ),
                     ),
                   ],
@@ -802,32 +701,32 @@ class _PaymentMethodTile extends StatelessWidget {
               ),
             ),
 
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
 
             // Radio Button
             Container(
-              width: 24.w,
-              height: 24.w,
+              width: AppDimens.w24,
+              height: AppDimens.w24,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[400]!,
-                  width: 2,
+                      : MyColors.grey400,
+                  width: AppDimens.borderWidth2,
                 ),
                 color: isSelected
                     ? MyColors.greenButton
-                    : Colors.transparent,
+                    : MyColors.transparent,
               ),
               child: isSelected
                   ? Center(
                       child: Container(
-                        width: 10.w,
-                        height: 10.w,
+                        width: AppDimens.w10,
+                        height: AppDimens.w10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: MyColors.white,
                         ),
                       ),
                     )

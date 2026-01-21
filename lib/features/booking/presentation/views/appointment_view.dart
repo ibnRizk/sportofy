@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/booking/presentation/views/appointment_grid_view.dart';
 import 'package:sportify_app/features/booking/presentation/widgets/booking_type_sheet.dart';
 import 'package:sportify_app/features/booking/presentation/widgets/audience_sheet.dart';
@@ -37,17 +40,17 @@ class _AppointmentViewState extends State<AppointmentView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
         title: const Text('Appointment'),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         iconTheme: const IconThemeData(
-          color: Colors.black87,
+          color: MyColors.black87,
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20.w),
+            padding: AppPadding.right20,
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
@@ -61,15 +64,12 @@ class _AppointmentViewState extends State<AppointmentView> {
               style: OutlinedButton.styleFrom(
                 side: BorderSide(
                   color: MyColors.greenButton,
-                  width: 1,
+                  width: AppDimens.borderWidth1,
                 ),
                 foregroundColor: MyColors.greenButton,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 6.h,
-                ),
+                padding: AppPadding.h12v6,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: AppRadius.r8,
                 ),
               ),
               child: Row(
@@ -77,15 +77,12 @@ class _AppointmentViewState extends State<AppointmentView> {
                 children: [
                   Text(
                     'By Week',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyles.medium12(),
                   ),
-                  SizedBox(width: 4.w),
+                  SizedBox(width: AppDimens.w4),
                   Icon(
                     Icons.arrow_forward_ios,
-                    size: 12.sp,
+                    size: AppDimens.iconSize12,
                   ),
                 ],
               ),
@@ -94,7 +91,7 @@ class _AppointmentViewState extends State<AppointmentView> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.w),
+        padding: AppPadding.p20,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -108,7 +105,7 @@ class _AppointmentViewState extends State<AppointmentView> {
               },
             ),
 
-            SizedBox(height: 32.h),
+            SizedBox(height: AppDimens.h32),
 
             // Time Slots Section
             _TimeSlotsSection(
@@ -132,7 +129,7 @@ class _AppointmentViewState extends State<AppointmentView> {
               },
             ),
 
-            SizedBox(height: 32.h),
+            SizedBox(height: AppDimens.h32),
 
             // Team Member Selection
             _TeamSelector(
@@ -149,7 +146,7 @@ class _AppointmentViewState extends State<AppointmentView> {
 
             // Find Member Form (Conditional)
             if (_isFindMemberMode) ...[
-              SizedBox(height: 16.h),
+              SizedBox(height: AppDimens.h16),
               _FindMemberForm(
                 playersPresent: _playersPresent,
                 playersRequired: _playersRequired,
@@ -186,21 +183,19 @@ class _AppointmentViewState extends State<AppointmentView> {
               ),
             ],
 
-            SizedBox(height: 40.h),
+            SizedBox(height: AppDimens.h40),
 
             // Booking Button
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: AppDimens.buttonHeight50,
               child: ElevatedButton(
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    backgroundColor: Colors.white,
+                    backgroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30.r),
-                      ),
+                      borderRadius: AppRadius.top30,
                     ),
                     builder: (context) =>
                         const BookingTypeSheet(),
@@ -208,24 +203,19 @@ class _AppointmentViewState extends State<AppointmentView> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
-                  foregroundColor: Colors.white,
+                  foregroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      10.r,
-                    ),
+                    borderRadius: AppRadius.r10,
                   ),
                 ),
                 child: Text(
                   'Booking now',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyles.semiBold16(),
                 ),
               ),
             ),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
           ],
         ),
       ),
@@ -266,41 +256,27 @@ class _BookingCalendar extends StatelessWidget {
         // Header
         Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 16.h,
-          ),
+          padding: AppPadding.h20v16,
           decoration: BoxDecoration(
-            color: const Color(0xFF3688A6),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(12.r),
-            ),
+            color: MyColors.main,
+            borderRadius: AppRadius.top12,
           ),
           child: Text(
             'July 2023',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
+            style: TextStyles.semiBold16(color: MyColors.white),
           ),
         ),
 
         // Days List
         Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 12.w,
-            vertical: 16.h,
-          ),
+          padding: AppPadding.h12v16,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(12.r),
-            ),
+            color: MyColors.white,
+            borderRadius: AppRadius.bottom12,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 8,
+                color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+                blurRadius: AppDimens.elevation8,
                 offset: const Offset(0, 2),
               ),
             ],
@@ -318,23 +294,19 @@ class _BookingCalendar extends StatelessWidget {
                     children: [
                       Text(
                         _dates[index]['day']!,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
+                        style: TextStyles.medium12(
                           color: selectedIndex == index
                               ? MyColors.greenButton
-                              : Colors.grey[700],
+                              : MyColors.grey700,
                         ),
                       ),
-                      SizedBox(height: 4.h),
+                      SizedBox(height: AppDimens.h4),
                       Text(
                         _dates[index]['date']!,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
+                        style: TextStyles.semiBold16(
                           color: selectedIndex == index
                               ? MyColors.greenButton
-                              : Colors.black87,
+                              : MyColors.black87,
                         ),
                       ),
                     ],
@@ -376,21 +348,14 @@ class _TimeSlotsSectionState
         // Header
         Text(
           'Available Time',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
-          ),
+          style: TextStyles.semiBold18(color: MyColors.black87),
         ),
-        SizedBox(height: 4.h),
+        SizedBox(height: AppDimens.h4),
         Text(
           'you can only pick consecutive hours',
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: Colors.grey[600],
-          ),
+          style: TextStyles.regular12(color: MyColors.grey600),
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: AppDimens.h16),
 
         // Legend and Toggle
         Row(
@@ -404,35 +369,29 @@ class _TimeSlotsSectionState
                   children: [
                     Icon(
                       Icons.access_time,
-                      size: 16.sp,
-                      color: Colors.amber[700],
+                      size: AppDimens.iconSize16,
+                      color: MyColors.amber700,
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: AppDimens.w4),
                     Text(
                       'Pending hours',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.grey[700],
-                      ),
+                      style: TextStyles.regular12(color: MyColors.grey700),
                     ),
                   ],
                 ),
-                SizedBox(width: 16.w),
+                SizedBox(width: AppDimens.w16),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.refresh,
-                      size: 16.sp,
-                      color: Colors.blue,
+                      size: AppDimens.iconSize16,
+                      color: MyColors.blue,
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: AppDimens.w4),
                     Text(
                       'Resell hours',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.grey[700],
-                      ),
+                      style: TextStyles.regular12(color: MyColors.grey700),
                     ),
                   ],
                 ),
@@ -452,12 +411,12 @@ class _TimeSlotsSectionState
           ],
         ),
 
-        SizedBox(height: 16.h),
+        SizedBox(height: AppDimens.h16),
 
         // Time Slots Grid
         Wrap(
-          spacing: 12.w,
-          runSpacing: 12.h,
+          spacing: AppDimens.w12,
+          runSpacing: AppDimens.h12,
           children: List.generate(_timeSlots.length, (
             index,
           ) {
@@ -550,52 +509,47 @@ class _TimeChip extends StatelessWidget {
         state == TimeSlotState.pending;
 
     return SizedBox(
-      width: 100.w, // Fixed width for 3 columns
+      width: AppDimens.w100, // Fixed width for 3 columns
       child: Stack(
         children: [
           // Main Chip
           GestureDetector(
             onTap: isDisabled ? null : onTap,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.w,
-                vertical: 12.h,
-              ),
+              padding: AppPadding.h12v12,
               decoration: BoxDecoration(
                 color: isSelected
                     ? MyColors.greenButton.withValues(
-                        alpha: 0.1,
+                        alpha: AppDimens.opacity1,
                       )
                     : (isDisabled
-                          ? Colors.grey[100]
+                          ? MyColors.grey100
                           : (isPending
-                                ? Colors.amber[50]
-                                : Colors.white)),
-                borderRadius: BorderRadius.circular(8.r),
+                                ? MyColors.amber50
+                                : MyColors.white)),
+                borderRadius: AppRadius.r8,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
                       : (isDisabled
-                            ? Colors.grey[300]!
+                            ? MyColors.grey300
                             : (isPending
-                                  ? Colors.amber[700]!
-                                  : Colors.grey[300]!)),
-                  width: 1,
+                                  ? MyColors.amber700
+                                  : MyColors.grey300)),
+                  width: AppDimens.borderWidth1,
                 ),
               ),
               child: Center(
                 child: Text(
                   timeRange,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
+                  style: TextStyles.medium12(
                     color: isSelected
                         ? MyColors.greenButton
                         : (isDisabled
-                              ? Colors.grey[400]
+                              ? MyColors.grey400
                               : (isPending
-                                    ? Colors.amber[700]
-                                    : Colors.black87)),
+                                    ? MyColors.amber700
+                                    : MyColors.black87)),
                   ),
                 ),
               ),
@@ -605,22 +559,22 @@ class _TimeChip extends StatelessWidget {
           // Badge (Top Right Corner)
           if (hasBadge && !isDisabled)
             Positioned(
-              top: 4.h,
-              right: 4.w,
+              top: AppDimens.h4,
+              right: AppDimens.w4,
               child: Container(
-                padding: EdgeInsets.all(4.w),
+                padding: AppPadding.p4,
                 decoration: BoxDecoration(
                   color: state == TimeSlotState.resell
-                      ? Colors.blue
-                      : Colors.amber[700],
+                      ? MyColors.blue
+                      : MyColors.amber700,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   state == TimeSlotState.resell
                       ? Icons.refresh
                       : Icons.access_time,
-                  size: 10.sp,
-                  color: Colors.white,
+                  size: AppDimens.iconSize10,
+                  color: MyColors.white,
                 ),
               ),
             ),
@@ -647,13 +601,9 @@ class _TeamSelector extends StatelessWidget {
       children: [
         Text(
           'Team Member',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
-          ),
+          style: TextStyles.semiBold18(color: MyColors.black87),
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: AppDimens.h16),
 
         // Full Team Option
         _TeamOption(
@@ -663,7 +613,7 @@ class _TeamSelector extends StatelessWidget {
           onTap: () => onOptionSelected(0),
         ),
 
-        SizedBox(height: 12.h),
+        SizedBox(height: AppDimens.h12),
 
         // Find Member Option
         _TeamOption(
@@ -699,64 +649,60 @@ class _TeamOption extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(16.w),
+        padding: AppPadding.p16,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          color: MyColors.white,
+          borderRadius: AppRadius.r12,
           border: Border.all(
             color: isSelected
                 ? MyColors.greenButton
-                : Colors.grey[300]!,
-            width: 1,
+                : MyColors.grey300,
+            width: AppDimens.borderWidth1,
           ),
         ),
         child: Row(
           children: [
             // Radio Button
             Container(
-              width: 24.w,
-              height: 24.w,
+              width: AppDimens.w24,
+              height: AppDimens.w24,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[400]!,
-                  width: 2,
+                      : MyColors.grey400,
+                  width: AppDimens.borderWidth2,
                 ),
                 color: isSelected
                     ? MyColors.greenButton
-                    : Colors.transparent,
+                    : MyColors.transparent,
               ),
               child: isSelected
                   ? Icon(
                       Icons.check,
-                      size: 16.sp,
-                      color: Colors.white,
+                      size: AppDimens.iconSize16,
+                      color: MyColors.white,
                     )
                   : null,
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
 
             // Icon
             Icon(
               icon,
               color: isSelected
                   ? MyColors.greenButton
-                  : Colors.grey[600],
-              size: 20.sp,
+                  : MyColors.grey600,
+              size: AppDimens.iconSize20,
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
 
             // Label
             Expanded(
               child: Text(
                 label,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium16(color: MyColors.black87),
               ),
             ),
 
@@ -764,8 +710,8 @@ class _TeamOption extends StatelessWidget {
             if (hasDropdown)
               Icon(
                 Icons.arrow_drop_down,
-                color: Colors.grey[600],
-                size: 24.sp,
+                color: MyColors.grey600,
+                size: AppDimens.iconSize24,
               ),
           ],
         ),
@@ -801,13 +747,13 @@ class _FindMemberForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         border: Border.all(
-          color: Colors.grey[300]!,
-          width: 1,
+          color: MyColors.grey300,
+          width: AppDimens.borderWidth1,
         ),
       ),
       child: Column(
@@ -827,7 +773,7 @@ class _FindMemberForm extends StatelessWidget {
             },
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
 
           _CounterRow(
             label: 'The number of players required',
@@ -844,18 +790,14 @@ class _FindMemberForm extends StatelessWidget {
             },
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Show match to Button (Opens Audience Sheet)
           Row(
             children: [
               Text(
                 'Show match to',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.medium14(color: MyColors.black87),
               ),
               const Spacer(),
               InkWell(
@@ -863,12 +805,9 @@ class _FindMemberForm extends StatelessWidget {
                   final result =
                       await showModalBottomSheet<String>(
                         context: context,
-                        backgroundColor: Colors.white,
+                        backgroundColor: MyColors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(
-                                top: Radius.circular(30.r),
-                              ),
+                          borderRadius: AppRadius.top30,
                         ),
                         builder: (context) => AudienceSheet(
                           selected: showMatchTo,
@@ -880,41 +819,32 @@ class _FindMemberForm extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 8.h,
-                  ),
+                  padding: AppPadding.h12v8,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: MyColors.greenButton,
-                      width: 1,
+                      width: AppDimens.borderWidth1,
                     ),
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    borderRadius: AppRadius.r8,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.person,
-                        size: 16.sp,
+                        size: AppDimens.iconSize16,
                         color: MyColors.greenButton,
                       ),
-                      SizedBox(width: 6.w),
+                      SizedBox(width: AppDimens.w6),
                       Text(
                         showMatchTo,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.greenButton,
-                        ),
+                        style: TextStyles.medium14(color: MyColors.greenButton),
                       ),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: AppDimens.w4),
                       Icon(
                         Icons.arrow_drop_down,
                         color: MyColors.greenButton,
-                        size: 20.sp,
+                        size: AppDimens.iconSize20,
                       ),
                     ],
                   ),
@@ -923,23 +853,19 @@ class _FindMemberForm extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Group Age Section
           Text(
             'Group Age',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
+            style: TextStyles.semiBold14(color: MyColors.black87),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Age Groups Checkboxes (2-column grid)
           Wrap(
-            spacing: 12.w,
-            runSpacing: 12.h,
+            spacing: AppDimens.w12,
+            runSpacing: AppDimens.h12,
             children:
                 [
                   'Less than 25',
@@ -952,16 +878,12 @@ class _FindMemberForm extends StatelessWidget {
                   return SizedBox(
                     width:
                         (MediaQuery.of(context).size.width -
-                            72.w) /
-                        2,
+                            AppDimens.w72) /
+                        AppDimens.w2,
                     child: CheckboxListTile(
                       title: Text(
                         group,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black87,
-                        ),
+                        style: TextStyles.regular14(color: MyColors.black87),
                       ),
                       value: isSelected,
                       onChanged: (value) {
@@ -977,47 +899,40 @@ class _FindMemberForm extends StatelessWidget {
                 }).toList(),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Special Note Field
           Text(
             'Special Note',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
+            style: TextStyles.semiBold14(color: MyColors.black87),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
           TextFormField(
             controller: specialNoteController,
             maxLines: 4,
             decoration: InputDecoration(
               hintText:
                   'EX: This game is for training only for age players between...',
-              hintStyle: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.grey[500],
-              ),
+              hintStyle: TextStyles.regular14(color: MyColors.grey500),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: AppRadius.r8,
                 borderSide: BorderSide(
-                  color: Colors.grey[300]!,
+                  color: MyColors.grey300,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: AppRadius.r8,
                 borderSide: BorderSide(
-                  color: Colors.grey[300]!,
+                  color: MyColors.grey300,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: AppRadius.r8,
                 borderSide: BorderSide(
                   color: MyColors.greenButton,
                 ),
               ),
-              contentPadding: EdgeInsets.all(12.w),
+              contentPadding: AppPadding.p12,
             ),
           ),
         ],
@@ -1047,11 +962,7 @@ class _CounterRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
+            style: TextStyles.medium14(color: MyColors.black87),
           ),
         ),
         Row(
@@ -1062,29 +973,25 @@ class _CounterRow extends StatelessWidget {
               icon: Icon(
                 Icons.remove_circle_outline,
                 color: MyColors.greenButton,
-                size: 24.sp,
+                size: AppDimens.iconSize24,
               ),
               onPressed: onDecrement,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
             // Value
             Text(
               value.toString(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
+              style: TextStyles.semiBold16(color: MyColors.black87),
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: AppDimens.w12),
             // Increment Button
             IconButton(
               icon: Icon(
                 Icons.add_circle_outline,
                 color: MyColors.greenButton,
-                size: 24.sp,
+                size: AppDimens.iconSize24,
               ),
               onPressed: onIncrement,
               padding: EdgeInsets.zero,

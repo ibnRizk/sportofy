@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
 class TournamentCard extends StatelessWidget {
@@ -21,15 +25,15 @@ class TournamentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(16.w),
+      margin: AppPadding.bottom16,
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.05),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -43,58 +47,46 @@ class TournamentCard extends StatelessWidget {
             children: [
               Text(
                 'Your Team',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold14(color: MyColors.black87),
               ),
               _buildStatusBadge(),
             ],
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Info Row: Team Avatar + Name + Trailing Info
           Row(
             children: [
               // Team Avatar
               CircleAvatar(
-                radius: 22.r,
+                radius: AppDimens.avatarSize22,
                 backgroundImage: AssetImage(ImgAssets.team3),
               ),
 
-              SizedBox(width: 12.w),
+              SizedBox(width: AppDimens.w12),
 
               // Team Name
               Expanded(
                 child: Text(
                   teamName,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold15(color: MyColors.black87),
                 ),
               ),
 
               // Trailing Info
               Text(
                 trailingInfo,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: _getTrailingColor(),
-                ),
+                style: TextStyles.medium13(color: _getTrailingColor()),
               ),
             ],
           ),
 
           // Divider
           Divider(
-            height: 24.h,
-            thickness: 1,
-            color: Colors.grey[200],
+            height: AppDimens.h24,
+            thickness: AppDimens.dividerThickness1,
+            color: MyColors.grey200,
           ),
 
           // Footer Row: Joined Date + Disjoin Button
@@ -103,11 +95,7 @@ class TournamentCard extends StatelessWidget {
             children: [
               Text(
                 'Joined at $joinedDate',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyles.regular13(color: MyColors.grey600),
               ),
               _buildDisjoinButton(),
             ],
@@ -123,38 +111,31 @@ class TournamentCard extends StatelessWidget {
 
     switch (status.toLowerCase()) {
       case 'joined':
-        bgColor = const Color(0xFFE3F2FD); // Light Blue
-        textColor = const Color(0xFF1976D2); // Blue
+        bgColor = MyColors.lightBlue100; // Light Blue
+        textColor = MyColors.blue700; // Blue
         break;
       case 'finished':
-        bgColor = const Color(0xFFE8F5E9); // Light Green
-        textColor = const Color(0xFF4CAF50); // Green
+        bgColor = MyColors.green.withValues(alpha: AppDimens.opacity1); // Light Green
+        textColor = MyColors.green; // Green
         break;
       case 'pending':
-        bgColor = const Color(0xFFFFF3E0); // Light Orange
-        textColor = const Color(0xFFFF9800); // Orange
+        bgColor = MyColors.orange.withValues(alpha: AppDimens.opacity1); // Light Orange
+        textColor = MyColors.orange; // Orange
         break;
       default:
-        bgColor = Colors.grey[200]!;
-        textColor = Colors.grey[700]!;
+        bgColor = MyColors.grey200;
+        textColor = MyColors.grey700;
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-        vertical: 6.h,
-      ),
+      padding: AppPadding.h12v6,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(4.r),
+        borderRadius: AppRadius.r4,
       ),
       child: Text(
         status,
-        style: TextStyle(
-          fontSize: 13.sp,
-          fontWeight: FontWeight.w500,
-          color: textColor,
-        ),
+        style: TextStyles.medium13(color: textColor),
       ),
     );
   }
@@ -162,9 +143,9 @@ class TournamentCard extends StatelessWidget {
   Color _getTrailingColor() {
     // "First place" should be black/bold, others grey
     if (trailingInfo.toLowerCase().contains('first place')) {
-      return Colors.black87;
+      return MyColors.black87;
     }
-    return Colors.grey[600]!;
+    return MyColors.grey600;
   }
 
   Widget _buildDisjoinButton() {
@@ -176,25 +157,20 @@ class TournamentCard extends StatelessWidget {
           : null,
       style: OutlinedButton.styleFrom(
         foregroundColor:
-            isDisjoinEnabled ? Colors.black87 : Colors.grey[400],
+            isDisjoinEnabled ? MyColors.black87 : MyColors.grey400,
         side: BorderSide(
-          color: isDisjoinEnabled ? Colors.black87 : Colors.grey[300]!,
-          width: 1.5,
+          color: isDisjoinEnabled ? MyColors.black87 : MyColors.grey300,
+          width: AppDimens.borderWidth2,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: AppRadius.r8,
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 10.h,
-        ),
+        padding: AppPadding.h24v10,
       ),
       child: Text(
         'Disjoin',
-        style: TextStyle(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
-          color: isDisjoinEnabled ? Colors.black87 : Colors.grey[400],
+        style: TextStyles.medium14(
+          color: isDisjoinEnabled ? MyColors.black87 : MyColors.grey400,
         ),
       ),
     );

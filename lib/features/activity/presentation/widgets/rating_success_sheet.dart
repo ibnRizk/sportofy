@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 
 class RatingSuccessSheet extends StatelessWidget {
@@ -10,63 +13,58 @@ class RatingSuccessSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+      padding: AppPadding.h30v30,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top25,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Drag Handle
           Container(
-            width: 40.w,
-            height: 4.h,
+            width: AppDimens.w40,
+            height: AppDimens.h4,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2.r),
+              color: MyColors.grey300,
+              borderRadius: AppRadius.r2,
             ),
           ),
 
-          SizedBox(height: 40.h),
+          SizedBox(height: AppDimens.h40),
 
           // Success Icon (Green Checkmark in Circle)
           Container(
-            width: 100.w,
-            height: 100.h,
+            width: AppDimens.containerHeight100,
+            height: AppDimens.containerHeight100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: MyColors.greenButton,
             ),
             child: Icon(
               Icons.check,
-              size: 60.sp,
-              color: Colors.white,
+              size: AppDimens.iconSize60,
+              color: MyColors.white,
             ),
           ),
 
-          SizedBox(height: 32.h),
+          SizedBox(height: AppDimens.h32),
 
           // Success Message
           Text(
             'Your request has been sent successfully',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
+            style: TextStyles.medium16(color: MyColors.black87).copyWith(
               height: 1.4,
             ),
           ),
 
-          SizedBox(height: 32.h),
+          SizedBox(height: AppDimens.h32),
 
           // Back to Home Button
           SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: () {
                 // Close the success sheet
@@ -77,22 +75,18 @@ class RatingSuccessSheet extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                 ),
-                elevation: 0,
+                elevation: AppDimens.elevation0,
               ),
               child: Text(
                 'Back to home',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: TextStyles.bold16(color: MyColors.white),
               ),
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
         ],
       ),
     );

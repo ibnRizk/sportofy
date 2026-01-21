@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/orders/presentation/widgets/order_card.dart';
 
 class MyOrdersView extends StatefulWidget {
@@ -46,25 +49,21 @@ class _MyOrdersViewState extends State<MyOrdersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.w,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'My Orders',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -73,7 +72,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
           // Filter Chips
           _buildFilterChips(),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Order List
           Expanded(
@@ -86,12 +85,12 @@ class _MyOrdersViewState extends State<MyOrdersView> {
 
   Widget _buildFilterChips() {
     return SizedBox(
-      height: 50.h,
+      height: AppDimens.buttonHeight50,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        padding: AppPadding.h20,
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
+        separatorBuilder: (context, index) => SizedBox(width: AppDimens.w10),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -101,26 +100,21 @@ class _MyOrdersViewState extends State<MyOrdersView> {
               });
             },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 10.h,
-              ),
+              padding: AppPadding.h20v10,
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : Colors.white,
+                color: isSelected ? MyColors.greenButton : MyColors.white,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[300]!,
+                      : MyColors.grey300,
                 ),
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: AppRadius.r20,
               ),
               child: Center(
                 child: Text(
                   _filters[index],
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: isSelected ? Colors.white : Colors.grey[600],
+                  style: TextStyles.medium14(
+                    color: isSelected ? MyColors.white : MyColors.grey600,
                   ),
                 ),
               ),
@@ -133,7 +127,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
 
   Widget _buildOrderList() {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: AppPadding.h20,
       itemCount: _orders.length,
       itemBuilder: (context, index) {
         final order = _orders[index];

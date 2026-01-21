@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/widgets/app_image.dart';
 import 'package:sportify_app/injection_container.dart';
@@ -78,10 +81,7 @@ class _OnboardingScreenState
           children: [
             // Language Selector (Top Right)
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 16.h,
-              ),
+              padding: AppPadding.h20v16,
               child: Align(
                 alignment: Alignment.topRight,
                 child: Row(
@@ -89,17 +89,15 @@ class _OnboardingScreenState
                   children: [
                     Text(
                       isArabic ? 'عربي' : 'English',
-                      style: TextStyle(
-                        fontSize: 14.sp,
+                      style: TextStyles.medium14(
                         color: MyColors.greenButton,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width: 4.w),
+                    SizedBox(width: AppDimens.w4),
                     Icon(
                       Icons.language,
                       color: MyColors.greenButton,
-                      size: 20.w,
+                      size: AppDimens.iconSize20,
                     ),
                   ],
                 ),
@@ -124,55 +122,47 @@ class _OnboardingScreenState
             // Page Indicators
             _buildPageIndicators(pages.length),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Login Button
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
+              padding: AppPadding.h20,
               child: SizedBox(
                 width: double.infinity,
-                height: 56.h,
+                height: AppDimens.buttonHeight56,
                 child: ElevatedButton(
                   onPressed: _navigateToLogin,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.r,
-                      ),
+                      borderRadius: AppRadius.r12,
                     ),
-                    elevation: 0,
+                    elevation: AppDimens.elevation0,
                   ),
                   child: Text(
                     'login'.tr(context),
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                    style: TextStyles.semiBold16(
+                      color: MyColors.white,
                     ),
                   ),
                 ),
               ),
             ),
 
-            SizedBox(height: 16.h),
+            SizedBox(height: AppDimens.h16),
 
             // Skip Button
             TextButton(
               onPressed: _skip,
               child: Text(
                 'skip'.tr(context),
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                style: TextStyles.medium16(
                   color: MyColors.greenButton,
                 ),
               ),
             ),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
           ],
         ),
       ),
@@ -189,42 +179,36 @@ class _OnboardingScreenState
         // Illustration Image
         AppImage.asset(
           imageAsset: data.image,
-          width: 320.w,
-          height: 280.h,
+          width: AppDimens.w320,
+          height: AppDimens.h280,
           fit: BoxFit.contain,
         ),
 
-        SizedBox(height: 40.h),
+        SizedBox(height: AppDimens.h40),
 
         // Title
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
+          padding: AppPadding.h40,
           child: Text(
             data.titleKey.tr(context),
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w700,
+            style: TextStyles.bold24(
               color: context.colors.textColor,
-              height: 1.3,
-            ),
+            ).copyWith(height: 1.3),
           ),
         ),
 
-        SizedBox(height: 16.h),
+        SizedBox(height: AppDimens.h16),
 
         // Description
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
+          padding: AppPadding.h40,
           child: Text(
             data.descriptionKey.tr(context),
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
+            style: TextStyles.regular14(
               color: MyColors.greyText,
-              height: 1.5,
-            ),
+            ).copyWith(height: 1.5),
           ),
         ),
       ],
@@ -244,14 +228,16 @@ class _OnboardingScreenState
   Widget _buildIndicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      margin: EdgeInsets.symmetric(horizontal: 4.w),
-      width: isActive ? 32.w : 8.w,
-      height: 8.h,
+      margin: AppPadding.h4,
+      width: isActive ? AppDimens.w32 : AppDimens.w8,
+      height: AppDimens.h8,
       decoration: BoxDecoration(
         color: isActive
             ? MyColors.greenButton
-            : MyColors.greyText.withValues(alpha:0.3),
-        borderRadius: BorderRadius.circular(4.r),
+            : MyColors.greyText.withValues(
+                alpha: AppDimens.opacity3,
+              ),
+        borderRadius: AppRadius.r4,
       ),
     );
   }

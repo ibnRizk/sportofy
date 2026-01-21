@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class AttachmentPanel extends StatelessWidget {
   final VoidCallback? onAttachmentTap;
@@ -18,16 +21,13 @@ class AttachmentPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 16.h,
-      ),
+      padding: AppPadding.h20v16,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyColors.white,
         border: Border(
           top: BorderSide(
-            color: Colors.grey[300]!,
-            width: 1,
+            color: MyColors.grey300,
+            width: AppDimens.borderWidth1,
           ),
         ),
       ),
@@ -71,41 +71,33 @@ class AttachmentPanel extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 56.w,
-            height: 56.w,
+            width: AppDimens.avatarSize56,
+            height: AppDimens.avatarSize56,
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: MyColors.grey100,
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.grey[300]!,
-                width: 1,
+                color: MyColors.grey300,
+                width: AppDimens.borderWidth1,
               ),
             ),
             child: Center(
               child: isGif
                   ? Text(
                       'GIF',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.bold12(color: MyColors.black87),
                     )
                   : Icon(
                       icon,
-                      size: 24.sp,
-                      color: Colors.black87,
+                      size: AppDimens.iconSize24,
+                      color: MyColors.black87,
                     ),
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.black87,
-            ),
+            style: TextStyles.regular12(color: MyColors.black87),
           ),
         ],
       ),

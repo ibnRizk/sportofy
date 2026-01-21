@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class HomeCategoryCard extends StatelessWidget {
@@ -19,9 +23,9 @@ class HomeCategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 140.h,
+        height: AppDimens.cardHeight140,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: AppRadius.r16,
           image: DecorationImage(
             image: AssetImage(image),
             fit: BoxFit.cover,
@@ -29,25 +33,23 @@ class HomeCategoryCard extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: AppRadius.r16,
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.transparent,
-                Colors.black.withValues(alpha: 0.7),
+                MyColors.transparent,
+                MyColors.black.withValues(alpha: AppDimens.opacity7),
               ],
             ),
           ),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.all(12.w),
+              padding: AppPadding.p12,
               child: Text(
                 title,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w700,
+                style: TextStyles.bold14(
                   color: context.colors.white,
                 ),
               ),

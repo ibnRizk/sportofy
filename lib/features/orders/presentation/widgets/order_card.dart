@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class OrderCard extends StatelessWidget {
   final String orderId;
@@ -23,15 +27,15 @@ class OrderCard extends StatelessWidget {
         context.push('/order-details');
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 16.h),
-        padding: EdgeInsets.all(16.w),
+        margin: AppPadding.bottom16,
+        padding: AppPadding.p16,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          color: MyColors.white,
+          borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.05),
-              blurRadius: 8,
+              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+              blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
           ],
@@ -46,42 +50,30 @@ class OrderCard extends StatelessWidget {
               children: [
                 Text(
                   'Order ID : $orderId',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold14(color: MyColors.black87),
                 ),
                 _buildStatusBadge(),
               ],
             ),
 
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
 
             // Info Section
             Text(
               'Order date: $orderDate',
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
-              ),
+              style: TextStyles.regular13(color: MyColors.grey600),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: AppDimens.h4),
             Text(
               'Received date: $receivedDate',
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
-              ),
+              style: TextStyles.regular13(color: MyColors.grey600),
             ),
 
             // Divider
             Divider(
-              height: 24.h,
-              thickness: 1,
-              color: Colors.grey[200],
+              height: AppDimens.h24,
+              thickness: AppDimens.dividerThickness1,
+              color: MyColors.grey200,
             ),
 
             // Footer Action Button
@@ -101,42 +93,35 @@ class OrderCard extends StatelessWidget {
 
     switch (status.toLowerCase()) {
       case 'ordered':
-        bgColor = const Color(0xFFE3F2FD); // Light Blue
-        textColor = const Color(0xFF1976D2); // Blue
+        bgColor = MyColors.lightBlue100; // Light Blue
+        textColor = MyColors.blue700; // Blue
         break;
       case 'canceled':
-        bgColor = const Color(0xFFFFEBEE); // Light Red
-        textColor = const Color(0xFFD32F2F); // Red
+        bgColor = MyColors.red100; // Light Red
+        textColor = MyColors.red700; // Red
         break;
       case 'shipped':
-        bgColor = const Color(0xFFFFF3E0); // Light Orange
-        textColor = const Color(0xFFFF9800); // Orange
+        bgColor = MyColors.orange.withValues(alpha: AppDimens.opacity1); // Light Orange
+        textColor = MyColors.orange; // Orange
         break;
       case 'delivered':
-        bgColor = const Color(0xFFE8F5E9); // Light Green
-        textColor = const Color(0xFF4CAF50); // Green
+        bgColor = MyColors.green.withValues(alpha: AppDimens.opacity1); // Light Green
+        textColor = MyColors.green; // Green
         break;
       default:
-        bgColor = Colors.grey[200]!;
-        textColor = Colors.grey[700]!;
+        bgColor = MyColors.grey200;
+        textColor = MyColors.grey700;
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-        vertical: 6.h,
-      ),
+      padding: AppPadding.h12v6,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(4.r),
+        borderRadius: AppRadius.r4,
       ),
       child: Text(
         status,
-        style: TextStyle(
-          fontSize: 13.sp,
-          fontWeight: FontWeight.w500,
-          color: textColor,
-        ),
+        style: TextStyles.medium13(color: textColor),
       ),
     );
   }
@@ -151,23 +136,23 @@ class OrderCard extends StatelessWidget {
 
     if (status.toLowerCase() == 'ordered') {
       buttonText = 'Cancel';
-      borderColor = const Color(0xFFD32F2F); // Red
-      textColor = const Color(0xFFD32F2F);
+      borderColor = MyColors.red700; // Red
+      textColor = MyColors.red700;
     } else if (status.toLowerCase() == 'shipped') {
       buttonText = 'Cancel';
-      borderColor = Colors.grey[300]!;
-      textColor = Colors.grey[400]!;
+      borderColor = MyColors.grey300;
+      textColor = MyColors.grey400;
       isDisabled = true;
     } else if (status.toLowerCase() == 'canceled' ||
         status.toLowerCase() == 'delivered') {
       buttonText = 'Reorder';
-      borderColor = const Color(0xFF4CAF50); // Green
-      textColor = const Color(0xFF4CAF50);
+      borderColor = MyColors.green; // Green
+      textColor = MyColors.green;
       icon = Icons.refresh;
     } else {
       buttonText = 'Action';
-      borderColor = Colors.grey[300]!;
-      textColor = Colors.grey[700]!;
+      borderColor = MyColors.grey300;
+      textColor = MyColors.grey700;
     }
 
     return OutlinedButton(
@@ -178,28 +163,22 @@ class OrderCard extends StatelessWidget {
             },
       style: OutlinedButton.styleFrom(
         foregroundColor: textColor,
-        side: BorderSide(color: borderColor, width: 1.5),
+        side: BorderSide(color: borderColor, width: AppDimens.borderWidth2),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: AppRadius.r8,
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 10.h,
-        ),
+        padding: AppPadding.h24v10,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: 18.w, color: textColor),
-            SizedBox(width: 6.w),
+            Icon(icon, size: AppDimens.iconSize18, color: textColor),
+            SizedBox(width: AppDimens.w6),
           ],
           Text(
             buttonText,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: TextStyles.medium14(),
           ),
         ],
       ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class LocationPermissionDialog extends StatelessWidget {
@@ -18,43 +21,40 @@ class LocationPermissionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: AppRadius.r16,
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.w),
+        padding: AppPadding.p24,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Location Icon
             Container(
-              width: 60.w,
-              height: 60.h,
+              width: AppDimens.containerWidth60,
+              height: AppDimens.containerHeight60,
               decoration: BoxDecoration(
-                color: MyColors.greenButton.withValues(alpha:0.1),
+                color: MyColors.greenButton.withValues(alpha: AppDimens.opacity1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.location_on,
                 color: MyColors.greenButton,
-                size: 32.w,
+                size: AppDimens.iconSize32,
               ),
             ),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: AppDimens.h20),
 
             // Title
             Text(
               'allow_location'.tr(context),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
+              style: TextStyles.semiBold16(
                 color: context.colors.textColor,
-                height: 1.5,
-              ),
+              ).copyWith(height: 1.5),
             ),
 
-            SizedBox(height: 32.h),
+            SizedBox(height: AppDimens.h32),
 
             // Allow Button
             SizedBox(
@@ -62,20 +62,18 @@ class LocationPermissionDialog extends StatelessWidget {
               child: TextButton(
                 onPressed: onAllow,
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  padding: AppPadding.v12,
                 ),
                 child: Text(
                   'allow_while_using'.tr(context),
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                  style: TextStyles.semiBold16(
                     color: MyColors.greenButton,
                   ),
                 ),
               ),
             ),
 
-            SizedBox(height: 8.h),
+            SizedBox(height: AppDimens.h8),
 
             // Deny Button
             SizedBox(
@@ -83,13 +81,11 @@ class LocationPermissionDialog extends StatelessWidget {
               child: TextButton(
                 onPressed: onDeny,
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  padding: AppPadding.v12,
                 ),
                 child: Text(
                   'deny'.tr(context),
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                  style: TextStyles.semiBold16(
                     color: MyColors.greenButton,
                   ),
                 ),

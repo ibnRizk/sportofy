@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/injection_container.dart';
 
@@ -77,12 +80,12 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.h,
+      height: AppDimens.containerHeight200,
       child: Stack(
         children: [
           // PageView
           SizedBox(
-            height: 180.h,
+            height: AppDimens.containerHeight180,
             child: PageView.builder(
               controller: _pageController,
               itemCount: _matches.length,
@@ -103,7 +106,7 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
           ),
           // Page Indicator Overlay
           Positioned(
-            bottom: 20.h,
+            bottom: AppDimens.h20,
             left: 0,
             right: 0,
             child: _buildPageIndicator(),
@@ -120,14 +123,14 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
         _matches.length,
         (index) => AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          margin: EdgeInsets.symmetric(horizontal: 3.w),
-          width: _currentPage == index ? 20.w : 6.w,
-          height: 6.h,
+          margin: EdgeInsets.symmetric(horizontal: AppDimens.w3),
+          width: _currentPage == index ? AppDimens.w20 : AppDimens.w6,
+          height: AppDimens.h6,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3.r),
+            borderRadius: AppRadius.r3,
             color: _currentPage == index
-                ? Colors.white
-                : Colors.white.withValues(alpha:0.5),
+                ? MyColors.white
+                : MyColors.white.withValues(alpha: AppDimens.opacity5),
           ),
         ),
       ),
@@ -145,14 +148,14 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
     required String penaltyInfo,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
-      padding: EdgeInsets.all(16.w),
+      margin: EdgeInsets.symmetric(horizontal: AppDimens.w16),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
         color: context.colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: AppRadius.r16,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.05),
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -162,13 +165,11 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
         children: [
           Text(
             '$title  $date',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
+            style: TextStyles.semiBold14(
               color: context.colors.textColor,
             ),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: AppDimens.h16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -182,9 +183,7 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
               // Score
               Text(
                 '$team1Score  -  $team2Score',
-                style: TextStyle(
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.w700,
+                style: TextStyles.bold32(
                   color: context.colors.textColor,
                 ),
               ),
@@ -198,12 +197,10 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
             ],
           ),
           if (penaltyInfo.isNotEmpty) ...[
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
             Text(
               penaltyInfo,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
+              style: TextStyles.medium12(
                 color: MyColors.greyText,
               ),
             ),
@@ -221,8 +218,8 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
     return Column(
       children: [
         Container(
-          width: 60.w,
-          height: 60.h,
+          width: AppDimens.containerWidth60,
+          height: AppDimens.containerHeight60,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
@@ -231,12 +228,10 @@ class _MatchResultSliderState extends State<MatchResultSlider> {
             ),
           ),
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: AppDimens.h8),
         Text(
           teamName,
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w600,
+          style: TextStyles.semiBold12(
             color: context.colors.textColor,
           ),
         ),

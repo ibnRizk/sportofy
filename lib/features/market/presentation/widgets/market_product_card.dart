@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class MarketProductCard extends StatelessWidget {
   final String imageUrl;
@@ -34,12 +38,12 @@ class MarketProductCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          color: context.colors.white,
+          borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
+              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+              blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
           ],
@@ -51,38 +55,47 @@ class MarketProductCard extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(12.r),
-                  ),
+                  borderRadius: AppRadius.top12,
                   child: Image.asset(
                     imageUrl,
                     width: double.infinity,
-                    height: 150.h,
+                    height: AppDimens.containerHeight150,
                     fit: BoxFit.cover,
-                    cacheWidth: (150.h * MediaQuery.of(context).devicePixelRatio).toInt(),
-                    cacheHeight: (150.h * MediaQuery.of(context).devicePixelRatio).toInt(),
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        width: double.infinity,
-                        height: 150.h,
-                        color: Colors.grey[200],
-                        child: Icon(
-                          Icons.image,
-                          size: 40.sp,
-                          color: Colors.grey[400],
-                        ),
-                      );
-                    },
+                    cacheWidth:
+                        (AppDimens.containerHeight150 *
+                                MediaQuery.of(
+                                  context,
+                                ).devicePixelRatio)
+                            .toInt(),
+                    cacheHeight:
+                        (AppDimens.containerHeight150 *
+                                MediaQuery.of(
+                                  context,
+                                ).devicePixelRatio)
+                            .toInt(),
+                    errorBuilder:
+                        (context, error, stackTrace) {
+                          return Container(
+                            width: double.infinity,
+                            height: AppDimens.containerHeight150,
+                            color: MyColors.grey200,
+                            child: Icon(
+                              Icons.image,
+                              size: AppDimens.iconSize40,
+                              color: MyColors.grey400,
+                            ),
+                          );
+                        },
                   ),
                 ),
                 // Quantity Selector Overlay
                 Positioned(
-                  bottom: 8.h,
+                  bottom: AppDimens.h8,
                   left: 0,
                   right: 0,
                   child: Center(
                     child: isInCart
-                        ? _buildQuantitySelector()
+                        ? _buildQuantitySelector(context)
                         : _buildAddButton(),
                   ),
                 ),
@@ -91,27 +104,24 @@ class MarketProductCard extends StatelessWidget {
 
             // Product Info
             Padding(
-              padding: EdgeInsets.all(12.w),
+              padding: AppPadding.p12,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
+                    style: TextStyles.semiBold14(
+                      color: context.colors.textColor,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: AppDimens.h4),
                   Text(
                     price,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                    style: TextStyles.bold14(
+                      color: context.colors.textColor,
                     ),
                   ),
                 ],
@@ -123,16 +133,16 @@ class MarketProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildQuantitySelector() {
+  Widget _buildQuantitySelector(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      padding: AppPadding.h8v4,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
+        color: context.colors.white,
+        borderRadius: AppRadius.r20,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 4,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity1),
+            blurRadius: AppDimens.elevation4,
             offset: const Offset(0, 2),
           ),
         ],
@@ -144,29 +154,29 @@ class MarketProductCard extends StatelessWidget {
           GestureDetector(
             onTap: quantity == 1 ? onDelete : onRemove,
             child: Icon(
-              quantity == 1 ? Icons.delete_outline : Icons.remove,
-              size: 18.sp,
-              color: Colors.black87,
+              quantity == 1
+                  ? Icons.delete_outline
+                  : Icons.remove,
+              size: AppDimens.iconSize18,
+              color: context.colors.textColor,
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Quantity
           Text(
             quantity.toString(),
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
+            style: TextStyles.semiBold14(
+              color: context.colors.textColor,
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Add Button
           GestureDetector(
             onTap: onAdd,
             child: Icon(
               Icons.add,
-              size: 18.sp,
-              color: Colors.black87,
+              size: AppDimens.iconSize18,
+              color: context.colors.textColor,
             ),
           ),
         ],
@@ -178,22 +188,24 @@ class MarketProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: onAdd,
       child: Container(
-        padding: EdgeInsets.all(8.w),
+        padding: AppPadding.p8,
         decoration: BoxDecoration(
           color: MyColors.greenButton,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: MyColors.greenButton.withValues(alpha: 0.3),
-              blurRadius: 8,
+              color: MyColors.greenButton.withValues(
+                alpha: AppDimens.opacity3,
+              ),
+              blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
           ],
         ),
         child: Icon(
           Icons.add,
-          size: 20.sp,
-          color: Colors.white,
+          size: AppDimens.iconSize20,
+          color: MyColors.white,
         ),
       ),
     );

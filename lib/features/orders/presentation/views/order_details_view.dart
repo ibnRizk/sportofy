@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class OrderDetailsView extends StatelessWidget {
   const OrderDetailsView({super.key});
@@ -8,73 +11,57 @@ class OrderDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: MyColors.grey50,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.w,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Order Details',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.w),
+        padding: AppPadding.p20,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section Title
             Text(
               'Arriving Date',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold16(color: MyColors.black87),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
 
             // Section 1: Arriving Date (Tracker Card)
             _buildArrivingDateCard(),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Section 2: Delivery Location
             Text(
               'Delivery Location',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold16(color: MyColors.black87),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
             _buildDeliveryLocationCard(),
 
-            SizedBox(height: 24.h),
+            SizedBox(height: AppDimens.h24),
 
             // Section 3: Order Summary
             Text(
               'Order Summary',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold16(color: MyColors.black87),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: AppDimens.h12),
             _buildOrderSummaryCard(),
           ],
         ),
@@ -84,14 +71,14 @@ class OrderDetailsView extends StatelessWidget {
 
   Widget _buildArrivingDateCard() {
     return Container(
-      padding: EdgeInsets.all(20.w),
+      padding: AppPadding.p20,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.05),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -105,29 +92,21 @@ class OrderDetailsView extends StatelessWidget {
             children: [
               Text(
                 'Arriving by 10 July',
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold15(color: MyColors.black87),
               ),
               Text(
                 'Order ID : 9287KJ',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyles.regular13(color: MyColors.grey600),
               ),
             ],
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // The Custom Tracker
           _buildProgressTracker(),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Buttons Row
           Row(
@@ -136,31 +115,23 @@ class OrderDetailsView extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: null, // Disabled
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.grey[400],
+                    foregroundColor: MyColors.grey400,
                     side: BorderSide(
-                      color: Colors.grey[300]!,
-                      width: 1.5,
+                      color: MyColors.grey300,
+                      width: AppDimens.borderWidth1_5,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        8.r,
-                      ),
+                      borderRadius: AppRadius.r8,
                     ),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                    ),
+                    padding: AppPadding.v12,
                   ),
                   child: Text(
                     'Cancel Order',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[400],
-                    ),
+                    style: TextStyles.medium14(color: MyColors.grey400),
                   ),
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppDimens.w12),
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
@@ -170,23 +141,16 @@ class OrderDetailsView extends StatelessWidget {
                     foregroundColor: MyColors.greenButton,
                     side: BorderSide(
                       color: MyColors.greenButton,
-                      width: 1.5,
+                      width: AppDimens.borderWidth1_5,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        8.r,
-                      ),
+                      borderRadius: AppRadius.r8,
                     ),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                    ),
+                    padding: AppPadding.v12,
                   ),
                   child: Text(
                     'Help & Support',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyles.medium14(),
                   ),
                 ),
               ),
@@ -198,8 +162,8 @@ class OrderDetailsView extends StatelessWidget {
   }
 
   Widget _buildProgressTracker() {
-    const Color activeColor = Color(0xFF00BCD4); // Cyan
-    final Color inactiveColor = Colors.grey[400]!;
+    final Color activeColor = MyColors.cyan;
+    final Color inactiveColor = MyColors.grey400;
 
     return Column(
       children: [
@@ -210,48 +174,36 @@ class OrderDetailsView extends StatelessWidget {
               child: Text(
                 'Ordered',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: activeColor,
-                ),
+                style: TextStyles.medium13(color: activeColor),
               ),
             ),
             Expanded(
               child: Text(
                 'Shipped',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: activeColor,
-                ),
+                style: TextStyles.medium13(color: activeColor),
               ),
             ),
             Expanded(
               child: Text(
                 'Delivered',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: inactiveColor,
-                ),
+                style: TextStyles.medium13(color: inactiveColor),
               ),
             ),
           ],
         ),
 
-        SizedBox(height: 8.h),
+        SizedBox(height: AppDimens.h8),
 
         // Dots and Lines Row
         Row(
           children: [
             // First Dot (Active)
             Container(
-              width: 12.w,
-              height: 12.w,
-              decoration: const BoxDecoration(
+              width: AppDimens.w12,
+              height: AppDimens.w12,
+              decoration: BoxDecoration(
                 color: activeColor,
                 shape: BoxShape.circle,
               ),
@@ -260,16 +212,16 @@ class OrderDetailsView extends StatelessWidget {
             // First Line (Active)
             Expanded(
               child: Container(
-                height: 2.h,
+                height: AppDimens.h2,
                 color: activeColor,
               ),
             ),
 
             // Second Dot (Active)
             Container(
-              width: 12.w,
-              height: 12.w,
-              decoration: const BoxDecoration(
+              width: AppDimens.w12,
+              height: AppDimens.w12,
+              decoration: BoxDecoration(
                 color: activeColor,
                 shape: BoxShape.circle,
               ),
@@ -278,15 +230,15 @@ class OrderDetailsView extends StatelessWidget {
             // Second Line (Inactive)
             Expanded(
               child: Container(
-                height: 2.h,
+                height: AppDimens.h2,
                 color: inactiveColor,
               ),
             ),
 
             // Third Dot (Inactive)
             Container(
-              width: 12.w,
-              height: 12.w,
+              width: AppDimens.w12,
+              height: AppDimens.w12,
               decoration: BoxDecoration(
                 color: inactiveColor,
                 shape: BoxShape.circle,
@@ -301,12 +253,12 @@ class OrderDetailsView extends StatelessWidget {
   Widget _buildDeliveryLocationCard() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.05),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -315,12 +267,10 @@ class OrderDetailsView extends StatelessWidget {
         children: [
           // Map Image Placeholder
           Container(
-            height: 150.h,
+            height: AppDimens.containerHeight150,
             decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(12.r),
-              ),
+              color: MyColors.grey200,
+              borderRadius: AppRadius.top12,
             ),
             child: Stack(
               children: [
@@ -328,15 +278,15 @@ class OrderDetailsView extends StatelessWidget {
                 Center(
                   child: Icon(
                     Icons.map,
-                    size: 60.w,
-                    color: Colors.grey[400],
+                    size: AppDimens.iconSize60,
+                    color: MyColors.grey400,
                   ),
                 ),
                 // Green Location Pin
                 Center(
                   child: Icon(
                     Icons.location_on,
-                    size: 40.w,
+                    size: AppDimens.iconSize40,
                     color: MyColors.greenButton,
                   ),
                 ),
@@ -346,16 +296,16 @@ class OrderDetailsView extends StatelessWidget {
 
           // Address Info
           Padding(
-            padding: EdgeInsets.all(16.w),
+            padding: AppPadding.p16,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
                   Icons.location_on_outlined,
-                  size: 20.w,
-                  color: Colors.black87,
+                  size: AppDimens.iconSize20,
+                  color: MyColors.black87,
                 ),
-                SizedBox(width: 8.w),
+                SizedBox(width: AppDimens.w8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment:
@@ -363,29 +313,17 @@ class OrderDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'Cairo (Maadi)',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                        style: TextStyles.bold15(color: MyColors.black87),
                       ),
-                      SizedBox(height: 4.h),
+                      SizedBox(height: AppDimens.h4),
                       Text(
                         '8 street 9, floor 5, department 15',
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyles.regular13(color: MyColors.grey600),
                       ),
-                      SizedBox(height: 4.h),
+                      SizedBox(height: AppDimens.h4),
                       Text(
                         'Mobile: 01101110101',
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyles.regular13(color: MyColors.grey600),
                       ),
                     ],
                   ),
@@ -400,14 +338,14 @@ class OrderDetailsView extends StatelessWidget {
 
   Widget _buildOrderSummaryCard() {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: AppPadding.p16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.white,
+        borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha:0.05),
-            blurRadius: 8,
+            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
         ],
@@ -416,24 +354,24 @@ class OrderDetailsView extends StatelessWidget {
         children: [
           // Product Image
           Container(
-            width: 80.w,
-            height: 80.w,
+            width: AppDimens.w80,
+            height: AppDimens.w80,
             decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(8.r),
+              color: MyColors.grey100,
+              borderRadius: AppRadius.r8,
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: AppRadius.r8,
               child: Image.asset(
                 'assets/images/shoes.png',
-                width: 80.w,
-                height: 80.w,
+                width: AppDimens.w80,
+                height: AppDimens.w80,
                 fit: BoxFit.contain,
               ),
             ),
           ),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Product Details
           Expanded(
@@ -442,42 +380,28 @@ class OrderDetailsView extends StatelessWidget {
               children: [
                 Text(
                   '1 X Adidas barricade',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.medium14(color: MyColors.black87),
                 ),
-                SizedBox(height: 6.h),
+                SizedBox(height: AppDimens.h6),
                 Text(
                   '3200 EGP',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold16(color: MyColors.black87),
                 ),
-                SizedBox(height: 6.h),
+                SizedBox(height: AppDimens.h6),
                 Row(
                   children: [
                     Container(
-                      width: 16.w,
-                      height: 16.w,
-                      decoration: const BoxDecoration(
-                        color: Color(
-                          0xFF8BC34A,
-                        ), // Light Green
+                      width: AppDimens.w16,
+                      height: AppDimens.w16,
+                      decoration: BoxDecoration(
+                        color: MyColors.green.withValues(alpha: AppDimens.opacity8),
                         shape: BoxShape.circle,
                       ),
                     ),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: AppDimens.w6),
                     Text(
                       '41',
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: TextStyles.medium13(color: MyColors.black87),
                     ),
                   ],
                 ),

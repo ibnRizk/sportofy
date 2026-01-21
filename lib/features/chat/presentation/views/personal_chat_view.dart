@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/chat/presentation/widgets/attachment_panel.dart';
 import 'package:sportify_app/features/chat/presentation/widgets/chat_input_bar.dart';
 import 'package:sportify_app/features/chat/presentation/widgets/message_bubble.dart';
@@ -108,7 +111,7 @@ class _PersonalChatViewState extends State<PersonalChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: _buildAppBar(),
       body: Column(
         children: [
@@ -142,13 +145,13 @@ class _PersonalChatViewState extends State<PersonalChatView> {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       elevation: 0,
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
-          color: Colors.black87,
-          size: 24.sp,
+          color: MyColors.black87,
+          size: AppDimens.iconSize24,
         ),
         onPressed: () {
           if (Navigator.canPop(context)) {
@@ -163,7 +166,7 @@ class _PersonalChatViewState extends State<PersonalChatView> {
             clipBehavior: Clip.none,
             children: [
               CircleAvatar(
-                radius: 20.r,
+                radius: AppDimens.avatarSize20,
                 backgroundImage: AssetImage(
                   widget.userAvatar ?? ImgAssets.mohamedAhmed,
                 ),
@@ -177,41 +180,35 @@ class _PersonalChatViewState extends State<PersonalChatView> {
                   bottom: -2,
                   right: -2,
                   child: Container(
-                    width: 14.w,
-                    height: 14.w,
+                    width: AppDimens.iconSize14,
+                    height: AppDimens.iconSize14,
                     decoration: BoxDecoration(
                       color: MyColors.greenButton,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Colors.white,
-                        width: 2.w,
+                        color: MyColors.white,
+                        width: AppDimens.borderWidth2,
                       ),
                     ),
                   ),
                 ),
             ],
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
           // Name and Status
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 widget.userName ?? 'Mohamed Ahmed',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold16(color: MyColors.black87),
               ),
               Text(
                 widget.isOnline ? 'Active now' : 'Offline',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
+                style: TextStyles.regular12(
                   color: widget.isOnline
                       ? MyColors.greenButton
-                      : Colors.grey[600],
+                      : MyColors.grey600,
                 ),
               ),
             ],
@@ -224,35 +221,24 @@ class _PersonalChatViewState extends State<PersonalChatView> {
   Widget _buildEmptyChat() {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 40.w),
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 32.h,
-        ),
+        margin: AppPadding.h40,
+        padding: AppPadding.h24v32,
         decoration: BoxDecoration(
-          color: Colors.cyan.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12.r),
+          color: MyColors.cyan.withValues(alpha: AppDimens.opacity1),
+          borderRadius: AppRadius.r12,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'No messages here yet...',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[700],
-              ),
+              style: TextStyles.bold16(color: MyColors.grey700),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: AppDimens.h8),
             Text(
               'Send a first message',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
-              ),
+              style: TextStyles.regular14(color: MyColors.grey600),
               textAlign: TextAlign.center,
             ),
           ],
@@ -264,21 +250,17 @@ class _PersonalChatViewState extends State<PersonalChatView> {
   Widget _buildActiveChat() {
     return ListView.builder(
       controller: _scrollController,
-      padding: EdgeInsets.symmetric(vertical: 16.h),
+      padding: AppPadding.v16,
       itemCount: _messages.length + 1, // +1 for date separator
       itemBuilder: (context, index) {
         // Date Separator (first item)
         if (index == 0) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: AppPadding.v16,
             child: Center(
               child: Text(
                 'MAY 01, 2014, 5:07 AM',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyles.regular12(color: MyColors.grey600),
               ),
             ),
           );

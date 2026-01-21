@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class RateStadiumSheet extends StatefulWidget {
   const RateStadiumSheet({super.key});
 
   @override
-  State<RateStadiumSheet> createState() => _RateStadiumSheetState();
+  State<RateStadiumSheet> createState() =>
+      _RateStadiumSheetState();
 }
 
-class _RateStadiumSheetState extends State<RateStadiumSheet> {
-  int _selectedRating = 4; // Default to 4 stars as shown in image
-  final TextEditingController _commentController = TextEditingController();
+class _RateStadiumSheetState
+    extends State<RateStadiumSheet> {
+  int _selectedRating =
+      4; // Default to 4 stars as shown in image
+  final TextEditingController _commentController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -22,51 +29,43 @@ class _RateStadiumSheetState extends State<RateStadiumSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      padding: AppPadding.h20v16,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.r),
-        ),
+        color: MyColors.white,
+        borderRadius: AppRadius.top25,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Drag Handle
           Container(
-            width: 40.w,
-            height: 4.h,
+            width: AppDimens.w40,
+            height: AppDimens.h4,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2.r),
+              color: MyColors.grey300,
+              borderRadius: AppRadius.r2,
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Title
           Text(
             'What is your experience?',
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: TextStyles.bold18(color: MyColors.black),
           ),
 
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
 
           // Subtitle
           Text(
             'Your feedback will help improve our service',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[600],
+            style: TextStyles.regular14(
+              color: MyColors.grey600,
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Star Rating
           Row(
@@ -79,29 +78,30 @@ class _RateStadiumSheetState extends State<RateStadiumSheet> {
                   });
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  padding: AppPadding.h4,
                   child: Icon(
                     Icons.star,
-                    size: 48.sp,
+                    size: AppDimens.iconSize48,
                     color: index < _selectedRating
-                        ? const Color(0xFFFFC107) // Yellow/Gold
-                        : Colors.grey[300],
+                        ? MyColors
+                              .amber // Yellow/Gold
+                        : MyColors.grey300,
                   ),
                 ),
               );
             }),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Comment TextField
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(12.r),
+              color: MyColors.grey100,
+              borderRadius: AppRadius.r12,
               border: Border.all(
-                color: Colors.grey[300]!,
-                width: 1,
+                color: MyColors.grey300,
+                width: AppDimens.borderWidth1,
               ),
             ),
             child: TextField(
@@ -109,26 +109,24 @@ class _RateStadiumSheetState extends State<RateStadiumSheet> {
               maxLines: 4,
               decoration: InputDecoration(
                 hintText: 'Additional comments...',
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[400],
+                hintStyle: TextStyles.regular14(
+                  color: MyColors.grey400,
                 ),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.all(16.w),
+                contentPadding: AppPadding.p16,
               ),
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.black87,
+              style: TextStyles.regular14(
+                color: MyColors.black87,
               ),
             ),
           ),
 
-          SizedBox(height: 24.h),
+          SizedBox(height: AppDimens.h24),
 
           // Submit Button
           SizedBox(
             width: double.infinity,
-            height: 50.h,
+            height: AppDimens.buttonHeight50,
             child: ElevatedButton(
               onPressed: () {
                 // Close this sheet and return the rating data
@@ -140,22 +138,20 @@ class _RateStadiumSheetState extends State<RateStadiumSheet> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: AppRadius.r10,
                 ),
-                elevation: 0,
+                elevation: AppDimens.elevation0,
               ),
               child: Text(
                 'Submit Review',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                style: TextStyles.bold16(
+                  color: MyColors.white,
                 ),
               ),
             ),
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
         ],
       ),
     );

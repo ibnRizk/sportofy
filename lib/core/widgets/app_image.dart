@@ -90,18 +90,20 @@ class AppImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (BuildContext context) {
-      if (imageUrl != null) {
-        return _imageNetwork;
-      }
-      if (imageFile != null) {
-        return _imageFile;
-      }
-      if (imageAsset != null) {
-        return _imageAsset;
-      }
-      return const SizedBox();
-    });
+    return Builder(
+      builder: (BuildContext context) {
+        if (imageUrl != null) {
+          return _imageNetwork;
+        }
+        if (imageFile != null) {
+          return _imageFile;
+        }
+        if (imageAsset != null) {
+          return _imageAsset;
+        }
+        return const SizedBox();
+      },
+    );
   }
 
   Widget _buildBaseCircle(ImageProvider child) {
@@ -110,22 +112,23 @@ class AppImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: DecorationImage(
-          image: child,
-          fit: fit,
-        ),
+        image: DecorationImage(image: child, fit: fit),
       ),
     );
   }
 
   Image get _imageAssetItem => Image.asset(
-        imageAsset!,
-        width: width,
-        height: height,
-        fit: fit,
-        errorBuilder: (BuildContext context, Object url, StackTrace? error) =>
-            _errorWidget,
-      );
+    imageAsset!,
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder:
+        (
+          BuildContext context,
+          Object url,
+          StackTrace? error,
+        ) => _errorWidget,
+  );
 
   Widget get _imageAsset {
     if (isCircle == true) {
@@ -135,13 +138,17 @@ class AppImage extends StatelessWidget {
   }
 
   Image get _imageFileItem => Image.file(
-        imageFile!,
-        width: width,
-        height: height,
-        fit: fit,
-        errorBuilder: (BuildContext context, Object url, StackTrace? error) =>
-            _errorWidget,
-      );
+    imageFile!,
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder:
+        (
+          BuildContext context,
+          Object url,
+          StackTrace? error,
+        ) => _errorWidget,
+  );
 
   Widget get _imageFile {
     if (isCircle == true) {
@@ -151,42 +158,59 @@ class AppImage extends StatelessWidget {
   }
 
   Image get _imageNetworkItem => Image.network(
-        imageUrl!,
-        color: color,
-        width: width,
-        height: height,
-        fit: fit,
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
+    imageUrl!,
+    color: color,
+    width: width,
+    height: height,
+    fit: fit,
+    loadingBuilder:
+        (
+          BuildContext context,
+          Widget child,
+          ImageChunkEvent? loadingProgress,
+        ) {
           if (loadingProgress == null) {
             return child;
           }
           return _loadingWidget;
         },
-        errorBuilder: (BuildContext context, _, dynamic error) => _errorWidget,
-      );
+    errorBuilder:
+        (BuildContext context, _, dynamic error) =>
+            _errorWidget,
+  );
 
   Widget get _imageNetwork {
     if (isCached == true) {
       if (isCircle == true) {
-        return _buildBaseCircle(CachedNetworkImageProvider(
-          imageUrl!,
-          maxWidth: width?.toInt(),
-          maxHeight: height?.toInt(),
-        ));
+        return _buildBaseCircle(
+          CachedNetworkImageProvider(
+            imageUrl!,
+            maxWidth: width?.toInt(),
+            maxHeight: height?.toInt(),
+          ),
+        );
       }
       return ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
+        borderRadius: BorderRadius.circular(
+          borderRadius ?? 8.r,
+        ),
         child: CachedNetworkImage(
           imageUrl: imageUrl!,
           color: color,
           width: width,
           height: height,
           fit: fit,
-          placeholderFadeInDuration: const Duration(milliseconds: 500),
-          placeholder: (BuildContext context, String url) => _loadingWidget,
-          errorWidget: (BuildContext context, String url, dynamic error) =>
-              _errorWidget,
+          placeholderFadeInDuration: const Duration(
+            milliseconds: 500,
+          ),
+          placeholder: (BuildContext context, String url) =>
+              _loadingWidget,
+          errorWidget:
+              (
+                BuildContext context,
+                String url,
+                dynamic error,
+              ) => _errorWidget,
         ),
       );
     }
@@ -197,24 +221,21 @@ class AppImage extends StatelessWidget {
   }
 
   Widget get _loadingWidget => Center(
-        child: AppShimmer(
-          child: Container(
-            width: width,
-            height: height,
-            color: Colors.grey.shade300,
-          ),
-        ),
-      );
+    child: AppShimmer(
+      child: Container(
+        width: width,
+        height: height,
+        color: Colors.grey.shade300,
+      ),
+    ),
+  );
 
   Widget get _errorWidget => Center(
-        child: Container(
-          width: width,
-          height: height,
-          color: Colors.grey.shade300,
-          child: const Icon(
-            Icons.error,
-            color: Colors.grey,
-          ),
-        ),
-      );
+    child: Container(
+      width: width,
+      height: height,
+      color: Colors.grey.shade300,
+      child: const Icon(Icons.error, color: Colors.grey),
+    ),
+  );
 }

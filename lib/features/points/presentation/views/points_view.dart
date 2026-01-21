@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class PointsView extends StatefulWidget {
   const PointsView({super.key});
@@ -20,49 +23,45 @@ class _PointsViewState extends State<PointsView> {
       'date': 'June 30, 2023',
       'amount': '300 Point',
       'icon': Icons.undo,
-      'iconBg': const Color(0xFFE3F5FF), // Light Blue
-      'iconColor': const Color(0xFF2196F3),
+      'iconBg': MyColors.lightBlue100, // Light Blue
+      'iconColor': MyColors.blue,
     },
     {
       'type': 'Received',
       'date': 'June 30, 2023',
       'amount': '500 Points',
       'icon': Icons.call_received,
-      'iconBg': const Color(0xFFE8F5E9), // Light Green
-      'iconColor': const Color(0xFF4CAF50),
+      'iconBg': MyColors.green.withValues(alpha: AppDimens.opacity1), // Light Green
+      'iconColor': MyColors.green,
     },
     {
       'type': 'Used',
       'date': 'June 30, 2023',
       'amount': '200 Points',
       'icon': Icons.call_made,
-      'iconBg': const Color(0xFFFFF3E0), // Light Orange/Grey
-      'iconColor': const Color(0xFFFF9800),
+      'iconBg': MyColors.orange.withValues(alpha: AppDimens.opacity1), // Light Orange/Grey
+      'iconColor': MyColors.orange,
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: MyColors.white,
+        elevation: AppDimens.elevation0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
-            size: 24.w,
+            color: MyColors.black,
+            size: AppDimens.iconSize24,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Points',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyles.bold18(color: MyColors.black),
         ),
         centerTitle: false,
       ),
@@ -72,27 +71,23 @@ class _PointsViewState extends State<PointsView> {
           // Header Card (Points Balance)
           _buildHeaderCard(),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Filter Chips
           _buildFilterChips(),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: AppDimens.h20),
 
           // Section Title
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: AppPadding.h20,
             child: Text(
               'Recent transaction',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: TextStyles.bold16(color: MyColors.black87),
             ),
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Transaction List
           Expanded(
@@ -106,11 +101,11 @@ class _PointsViewState extends State<PointsView> {
   Widget _buildHeaderCard() {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
-      padding: EdgeInsets.all(20.w),
+      margin: AppPadding.h20,
+      padding: AppPadding.p20,
       decoration: BoxDecoration(
-        color: const Color(0xFFEBFDFD), // Light Cyan/Blue
-        borderRadius: BorderRadius.circular(12.r),
+        color: MyColors.cyanMint, // Light Cyan/Blue
+        borderRadius: AppRadius.r12,
       ),
       child: Column(
         children: [
@@ -120,48 +115,37 @@ class _PointsViewState extends State<PointsView> {
             children: [
               Text(
                 '336',
-                style: TextStyle(
-                  fontSize: 48.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyles.bold48(color: MyColors.black87),
               ),
-              SizedBox(width: 8.w),
+              SizedBox(width: AppDimens.w8),
               // Coin Emoji (Using text-based emoji as placeholder)
               Text(
                 '🪙',
                 style: TextStyle(
-                  fontSize: 40.sp,
+                  fontSize: AppDimens.iconSize40,
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 12.h),
+          SizedBox(height: AppDimens.h12),
 
           // Description Text
           Text(
             'Play and get points to get discounts\non your purchases',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700],
+            style: TextStyles.medium14(color: MyColors.grey700).copyWith(
               height: 1.4,
             ),
           ),
 
-          SizedBox(height: 8.h),
+          SizedBox(height: AppDimens.h8),
 
           // Conversion Text
           Text(
             '1 points correspond to 1 pounds',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[500],
-            ),
+            style: TextStyles.regular12(color: MyColors.grey500),
           ),
         ],
       ),
@@ -170,12 +154,12 @@ class _PointsViewState extends State<PointsView> {
 
   Widget _buildFilterChips() {
     return SizedBox(
-      height: 40.h,
+      height: AppDimens.h40,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        padding: AppPadding.h20,
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
+        separatorBuilder: (context, index) => SizedBox(width: AppDimens.w10),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -185,26 +169,21 @@ class _PointsViewState extends State<PointsView> {
               });
             },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 8.h,
-              ),
+              padding: AppPadding.h20v8,
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : Colors.white,
+                color: isSelected ? MyColors.greenButton : MyColors.white,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[300]!,
+                      : MyColors.grey300,
                 ),
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: AppRadius.r20,
               ),
               child: Center(
                 child: Text(
                   _filters[index],
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: isSelected ? Colors.white : Colors.grey[600],
+                  style: TextStyles.medium14(
+                    color: isSelected ? MyColors.white : MyColors.grey600,
                   ),
                 ),
               ),
@@ -217,12 +196,12 @@ class _PointsViewState extends State<PointsView> {
 
   Widget _buildTransactionList() {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: AppPadding.h20,
       itemCount: _transactions.length,
       separatorBuilder: (context, index) => Divider(
-        height: 1,
-        thickness: 1,
-        color: Colors.grey[200],
+        height: AppDimens.dividerThickness1,
+        thickness: AppDimens.dividerThickness1,
+        color: MyColors.grey200,
       ),
       itemBuilder: (context, index) {
         final transaction = _transactions[index];
@@ -259,13 +238,13 @@ class _TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+      padding: AppPadding.v12,
       child: Row(
         children: [
           // Icon Circle
           Container(
-            width: 40.w,
-            height: 40.w,
+            width: AppDimens.containerHeight40,
+            height: AppDimens.containerHeight40,
             decoration: BoxDecoration(
               color: iconBg,
               shape: BoxShape.circle,
@@ -273,11 +252,11 @@ class _TransactionTile extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor,
-              size: 20.w,
+              size: AppDimens.iconSize20,
             ),
           ),
 
-          SizedBox(width: 12.w),
+          SizedBox(width: AppDimens.w12),
 
           // Type and Date
           Expanded(
@@ -286,20 +265,12 @@ class _TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   type,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyles.bold15(color: MyColors.black87),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: AppDimens.h4),
                 Text(
                   date,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey[500],
-                  ),
+                  style: TextStyles.regular13(color: MyColors.grey500),
                 ),
               ],
             ),
@@ -308,11 +279,7 @@ class _TransactionTile extends StatelessWidget {
           // Amount
           Text(
             amount,
-            style: TextStyle(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style: TextStyles.bold15(color: MyColors.black87),
           ),
         ],
       ),
