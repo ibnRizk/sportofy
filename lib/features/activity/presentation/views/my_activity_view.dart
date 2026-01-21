@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
-import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/activity/presentation/widgets/activity_card.dart';
 import 'package:sportify_app/features/activity/presentation/widgets/rate_stadium_sheet.dart';
@@ -13,7 +15,8 @@ class MyActivityView extends StatefulWidget {
   const MyActivityView({super.key});
 
   @override
-  State<MyActivityView> createState() => _MyActivityViewState();
+  State<MyActivityView> createState() =>
+      _MyActivityViewState();
 }
 
 class _MyActivityViewState extends State<MyActivityView>
@@ -21,10 +24,35 @@ class _MyActivityViewState extends State<MyActivityView>
   late TabController _tabController;
   int _selectedFilterIndex = 0;
 
+  // Dynamic filter lists based on tab
+  List<String> get _currentFilters {
+    if (_tabController.index == 0) {
+      // Organized tab
+      return [
+        'All',
+        'Open',
+        'Locked',
+        'Pending',
+        'Finished',
+      ];
+    } else {
+      // Joined or Booked tab
+      return ['All', 'Reserved', 'Pending', 'Finished'];
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        setState(() {
+          _selectedFilterIndex =
+              0; // Reset to "All" when tab changes
+        });
+      }
+    });
   }
 
   @override
@@ -35,17 +63,19 @@ class _MyActivityViewState extends State<MyActivityView>
 
   // Handle the 2-step rating flow
   Future<void> _handleRateStadium() async {
-      // Step 1: Show rating sheet and wait for it to close
-      final result = await showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: MyColors.transparent,
-        builder: (context) => const RateStadiumSheet(),
-      );
+    // Step 1: Show rating sheet and wait for it to close
+    final result = await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: MyColors.transparent,
+      builder: (context) => const RateStadiumSheet(),
+    );
 
     // Step 2: If rating was submitted (sheet returned data), show success
     if (result != null && mounted) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(
+        const Duration(milliseconds: 200),
+      );
       if (mounted) {
         showModalBottomSheet(
           context: context,
@@ -65,10 +95,14 @@ class _MyActivityViewState extends State<MyActivityView>
         elevation: AppDimens.elevation0,
         leading: IconButton(
           onPressed: () => context.pop(),
-          icon: Icon(
-            Icons.arrow_back,
-            size: AppDimens.iconSize24,
-            color: MyColors.black,
+          icon: SvgPicture.asset(
+            ImgAssets.icBack,
+            width: AppDimens.iconSize24,
+            height: AppDimens.iconSize24,
+            colorFilter: ColorFilter.mode(
+              MyColors.black,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         title: Text(
@@ -84,6 +118,8 @@ class _MyActivityViewState extends State<MyActivityView>
           unselectedLabelColor: MyColors.grey600,
           labelStyle: TextStyles.semiBold16(),
           unselectedLabelStyle: TextStyles.medium16(),
+          dividerColor:
+              MyColors.transparent, // Remove divider
           tabs: const [
             Tab(text: 'Organized'),
             Tab(text: 'Joined'),
@@ -93,39 +129,35 @@ class _MyActivityViewState extends State<MyActivityView>
       ),
       body: Column(
         children: [
-          // Filter Chips Section
+          // Filter Chips Section (Dynamic based on tab)
           Container(
             color: MyColors.white,
-            padding: AppPadding.v16,
+            padding: EdgeInsets.symmetric(vertical: 16.h),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: AppPadding.h20,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
               child: Row(
-                children: [
-                  _FilterChip(
-                    label: 'All',
-                    isSelected: _selectedFilterIndex == 0,
-                    onTap: () => setState(() => _selectedFilterIndex = 0),
+                children: List.generate(
+                  _currentFilters.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(
+                      right:
+                          index < _currentFilters.length - 1
+                          ? 12.w
+                          : 0,
+                    ),
+                    child: _FilterChip(
+                      label: _currentFilters[index],
+                      isSelected:
+                          _selectedFilterIndex == index,
+                      onTap: () => setState(
+                        () => _selectedFilterIndex = index,
+                      ),
+                    ),
                   ),
-                  SizedBox(width: AppDimens.w12),
-                  _FilterChip(
-                    label: 'Reserved',
-                    isSelected: _selectedFilterIndex == 1,
-                    onTap: () => setState(() => _selectedFilterIndex = 1),
-                  ),
-                  SizedBox(width: AppDimens.w12),
-                  _FilterChip(
-                    label: 'Pending',
-                    isSelected: _selectedFilterIndex == 2,
-                    onTap: () => setState(() => _selectedFilterIndex = 2),
-                  ),
-                  SizedBox(width: AppDimens.w12),
-                  _FilterChip(
-                    label: 'Finished',
-                    isSelected: _selectedFilterIndex == 3,
-                    onTap: () => setState(() => _selectedFilterIndex = 3),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -154,8 +186,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'You',
           statusLabel: 'Open',
-          statusBgColor: MyColors.lightBlue100,
-          statusTextColor: MyColors.blue,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -167,8 +197,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'You',
           statusLabel: 'Locked',
-          statusBgColor: MyColors.red100,
-          statusTextColor: MyColors.red700,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -180,8 +208,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'You',
           statusLabel: 'Finished',
-          statusBgColor: MyColors.green.withValues(alpha: AppDimens.opacity1),
-          statusTextColor: MyColors.green,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -202,8 +228,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Reserved',
-          statusBgColor: MyColors.lightBlue100,
-          statusTextColor: MyColors.blue,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -215,8 +239,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Pending',
-          statusBgColor: MyColors.orange.withValues(alpha: AppDimens.opacity1),
-          statusTextColor: MyColors.orange,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -228,8 +250,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Finished',
-          statusBgColor: MyColors.green.withValues(alpha: AppDimens.opacity1),
-          statusTextColor: MyColors.green,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -248,8 +268,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Reserved',
-          statusBgColor: MyColors.lightBlue100,
-          statusTextColor: MyColors.blue,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -262,8 +280,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Pending',
-          statusBgColor: MyColors.orange.withValues(alpha: AppDimens.opacity1),
-          statusTextColor: MyColors.orange,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -276,8 +292,6 @@ class _MyActivityViewState extends State<MyActivityView>
         ActivityCard(
           userName: 'Mohamed Ahmed',
           statusLabel: 'Finished',
-          statusBgColor: MyColors.green.withValues(alpha: AppDimens.opacity1),
-          statusTextColor: MyColors.green,
           stadiumName: 'Stadium name',
           date: 'Today, 03/07',
           time: '06 : 00 PM',
@@ -291,7 +305,7 @@ class _MyActivityViewState extends State<MyActivityView>
   }
 }
 
-/// Filter Chip Widget
+/// Filter Chip Widget (Capsule Style)
 class _FilterChip extends StatelessWidget {
   final String label;
   final bool isSelected;
@@ -305,23 +319,37 @@ class _FilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: AppRadius.r20,
       child: Container(
-        padding: AppPadding.h20v8,
+        padding: EdgeInsets.symmetric(
+          horizontal: 24.w,
+          vertical: 10.h,
+        ),
         decoration: BoxDecoration(
-          color: isSelected ? MyColors.greenButton : MyColors.white,
-          borderRadius: AppRadius.r20,
-          border: Border.all(
-            color: isSelected ? MyColors.greenButton : MyColors.grey300,
-            width: AppDimens.borderWidth1,
-          ),
+          color: isSelected
+              ? MyColors.greenButton
+              : MyColors
+                    .transparent, // Transparent for unselected
+          borderRadius: BorderRadius.circular(
+            30.r,
+          ), // Fully rounded (StadiumBorder)
+          border: isSelected
+              ? null // No border when selected
+              : Border.all(
+                  color: MyColors.grey300,
+                  width: 1, // Thin grey border
+                ),
         ),
         child: Text(
           label,
-          style: TextStyles.medium14(
-            color: isSelected ? MyColors.white : MyColors.grey700,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+            color: isSelected
+                ? MyColors.white
+                : MyColors
+                      .darkGrayColor, // Dark grey for unselected
           ),
         ),
       ),

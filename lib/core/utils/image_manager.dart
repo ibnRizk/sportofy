@@ -160,4 +160,6 @@ class ImgAssets {
   static const String icCalendar =
       'assets/icons/calender.svg';
   static const String icClock = 'assets/icons/clock.svg';
+  static const String icTimer = 'assets/icons/timer.svg';
+  static const String icBack = 'assets/icons/back.svg';
 }
