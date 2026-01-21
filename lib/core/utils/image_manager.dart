@@ -78,6 +78,7 @@ class ImgAssets {
   static const String team3 = 'assets/images/team3.png';
   static const String team3Svg = 'assets/icons/team3.svg';
   static const String team5Svg = 'assets/icons/team5.svg';
+  static const String team10Svg = 'assets/icons/team10.svg';
   static const String userAvatar =
       'assets/images/Ellipse 17.png';
   static const String icNotification =
@@ -122,9 +123,12 @@ class ImgAssets {
       'assets/images/sharing_subscribtion.png';
 
   // Stadium Assets
-  static const String mapPlaceholder = 'assets/images/mark_loca.png';
-  static const String lightYard = 'assets/images/light_yard.png';
-  static const String nightYard = 'assets/images/night_yard.png';
+  static const String mapPlaceholder =
+      'assets/images/mark_loca.png';
+  static const String lightYard =
+      'assets/images/light_yard.png';
+  static const String nightYard =
+      'assets/images/night_yard.png';
 
   // Community Assets
   static const String communityPariOnly =
@@ -132,7 +136,26 @@ class ImgAssets {
   static const String pana = 'assets/images/pana.png';
 
   // Market Assets
-  static const String smallShoes = 'assets/images/small_shoes.png';
-  static const String whiteShoes = 'assets/images/white_shoes.png';
+  static const String smallShoes =
+      'assets/images/small_shoes.png';
+  static const String whiteShoes =
+      'assets/images/white_shoes.png';
   static const String shoes = 'assets/images/shoes.png';
+
+  // Bottom Navigation Icons
+  static const String icHome = 'assets/icons/home.svg';
+  static const String icMarket = 'assets/icons/store.svg';
+  static const String icCommunity =
+      'assets/icons/Community.svg';
+  static const String icStadiums =
+      'assets/icons/stadiums.svg';
+  static const String icMatches =
+      'assets/icons/matches.svg';
+
+  // Match Card Icons
+  static const String icStadium =
+      'assets/icons/stadiums.svg';
+  static const String icCalendar =
+      'assets/icons/calender.svg';
+  static const String icClock = 'assets/icons/clock.svg';
 }

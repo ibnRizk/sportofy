@@ -6,7 +6,7 @@ class MyColors {
   static const Color upBackGround = Color(0xFFFFFFFF);
   static const Color main = Color(0xff00A9B8);
   static const Color secondaryColor = Color(0xFFBBDEFB);
-  static const Color textColor = Color(0xFF1A237E);
+  static const Color textColor = darkGrayColor;
   static const Color body = Color(0xFF5C6BC0);
   static const Color highlight = Color(0xFF1976D2);
   static const Color buttonColor = Color(0xFF0D47A1);

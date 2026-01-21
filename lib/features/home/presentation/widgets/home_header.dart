@@ -16,7 +16,8 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: MyColors.white, // White background
       padding: EdgeInsets.symmetric(
         horizontal: AppDimens.w16,
         vertical: AppDimens.h12,
@@ -56,7 +57,8 @@ class HomeHeader extends StatelessWidget {
                         style: TextStyles.semiBold14(
                           color: context.colors.textColor,
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow
+                            .visible, // Show full text
                       ),
                     ),
                     SizedBox(width: AppDimens.w4),
@@ -70,7 +72,9 @@ class HomeHeader extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+
+          SizedBox(width: AppDimens.w12),
+
           // Notification Icon
           GestureDetector(
             onTap: () {

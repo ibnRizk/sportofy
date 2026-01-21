@@ -34,10 +34,10 @@ class HomeView extends StatelessWidget {
 
               SizedBox(height: AppDimens.h16),
 
-              // Match Result Slider
+              // Match Result Slider - Full Width Edge-to-Edge
               const MatchResultSlider(),
 
-              SizedBox(height: AppDimens.h24),
+              SizedBox(height: AppDimens.h12),
 
               // Categories
               Padding(
@@ -49,7 +49,9 @@ class HomeView extends StatelessWidget {
                         image: ImgAssets.stadiumsCategory,
                         title: 'stadiums'.tr(context),
                         onTap: () {
-                          context.read<HomeCubit>().changeBottomNavIndex(3);
+                          context
+                              .read<HomeCubit>()
+                              .changeBottomNavIndex(3);
                         },
                       ),
                     ),
@@ -59,17 +61,22 @@ class HomeView extends StatelessWidget {
                         image: ImgAssets.matchesCategory,
                         title: 'matches'.tr(context),
                         onTap: () {
-                          context.read<HomeCubit>().changeBottomNavIndex(4);
+                          context
+                              .read<HomeCubit>()
+                              .changeBottomNavIndex(4);
                         },
                       ),
                     ),
                     SizedBox(width: AppDimens.w12),
                     Expanded(
                       child: HomeCategoryCard(
-                        image: ImgAssets.tournamentsCategory,
+                        image:
+                            ImgAssets.tournamentsCategory,
                         title: 'tournaments'.tr(context),
                         onTap: () {
-                          context.push(Routes.tournamentsListRoute);
+                          context.push(
+                            Routes.tournamentsListRoute,
+                          );
                         },
                       ),
                     ),
@@ -77,13 +84,14 @@ class HomeView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: AppDimens.h24),
+              SizedBox(height: AppDimens.h8),
 
               // Matches Near You Section
               Padding(
                 padding: AppPadding.h16,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'matches_near_you'.tr(context),
@@ -92,7 +100,11 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(
+                          Routes.matchesDetailsRoute,
+                        );
+                      },
                       child: Text(
                         'view_all'.tr(context),
                         style: TextStyles.semiBold14(
@@ -104,7 +116,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: AppDimens.h12),
+              SizedBox(height: AppDimens.h4),
 
               // Matches List (Always Show Mock Data)
               BlocBuilder<HomeCubit, HomeState>(
@@ -112,7 +124,8 @@ class HomeView extends StatelessWidget {
                   // Force show matches - UI Layer Only
                   return ListView.separated(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics:
+                        const NeverScrollableScrollPhysics(),
                     padding: AppPadding.h16,
                     itemCount: state.nearbyMatches.length,
                     separatorBuilder: (context, index) =>
@@ -126,7 +139,7 @@ class HomeView extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: AppDimens.h24),
+              SizedBox(height: AppDimens.h12),
             ],
           ),
         ),

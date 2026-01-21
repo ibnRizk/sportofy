@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -61,10 +62,14 @@ class CustomDrawer extends StatelessWidget {
                           style: TextStyles.medium14(color: context.colors.textColor),
                         ),
                         SizedBox(width: AppDimens.w6),
-                        Icon(
-                          Icons.language,
-                          size: AppDimens.iconSize18,
-                          color: context.colors.textColor,
+                        SvgPicture.asset(
+                          ImgAssets.icMenuLanguage,
+                          width: AppDimens.iconSize18,
+                          height: AppDimens.iconSize18,
+                          colorFilter: ColorFilter.mode(
+                            context.colors.textColor,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
@@ -268,10 +273,14 @@ class CustomDrawer extends StatelessWidget {
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.logout,
-                        size: AppDimens.iconSize20,
-                        color: MyColors.white,
+                      SvgPicture.asset(
+                        ImgAssets.icMenuLogout,
+                        width: AppDimens.iconSize20,
+                        height: AppDimens.iconSize20,
+                        colorFilter: ColorFilter.mode(
+                          MyColors.white,
+                          BlendMode.srcIn,
+                        ),
                       ),
                       SizedBox(width: AppDimens.w8),
                       Text(
@@ -295,36 +304,21 @@ class CustomDrawer extends StatelessWidget {
     int index,
   ) {
     final menuItems = [
-      {'iconData': Icons.refresh, 'title': 'My Activity'},
-      {'iconData': Icons.star_border, 'title': 'Points'},
-      {
-        'iconData': Icons.account_balance_wallet_outlined,
-        'title': 'Wallet',
-      },
-      {
-        'iconData': Icons.shopping_cart_outlined,
-        'title': 'My Cart',
-      },
-      {
-        'iconData': Icons.emoji_events_outlined,
-        'title': 'Tournaments',
-      },
-      {
-        'iconData': Icons.receipt_long_outlined,
-        'title': 'My Orders',
-      },
-      {
-        'iconData': Icons.phone_outlined,
-        'title': 'Contact us',
-      },
-      {'iconData': Icons.info_outline, 'title': 'About'},
-      {'iconData': Icons.language, 'title': 'Language'},
+      {'iconSvg': ImgAssets.icMenuActivity, 'title': 'My Activity'},
+      {'iconSvg': ImgAssets.icMenuPoints, 'title': 'Points'},
+      {'iconSvg': ImgAssets.icMenuWallet, 'title': 'Wallet'},
+      {'iconSvg': ImgAssets.icMenuCart, 'title': 'My Cart'},
+      {'iconSvg': ImgAssets.icMenuTournaments, 'title': 'Tournaments'},
+      {'iconSvg': ImgAssets.icMenuOrders, 'title': 'My Orders'},
+      {'iconSvg': ImgAssets.icMenuContact, 'title': 'Contact us'},
+      {'iconSvg': ImgAssets.icMenuAbout, 'title': 'About'},
+      {'iconSvg': ImgAssets.icMenuLanguage, 'title': 'Language'},
     ];
 
     final item = menuItems[index];
-    return _buildMenuItemWithIconData(
+    return _buildMenuItemWithSvg(
       context: context,
-      iconData: item['iconData'] as IconData,
+      iconSvg: item['iconSvg'] as String,
       title: item['title'] as String,
       onTap: () {
         Navigator.pop(context);
@@ -363,11 +357,11 @@ class CustomDrawer extends StatelessWidget {
   }
 
   // ═══════════════════════════════════════════════
-  // MENU ITEM WIDGET (Material Icons)
+  // MENU ITEM WIDGET (SVG Icons)
   // ═══════════════════════════════════════════════
-  Widget _buildMenuItemWithIconData({
+  Widget _buildMenuItemWithSvg({
     required BuildContext context,
-    required IconData iconData,
+    required String iconSvg,
     required String title,
     required VoidCallback onTap,
   }) {
@@ -377,10 +371,14 @@ class CustomDrawer extends StatelessWidget {
         padding: AppPadding.h20v16,
         child: Row(
           children: [
-            Icon(
-              iconData,
-              size: AppDimens.iconSize24,
-              color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
+            SvgPicture.asset(
+              iconSvg,
+              width: AppDimens.iconSize24,
+              height: AppDimens.iconSize24,
+              colorFilter: ColorFilter.mode(
+                context.colors.textColor.withValues(alpha: AppDimens.opacity6),
+                BlendMode.srcIn,
+              ),
             ),
             SizedBox(width: AppDimens.w16),
             Expanded(
