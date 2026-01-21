@@ -111,7 +111,8 @@ class TournamentCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
-                  color: MyColors.greyText, // Light Grey
+                  color:
+                      MyColors.darkGrayColor, // Light Grey
                 ),
               ),
               _buildDisjoinButton(),
@@ -174,9 +175,9 @@ class TournamentCard extends StatelessWidget {
     if (trailingInfo.toLowerCase().contains(
       'first place',
     )) {
-      return MyColors.black87;
+      return MyColors.black;
     }
-    return MyColors.grey600;
+    return MyColors.darkGrayColor;
   }
 
   Widget _buildDisjoinButton() {
@@ -192,7 +193,7 @@ class TournamentCard extends StatelessWidget {
             : MyColors.grey400,
         side: BorderSide(
           color: isDisjoinEnabled
-              ? MyColors.grey300
+              ? MyColors.darkGrayColor
               : MyColors.grey300,
           width: 1, // Very thin border
         ),
