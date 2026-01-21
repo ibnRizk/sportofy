@@ -97,7 +97,7 @@ class _MatchResultSliderState
               // Team 3
               _buildTeamInfo(
                 context: context,
-                teamImage: ImgAssets.team3Svg,
+                teamImage: ImgAssets.team3,
                 teamName: 'Team 3',
               ),
 
@@ -128,7 +128,7 @@ class _MatchResultSliderState
               // Team 5
               _buildTeamInfo(
                 context: context,
-                teamImage: ImgAssets.team5Svg,
+                teamImage: ImgAssets.team5,
                 teamName: 'Team 5',
               ),
             ],
@@ -206,21 +206,21 @@ class _MatchResultSliderState
                         Positioned(
                           left: 0,
                           child: _buildSmallAvatar(
-                            ImgAssets.team3Svg,
+                            ImgAssets.team3,
                           ),
                         ),
                         // Avatar 2
                         Positioned(
                           left: AppDimens.w20,
                           child: _buildSmallAvatar(
-                            ImgAssets.team5Svg,
+                            ImgAssets.team5,
                           ),
                         ),
                         // Avatar 3
                         Positioned(
                           left: AppDimens.w40,
                           child: _buildSmallAvatar(
-                            ImgAssets.team10Svg,
+                            ImgAssets.team10,
                           ),
                         ),
                         // Empty Placeholder (Grey Circle)
@@ -380,7 +380,7 @@ class _MatchResultSliderState
                 ),
                 child: ClipOval(
                   child: _buildTeamAvatar(
-                    ImgAssets.team10Svg,
+                    ImgAssets.team10,
                     AppDimens.containerWidth80,
                     AppDimens.containerWidth80,
                   ),
@@ -430,7 +430,7 @@ class _MatchResultSliderState
               // Team 6 (using team3 as placeholder)
               _buildTeamInfo(
                 context: context,
-                teamImage: ImgAssets.team3Svg,
+                teamImage: ImgAssets.team3,
                 teamName: 'Team 6',
               ),
 
@@ -460,7 +460,7 @@ class _MatchResultSliderState
               // Team 9 (using team5 as placeholder)
               _buildTeamInfo(
                 context: context,
-                teamImage: ImgAssets.team5Svg,
+                teamImage: ImgAssets.team5,
                 teamName: 'Team 9',
               ),
             ],
@@ -540,26 +540,45 @@ class _MatchResultSliderState
   }
 
   // ═══════════════════════════════════════════════
-  // TEAM AVATAR BUILDER (SVG Only)
+  // TEAM AVATAR BUILDER (Supports SVG & PNG)
   // ═══════════════════════════════════════════════
   Widget _buildTeamAvatar(
     String imagePath,
     double width,
     double height,
   ) {
-    // Use SVG directly - no PNG fallback
-    return SvgPicture.asset(
-      imagePath,
-      width: width,
-      height: height,
-      fit: BoxFit.cover,
-      placeholderBuilder: (context) =>
-          _buildPlaceholder(width, height),
-      errorBuilder: (context, error, stackTrace) {
-        debugPrint('SVG Error loading $imagePath: $error');
-        return _buildPlaceholder(width, height);
-      },
-    );
+    // Check file extension to determine render method
+    if (imagePath.endsWith('.svg')) {
+      // SVG files - use SvgPicture
+      return SvgPicture.asset(
+        imagePath,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        placeholderBuilder: (context) =>
+            _buildPlaceholder(width, height),
+        errorBuilder: (context, error, stackTrace) {
+          debugPrint(
+            'SVG Error loading $imagePath: $error',
+          );
+          return _buildPlaceholder(width, height);
+        },
+      );
+    } else {
+      // PNG/JPG files - use Image.asset
+      return Image.asset(
+        imagePath,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          debugPrint(
+            'Image Error loading $imagePath: $error',
+          );
+          return _buildPlaceholder(width, height);
+        },
+      );
+    }
   }
 
   // Placeholder widget

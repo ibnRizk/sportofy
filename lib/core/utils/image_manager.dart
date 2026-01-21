@@ -76,9 +76,11 @@ class ImgAssets {
   static const String organization =
       'assets/images/organization.png';
   static const String team3 = 'assets/images/team3.png';
-  static const String team3Svg = 'assets/icons/team3.svg';
-  static const String team5Svg = 'assets/icons/team5.svg';
-  static const String team10Svg = 'assets/icons/team10.svg';
+
+  static const String team5 = 'assets/images/team5.png';
+
+  static const String team10 = 'assets/images/team10.png';
+
   static const String userAvatar =
       'assets/images/Ellipse 17.png';
   static const String icNotification =
