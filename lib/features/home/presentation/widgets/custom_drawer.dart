@@ -50,7 +50,9 @@ class CustomDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: context.colors.textColor
-                            .withValues(alpha: AppDimens.opacity2),
+                            .withValues(
+                              alpha: AppDimens.opacity2,
+                            ),
                       ),
                       borderRadius: AppRadius.r20,
                     ),
@@ -59,7 +61,9 @@ class CustomDrawer extends StatelessWidget {
                       children: [
                         Text(
                           'عربي',
-                          style: TextStyles.medium14(color: context.colors.textColor),
+                          style: TextStyles.medium14(
+                            color: context.colors.textColor,
+                          ),
                         ),
                         SizedBox(width: AppDimens.w6),
                         SvgPicture.asset(
@@ -88,9 +92,7 @@ class CustomDrawer extends StatelessWidget {
                 color: context.colors.textColor.withValues(
                   alpha: AppDimens.opacity7,
                 ),
-              ).copyWith(
-                height: 1.5,
-              ),
+              ).copyWith(height: 1.5),
             ),
 
             SizedBox(height: AppDimens.h32),
@@ -113,7 +115,9 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 child: Text(
                   'Sign up',
-                  style: TextStyles.semiBold16(color: MyColors.white),
+                  style: TextStyles.semiBold16(
+                    color: MyColors.white,
+                  ),
                 ),
               ),
             ),
@@ -124,7 +128,9 @@ class CustomDrawer extends StatelessWidget {
             Text(
               'Already have an account',
               style: TextStyles.regular14(
-                color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
+                color: context.colors.textColor.withValues(
+                  alpha: AppDimens.opacity6,
+                ),
               ),
             ),
 
@@ -151,7 +157,9 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 child: Text(
                   'Login',
-                  style: TextStyles.semiBold16(color: MyColors.greenButton),
+                  style: TextStyles.semiBold16(
+                    color: MyColors.greenButton,
+                  ),
                 ),
               ),
             ),
@@ -197,7 +205,8 @@ class CustomDrawer extends StatelessWidget {
                           Text(
                             'Hi, Ahmed Hassen',
                             style: TextStyles.semiBold16(
-                              color: context.colors.textColor,
+                              color:
+                                  context.colors.textColor,
                             ),
                           ),
                           SizedBox(width: AppDimens.w4),
@@ -215,7 +224,9 @@ class CustomDrawer extends StatelessWidget {
                         },
                         child: Text(
                           'View profile',
-                          style: TextStyles.medium13(color: MyColors.greenButton),
+                          style: TextStyles.medium13(
+                            color: MyColors.greenButton,
+                          ),
                         ),
                       ),
                     ],
@@ -228,7 +239,9 @@ class CustomDrawer extends StatelessWidget {
           Divider(
             height: AppDimens.dividerThickness1,
             thickness: AppDimens.dividerThickness1,
-            color: context.colors.textColor.withValues(alpha: AppDimens.opacity1),
+            color: context.colors.textColor.withValues(
+              alpha: AppDimens.opacity1,
+            ),
           ),
 
           // Menu Items with Dividers
@@ -240,7 +253,9 @@ class CustomDrawer extends StatelessWidget {
                 height: AppDimens.dividerThickness1,
                 thickness: AppDimens.dividerThickness1,
                 indent: AppDimens.w60,
-                color: context.colors.textColor.withValues(alpha: AppDimens.opacity05),
+                color: context.colors.textColor.withValues(
+                  alpha: AppDimens.opacity05,
+                ),
               ),
               itemBuilder: (context, index) {
                 return _buildMenuItemByIndex(
@@ -285,7 +300,9 @@ class CustomDrawer extends StatelessWidget {
                       SizedBox(width: AppDimens.w8),
                       Text(
                         'Logout',
-                        style: TextStyles.semiBold16(color: MyColors.white),
+                        style: TextStyles.semiBold16(
+                          color: MyColors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -304,15 +321,36 @@ class CustomDrawer extends StatelessWidget {
     int index,
   ) {
     final menuItems = [
-      {'iconSvg': ImgAssets.icMenuActivity, 'title': 'My Activity'},
-      {'iconSvg': ImgAssets.icMenuPoints, 'title': 'Points'},
-      {'iconSvg': ImgAssets.icMenuWallet, 'title': 'Wallet'},
+      {
+        'iconSvg': ImgAssets.icMenuActivity,
+        'title': 'My Activity',
+      },
+      {
+        'iconSvg': ImgAssets.icMenuPoints,
+        'title': 'Points',
+      },
+      {
+        'iconSvg': ImgAssets.icMenuWallet,
+        'title': 'Wallet',
+      },
       {'iconSvg': ImgAssets.icMenuCart, 'title': 'My Cart'},
-      {'iconSvg': ImgAssets.icMenuTournaments, 'title': 'Tournaments'},
-      {'iconSvg': ImgAssets.icMenuOrders, 'title': 'My Orders'},
-      {'iconSvg': ImgAssets.icMenuContact, 'title': 'Contact us'},
+      {
+        'iconSvg': ImgAssets.icMenuTournaments,
+        'title': 'Tournaments',
+      },
+      {
+        'iconSvg': ImgAssets.icMenuOrders,
+        'title': 'My Orders',
+      },
+      {
+        'iconSvg': ImgAssets.icMenuContact,
+        'title': 'Contact us',
+      },
       {'iconSvg': ImgAssets.icMenuAbout, 'title': 'About'},
-      {'iconSvg': ImgAssets.icMenuLanguage, 'title': 'Language'},
+      {
+        'iconSvg': ImgAssets.icMenuLanguage,
+        'title': 'Language',
+      },
     ];
 
     final item = menuItems[index];
@@ -376,7 +414,9 @@ class CustomDrawer extends StatelessWidget {
               width: AppDimens.iconSize24,
               height: AppDimens.iconSize24,
               colorFilter: ColorFilter.mode(
-                context.colors.textColor.withValues(alpha: AppDimens.opacity6),
+                context.colors.textColor.withValues(
+                  alpha: AppDimens.opacity6,
+                ),
                 BlendMode.srcIn,
               ),
             ),
@@ -384,7 +424,9 @@ class CustomDrawer extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: TextStyles.regular15(color: context.colors.textColor),
+                style: TextStyles.regular15(
+                  color: context.colors.textColor,
+                ),
               ),
             ),
             // ✅ NO TRAILING ARROW
@@ -463,7 +505,9 @@ class CustomDrawer extends StatelessWidget {
             child: Text(
               'Cancel',
               style: TextStyles.semiBold14(
-                color: context.colors.textColor.withValues(alpha: AppDimens.opacity6),
+                color: context.colors.textColor.withValues(
+                  alpha: AppDimens.opacity6,
+                ),
               ),
             ),
           ),
@@ -475,7 +519,9 @@ class CustomDrawer extends StatelessWidget {
             },
             child: Text(
               'Logout',
-              style: TextStyles.semiBold14(color: MyColors.red),
+              style: TextStyles.semiBold14(
+                color: MyColors.red,
+              ),
             ),
           ),
         ],
