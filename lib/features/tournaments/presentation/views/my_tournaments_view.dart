@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/features/tournaments/presentation/widgets/tournament_card.dart';
 
 class MyTournamentsView extends StatefulWidget {
   const MyTournamentsView({super.key});
 
   @override
-  State<MyTournamentsView> createState() => _MyTournamentsViewState();
+  State<MyTournamentsView> createState() =>
+      _MyTournamentsViewState();
 }
 
-class _MyTournamentsViewState extends State<MyTournamentsView> {
+class _MyTournamentsViewState
+    extends State<MyTournamentsView> {
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['All', 'Joined', 'Pending', 'Finished'];
+  final List<String> _filters = [
+    'All',
+    'Joined',
+    'Pending',
+    'Finished',
+  ];
 
   // Mock Data - Strictly matches the screenshot
   final List<Map<String, dynamic>> _tournaments = [
@@ -43,9 +51,10 @@ class _MyTournamentsViewState extends State<MyTournamentsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:
+          MyColors.grey50, // Very light grey background
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -67,28 +76,31 @@ class _MyTournamentsViewState extends State<MyTournamentsView> {
       ),
       body: Column(
         children: [
+          SizedBox(height: AppDimens.h12),
           // Filter Chips
           _buildFilterChips(),
 
           SizedBox(height: 20.h),
 
           // Tournament List
-          Expanded(
-            child: _buildTournamentList(),
-          ),
+          Expanded(child: _buildTournamentList()),
         ],
       ),
     );
   }
 
   Widget _buildFilterChips() {
-    return SizedBox(
-      height: 50.h,
+    return Container(
+      height: 60.h,
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 8.h,
+      ),
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: 10.w),
+        separatorBuilder: (context, index) =>
+            SizedBox(width: 12.w),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -99,17 +111,22 @@ class _MyTournamentsViewState extends State<MyTournamentsView> {
             },
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
+                horizontal: 24.w,
                 vertical: 10.h,
               ),
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : Colors.white,
+                color: isSelected
+                    ? MyColors.greenButton
+                    : MyColors.transparent,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
-                      : Colors.grey[300]!,
+                      : MyColors.grey300,
+                  width: 1,
                 ),
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: BorderRadius.circular(
+                  36.r,
+                ), // Pill style - high radius
               ),
               child: Center(
                 child: Text(
@@ -117,7 +134,9 @@ class _MyTournamentsViewState extends State<MyTournamentsView> {
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
-                    color: isSelected ? Colors.white : Colors.grey[600],
+                    color: isSelected
+                        ? MyColors.white
+                        : MyColors.darkGrayColor,
                   ),
                 ),
               ),
