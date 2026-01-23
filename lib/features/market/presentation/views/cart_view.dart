@@ -51,13 +51,18 @@ class _CartViewState extends State<CartView> {
   double get _subtotal {
     return _cartItems.fold(
       0.0,
-      (sum, item) => sum + (item['price'] as double) * (item['quantity'] as int),
+      (sum, item) =>
+          sum +
+          (item['price'] as double) *
+              (item['quantity'] as int),
     );
   }
 
   void _updateQuantity(String itemId, int newQuantity) {
     setState(() {
-      final itemIndex = _cartItems.indexWhere((item) => item['id'] == itemId);
+      final itemIndex = _cartItems.indexWhere(
+        (item) => item['id'] == itemId,
+      );
       if (itemIndex != -1) {
         if (newQuantity <= 0) {
           _cartItems.removeAt(itemIndex);
@@ -93,7 +98,7 @@ class _CartViewState extends State<CartView> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: MyColors.black87,
+            color: MyColors.darkGrayColor,
             size: AppDimens.iconSize24,
           ),
           onPressed: () {
@@ -104,9 +109,10 @@ class _CartViewState extends State<CartView> {
         ),
         title: Text(
           'My Cart',
-          style: TextStyles.bold18(color: MyColors.black87),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
-        centerTitle: true,
       ),
       body: _cartItems.isEmpty
           ? _buildEmptyState()
@@ -122,7 +128,8 @@ class _CartViewState extends State<CartView> {
                       return CartItemTile(
                         imageUrl: item['image'] as String,
                         name: item['name'] as String,
-                        price: '${item['price'].toStringAsFixed(0)} EGP',
+                        price:
+                            '${item['price'].toStringAsFixed(0)} EGP',
                         color: item['color'] as String,
                         size: item['size'] as int,
                         quantity: item['quantity'] as int,
@@ -139,7 +146,10 @@ class _CartViewState extends State<CartView> {
                           );
                         },
                         onDelete: () {
-                          _updateQuantity(item['id'] as String, 0);
+                          _updateQuantity(
+                            item['id'] as String,
+                            0,
+                          );
                         },
                       );
                     },
@@ -171,12 +181,16 @@ class _CartViewState extends State<CartView> {
             SizedBox(height: AppDimens.h24),
             Text(
               'Your cart is empty',
-              style: TextStyles.bold20(color: MyColors.black87),
+              style: TextStyles.bold20(
+                color: MyColors.black87,
+              ),
             ),
             SizedBox(height: AppDimens.h12),
             Text(
               'Add some products to your cart to continue shopping',
-              style: TextStyles.regular14(color: MyColors.grey600),
+              style: TextStyles.regular14(
+                color: MyColors.darkGrayColor,
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.h32),
@@ -192,6 +206,8 @@ class _CartViewState extends State<CartView> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: MyColors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r12,
                   ),

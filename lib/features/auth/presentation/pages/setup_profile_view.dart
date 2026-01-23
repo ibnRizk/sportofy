@@ -124,13 +124,7 @@ class _SetupProfileViewBodyState
       appBar: AppBar(
         backgroundColor: context.colors.white,
         elevation: AppDimens.elevation0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: context.colors.black,
-          ),
-          onPressed: () => context.pop(),
-        ),
+
         title: Text(
           'setup_profile'.tr(context),
           style: TextStyles.semiBold18(
@@ -153,320 +147,396 @@ class _SetupProfileViewBodyState
                       padding: AppPadding.h20,
                       child: Column(
                         children: [
-                  SizedBox(height: AppDimens.h24),
+                          SizedBox(height: AppDimens.h24),
 
-                  // Full Name
-                  TextFormField(
-                    controller: _nameController,
-                    style: TextStyles.regular16(
-                      color: MyColors.darkGrayColor,
-                    ),
-                    validator: (value) =>
-                        Validator.validateName(
-                          value,
-                          context,
-                        ),
-                    onChanged: (value) {
-                      context
-                          .read<AuthCubit>()
-                          .updateFullName(value);
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'full_name'.tr(context),
-                      hintStyle: TextStyles.regular16(
-                        color: MyColors.greyText,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.borderColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.borderColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.greenButton,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.errorColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      focusedErrorBorder:
-                          OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.errorColor,
-                              width: AppDimens.borderWidth2,
+                          // Full Name
+                          TextFormField(
+                            controller: _nameController,
+                            style: TextStyles.regular16(
+                              color: MyColors.darkGrayColor,
                             ),
-                          ),
-                      contentPadding: AppPadding.h16v16,
-                      errorStyle: TextStyle(
-                        fontSize: 12,
-                        color: MyColors.errorColor,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: AppDimens.h20),
-
-                  // Email (Optional)
-                  TextFormField(
-                    controller: _emailController,
-                    keyboardType:
-                        TextInputType.emailAddress,
-                    style: TextStyles.regular16(
-                      color: MyColors.darkGrayColor,
-                    ),
-                    validator: (value) =>
-                        _validateEmailOptional(
-                          value,
-                          context,
-                        ),
-                    onChanged: (value) {
-                      if (value.trim().isNotEmpty) {
-                        context
-                            .read<AuthCubit>()
-                            .updateEmail(value);
-                      }
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'email_optional'.tr(
-                        context,
-                      ),
-                      hintStyle: TextStyles.regular16(
-                        color: MyColors.greyText,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.borderColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.borderColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.greenButton,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: AppRadius.r10,
-                        borderSide: BorderSide(
-                          color: MyColors.errorColor,
-                          width: AppDimens.borderWidth2,
-                        ),
-                      ),
-                      focusedErrorBorder:
-                          OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.errorColor,
-                              width: AppDimens.borderWidth2,
-                            ),
-                          ),
-                      contentPadding: AppPadding.h16v16,
-                      errorStyle: TextStyle(
-                        fontSize: 12,
-                        color: MyColors.errorColor,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: AppDimens.h20),
-
-                  // Gender Dropdown
-                  BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      return DropdownButtonFormField<
-                        String
-                      >(
-                        value: state.gender,
-                        validator: (value) =>
-                            _validateGender(value, context),
-                        hint: Text(
-                          'gender'.tr(context),
-                          style: TextStyles.regular16(
-                            color: MyColors.greyText,
-                          ),
-                        ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.borderColor,
-                              width: AppDimens.borderWidth2,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.borderColor,
-                              width: AppDimens.borderWidth2,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.greenButton,
-                              width: AppDimens.borderWidth2,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: AppRadius.r10,
-                            borderSide: BorderSide(
-                              color: MyColors.errorColor,
-                              width: AppDimens.borderWidth2,
-                            ),
-                          ),
-                          focusedErrorBorder:
-                              OutlineInputBorder(
+                            validator: (value) =>
+                                Validator.validateName(
+                                  value,
+                                  context,
+                                ),
+                            onChanged: (value) {
+                              context
+                                  .read<AuthCubit>()
+                                  .updateFullName(value);
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'full_name'.tr(
+                                context,
+                              ),
+                              hintStyle:
+                                  TextStyles.regular16(
+                                    color: MyColors
+                                        .darkGrayColor,
+                                  ),
+                              border: OutlineInputBorder(
                                 borderRadius: AppRadius.r10,
                                 borderSide: BorderSide(
                                   color:
-                                      MyColors.errorColor,
+                                      MyColors.borderColor,
                                   width: AppDimens
                                       .borderWidth2,
                                 ),
                               ),
-                          contentPadding: AppPadding.h16v16,
-                          errorStyle: TextStyle(
-                            fontSize: 12,
-                            color: MyColors.errorColor,
-                          ),
-                        ),
-                        items: [
-                          DropdownMenuItem(
-                            value: 'male',
-                            child: Text(
-                              'male'.tr(context),
-                              style: TextStyles.regular16(
-                                color: MyColors.darkGrayColor,
-                              ),
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'female',
-                            child: Text(
-                              'female'.tr(context),
-                              style: TextStyles.regular16(
-                                color: MyColors.darkGrayColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                        onChanged: (value) {
-                          context
-                              .read<AuthCubit>()
-                              .updateGender(value);
-                        },
-                      );
-                    },
-                  ),
-
-                  SizedBox(height: AppDimens.h20),
-
-                  // Date of Birth
-                  BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      final hasError =
-                          state.dateOfBirth == null &&
-                          _hasAttemptedValidation;
-                      return Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () =>
-                                _selectDate(context),
-                            child: Container(
-                              padding: AppPadding.h16v16,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: hasError
-                                      ? MyColors.errorColor
-                                      : MyColors
-                                            .borderColor,
-                                  width: AppDimens
-                                      .borderWidth2,
-                                ),
-                                borderRadius: AppRadius.r10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .spaceBetween,
-                                children: [
-                                  Text(
-                                    state.dateOfBirth !=
-                                            null
-                                        ? _formatDate(
-                                            state
-                                                .dateOfBirth,
-                                          )
-                                        : 'date_of_birth'
-                                              .tr(context),
-                                    style: TextStyles.regular16(
-                                      color:
-                                          state.dateOfBirth !=
-                                              null
-                                          ? MyColors
-                                                .darkGrayColor
-                                          : MyColors
-                                                .greyText,
+                              enabledBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .borderColor,
+                                      width: AppDimens
+                                          .borderWidth2,
                                     ),
                                   ),
-                                  Icon(
-                                    Icons
-                                        .keyboard_arrow_down,
-                                    color:
-                                        MyColors.greyText,
-                                    size: AppDimens.w20,
+                              focusedBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .greenButton,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
                                   ),
-                                ],
+                              errorBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .errorColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              focusedErrorBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .errorColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              contentPadding:
+                                  AppPadding.h16v16,
+                              errorStyle: TextStyle(
+                                fontSize: 12,
+                                color: MyColors.errorColor,
                               ),
                             ),
                           ),
-                          if (hasError)
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 8,
-                              ),
-                              child: Text(
-                                'error_field_required'.tr(
+
+                          SizedBox(height: AppDimens.h20),
+
+                          // Email (Optional)
+                          TextFormField(
+                            controller: _emailController,
+                            keyboardType:
+                                TextInputType.emailAddress,
+                            style: TextStyles.regular16(
+                              color: MyColors.darkGrayColor,
+                            ),
+                            validator: (value) =>
+                                _validateEmailOptional(
+                                  value,
                                   context,
                                 ),
-                                style: TextStyle(
-                                  fontSize: 12,
+                            onChanged: (value) {
+                              if (value.trim().isNotEmpty) {
+                                context
+                                    .read<AuthCubit>()
+                                    .updateEmail(value);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'email_optional'.tr(
+                                context,
+                              ),
+                              hintStyle:
+                                  TextStyles.regular16(
+                                    color: MyColors
+                                        .darkGrayColor,
+                                  ),
+                              border: OutlineInputBorder(
+                                borderRadius: AppRadius.r10,
+                                borderSide: BorderSide(
                                   color:
-                                      MyColors.errorColor,
+                                      MyColors.borderColor,
+                                  width: AppDimens
+                                      .borderWidth2,
                                 ),
                               ),
+                              enabledBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .borderColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              focusedBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .greenButton,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              errorBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .errorColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              focusedErrorBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .errorColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                              contentPadding:
+                                  AppPadding.h16v16,
+                              errorStyle: TextStyle(
+                                fontSize: 12,
+                                color: MyColors.errorColor,
+                              ),
                             ),
-                        ],
-                      );
-                    },
-                  ),
+                          ),
+
+                          SizedBox(height: AppDimens.h20),
+
+                          // Gender Dropdown
+                          BlocBuilder<AuthCubit, AuthState>(
+                            builder: (context, state) {
+                              return DropdownButtonFormField<
+                                String
+                              >(
+                                value: state.gender,
+                                validator: (value) =>
+                                    _validateGender(
+                                      value,
+                                      context,
+                                    ),
+                                hint: Text(
+                                  'gender'.tr(context),
+                                  style:
+                                      TextStyles.regular16(
+                                        color: MyColors
+                                            .darkGrayColor,
+                                      ),
+                                ),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        AppRadius.r10,
+                                    borderSide: BorderSide(
+                                      color: MyColors
+                                          .borderColor,
+                                      width: AppDimens
+                                          .borderWidth2,
+                                    ),
+                                  ),
+                                  enabledBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                            AppRadius.r10,
+                                        borderSide: BorderSide(
+                                          color: MyColors
+                                              .borderColor,
+                                          width: AppDimens
+                                              .borderWidth2,
+                                        ),
+                                      ),
+                                  focusedBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                            AppRadius.r10,
+                                        borderSide: BorderSide(
+                                          color: MyColors
+                                              .greenButton,
+                                          width: AppDimens
+                                              .borderWidth2,
+                                        ),
+                                      ),
+                                  errorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                            AppRadius.r10,
+                                        borderSide: BorderSide(
+                                          color: MyColors
+                                              .errorColor,
+                                          width: AppDimens
+                                              .borderWidth2,
+                                        ),
+                                      ),
+                                  focusedErrorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                            AppRadius.r10,
+                                        borderSide: BorderSide(
+                                          color: MyColors
+                                              .errorColor,
+                                          width: AppDimens
+                                              .borderWidth2,
+                                        ),
+                                      ),
+                                  contentPadding:
+                                      AppPadding.h16v16,
+                                  errorStyle: TextStyle(
+                                    fontSize: 12,
+                                    color:
+                                        MyColors.errorColor,
+                                  ),
+                                ),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'male',
+                                    child: Text(
+                                      'male'.tr(context),
+                                      style: TextStyles.regular16(
+                                        color: MyColors
+                                            .darkGrayColor,
+                                      ),
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'female',
+                                    child: Text(
+                                      'female'.tr(context),
+                                      style: TextStyles.regular16(
+                                        color: MyColors
+                                            .darkGrayColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  context
+                                      .read<AuthCubit>()
+                                      .updateGender(value);
+                                },
+                              );
+                            },
+                          ),
+
+                          SizedBox(height: AppDimens.h20),
+
+                          // Date of Birth
+                          BlocBuilder<AuthCubit, AuthState>(
+                            builder: (context, state) {
+                              final hasError =
+                                  state.dateOfBirth ==
+                                      null &&
+                                  _hasAttemptedValidation;
+                              return Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment
+                                        .start,
+                                children: [
+                                  InkWell(
+                                    onTap: () =>
+                                        _selectDate(
+                                          context,
+                                        ),
+                                    child: Container(
+                                      padding:
+                                          AppPadding.h16v16,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: hasError
+                                              ? MyColors
+                                                    .errorColor
+                                              : MyColors
+                                                    .borderColor,
+                                          width: AppDimens
+                                              .borderWidth2,
+                                        ),
+                                        borderRadius:
+                                            AppRadius.r10,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                        children: [
+                                          Text(
+                                            state.dateOfBirth !=
+                                                    null
+                                                ? _formatDate(
+                                                    state
+                                                        .dateOfBirth,
+                                                  )
+                                                : 'date_of_birth'.tr(
+                                                    context,
+                                                  ),
+                                            style: TextStyles.regular16(
+                                              color:
+                                                  state.dateOfBirth !=
+                                                      null
+                                                  ? MyColors
+                                                        .darkGrayColor
+                                                  : MyColors
+                                                        .darkGrayColor,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons
+                                                .keyboard_arrow_down,
+                                            color: MyColors
+                                                .darkGrayColor,
+                                            size: AppDimens
+                                                .w20,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  if (hasError)
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(
+                                            top: 8,
+                                          ),
+                                      child: Text(
+                                        'error_field_required'
+                                            .tr(context),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: MyColors
+                                              .errorColor,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              );
+                            },
+                          ),
 
                           // Dynamic Spacing
                           if (isKeyboardOpen)
@@ -478,35 +548,46 @@ class _SetupProfileViewBodyState
                           BlocBuilder<AuthCubit, AuthState>(
                             builder: (context, state) {
                               final isValid =
-                                  state.fullName.isNotEmpty &&
+                                  state
+                                      .fullName
+                                      .isNotEmpty &&
                                   state.gender != null &&
                                   state.dateOfBirth != null;
                               return SizedBox(
                                 width: double.infinity,
-                                height: AppDimens.buttonHeight56,
+                                height: AppDimens
+                                    .buttonHeight56,
                                 child: ElevatedButton(
                                   onPressed: isValid
                                       ? () =>
-                                            _handleContinue(context)
+                                            _handleContinue(
+                                              context,
+                                            )
                                       : null,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: isValid
-                                        ? MyColors.greenButton
+                                        ? MyColors
+                                              .greenButton
                                         : MyColors.grey300,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: AppRadius.r12,
-                                    ),
-                                    elevation: AppDimens.elevation0,
+                                    shape:
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              AppRadius.r12,
+                                        ),
+                                    elevation: AppDimens
+                                        .elevation0,
                                     disabledBackgroundColor:
                                         MyColors.grey300,
                                   ),
                                   child: Text(
                                     'continue'.tr(context),
-                                    style: TextStyles.semiBold20(
-                                      color: isValid
-                                          ? Colors.white
-                                          : MyColors.grey500,
-                                    ),
+                                    style:
+                                        TextStyles.semiBold20(
+                                          color: isValid
+                                              ? Colors.white
+                                              : MyColors
+                                                    .grey500,
+                                        ),
                                   ),
                                 ),
                               );

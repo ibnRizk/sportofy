@@ -122,7 +122,7 @@ class ChatsView extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyles.regular14(color: MyColors.grey500),
+                  hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
                   prefixIcon: Icon(
                     Icons.search,
                     size: AppDimens.iconSize20,

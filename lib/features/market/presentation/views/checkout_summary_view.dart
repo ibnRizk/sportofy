@@ -2,29 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/market/presentation/widgets/address_card.dart';
 import 'package:sportify_app/features/market/presentation/widgets/order_success_sheet.dart';
+import 'package:sportify_app/features/market/presentation/widgets/payment_option_tile.dart';
 
 class CheckoutSummaryView extends StatefulWidget {
   final Map<String, dynamic>? addressData;
 
-  const CheckoutSummaryView({
-    super.key,
-    this.addressData,
-  });
+  const CheckoutSummaryView({super.key, this.addressData});
 
   @override
-  State<CheckoutSummaryView> createState() => _CheckoutSummaryViewState();
+  State<CheckoutSummaryView> createState() =>
+      _CheckoutSummaryViewState();
 }
 
-class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
-  String _selectedPaymentMethod = 'sportify_wallet';
+class _CheckoutSummaryViewState
+    extends State<CheckoutSummaryView> {
+  String _selectedPaymentMethod = 'wallet';
+
+  // Payment methods data
+  final List<Map<String, dynamic>> _paymentMethods = [
+    {
+      'value': 'wallet',
+      'icon': ImgAssets.sportifyWallet,
+      'title': 'Sportify Wallet',
+      'balance': '100 EGP',
+    },
+    {
+      'value': 'mobile_wallet',
+      'icon': ImgAssets.vodafoneCash,
+      'title': 'Vodafone cash, WE Pay ..',
+      'balance': null,
+    },
+    {
+      'value': 'card',
+      'icon': ImgAssets.creditCard,
+      'title': 'Debit / Credit Card',
+      'balance': null,
+    },
+    {
+      'value': 'cash',
+      'icon': ImgAssets.cashMoney,
+      'title': 'Cash Payment',
+      'balance': null,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final address = widget.addressData?['address'] ?? 'Cairo (Maadi)';
-    final street = widget.addressData?['street'] ?? '8 street 9, floor 5, department 15';
-    final mobile = widget.addressData?['mobile'] ?? '01101110101';
+    final address =
+        widget.addressData?['address'] ?? 'Cairo (Maadi)';
+    final street =
+        widget.addressData?['street'] ??
+        '8 street 9, floor 5, department 15';
+    final mobile =
+        widget.addressData?['mobile'] ?? '01101110101';
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -47,8 +80,8 @@ class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
           'Delivery Address',
           style: TextStyle(
             fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+            color: MyColors.darkGrayColor,
           ),
         ),
         centerTitle: false,
@@ -58,7 +91,8 @@ class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // Address Card
                   AddressCard(
@@ -75,63 +109,65 @@ class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
 
                   // Payment Methods Section
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20.w),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                    ),
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Payment methods',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                          style: TextStyles.bold16(
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                         SizedBox(height: 16.h),
 
-                        // Payment Method Options
-                        _buildPaymentOption(
-                          value: 'sportify_wallet',
-                          icon: ImgAssets.sportifyWallet,
-                          title: 'Sportify Wallet',
-                          subtitle: '100 EGP',
-                          isSelected: _selectedPaymentMethod == 'sportify_wallet',
-                        ),
-                        SizedBox(height: 12.h),
-
-                        _buildPaymentOption(
-                          value: 'vodafone_cash',
-                          icon: ImgAssets.vodafoneCash,
-                          title: 'Vodafone cash, WE Pay ..',
-                          isSelected: _selectedPaymentMethod == 'vodafone_cash',
-                        ),
-                        SizedBox(height: 12.h),
-
-                        _buildPaymentOption(
-                          value: 'credit_card',
-                          icon: ImgAssets.creditCard,
-                          title: 'Debit / Credit Card',
-                          isSelected: _selectedPaymentMethod == 'credit_card',
-                        ),
-                        SizedBox(height: 12.h),
-
-                        _buildPaymentOption(
-                          value: 'cash',
-                          icon: ImgAssets.cashMoney,
-                          title: 'Cash Payment',
-                          isSelected: _selectedPaymentMethod == 'cash',
+                        // Payment Method Options with Dividers
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics:
+                              const NeverScrollableScrollPhysics(),
+                          itemCount: _paymentMethods.length,
+                          separatorBuilder:
+                              (context, index) => Divider(
+                                height: 1,
+                                thickness: 1,
+                                color: Colors.grey[200]!,
+                              ),
+                          itemBuilder: (context, index) {
+                            final method =
+                                _paymentMethods[index];
+                            return PaymentOptionTile(
+                              value:
+                                  method['value'] as String,
+                              iconPath:
+                                  method['icon'] as String,
+                              title:
+                                  method['title'] as String,
+                              balanceText:
+                                  method['balance']
+                                      as String?,
+                              isSelected:
+                                  _selectedPaymentMethod ==
+                                  method['value'] as String,
+                              onTap: () {
+                                setState(() {
+                                  _selectedPaymentMethod =
+                                      method['value']
+                                          as String;
+                                });
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -150,7 +186,9 @@ class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withValues(
+                    alpha: 0.05,
+                  ),
                   blurRadius: 10,
                   offset: const Offset(0, -2),
                 ),
@@ -173,121 +211,31 @@ class _CheckoutSummaryViewState extends State<CheckoutSummaryView> {
                         top: Radius.circular(30.r),
                       ),
                     ),
-                    builder: (context) => const OrderSuccessSheet(),
+                    builder: (context) =>
+                        const OrderSuccessSheet(),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: Colors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
                   ),
                   elevation: 0,
                 ),
                 child: Text(
                   'Place Order',
                   style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPaymentOption({
-    required String value,
-    required String icon,
-    required String title,
-    String? subtitle,
-    required bool isSelected,
-  }) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _selectedPaymentMethod = value;
-        });
-      },
-      child: Row(
-        children: [
-          // Icon
-          Image.asset(
-            icon,
-            width: 40.w,
-            height: 40.w,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                width: 40.w,
-                height: 40.w,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Icon(
-                  Icons.payment,
-                  size: 20.sp,
-                  color: Colors.grey[600],
-                ),
-              );
-            },
-          ),
-          SizedBox(width: 12.w),
-
-          // Title and Subtitle
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-                if (subtitle != null) ...[
-                  SizedBox(height: 2.h),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.greenButton,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-
-          // Radio Button
-          Container(
-            width: 24.w,
-            height: 24.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: isSelected
-                    ? MyColors.greenButton
-                    : Colors.grey[400]!,
-                width: 2,
-              ),
-              color: isSelected
-                  ? MyColors.greenButton
-                  : Colors.transparent,
-            ),
-            child: isSelected
-                ? Icon(
-                    Icons.check,
-                    size: 16.sp,
-                    color: Colors.white,
-                  )
-                : null,
           ),
         ],
       ),

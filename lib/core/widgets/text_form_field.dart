@@ -113,7 +113,7 @@ class AppTextFormField extends StatelessWidget {
                     child: Icon(
                       prefix,
                       size: AppDimens.iconSize16,
-                      color: MyColors.grey,
+                      color: MyColors.darkGrayColor,
                     ),
                   )
                 : null,
@@ -167,7 +167,7 @@ class AppTextFormField extends StatelessWidget {
         ),
         labelStyle: TextStyles.regular14(color: labelColor),
         errorStyle: TextStyles.regular10(color: MyColors.red),
-        hintStyle: TextStyles.regular14(color: MyColors.grey),
+        hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
       ),
       style: TextStyles.regular14(color: color),
       focusNode: focusNode,

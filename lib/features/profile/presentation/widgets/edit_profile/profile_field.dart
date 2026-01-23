@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
 
 class ProfileField extends StatelessWidget {
   final String title;
@@ -30,7 +31,7 @@ class ProfileField extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: Colors.grey.withValues(alpha:0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -40,9 +41,9 @@ class ProfileField extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: 12.sp,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: Colors.grey,
+                color: MyColors.darkGrayColor,
               ),
             ),
             SizedBox(height: 8.h),
@@ -56,8 +57,8 @@ class ProfileField extends StatelessWidget {
                   child: Text(
                     value,
                     style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black87,
                     ),
                   ),
@@ -66,7 +67,7 @@ class ProfileField extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 16.w,
-                    color: Colors.grey,
+                    color: MyColors.darkGrayColor,
                   ),
               ],
             ),

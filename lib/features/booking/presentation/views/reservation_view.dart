@@ -125,6 +125,8 @@ class _ReservationViewState extends State<ReservationView> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 foregroundColor: MyColors.white,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r12,
                 ),
@@ -206,7 +208,7 @@ class _ReservationViewState extends State<ReservationView> {
                     SizedBox(width: AppDimens.w4),
                     Text(
                       'Arab Elmaadi',
-                      style: TextStyles.regular14(color: MyColors.grey600),
+                      style: TextStyles.regular14(color: MyColors.darkGrayColor),
                     ),
                   ],
                 ),
@@ -683,7 +685,7 @@ class _PaymentMethodTile extends StatelessWidget {
                     SizedBox(height: AppDimens.h4),
                     Text(
                       subtitle!,
-                      style: TextStyles.regular12(color: MyColors.grey600),
+                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
                     ),
                   ],
                   if (price != null) ...[

@@ -33,11 +33,15 @@ class ContactInfoBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Center(
             child: Container(
-              margin: AppPadding.top12.copyWith(bottom: AppDimens.h8),
+              margin: AppPadding.top12.copyWith(
+                bottom: AppDimens.h8,
+              ),
               width: AppDimens.w40,
               height: AppDimens.h4,
               decoration: BoxDecoration(
-                color: MyColors.grey.withValues(alpha: AppDimens.opacity3),
+                color: MyColors.grey.withValues(
+                  alpha: AppDimens.opacity3,
+                ),
                 borderRadius: AppRadius.r2,
               ),
             ),
@@ -48,7 +52,9 @@ class ContactInfoBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Padding(
             padding: AppPadding.h20.copyWith(
-              bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.h20,
+              bottom:
+                  MediaQuery.of(context).viewInsets.bottom +
+                  AppDimens.h20,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -68,7 +74,9 @@ class ContactInfoBottomSheet extends StatelessWidget {
                     SizedBox(width: AppDimens.w16),
                     Text(
                       'Contact Info',
-                      style: TextStyles.semiBold18(color: MyColors.black87),
+                      style: TextStyles.semiBold18(
+                        color: MyColors.black87,
+                      ),
                     ),
                   ],
                 ),
@@ -110,7 +118,6 @@ class ContactInfoBottomSheet extends StatelessWidget {
         ],
       ),
     );
-
   }
 
   Widget _buildInfoRow({
@@ -127,7 +134,9 @@ class ContactInfoBottomSheet extends StatelessWidget {
           width: AppDimens.containerHeight40,
           height: AppDimens.containerHeight40,
           decoration: BoxDecoration(
-            color: MyColors.grey.withValues(alpha: AppDimens.opacity1),
+            color: MyColors.grey.withValues(
+              alpha: AppDimens.opacity1,
+            ),
             borderRadius: AppRadius.r8,
           ),
           child: Icon(
@@ -146,12 +155,16 @@ class ContactInfoBottomSheet extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyles.medium14(color: MyColors.black87),
+                style: TextStyles.medium16(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               SizedBox(height: AppDimens.h6),
               Text(
                 value,
-                style: TextStyles.regular14(color: MyColors.greenButton),
+                style: TextStyles.regular14(
+                  color: MyColors.greenButton,
+                ),
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
@@ -152,10 +153,11 @@ class _CommunityViewState extends State<CommunityView> {
   Widget _buildCustomAppBar() {
     return Container(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + AppDimens.h10,
+        top:
+            MediaQuery.of(context).padding.top +
+            AppDimens.h20,
         left: AppDimens.w20,
         right: AppDimens.w20,
-        bottom: AppDimens.h16,
       ),
       child: Row(
         children: [
@@ -172,11 +174,11 @@ class _CommunityViewState extends State<CommunityView> {
             child: Container(
               height: AppDimens.containerHeight40,
               decoration: BoxDecoration(
-                color: MyColors.grey100,
-                borderRadius: AppRadius.r25,
+                color: MyColors.white,
+                borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(
-                  color: MyColors.grey300,
-                  width: AppDimens.borderWidth1,
+                  color: Colors.grey[400]!,
+                  width: 1.5,
                 ),
               ),
               child: TextField(
@@ -245,8 +247,10 @@ class _CommunityViewState extends State<CommunityView> {
 
   Widget _buildFilterTabs() {
     return Container(
-      height: AppDimens.containerHeight50,
-      padding: AppPadding.h20,
+      height: 35,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.w20,
+      ),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
@@ -276,15 +280,20 @@ class _CommunityViewState extends State<CommunityView> {
                 ),
               ),
               child: Center(
-                child: Text(
-                  filter,
-                  style: isSelected
-                      ? TextStyles.medium14(
-                          color: MyColors.white,
-                        )
-                      : TextStyles.medium14(
-                          color: MyColors.black87,
-                        ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppDimens.w16,
+                  ),
+                  child: Text(
+                    filter,
+                    style: isSelected
+                        ? TextStyles.medium14(
+                            color: MyColors.white,
+                          )
+                        : TextStyles.medium14(
+                            color: MyColors.black87,
+                          ),
+                  ),
                 ),
               ),
             ),
@@ -305,8 +314,8 @@ class _CommunityViewState extends State<CommunityView> {
           ),
           child: Text(
             'Players near you',
-            style: TextStyles.bold16(
-              color: MyColors.black87,
+            style: TextStyles.semiBold16(
+              color: MyColors.darkGrayColor,
             ),
           ),
         ),
@@ -314,7 +323,9 @@ class _CommunityViewState extends State<CommunityView> {
           height: AppDimens.containerHeight100,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: AppDimens.w20),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.w20,
+            ),
             itemCount: _nearbyPlayers.length,
             separatorBuilder: (context, index) =>
                 SizedBox(width: AppDimens.w16),

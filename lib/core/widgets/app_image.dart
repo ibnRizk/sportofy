@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../utils/app_colors.dart';
 import 'app_shimmer.dart';
 
 class AppImage extends StatelessWidget {
@@ -235,7 +236,7 @@ class AppImage extends StatelessWidget {
       width: width,
       height: height,
       color: Colors.grey.shade300,
-      child: const Icon(Icons.error, color: Colors.grey),
+      child: Icon(Icons.error, color: MyColors.darkGrayColor),
     ),
   );
 }

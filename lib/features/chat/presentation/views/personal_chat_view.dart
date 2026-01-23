@@ -232,13 +232,13 @@ class _PersonalChatViewState extends State<PersonalChatView> {
           children: [
             Text(
               'No messages here yet...',
-              style: TextStyles.bold16(color: MyColors.grey700),
+              style: TextStyles.bold16(color: MyColors.darkGrayColor),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.h8),
             Text(
               'Send a first message',
-              style: TextStyles.regular14(color: MyColors.grey600),
+              style: TextStyles.regular14(color: MyColors.darkGrayColor),
               textAlign: TextAlign.center,
             ),
           ],
@@ -260,7 +260,7 @@ class _PersonalChatViewState extends State<PersonalChatView> {
             child: Center(
               child: Text(
                 'MAY 01, 2014, 5:07 AM',
-                style: TextStyles.regular12(color: MyColors.grey600),
+                style: TextStyles.regular12(color: MyColors.darkGrayColor),
               ),
             ),
           );

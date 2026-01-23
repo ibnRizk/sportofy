@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
 
 class TeamMemberTile extends StatelessWidget {
   final String name;
@@ -60,7 +61,7 @@ class TeamMemberTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11.sp, // Slightly smaller font
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
               ],
@@ -72,7 +73,7 @@ class TeamMemberTile extends StatelessWidget {
             icon: Icon(
               Icons.cancel,
               size: 18.w, // Slightly smaller icon
-              color: Colors.grey,
+              color: MyColors.darkGrayColor,
             ),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),

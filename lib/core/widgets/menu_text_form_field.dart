@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_colors.dart';
 
 class MenuTextFormField extends StatelessWidget {
   final String? Function(String? val)? validate;
@@ -86,7 +87,7 @@ class MenuTextFormField extends StatelessWidget {
           fontSize: myFontSize - 4,
         ),
         hintStyle: theme.bodyMedium!.copyWith(
-          color: Colors.grey,
+          color: MyColors.darkGrayColor,
           fontSize: myFontSize,
         ),
       ),

@@ -51,7 +51,7 @@ class DetectLocationView extends StatelessWidget {
                 child: Text(
                   'Map Placeholder\n(Google Maps will be integrated here)',
                   textAlign: TextAlign.center,
-                  style: TextStyles.regular14(color: MyColors.grey600),
+                  style: TextStyles.regular14(color: MyColors.darkGrayColor),
                 ),
               ),
             ),
@@ -89,7 +89,7 @@ class DetectLocationView extends StatelessWidget {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Search',
-                          hintStyle: TextStyles.regular16(color: MyColors.grey500),
+                          hintStyle: TextStyles.regular16(color: MyColors.darkGrayColor),
                           border: InputBorder.none,
                           contentPadding: AppPadding.zero,
                         ),

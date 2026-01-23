@@ -43,15 +43,14 @@ class CartItemTile extends StatelessWidget {
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Product Image
           ClipRRect(
             borderRadius: AppRadius.r8,
             child: Image.asset(
               imageUrl,
-              width: AppDimens.containerWidth80,
-              height: AppDimens.containerWidth80,
+              width: 102,
+              height: 90,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -77,13 +76,24 @@ class CartItemTile extends StatelessWidget {
                 // Product Name
                 Text(
                   name,
-                  style: TextStyles.bold16(color: MyColors.black87),
+                  style: TextStyles.regular11(
+                    color: MyColors.darkGrayColor,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: AppDimens.h4),
 
                 // Color and Size
+
+                // Price
+                Text(
+                  price,
+                  style: TextStyles.semiBold14(
+                    color: MyColors.darkGrayColor,
+                  ),
+                ),
+                SizedBox(height: AppDimens.h8),
                 Row(
                   children: [
                     // Color Swatch
@@ -102,16 +112,11 @@ class CartItemTile extends StatelessWidget {
                     SizedBox(width: AppDimens.w6),
                     Text(
                       '$size',
-                      style: TextStyles.medium12(color: MyColors.grey600),
+                      style: TextStyles.semiBold14(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                   ],
-                ),
-                SizedBox(height: AppDimens.h8),
-
-                // Price
-                Text(
-                  price,
-                  style: TextStyles.bold14(color: MyColors.greenButton),
                 ),
               ],
             ),
@@ -121,23 +126,37 @@ class CartItemTile extends StatelessWidget {
 
           // Quantity Selector
           Container(
+            width: 109,
+            height: 32,
             padding: AppPadding.h8v4,
             decoration: BoxDecoration(
               color: MyColors.white,
-              borderRadius: AppRadius.r20,
+              boxShadow: [
+                BoxShadow(
+                  color: MyColors.grey200,
+                  blurRadius: 10,
+                  offset: Offset(0, 10),
+                ),
+              ],
+              borderRadius: AppRadius.r4,
               border: Border.all(
                 color: MyColors.grey300,
                 width: AppDimens.borderWidth1,
               ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            child: Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
               children: [
                 // Delete/Decrease Button
                 GestureDetector(
-                  onTap: quantity == 1 ? onDelete : onDecrease,
+                  onTap: quantity == 1
+                      ? onDelete
+                      : onDecrease,
                   child: Icon(
-                    quantity == 1 ? Icons.delete_outline : Icons.remove,
+                    quantity == 1
+                        ? Icons.delete_outline
+                        : Icons.remove,
                     size: AppDimens.iconSize18,
                     color: MyColors.greenButton,
                   ),
@@ -146,7 +165,9 @@ class CartItemTile extends StatelessWidget {
                 // Quantity
                 Text(
                   quantity.toString(),
-                  style: TextStyles.semiBold14(color: MyColors.black87),
+                  style: TextStyles.regular16(
+                    color: MyColors.black87,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h8),
                 // Add Button

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/locale/app_localizations.dart';
+import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
@@ -10,7 +11,6 @@ import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/home/domain/entities/match_entity.dart';
-import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:sportify_app/injection_container.dart';
 
 class NearbyMatchCard extends StatelessWidget {
@@ -25,8 +25,11 @@ class NearbyMatchCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // Navigate to matches screen in bottom navigation bar (index 4)
-        context.read<HomeCubit>().changeBottomNavIndex(4);
+        // Navigate to match details screen
+        context.push(
+          Routes.matchesDetailsRoute,
+          extra: match,
+        );
       },
       borderRadius: AppRadius.r12,
       child: Container(
@@ -75,7 +78,7 @@ class NearbyMatchCard extends StatelessWidget {
                   Text(
                     match.organizerName,
                     textAlign: TextAlign.center,
-                    style: TextStyles.semiBold12(
+                    style: TextStyles.regular10(
                       color: MyColors.darkGrayColor,
                     ),
                     maxLines: 1,
@@ -88,7 +91,7 @@ class NearbyMatchCard extends StatelessWidget {
                   Text(
                     'organizer'.tr(context),
                     style: TextStyle(
-                      fontSize: 8.sp,
+                      fontSize: 10.sp,
                       fontWeight: FontWeight.w400,
                       color: MyColors.greenButton,
                     ),
@@ -124,7 +127,7 @@ class NearbyMatchCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w400,
-                          color: MyColors.greyText,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ],
@@ -375,7 +378,7 @@ class NearbyMatchCard extends StatelessWidget {
         width: size,
         height: size,
         colorFilter: ColorFilter.mode(
-          MyColors.greyText, // Light Grey color
+          MyColors.darkGrayColor, // Light Grey color
           BlendMode.srcIn,
         ),
       );
@@ -395,7 +398,7 @@ class NearbyMatchCard extends StatelessWidget {
       return Icon(
         fallbackIcon,
         size: size,
-        color: MyColors.greyText,
+        color: MyColors.darkGrayColor,
       );
     }
   }

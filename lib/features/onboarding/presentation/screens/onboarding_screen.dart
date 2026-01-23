@@ -165,7 +165,7 @@ class _OnboardingScreenState
                   ),
                   child: Text(
                     'login'.tr(context),
-                    style: TextStyles.semiBold16(
+                    style: TextStyles.semiBold20(
                       color: MyColors.white,
                     ),
                   ),
@@ -180,7 +180,7 @@ class _OnboardingScreenState
               onPressed: _skip,
               child: Text(
                 'skip'.tr(context),
-                style: TextStyles.medium16(
+                style: TextStyles.medium20(
                   color: MyColors.greenButton,
                 ),
               ),
@@ -258,14 +258,12 @@ class _OnboardingScreenState
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       margin: AppPadding.h4,
-      width: isActive ? AppDimens.w32 : AppDimens.w8,
-      height: AppDimens.h8,
+      width: isActive ? AppDimens.w32 : AppDimens.w16,
+      height: 5.h,
       decoration: BoxDecoration(
         color: isActive
-            ? MyColors.greenButton
-            : MyColors.greyText.withValues(
-                alpha: AppDimens.opacity3,
-              ),
+            ? const Color(0xFF3C9BBE)
+            : MyColors.grey,
         borderRadius: AppRadius.r4,
       ),
     );

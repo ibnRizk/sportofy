@@ -187,7 +187,7 @@ class _SharingCostSheetState
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyles.regular14(color: MyColors.grey500),
+                  hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
                   prefixIcon: Icon(
                     Icons.search,
                     color: MyColors.grey500,
@@ -300,7 +300,7 @@ class _SharingCostSheetState
                                 SizedBox(height: AppDimens.h4),
                                 Text(
                                   user.phone,
-                                  style: TextStyles.regular12(color: MyColors.grey600),
+                                  style: TextStyles.regular12(color: MyColors.darkGrayColor),
                                   maxLines: 1,
                                   overflow:
                                       TextOverflow.ellipsis,
@@ -360,8 +360,8 @@ class _SharingCostSheetState
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
-                    disabledBackgroundColor:
-                        MyColors.grey300,
+                    disabledBackgroundColor: MyColors.grey300,
+                    disabledForegroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: AppRadius.r10,
                     ),

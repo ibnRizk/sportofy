@@ -42,7 +42,7 @@ class _MatchResultSliderState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppDimens.containerHeight200,
+      height: 190.h,
       width: double.infinity, // Full width
       child: PageView.builder(
         controller: _pageController,
@@ -87,7 +87,7 @@ class _MatchResultSliderState
             ),
           ),
 
-          SizedBox(height: AppDimens.h16),
+          SizedBox(height: AppDimens.h24),
 
           // Score Row
           Row(
@@ -119,7 +119,7 @@ class _MatchResultSliderState
                     style: TextStyle(
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w400,
-                      color: MyColors.greyText,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ],
@@ -134,7 +134,7 @@ class _MatchResultSliderState
             ],
           ),
 
-          SizedBox(height: AppDimens.h16),
+          SizedBox(height: AppDimens.h24),
 
           // Pagination Dots
           _buildPageIndicator(),
@@ -451,7 +451,7 @@ class _MatchResultSliderState
                     style: TextStyle(
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w400,
-                      color: MyColors.greyText,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ],
@@ -519,10 +519,10 @@ class _MatchResultSliderState
             horizontal: AppDimens.w3,
           ),
           width: isActive
-              ? AppDimens.w20
+              ? AppDimens.w24
               : AppDimens
-                    .w6, // Wide line for active, small circle for inactive
-          height: AppDimens.h6,
+                    .w15, // Wide line for active, small circle for inactive
+          height: AppDimens.h4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               AppDimens.w3,
@@ -530,7 +530,7 @@ class _MatchResultSliderState
             color: isActive
                 ? MyColors
                       .main // Teal/Green for active (wide line)
-                : MyColors.greyText.withValues(
+                : MyColors.grey.withValues(
                     alpha: 0.5,
                   ), // Grey for inactive (small circle)
           ),
@@ -593,7 +593,7 @@ class _MatchResultSliderState
       child: Icon(
         Icons.sports_soccer,
         size: width * 0.5,
-        color: MyColors.greyText,
+        color: MyColors.darkGrayColor,
       ),
     );
   }

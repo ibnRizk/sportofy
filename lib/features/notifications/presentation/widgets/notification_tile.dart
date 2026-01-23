@@ -56,7 +56,7 @@ class NotificationTile extends StatelessWidget {
                   // Message (Regular Grey)
                   TextSpan(
                     text: ' $message',
-                    style: TextStyles.regular14(color: MyColors.grey700),
+                    style: TextStyles.regular14(color: MyColors.darkGrayColor),
                   ),
                   // Time (Blue/Light Blue)
                   TextSpan(

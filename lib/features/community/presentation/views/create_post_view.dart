@@ -188,7 +188,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                 backgroundColor: MyColors.greenButton,
                 foregroundColor: MyColors.white,
                 disabledBackgroundColor: MyColors.grey300,
-                disabledForegroundColor: MyColors.grey600,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r8,
                 ),
@@ -263,7 +263,7 @@ class _CreatePostViewState extends State<CreatePostView> {
                     style: TextStyles.regular16(color: MyColors.black87),
                     decoration: InputDecoration(
                       hintText: 'What is in your mind ?',
-                      hintStyle: TextStyles.regular16(color: MyColors.grey600),
+                      hintStyle: TextStyles.regular16(color: MyColors.darkGrayColor),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,

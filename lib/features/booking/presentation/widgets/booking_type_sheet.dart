@@ -209,6 +209,8 @@ class BookingTypeSheet extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MyColors.greenButton,
                       foregroundColor: Colors.white,
+                      disabledBackgroundColor: MyColors.grey300,
+                      disabledForegroundColor: MyColors.white,
                       padding: EdgeInsets.symmetric(
                         vertical: 14.h,
                       ),

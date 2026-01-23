@@ -39,7 +39,9 @@ class HomeCategoryCard extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 MyColors.transparent,
-                MyColors.black.withValues(alpha: AppDimens.opacity7),
+                MyColors.black.withValues(
+                  alpha: AppDimens.opacity7,
+                ),
               ],
             ),
           ),
@@ -49,7 +51,7 @@ class HomeCategoryCard extends StatelessWidget {
               padding: AppPadding.p12,
               child: Text(
                 title,
-                style: TextStyles.bold14(
+                style: TextStyles.bold15(
                   color: context.colors.white,
                 ),
               ),

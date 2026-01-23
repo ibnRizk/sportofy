@@ -11,16 +11,23 @@ class NewAddressView extends StatefulWidget {
   const NewAddressView({super.key});
 
   @override
-  State<NewAddressView> createState() => _NewAddressViewState();
+  State<NewAddressView> createState() =>
+      _NewAddressViewState();
 }
 
 class _NewAddressViewState extends State<NewAddressView> {
-  final TextEditingController _regionController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _buildingController = TextEditingController();
-  final TextEditingController _floorController = TextEditingController();
-  final TextEditingController _apartmentController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _regionController =
+      TextEditingController();
+  final TextEditingController _streetController =
+      TextEditingController();
+  final TextEditingController _buildingController =
+      TextEditingController();
+  final TextEditingController _floorController =
+      TextEditingController();
+  final TextEditingController _apartmentController =
+      TextEditingController();
+  final TextEditingController _phoneController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -71,7 +78,7 @@ class _NewAddressViewState extends State<NewAddressView> {
           'Delivery Address',
           style: TextStyle(
             fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
         ),
@@ -91,16 +98,17 @@ class _NewAddressViewState extends State<NewAddressView> {
                   ImgAssets.mapPlaceholder,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey[200],
-                      child: Icon(
-                        Icons.map,
-                        size: 60.sp,
-                        color: Colors.grey[400],
-                      ),
-                    );
-                  },
+                  errorBuilder:
+                      (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[200],
+                          child: Icon(
+                            Icons.map,
+                            size: 60.sp,
+                            color: Colors.grey[400],
+                          ),
+                        );
+                      },
                 ),
               ),
 
@@ -119,7 +127,9 @@ class _NewAddressViewState extends State<NewAddressView> {
                       backgroundColor: MyColors.greenButton,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(
+                          12.r,
+                        ),
                       ),
                       padding: EdgeInsets.symmetric(
                         horizontal: 32.w,
@@ -145,7 +155,8 @@ class _NewAddressViewState extends State<NewAddressView> {
             child: SingleChildScrollView(
               padding: EdgeInsets.all(20.w),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // Region Field
                   CustomTextField(
@@ -201,7 +212,9 @@ class _NewAddressViewState extends State<NewAddressView> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withValues(
+                    alpha: 0.05,
+                  ),
                   blurRadius: 10,
                   offset: const Offset(0, -2),
                 ),
@@ -215,16 +228,20 @@ class _NewAddressViewState extends State<NewAddressView> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: Colors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
                   ),
                   elevation: 0,
                 ),
                 child: Text(
                   'Checkout',
                   style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

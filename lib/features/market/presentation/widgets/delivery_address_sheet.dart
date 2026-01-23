@@ -56,7 +56,7 @@ class DeliveryAddressSheet extends StatelessWidget {
                 'Delivery Address',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
               ),
@@ -90,7 +90,10 @@ class DeliveryAddressSheet extends StatelessWidget {
                 icon: Icons.my_location,
                 text: 'Deliver to current location',
                 onTap: () {
-                  _handleAddressSelection(context, 'current');
+                  _handleAddressSelection(
+                    context,
+                    'current',
+                  );
                 },
               ),
 
@@ -107,7 +110,10 @@ class DeliveryAddressSheet extends StatelessWidget {
                 icon: Icons.pin_drop_outlined,
                 text: 'Deliver to different location',
                 onTap: () {
-                  _handleAddressSelection(context, 'different');
+                  _handleAddressSelection(
+                    context,
+                    'different',
+                  );
                 },
               ),
             ],
@@ -119,7 +125,10 @@ class DeliveryAddressSheet extends StatelessWidget {
     );
   }
 
-  void _handleAddressSelection(BuildContext context, String option) {
+  void _handleAddressSelection(
+    BuildContext context,
+    String option,
+  ) {
     // Close the delivery address sheet
     Navigator.pop(context);
 
@@ -142,11 +151,9 @@ class DeliveryAddressSheet extends StatelessWidget {
       });
     } else if (option == 'different') {
       // Navigate to New Address View
-      Navigator.pop(context);
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (!context.mounted) return;
-        context.push(Routes.newAddressRoute);
-      });
+
+      context.push(Routes.newAddressRoute);
+      ;
     }
   }
 }

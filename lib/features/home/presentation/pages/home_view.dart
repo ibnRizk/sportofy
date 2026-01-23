@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
               // Match Result Slider - Full Width Edge-to-Edge
               const MatchResultSlider(),
 
-              SizedBox(height: AppDimens.h12),
+              SizedBox(height: AppDimens.h14),
 
               // Categories
               Padding(
@@ -95,19 +95,19 @@ class HomeView extends StatelessWidget {
                   children: [
                     Text(
                       'matches_near_you'.tr(context),
-                      style: TextStyles.bold18(
+                      style: TextStyles.semiBold16(
                         color: context.colors.textColor,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
-                        context.push(
-                          Routes.matchesDetailsRoute,
-                        );
+                        context
+                            .read<HomeCubit>()
+                            .changeBottomNavIndex(4);
                       },
                       child: Text(
                         'view_all'.tr(context),
-                        style: TextStyles.semiBold14(
+                        style: TextStyles.medium12(
                           color: MyColors.greenButton,
                         ),
                       ),

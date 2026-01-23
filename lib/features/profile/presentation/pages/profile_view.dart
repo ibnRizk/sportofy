@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -73,7 +74,7 @@ class ProfileView extends StatelessWidget {
                         _buildBadge(
                           icon: Icons.monetization_on,
                           text: '336',
-                          color: MyColors.cyan,
+                          color: Color(0xFF3C9BBE),
                         ),
 
                         // Center: Avatar + Name
@@ -82,7 +83,8 @@ class ProfileView extends StatelessWidget {
                             Stack(
                               children: [
                                 CircleAvatar(
-                                  radius: AppDimens.avatarSize50,
+                                  radius: AppDimens
+                                      .avatarSize50,
                                   backgroundImage:
                                       AssetImage(
                                         ImgAssets
@@ -99,8 +101,8 @@ class ProfileView extends StatelessWidget {
                                         const BoxDecoration(
                                           shape: BoxShape
                                               .circle,
-                                          color:
-                                              MyColors.white,
+                                          color: MyColors
+                                              .white,
                                         ),
                                     padding: AppPadding.p2,
                                     child: Image.asset(
@@ -115,7 +117,7 @@ class ProfileView extends StatelessWidget {
                             SizedBox(height: AppDimens.h12),
                             Text(
                               'Ahmed Hassan',
-                              style: TextStyles.bold18(
+                              style: TextStyles.medium14(
                                 color: context
                                     .colors
                                     .textColor,
@@ -124,7 +126,7 @@ class ProfileView extends StatelessWidget {
                             SizedBox(height: AppDimens.h4),
                             Text(
                               'ID: Rmk4C1',
-                              style: TextStyles.medium14(
+                              style: TextStyles.regular12(
                                 color: MyColors.greenButton,
                               ),
                             ),
@@ -135,7 +137,7 @@ class ProfileView extends StatelessWidget {
                         _buildBadge(
                           icon: Icons.male,
                           text: '24',
-                          color: MyColors.cyan,
+                          color: Color(0xFF3C9BBE),
                         ),
                       ],
                     ),
@@ -143,37 +145,42 @@ class ProfileView extends StatelessWidget {
                     SizedBox(height: AppDimens.h20),
 
                     // Action Buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildOutlinedButton(
-                            icon: Icons.people_outline,
-                            text: '560 Friends',
-                            onTap: () {
-                              context.push(
-                                Routes.friendsRoute,
-                              );
-                            },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildOutlinedButton(
+                              icon: Icons.people_outline,
+                              text: '560 Friends',
+                              onTap: () {
+                                context.push(
+                                  Routes.friendsRoute,
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(width: AppDimens.w12),
-                        Expanded(
-                          child: _buildOutlinedButton(
-                            icon: Icons.phone_outlined,
-                            text: 'Contact Info',
-                            onTap: () {
-                              ContactInfoBottomSheet.show(
-                                context,
-                                email:
-                                    'ahmedhassan123@gmail.com',
-                                phone: '010010001001',
-                                connectedDate:
-                                    'July 5, 2022',
-                              );
-                            },
+                          SizedBox(width: AppDimens.w12),
+                          Expanded(
+                            child: _buildOutlinedButton(
+                              icon: Icons.phone_outlined,
+                              text: 'Contact Info',
+                              onTap: () {
+                                ContactInfoBottomSheet.show(
+                                  context,
+                                  email:
+                                      'ahmedhassan123@gmail.com',
+                                  phone: '010010001001',
+                                  connectedDate:
+                                      'July 5, 2022',
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -219,7 +226,7 @@ class ProfileView extends StatelessWidget {
                     children: [
                       Text(
                         'About me',
-                        style: TextStyles.bold16(
+                        style: TextStyles.semiBold16(
                           color: context.colors.textColor,
                         ),
                       ),
@@ -228,10 +235,10 @@ class ProfileView extends StatelessWidget {
                         'Lorem Ipsum is simply a printable and proforma text typesetting industry. Lorem Ipsum was the master of the industry Standard dummy text since the fifteenth century AD.',
                         style: TextStyles.regular14(
                           color: context.colors.textColor
-                              .withValues(alpha: AppDimens.opacity6),
-                        ).copyWith(
-                          height: 1.5,
-                        ),
+                              .withValues(
+                                alpha: AppDimens.opacity6,
+                              ),
+                        ).copyWith(height: 1.5),
                       ),
                     ],
                   ),
@@ -256,33 +263,62 @@ class ProfileView extends StatelessWidget {
                         children: [
                           Text(
                             'Sports',
-                            style: TextStyles.bold16(
-                              color: context.colors.textColor,
+                            style: TextStyles.semiBold16(
+                              color:
+                                  context.colors.textColor,
                             ),
                           ),
                           Text(
                             'Level 60',
-                            style: TextStyles.medium14(
+                            style: TextStyles.regular12(
                               color: context
                                   .colors
                                   .textColor
-                                  .withValues(alpha: AppDimens.opacity5),
+                                  .withValues(
+                                    alpha:
+                                        AppDimens.opacity5,
+                                  ),
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: AppDimens.h12),
+                      // Custom Progress Bar with Blue to Green Gradient
                       ClipRRect(
                         borderRadius: AppRadius.r10,
-                        child: LinearProgressIndicator(
-                          value: 0.6,
-                          backgroundColor: MyColors.grey
-                              .withValues(alpha: AppDimens.opacity2),
-                          valueColor:
-                              const AlwaysStoppedAnimation<
-                                Color
-                              >(MyColors.cyan),
-                          minHeight: AppDimens.h6,
+                        child: Container(
+                          height: AppDimens.h6,
+                          decoration: BoxDecoration(
+                            color: MyColors.grey.withValues(
+                              alpha: AppDimens.opacity2,
+                            ),
+                            borderRadius: AppRadius.r10,
+                          ),
+                          child: Stack(
+                            children: [
+                              FractionallySizedBox(
+                                widthFactor: 0.6,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        MyColors
+                                            .blue, // Blue start
+                                        MyColors
+                                            .greenButton, // Green end
+                                      ],
+                                      begin: Alignment
+                                          .centerLeft,
+                                      end: Alignment
+                                          .centerRight,
+                                    ),
+                                    borderRadius:
+                                        AppRadius.r10,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: AppDimens.h16),
@@ -296,19 +332,18 @@ class ProfileView extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatItem(
-                            icon: Icons
-                                .sports_soccer_outlined,
+                            iconSvg: ImgAssets.icMatches,
                             text: '53 Matches',
                           ),
                           SizedBox(width: AppDimens.w16),
                           _buildStatItem(
-                            icon:
-                                Icons.emoji_events_outlined,
+                            iconSvg:
+                                ImgAssets.icTournaments,
                             text: '13 Tournament',
                           ),
                           SizedBox(width: AppDimens.w16),
                           _buildStatItem(
-                            icon: Icons.sports_outlined,
+                            iconSvg: ImgAssets.icOrganized,
                             text: '15 Organized',
                           ),
                         ],
@@ -337,16 +372,18 @@ class ProfileView extends StatelessWidget {
                       children: [
                         Text(
                           'My Teams',
-                          style: TextStyles.bold16(
+                          style: TextStyles.semiBold16(
                             color: context.colors.textColor,
                           ),
                         ),
                         SizedBox(height: AppDimens.h4),
                         Text(
                           'This teams to join the tournaments',
-                          style: TextStyles.regular12(
+                          style: TextStyles.regular10(
                             color: context.colors.textColor
-                                .withValues(alpha: AppDimens.opacity5),
+                                .withValues(
+                                  alpha: AppDimens.opacity5,
+                                ),
                           ),
                         ),
                         SizedBox(height: AppDimens.h16),
@@ -383,11 +420,17 @@ class ProfileView extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: AppDimens.iconSize18, color: MyColors.white),
+          Icon(
+            icon,
+            size: AppDimens.iconSize18,
+            color: MyColors.white,
+          ),
           SizedBox(width: AppDimens.w4),
           Text(
             text,
-            style: TextStyles.semiBold14(color: MyColors.white),
+            style: TextStyles.semiBold14(
+              color: MyColors.white,
+            ),
           ),
         ],
       ),
@@ -414,11 +457,17 @@ class ProfileView extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: AppDimens.iconSize20, color: MyColors.black87),
+          Icon(
+            icon,
+            size: AppDimens.iconSize20,
+            color: MyColors.black87,
+          ),
           SizedBox(width: AppDimens.w6),
           Text(
             text,
-            style: TextStyles.medium14(color: MyColors.black87),
+            style: TextStyles.medium14(
+              color: MyColors.black87,
+            ),
           ),
         ],
       ),
@@ -436,7 +485,9 @@ class ProfileView extends StatelessWidget {
         borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity03),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity03,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
@@ -447,12 +498,16 @@ class ProfileView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyles.bold14(color: MyColors.black87),
+            style: TextStyles.semiBold16(
+              color: MyColors.darkGrayColor,
+            ),
           ),
           SizedBox(height: AppDimens.h8),
           Text(
             value,
-            style: TextStyles.regular14(color: MyColors.black54),
+            style: TextStyles.regular14(
+              color: MyColors.black54,
+            ),
           ),
         ],
       ),
@@ -468,7 +523,9 @@ class ProfileView extends StatelessWidget {
         borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity03),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity03,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
@@ -479,17 +536,27 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget _buildStatItem({
-    required IconData icon,
+    required String iconSvg,
     required String text,
   }) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: AppDimens.iconSize18, color: MyColors.black54),
+        SvgPicture.asset(
+          iconSvg,
+          width: AppDimens.iconSize18,
+          height: AppDimens.iconSize18,
+          colorFilter: ColorFilter.mode(
+            MyColors.black54,
+            BlendMode.srcIn,
+          ),
+        ),
         SizedBox(width: AppDimens.w4),
         Text(
           text,
-          style: TextStyles.medium12(color: MyColors.black54),
+          style: TextStyles.regular10(
+            color: MyColors.black54,
+          ),
         ),
       ],
     );
@@ -509,12 +576,20 @@ class ProfileView extends StatelessWidget {
             children: [
               Text(
                 'Team Name',
-                style: TextStyles.semiBold15(color: MyColors.black87),
+                style: TextStyles.semiBold15(
+                  color: MyColors.black87,
+                ),
               ),
               SizedBox(height: AppDimens.h2),
-              Text(
-                'Football team',
-                style: TextStyles.medium12(color: MyColors.greenButton),
+              Row(
+                children: [
+                  Text(
+                    'Football team',
+                    style: TextStyles.regular10(
+                      color: MyColors.greenButton,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -563,7 +638,9 @@ class ProfileView extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '+6',
-                      style: TextStyles.bold10(color: MyColors.white),
+                      style: TextStyles.bold10(
+                        color: MyColors.white,
+                      ),
                     ),
                   ),
                 ),

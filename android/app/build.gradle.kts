@@ -24,6 +24,7 @@ android {
         applicationId = "com.example.test"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
+        // Google Maps Flutter requires minSdk 20+, setting to 21 for safety
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

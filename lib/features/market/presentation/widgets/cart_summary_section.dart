@@ -27,7 +27,9 @@ class CartSummarySection extends StatelessWidget {
         color: MyColors.white,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity05,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, -2),
           ),
@@ -37,33 +39,39 @@ class CartSummarySection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Payment Summary Header
-          Row(
-            children: [
-              Icon(
-                Icons.keyboard_arrow_down,
-                color: MyColors.greenButton,
-                size: AppDimens.iconSize24,
+          Icon(
+            Icons.keyboard_arrow_down,
+            color: MyColors.greenButton,
+            size: AppDimens.iconSize24,
+          ),
+          SizedBox(width: AppDimens.w8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Payment summary',
+              style: TextStyles.semiBold16(
+                color: MyColors.darkGrayColor,
               ),
-              SizedBox(width: AppDimens.w8),
-              Text(
-                'Payment summary',
-                style: TextStyles.bold16(color: MyColors.black87),
-              ),
-            ],
+            ),
           ),
           SizedBox(height: AppDimens.h16),
 
           // Subtotal
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Subtotal',
-                style: TextStyles.medium14(color: MyColors.grey700),
+                style: TextStyles.semiBold16(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               Text(
                 '${subtotal.toStringAsFixed(0)} EGP',
-                style: TextStyles.semiBold14(color: MyColors.black87),
+                style: TextStyles.semiBold16(
+                  color: MyColors.black87,
+                ),
               ),
             ],
           ),
@@ -71,15 +79,20 @@ class CartSummarySection extends StatelessWidget {
 
           // Delivery Fees
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Delivery Fees',
-                style: TextStyles.medium14(color: MyColors.grey700),
+                style: TextStyles.semiBold16(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               Text(
                 '${deliveryFees.toStringAsFixed(0)} EGP',
-                style: TextStyles.semiBold14(color: MyColors.black87),
+                style: TextStyles.semiBold16(
+                  color: MyColors.black87,
+                ),
               ),
             ],
           ),
@@ -94,6 +107,8 @@ class CartSummarySection extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 foregroundColor: MyColors.white,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r12,
                 ),
@@ -101,7 +116,7 @@ class CartSummarySection extends StatelessWidget {
               ),
               child: Text(
                 'Checkout',
-                style: TextStyles.bold16(),
+                style: TextStyles.semiBold20(),
               ),
             ),
           ),

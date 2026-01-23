@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_colors.dart';
 import '../utils/app_dimens.dart';
 import '../utils/app_padding.dart';
 import '../utils/app_radius.dart';
@@ -30,7 +31,7 @@ class AppElevatedButton extends StatelessWidget {
   const AppElevatedButton({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
     this.buttonColor,
     this.borderColor,
     this.iconColor,
@@ -60,8 +61,14 @@ class AppElevatedButton extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         style: ElevatedButton.styleFrom(
           padding: padding ?? AppPadding.h16v12,
-          foregroundColor: context.colors.baseColor,
-          backgroundColor: buttonColor ?? context.colors.main,
+          foregroundColor: onPressed == null
+              ? MyColors.white
+              : context.colors.baseColor,
+          backgroundColor: onPressed == null
+              ? MyColors.grey300
+              : (buttonColor ?? context.colors.main),
+          disabledBackgroundColor: MyColors.grey300,
+          disabledForegroundColor: MyColors.white,
           elevation: elevation ?? AppDimens.elevation0,
           side: borderColor != null
               ? BorderSide(
@@ -74,7 +81,12 @@ class AppElevatedButton extends StatelessWidget {
                 ? BorderRadius.circular(buttonRadius!.r)
                 : AppRadius.r8,
           ),
-          minimumSize: minimumSize ?? Size(double.infinity, AppDimens.buttonHeight56),
+          minimumSize:
+              minimumSize ??
+              Size(
+                double.infinity,
+                AppDimens.buttonHeight56,
+              ),
           maximumSize: maximumSize,
         ),
         child: Center(
@@ -82,8 +94,10 @@ class AppElevatedButton extends StatelessWidget {
             builder: (BuildContext context) {
               if (icon != null || iconSvg != null) {
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.center,
                   children: <Widget>[
                     Builder(
                       builder: (context) {
@@ -111,9 +125,13 @@ class AppElevatedButton extends StatelessWidget {
                     SizedBox(width: AppDimens.w8),
                     Text(
                       text,
-                      style: textStyle ??
+                      style:
+                          textStyle ??
                           TextStyles.medium16(
-                              color: textColor ?? context.colors.baseColor),
+                            color:
+                                textColor ??
+                                context.colors.baseColor,
+                          ),
                       textAlign: TextAlign.center,
                       maxLines: 1,
                     ),
@@ -122,9 +140,13 @@ class AppElevatedButton extends StatelessWidget {
               }
               return Text(
                 text,
-                style: textStyle ??
+                style:
+                    textStyle ??
                     TextStyles.medium16(
-                        color: textColor ?? context.colors.baseColor),
+                      color:
+                          textColor ??
+                          context.colors.baseColor,
+                    ),
                 textAlign: TextAlign.center,
                 maxLines: 1,
               );

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../injection_container.dart';
+import '../utils/app_colors.dart';
 import '../utils/validator.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -161,7 +162,7 @@ class AppTextFormField extends StatelessWidget {
           fontSize: myFontSize - 4,
         ),
         hintStyle: theme.bodyMedium!.copyWith(
-          color: Colors.grey,
+          color: MyColors.darkGrayColor,
           fontSize: myFontSize,
         ),
       ),

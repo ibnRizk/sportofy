@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -8,7 +9,6 @@ import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
-import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/market_product_card.dart';
 
 class MarketView extends StatefulWidget {
@@ -19,11 +19,17 @@ class MarketView extends StatefulWidget {
 }
 
 class _MarketViewState extends State<MarketView> {
-  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController =
+      TextEditingController();
   String _selectedCategory = 'Shoes';
   int _cartItemCount = 3; // Mock cart count
 
-  final List<String> _categories = ['Shoes', 'Balls', 'Bags', 'Clothes'];
+  final List<String> _categories = [
+    'Shoes',
+    'Balls',
+    'Bags',
+    'Clothes',
+  ];
 
   // Mock products data
   final List<Map<String, dynamic>> _products = [
@@ -63,19 +69,28 @@ class _MarketViewState extends State<MarketView> {
 
   List<Map<String, dynamic>> get _filteredProducts {
     return _products
-        .where((product) => product['category'] == _selectedCategory)
+        .where(
+          (product) =>
+              product['category'] == _selectedCategory,
+        )
         .toList();
   }
 
-  void _updateProductQuantity(String productId, int newQuantity) {
+  void _updateProductQuantity(
+    String productId,
+    int newQuantity,
+  ) {
     setState(() {
-      final productIndex =
-          _products.indexWhere((p) => p['id'] == productId);
+      final productIndex = _products.indexWhere(
+        (p) => p['id'] == productId,
+      );
       if (productIndex != -1) {
         _products[productIndex]['quantity'] = newQuantity;
         // Update cart count
-        _cartItemCount = _products
-            .fold(0, (sum, p) => sum + (p['quantity'] as int));
+        _cartItemCount = _products.fold(
+          0,
+          (sum, p) => sum + (p['quantity'] as int),
+        );
       }
     });
   }
@@ -89,92 +104,148 @@ class _MarketViewState extends State<MarketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colors.white,
+      backgroundColor: MyColors.white,
       appBar: AppBar(
-        backgroundColor: context.colors.white,
+        backgroundColor: MyColors.white,
         elevation: 0,
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            ImgAssets.icBack,
+            width: AppDimens.iconSize24,
+            height: AppDimens.iconSize24,
+            colorFilter: const ColorFilter.mode(
+              MyColors.darkGrayColor,
+              BlendMode.srcIn,
+            ),
+          ),
+          onPressed: () => context.pop(),
+        ),
         title: Text(
           'Market',
-          style: TextStyles.bold18(color: context.colors.textColor),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
-        centerTitle: true,
+
         actions: [
-          // Cart Icon with Badge
-          Stack(
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  size: AppDimens.iconSize24,
-                  color: context.colors.textColor,
+          // Cart Icon in Light Blue/Grey Circle
+          Padding(
+            padding: EdgeInsets.only(right: AppDimens.w16),
+            child: GestureDetector(
+              onTap: () {
+                context.push(Routes.cartRoute);
+              },
+              child: Container(
+                width: AppDimens.iconSize40,
+                height: AppDimens.iconSize40,
+                decoration: BoxDecoration(
+                  color: MyColors.grey100,
+                  shape: BoxShape.circle,
                 ),
-                 onPressed: () {
-                   context.push(Routes.cartRoute);
-                 },
-              ),
-              if (_cartItemCount > 0)
-                Positioned(
-                  right: AppDimens.w8,
-                  top: AppDimens.h8,
-                  child: Container(
-                    padding: AppPadding.p4,
-                    decoration: BoxDecoration(
-                      color: MyColors.red,
-                      shape: BoxShape.circle,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Icon(
+                      Icons.shopping_cart_outlined,
+                      size: AppDimens.iconSize20,
+                      color: MyColors.darkGrayColor,
                     ),
-                    constraints: BoxConstraints(
-                      minWidth: AppDimens.w16,
-                      minHeight: AppDimens.h16,
-                    ),
-                    child: Center(
-                      child: Text(
-                        _cartItemCount > 9 ? '9+' : _cartItemCount.toString(),
-                        style: TextStyles.bold10(color: MyColors.white),
+                    if (_cartItemCount > 0)
+                      Positioned(
+                        right: AppDimens.w4,
+                        top: AppDimens.h4,
+                        child: Container(
+                          padding: AppPadding.p4,
+                          decoration: BoxDecoration(
+                            color: MyColors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          constraints: BoxConstraints(
+                            minWidth: AppDimens.w16,
+                            minHeight: AppDimens.h16,
+                          ),
+                          child: Center(
+                            child: Text(
+                              _cartItemCount > 9
+                                  ? '9+'
+                                  : _cartItemCount
+                                        .toString(),
+                              style: TextStyles.bold10(
+                                color: MyColors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                  ],
                 ),
-            ],
+              ),
+            ),
           ),
         ],
       ),
       body: Column(
         children: [
+          SizedBox(height: AppDimens.h16),
           // Search Bar
           Padding(
-            padding: AppPadding.h20v16,
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyles.regular14(color: MyColors.grey600),
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 20.sp,
-                  color: MyColors.grey600,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.w20,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: MyColors.white,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(
+                  color: MyColors.darkGrayColor,
+                  width: 1,
                 ),
-                filled: true,
-                fillColor: MyColors.grey100,
-                border: OutlineInputBorder(
-                  borderRadius: AppRadius.r12,
-                  borderSide: BorderSide.none,
+              ),
+              child: TextField(
+                controller: _searchController,
+                style: TextStyles.regular14(
+                  color: MyColors.darkGrayColor,
                 ),
-                contentPadding: AppPadding.h16v12,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyles.regular14(
+                    color: MyColors.darkGrayColor,
+                  ),
+                  prefixIcon: Padding(
+                    padding: AppPadding.p12,
+                    child: Icon(
+                      Icons.search,
+                      size: AppDimens.iconSize20,
+                      color: MyColors.darkGrayColor,
+                    ),
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppDimens.w16,
+                    vertical: AppDimens.h12,
+                  ),
+                  isDense: true,
+                ),
               ),
             ),
           ),
+          SizedBox(height: AppDimens.h16),
 
           // Categories
           SizedBox(
-            height: AppDimens.containerHeight50,
+            height: 42.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              padding: AppPadding.h20,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimens.w20,
+              ),
               itemCount: _categories.length,
-              separatorBuilder: (context, index) => SizedBox(width: AppDimens.w12),
+              separatorBuilder: (context, index) =>
+                  SizedBox(width: AppDimens.w12),
               itemBuilder: (context, index) {
                 final category = _categories[index];
-                final isSelected = _selectedCategory == category;
+                final isSelected =
+                    _selectedCategory == category;
                 return GestureDetector(
                   onTap: () {
                     setState(() {
@@ -186,14 +257,14 @@ class _MarketViewState extends State<MarketView> {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? MyColors.greenButton
-                          : context.colors.white,
+                          : MyColors.white,
                       borderRadius: AppRadius.r20,
-                      border: Border.all(
-                        color: isSelected
-                            ? MyColors.greenButton
-                            : MyColors.grey300,
-                        width: AppDimens.borderWidth1,
-                      ),
+                      border: isSelected
+                          ? null
+                          : Border.all(
+                              color: Colors.grey[300]!,
+                              width: 1,
+                            ),
                     ),
                     child: Center(
                       child: Text(
@@ -201,7 +272,7 @@ class _MarketViewState extends State<MarketView> {
                         style: TextStyles.medium14(
                           color: isSelected
                               ? MyColors.white
-                              : context.colors.textColor,
+                              : MyColors.darkGrayColor,
                         ),
                       ),
                     ),
@@ -215,10 +286,17 @@ class _MarketViewState extends State<MarketView> {
 
           // Category Title
           Padding(
-            padding: AppPadding.h20,
-            child: Text(
-              _selectedCategory,
-              style: TextStyles.bold18(color: context.colors.textColor),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.w20,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                _selectedCategory,
+                style: TextStyles.semiBold16(
+                  color: MyColors.darkGrayColor,
+                ),
+              ),
             ),
           ),
 
@@ -227,13 +305,16 @@ class _MarketViewState extends State<MarketView> {
           // Products Grid
           Expanded(
             child: GridView.builder(
-              padding: AppPadding.h20,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: AppDimens.w12,
-                mainAxisSpacing: AppDimens.h16,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimens.w20,
               ),
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    crossAxisSpacing: AppDimens.w12,
+                    mainAxisSpacing: AppDimens.h16,
+                  ),
               itemCount: _filteredProducts.length,
               itemBuilder: (context, index) {
                 final product = _filteredProducts[index];

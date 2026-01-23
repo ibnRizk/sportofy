@@ -121,7 +121,7 @@ class CommentTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey[600],
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 SizedBox(width: 16.w),
@@ -135,7 +135,7 @@ class CommentTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ),
@@ -150,7 +150,7 @@ class CommentTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ),
@@ -161,7 +161,7 @@ class CommentTile extends StatelessWidget {
                   Icon(
                     Icons.thumb_up,
                     size: 14.sp,
-                    color: Colors.grey[600],
+                    color: MyColors.darkGrayColor,
                   ),
                   SizedBox(width: 4.w),
                   Text(
@@ -169,7 +169,7 @@ class CommentTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey[600],
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ],

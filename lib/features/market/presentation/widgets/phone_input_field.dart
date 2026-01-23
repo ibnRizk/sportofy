@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 
 class PhoneInputField extends StatelessWidget {
   final TextEditingController? controller;
 
-  const PhoneInputField({
-    super.key,
-    this.controller,
-  });
+  const PhoneInputField({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +14,9 @@ class PhoneInputField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
+
         border: Border.all(
-          color: Colors.grey[300]!,
+          color: MyColors.darkGrayColor,
           width: 1,
         ),
       ),
@@ -27,21 +27,24 @@ class PhoneInputField extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Row(
               children: [
-                // Egypt Flag (using placeholder - you can replace with actual flag asset)
-                Container(
+                // Egypt Flag
+                Image.asset(
+                  ImgAssets.egyptFlag,
                   width: 24.w,
                   height: 16.h,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(2.r),
-                  ),
-                  child: Center(
-                    child: Container(
-                      width: 24.w,
-                      height: 5.h,
-                      color: Colors.white,
-                    ),
-                  ),
+                  fit: BoxFit.cover,
+                  errorBuilder:
+                      (context, error, stackTrace) {
+                        return Container(
+                          width: 24.w,
+                          height: 16.h,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.circular(2.r),
+                          ),
+                        );
+                      },
                 ),
                 SizedBox(width: 8.w),
                 Text(
@@ -70,15 +73,20 @@ class PhoneInputField extends StatelessWidget {
               keyboardType: TextInputType.phone,
               style: TextStyle(
                 fontSize: 16.sp,
-                color: Colors.black87,
+                color: MyColors.darkGrayColor,
               ),
               decoration: InputDecoration(
                 hintText: 'Enter your Phone number',
                 hintStyle: TextStyle(
                   fontSize: 16.sp,
-                  color: Colors.grey[600],
+                  color: Colors.grey[400]!,
                 ),
-                border: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: MyColors.darkGrayColor,
+                    width: 1,
+                  ),
+                ),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 16.w,
                   vertical: 16.h,

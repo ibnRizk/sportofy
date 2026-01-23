@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
@@ -34,7 +35,9 @@ class OrderCard extends StatelessWidget {
           borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+              color: MyColors.black.withValues(
+                alpha: AppDimens.opacity05,
+              ),
               blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
@@ -50,7 +53,9 @@ class OrderCard extends StatelessWidget {
               children: [
                 Text(
                   'Order ID : $orderId',
-                  style: TextStyles.bold14(color: MyColors.black87),
+                  style: TextStyles.medium12(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
                 _buildStatusBadge(),
               ],
@@ -61,12 +66,16 @@ class OrderCard extends StatelessWidget {
             // Info Section
             Text(
               'Order date: $orderDate',
-              style: TextStyles.regular13(color: MyColors.grey600),
+              style: TextStyles.regular12(
+                color: MyColors.darkGrayColor,
+              ),
             ),
             SizedBox(height: AppDimens.h4),
             Text(
               'Received date: $receivedDate',
-              style: TextStyles.regular13(color: MyColors.grey600),
+              style: TextStyles.regular12(
+                color: MyColors.darkGrayColor,
+              ),
             ),
 
             // Divider
@@ -79,7 +88,10 @@ class OrderCard extends StatelessWidget {
             // Footer Action Button
             Align(
               alignment: Alignment.centerRight,
-              child: _buildActionButton(),
+              child: SizedBox(
+                height: AppDimens.buttonHeight40,
+                child: _buildActionButton(),
+              ),
             ),
           ],
         ),
@@ -101,11 +113,15 @@ class OrderCard extends StatelessWidget {
         textColor = MyColors.red700; // Red
         break;
       case 'shipped':
-        bgColor = MyColors.orange.withValues(alpha: AppDimens.opacity1); // Light Orange
+        bgColor = MyColors.orange.withValues(
+          alpha: AppDimens.opacity1,
+        ); // Light Orange
         textColor = MyColors.orange; // Orange
         break;
       case 'delivered':
-        bgColor = MyColors.green.withValues(alpha: AppDimens.opacity1); // Light Green
+        bgColor = MyColors.green.withValues(
+          alpha: AppDimens.opacity1,
+        ); // Light Green
         textColor = MyColors.green; // Green
         break;
       default:
@@ -121,7 +137,7 @@ class OrderCard extends StatelessWidget {
       ),
       child: Text(
         status,
-        style: TextStyles.medium13(color: textColor),
+        style: TextStyles.medium12(color: textColor),
       ),
     );
   }
@@ -140,8 +156,8 @@ class OrderCard extends StatelessWidget {
       textColor = MyColors.red700;
     } else if (status.toLowerCase() == 'shipped') {
       buttonText = 'Cancel';
-      borderColor = MyColors.grey300;
-      textColor = MyColors.grey400;
+      borderColor = MyColors.darkGrayColor;
+      textColor = MyColors.darkGrayColor;
       isDisabled = true;
     } else if (status.toLowerCase() == 'canceled' ||
         status.toLowerCase() == 'delivered') {
@@ -151,8 +167,8 @@ class OrderCard extends StatelessWidget {
       icon = Icons.refresh;
     } else {
       buttonText = 'Action';
-      borderColor = MyColors.grey300;
-      textColor = MyColors.grey700;
+      borderColor = MyColors.darkGrayColor;
+      textColor = MyColors.darkGrayColor;
     }
 
     return OutlinedButton(
@@ -163,23 +179,27 @@ class OrderCard extends StatelessWidget {
             },
       style: OutlinedButton.styleFrom(
         foregroundColor: textColor,
-        side: BorderSide(color: borderColor, width: AppDimens.borderWidth2),
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.r8,
+        side: BorderSide(
+          color: borderColor,
+          width: AppDimens.borderWidth2,
         ),
-        padding: AppPadding.h24v10,
+        shape: RoundedRectangleBorder(
+          borderRadius: AppRadius.r6,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 40.w),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: AppDimens.iconSize18, color: textColor),
+            Icon(
+              icon,
+              size: AppDimens.iconSize18,
+              color: textColor,
+            ),
             SizedBox(width: AppDimens.w6),
           ],
-          Text(
-            buttonText,
-            style: TextStyles.medium14(),
-          ),
+          Text(buttonText, style: TextStyles.medium12()),
         ],
       ),
     );

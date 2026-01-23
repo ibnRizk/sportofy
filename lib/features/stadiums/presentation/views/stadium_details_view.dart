@@ -416,6 +416,8 @@ class _StadiumDetailsViewState
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: Colors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   padding: EdgeInsets.symmetric(
                     horizontal: 40.w,
                     vertical: 14.h,

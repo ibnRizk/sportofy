@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class OrderSuccessSheet extends StatefulWidget {
   const OrderSuccessSheet({super.key});
@@ -13,140 +16,137 @@ class OrderSuccessSheet extends StatefulWidget {
 
 class _OrderSuccessSheetState
     extends State<OrderSuccessSheet> {
-  @override
-  void initState() {
-    super.initState();
-    // Automatically navigate to home after 2 seconds
-    Future.delayed(const Duration(seconds: 2), () {
+  void _navigateToHome() {
+    // Navigate to home using go_router
+    Future.delayed(const Duration(milliseconds: 300), () {
       if (!mounted) return;
-      // Close the sheet first
-      Navigator.pop(context);
-      // Clear navigation stack and navigate to home
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (!context.mounted) return;
-        Navigator.of(
-          context,
-          rootNavigator: true,
-        ).pushNamedAndRemoveUntil(
-          Routes.homeScreenRoute,
-          (route) => false,
-        );
-      });
+      context.go(Routes.homeScreenRoute);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 40.h,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.r),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Success Icon
-          Container(
-            width: 80.w,
-            height: 80.w,
-            decoration: BoxDecoration(
-              color: MyColors.greenButton,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: MyColors.greenButton.withValues(
-                    alpha: 0.3,
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          _navigateToHome();
+        }
+      },
+      child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 40.h,
+          ),
+          decoration: BoxDecoration(
+            color: MyColors.white,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(30.r),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Success Title
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
+                child: Text(
+                  'Your request has been sent successfully',
+                  style: TextStyles.medium18(
+                    color: MyColors.darkGrayColor,
                   ),
-                  blurRadius: 20,
-                  offset: const Offset(0, 4),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
-            child: Icon(
-              Icons.check,
-              size: 50.sp,
-              color: Colors.white,
-            ),
-          ),
+              ),
 
-          SizedBox(height: 32.h),
+              SizedBox(height: 32.h),
 
-          // Title
-          Text(
-            'Order placed successfully',
-            style: TextStyle(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-            textAlign: TextAlign.center,
-          ),
+              // Delivery Illustration Image
+              Image.asset(
+                ImgAssets.deliverySuccess,
+                width: double.infinity,
+                height: 250.h,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: double.infinity,
+                    height: 250.h,
+                    decoration: BoxDecoration(
+                      color: MyColors.grey100,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.local_shipping,
+                      size: 80.sp,
+                      color: MyColors.grey400,
+                    ),
+                  );
+                },
+              ),
 
-          SizedBox(height: 12.h),
+              SizedBox(height: 24.h),
 
-          // Subtitle
-          Text(
-            'You will receive an email confirmation',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[600],
-            ),
-            textAlign: TextAlign.center,
-          ),
+              // Delivery Time Text
+              Row(
+                children: [
+                  Text(
+                    'The order will reach you within ',
+                    style: TextStyles.regular18(
+                      color: MyColors.darkGrayColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    ' 3-5 days',
+                    style: TextStyles.bold18(
+                      color: MyColors.darkGrayColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
 
-          SizedBox(height: 40.h),
+              SizedBox(height: 40.h),
 
-          // Back to Home Button
-          SizedBox(
-            width: double.infinity,
-            height: 50.h,
-            child: ElevatedButton(
-              onPressed: () {
-                // Close the sheet first
-                Navigator.pop(context);
-
-                // Clear navigation stack and navigate to home
-                Future.delayed(
-                  const Duration(milliseconds: 300),
-                  () {
-                    if (!context.mounted) return;
-                    Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).pushNamedAndRemoveUntil(
-                      Routes.homeScreenRoute,
-                      (route) => false,
-                    );
+              // Back to Home Button
+              SizedBox(
+                width: double.infinity,
+                height: 53.h,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Close the sheet - navigation will happen via PopScope
+                    if (Navigator.canPop(context)) {
+                      context.go(Routes.homeScreenRoute);
+                    }
                   },
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.greenButton,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MyColors.greenButton,
+                    foregroundColor: MyColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    'Back to home',
+                    style: TextStyles.semiBold20(
+                      color: MyColors.white,
+                    ),
+                  ),
                 ),
-                elevation: 0,
               ),
-              child: Text(
-                'Back to home',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
 
-          SizedBox(height: 20.h),
-        ],
+              SizedBox(height: 20.h),
+            ],
+          ),
+        ),
       ),
     );
   }

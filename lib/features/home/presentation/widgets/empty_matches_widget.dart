@@ -31,7 +31,7 @@ class EmptyMatchesWidget extends StatelessWidget {
           'no_matches_near'.tr(context),
           textAlign: TextAlign.center,
           style: TextStyles.medium14(
-            color: MyColors.greyText,
+            color: MyColors.darkGrayColor,
           ),
         ),
       ),

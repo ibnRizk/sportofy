@@ -120,6 +120,8 @@ class JoinTeamSheet extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r10,
                 ),

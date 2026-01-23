@@ -24,18 +24,14 @@ class AddressOptionTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              size: 24.sp,
-              color: Colors.black87,
-            ),
+            Icon(icon, size: 24.sp, color: Colors.black87),
             SizedBox(width: 16.w),
             Expanded(
               child: Text(
                 text,
                 style: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: Colors.black87,
                 ),
               ),

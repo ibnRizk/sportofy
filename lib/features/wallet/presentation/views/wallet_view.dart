@@ -66,7 +66,9 @@ class _WalletViewState extends State<WalletView> {
         ),
         title: Text(
           'Wallet',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
       ),
@@ -88,7 +90,7 @@ class _WalletViewState extends State<WalletView> {
             padding: AppPadding.h20,
             child: Text(
               'Recent transaction',
-              style: TextStyles.bold16(
+              style: TextStyles.semiBold16(
                 color: MyColors.black87,
               ),
             ),
@@ -121,8 +123,8 @@ class _WalletViewState extends State<WalletView> {
             children: [
               Text(
                 'Balance Available',
-                style: TextStyles.medium14(
-                  color: MyColors.grey600,
+                style: TextStyles.medium16(
+                  color: MyColors.darkGrayColor,
                 ),
               ),
               SizedBox(height: AppDimens.h8),
@@ -143,7 +145,7 @@ class _WalletViewState extends State<WalletView> {
             style: OutlinedButton.styleFrom(
               foregroundColor: MyColors.black87,
               side: BorderSide(
-                color: MyColors.grey400,
+                color: MyColors.darkGrayColor,
                 width: AppDimens.borderWidth2,
               ),
               shape: RoundedRectangleBorder(
@@ -279,14 +281,14 @@ class _TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   type,
-                  style: TextStyles.bold15(
+                  style: TextStyles.medium14(
                     color: MyColors.black87,
                   ),
                 ),
                 SizedBox(height: AppDimens.h4),
                 Text(
                   date,
-                  style: TextStyles.regular13(
+                  style: TextStyles.regular12(
                     color: MyColors.grey500,
                   ),
                 ),
@@ -297,7 +299,7 @@ class _TransactionTile extends StatelessWidget {
           // Amount
           Text(
             amount,
-            style: TextStyles.bold15(
+            style: TextStyles.medium14(
               color: MyColors.black87,
             ),
           ),

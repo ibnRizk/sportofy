@@ -15,7 +15,12 @@ class PointsView extends StatefulWidget {
 class _PointsViewState extends State<PointsView> {
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['All', 'Received', 'Used', 'Refund'];
+  final List<String> _filters = [
+    'All',
+    'Received',
+    'Used',
+    'Refund',
+  ];
 
   final List<Map<String, dynamic>> _transactions = [
     {
@@ -31,7 +36,9 @@ class _PointsViewState extends State<PointsView> {
       'date': 'June 30, 2023',
       'amount': '500 Points',
       'icon': Icons.call_received,
-      'iconBg': MyColors.green.withValues(alpha: AppDimens.opacity1), // Light Green
+      'iconBg': MyColors.green.withValues(
+        alpha: AppDimens.opacity1,
+      ), // Light Green
       'iconColor': MyColors.green,
     },
     {
@@ -39,7 +46,9 @@ class _PointsViewState extends State<PointsView> {
       'date': 'June 30, 2023',
       'amount': '200 Points',
       'icon': Icons.call_made,
-      'iconBg': MyColors.orange.withValues(alpha: AppDimens.opacity1), // Light Orange/Grey
+      'iconBg': MyColors.orange.withValues(
+        alpha: AppDimens.opacity1,
+      ), // Light Orange/Grey
       'iconColor': MyColors.orange,
     },
   ];
@@ -61,7 +70,9 @@ class _PointsViewState extends State<PointsView> {
         ),
         title: Text(
           'Points',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.black,
+          ),
         ),
         centerTitle: false,
       ),
@@ -83,16 +94,16 @@ class _PointsViewState extends State<PointsView> {
             padding: AppPadding.h20,
             child: Text(
               'Recent transaction',
-              style: TextStyles.bold16(color: MyColors.black87),
+              style: TextStyles.semiBold16(
+                color: MyColors.black87,
+              ),
             ),
           ),
 
           SizedBox(height: AppDimens.h12),
 
           // Transaction List
-          Expanded(
-            child: _buildTransactionList(),
-          ),
+          Expanded(child: _buildTransactionList()),
         ],
       ),
     );
@@ -115,7 +126,9 @@ class _PointsViewState extends State<PointsView> {
             children: [
               Text(
                 '336',
-                style: TextStyles.bold48(color: MyColors.black87),
+                style: TextStyles.bold32(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               SizedBox(width: AppDimens.w8),
               // Coin Emoji (Using text-based emoji as placeholder)
@@ -134,9 +147,9 @@ class _PointsViewState extends State<PointsView> {
           Text(
             'Play and get points to get discounts\non your purchases',
             textAlign: TextAlign.center,
-            style: TextStyles.medium14(color: MyColors.grey700).copyWith(
-              height: 1.4,
-            ),
+            style: TextStyles.regular16(
+              color: MyColors.darkGrayColor,
+            ).copyWith(height: 1.4),
           ),
 
           SizedBox(height: AppDimens.h8),
@@ -145,7 +158,9 @@ class _PointsViewState extends State<PointsView> {
           Text(
             '1 points correspond to 1 pounds',
             textAlign: TextAlign.center,
-            style: TextStyles.regular12(color: MyColors.grey500),
+            style: TextStyles.regular10(
+              color: MyColors.darkGrayColor,
+            ),
           ),
         ],
       ),
@@ -159,7 +174,8 @@ class _PointsViewState extends State<PointsView> {
         padding: AppPadding.h20,
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: AppDimens.w10),
+        separatorBuilder: (context, index) =>
+            SizedBox(width: AppDimens.w10),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -171,7 +187,9 @@ class _PointsViewState extends State<PointsView> {
             child: Container(
               padding: AppPadding.h20v8,
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : MyColors.white,
+                color: isSelected
+                    ? MyColors.greenButton
+                    : MyColors.white,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
@@ -183,7 +201,9 @@ class _PointsViewState extends State<PointsView> {
                 child: Text(
                   _filters[index],
                   style: TextStyles.medium14(
-                    color: isSelected ? MyColors.white : MyColors.grey600,
+                    color: isSelected
+                        ? MyColors.white
+                        : MyColors.grey600,
                   ),
                 ),
               ),
@@ -265,12 +285,16 @@ class _TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   type,
-                  style: TextStyles.bold15(color: MyColors.black87),
+                  style: TextStyles.medium14(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h4),
                 Text(
                   date,
-                  style: TextStyles.regular13(color: MyColors.grey500),
+                  style: TextStyles.regular12(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
               ],
             ),
@@ -279,7 +303,9 @@ class _TransactionTile extends StatelessWidget {
           // Amount
           Text(
             amount,
-            style: TextStyles.bold15(color: MyColors.black87),
+            style: TextStyles.medium14(
+              color: MyColors.black87,
+            ),
           ),
         ],
       ),

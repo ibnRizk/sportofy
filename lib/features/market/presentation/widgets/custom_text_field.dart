@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -20,34 +21,34 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       style: TextStyle(
         fontSize: 16.sp,
-        color: Colors.black87,
+        color: MyColors.darkGrayColor,
       ),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
           fontSize: 16.sp,
-          color: Colors.grey[600],
+          color: Colors.grey[400]!,
         ),
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(
-            color: Colors.grey[300]!,
+            color: MyColors.darkGrayColor,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(
-            color: Colors.grey[300]!,
+            color: MyColors.darkGrayColor,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(
-            color: Colors.grey[400]!,
+            color: MyColors.darkGrayColor,
             width: 1.5,
           ),
         ),

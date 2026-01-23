@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
@@ -20,7 +21,10 @@ class AddressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      margin: EdgeInsets.symmetric(
+        horizontal: 20.w,
+        vertical: 16.h,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
@@ -47,18 +51,19 @@ class AddressCard extends StatelessWidget {
                   width: double.infinity,
                   height: 180.h,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: double.infinity,
-                      height: 180.h,
-                      color: Colors.grey[200],
-                      child: Icon(
-                        Icons.map,
-                        size: 50.sp,
-                        color: Colors.grey[400],
-                      ),
-                    );
-                  },
+                  errorBuilder:
+                      (context, error, stackTrace) {
+                        return Container(
+                          width: double.infinity,
+                          height: 180.h,
+                          color: Colors.grey[200],
+                          child: Icon(
+                            Icons.map,
+                            size: 50.sp,
+                            color: Colors.grey[400],
+                          ),
+                        );
+                      },
                 ),
               ),
               // Green Pin Icon Centered
@@ -83,10 +88,10 @@ class AddressCard extends StatelessWidget {
                 // Title Row
                 Row(
                   children: [
-                    Icon(
-                      Icons.location_on,
-                      size: 20.sp,
-                      color: MyColors.greenButton,
+                    SvgPicture.asset(
+                      'assets/icons/location.svg',
+                      width: 20.w,
+                      height: 20.h,
                     ),
                     SizedBox(width: 8.w),
                     Expanded(
@@ -95,7 +100,7 @@ class AddressCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ),
@@ -121,7 +126,7 @@ class AddressCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey[700],
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 SizedBox(height: 4.h),

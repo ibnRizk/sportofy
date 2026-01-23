@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/notification_settings_bottom_sheet.dart';
 
@@ -26,11 +28,15 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Center(
             child: Container(
-              margin: AppPadding.top10.copyWith(bottom: AppDimens.h20),
+              margin: AppPadding.top10.copyWith(
+                bottom: AppDimens.h20,
+              ),
               width: AppDimens.w40,
               height: AppDimens.h4,
               decoration: BoxDecoration(
-                color: MyColors.grey.withValues(alpha: AppDimens.opacity3),
+                color: MyColors.grey.withValues(
+                  alpha: AppDimens.opacity3,
+                ),
                 borderRadius: AppRadius.r2,
               ),
             ),
@@ -42,14 +48,17 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           Padding(
             padding: AppPadding.h20,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceAround,
               children: [
                 _buildQuickActionItem(
                   icon: Icons.edit_outlined,
                   label: 'Edit Account',
-                  iconColor: MyColors.black87,
-                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
-                  textColor: MyColors.black87,
+                  iconColor: MyColors.darkGrayColor,
+                  borderColor: MyColors.grey.withValues(
+                    alpha: AppDimens.opacity4,
+                  ),
+                  textColor: MyColors.darkGrayColor,
                   onTap: () {
                     // Close current sheet
                     context.pop();
@@ -61,7 +70,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   icon: Icons.share_outlined,
                   label: 'Share Account',
                   iconColor: MyColors.black87,
-                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
+                  borderColor: MyColors.grey.withValues(
+                    alpha: AppDimens.opacity4,
+                  ),
                   textColor: MyColors.black87,
                   onTap: () {
                     // TODO: Implement Share Account
@@ -71,7 +82,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   icon: Icons.link,
                   label: 'Account Link',
                   iconColor: MyColors.black87,
-                  borderColor: MyColors.grey.withValues(alpha: AppDimens.opacity4),
+                  borderColor: MyColors.grey.withValues(
+                    alpha: AppDimens.opacity4,
+                  ),
                   textColor: MyColors.black87,
                   onTap: () {
                     // TODO: Implement Account Link
@@ -98,7 +111,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Divider(
             thickness: AppDimens.dividerThickness1,
-            color: MyColors.grey.withValues(alpha: AppDimens.opacity2),
+            color: MyColors.grey.withValues(
+              alpha: AppDimens.opacity2,
+            ),
             height: AppDimens.dividerThickness1,
           ),
 
@@ -108,39 +123,46 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           InkWell(
             onTap: () {
               // Get the root navigator context BEFORE popping
-              final rootNavigator = Navigator.of(context, rootNavigator: true);
-              
+              final rootNavigator = Navigator.of(
+                context,
+                rootNavigator: true,
+              );
+
               // Close current sheet
               Navigator.of(context).pop();
-              
+
               // Show new sheet using root navigator's context after a delay
-              Future.delayed(const Duration(milliseconds: 250), () {
-                showModalBottomSheet(
-                  context: rootNavigator.context,
-                  backgroundColor: MyColors.transparent,
-                  isScrollControlled: true,
-                  enableDrag: true,
-                  isDismissible: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.top25,
-                  ),
-                  builder: (ctx) => const NotificationSettingsBottomSheet(),
-                );
-              });
+              Future.delayed(
+                const Duration(milliseconds: 250),
+                () {
+                  showModalBottomSheet(
+                    context: rootNavigator.context,
+                    backgroundColor: MyColors.transparent,
+                    isScrollControlled: true,
+                    enableDrag: true,
+                    isDismissible: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: AppRadius.top25,
+                    ),
+                    builder: (ctx) =>
+                        const NotificationSettingsBottomSheet(),
+                  );
+                },
+              );
             },
             child: Padding(
               padding: AppPadding.h20v16,
               child: Row(
                 children: [
-                  Icon(
-                    Icons.notifications_outlined,
-                    size: AppDimens.iconSize24,
-                    color: MyColors.black87,
+                  SvgPicture.asset(
+                    ImgAssets.icNotification,
                   ),
                   SizedBox(width: AppDimens.w16),
                   Text(
                     'Notification Setting',
-                    style: TextStyles.medium16(color: MyColors.black87),
+                    style: TextStyles.regular14(
+                      color: MyColors.darkGrayColor,
+                    ),
                   ),
                 ],
               ),
@@ -152,7 +174,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
           // ═══════════════════════════════════════════════
           Divider(
             thickness: AppDimens.dividerThickness1,
-            color: MyColors.grey.withValues(alpha: AppDimens.opacity2),
+            color: MyColors.grey.withValues(
+              alpha: AppDimens.opacity2,
+            ),
             height: AppDimens.dividerThickness1,
           ),
 
@@ -177,7 +201,9 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                   SizedBox(width: AppDimens.w16),
                   Text(
                     'Logout',
-                    style: TextStyles.medium16(color: MyColors.red),
+                    style: TextStyles.medium16(
+                      color: MyColors.red,
+                    ),
                   ),
                 ],
               ),
@@ -229,7 +255,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
             child: Text(
               label,
               textAlign: TextAlign.center,
-              style: TextStyles.regular12(color: textColor),
+              style: TextStyles.regular10(color: textColor),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -250,7 +276,8 @@ class AccountSettingsBottomSheet extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: AppRadius.top25,
       ),
-      builder: (context) => const AccountSettingsBottomSheet(),
+      builder: (context) =>
+          const AccountSettingsBottomSheet(),
     );
   }
 }

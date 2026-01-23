@@ -97,7 +97,7 @@ class ImgAssets {
   static const String icMenuCart =
       'assets/icons/My cart.svg';
   static const String icMenuTournaments =
-      'assets/icons/Tournaments-1.svg';
+      'assets/icons/Tournaments.svg';
   static const String icMenuOrders =
       'assets/icons/My Orders.svg';
   static const String icMenuContact =
@@ -143,6 +143,8 @@ class ImgAssets {
   static const String whiteShoes =
       'assets/images/white_shoes.png';
   static const String shoes = 'assets/images/shoes.png';
+  static const String deliverySuccess =
+      'assets/images/delivery_success.png';
 
   // Bottom Navigation Icons
   static const String icHome = 'assets/icons/home.svg';
@@ -162,4 +164,10 @@ class ImgAssets {
   static const String icClock = 'assets/icons/clock.svg';
   static const String icTimer = 'assets/icons/timer.svg';
   static const String icBack = 'assets/icons/back.svg';
+
+  // Sports Icons
+  static const String icTournaments =
+      'assets/icons/Tournaments.svg';
+  static const String icOrganized =
+      'assets/icons/organized.svg';
 }

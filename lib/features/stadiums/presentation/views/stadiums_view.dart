@@ -27,8 +27,8 @@ class _StadiumsViewState extends State<StadiumsView> {
   RangeValues _timeRange = const RangeValues(0.0, 1.0);
   bool _isMapView =
       false; // Toggle between List and Map view
-  // ignore: unused_field
-  // For future map control (camera movement, etc.)
+  GoogleMapController?
+  _mapController; // Map controller for future use
 
   final List<String> _sports = [
     'Football',
@@ -49,6 +49,7 @@ class _StadiumsViewState extends State<StadiumsView> {
   @override
   void dispose() {
     _searchController.dispose();
+    _mapController?.dispose();
     super.dispose();
   }
 
@@ -69,7 +70,9 @@ class _StadiumsViewState extends State<StadiumsView> {
         ),
         title: Text(
           'Stadiums',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
       ),
@@ -80,9 +83,13 @@ class _StadiumsViewState extends State<StadiumsView> {
 
           // Conditional Content (List or Map)
           Expanded(
-            child: _isMapView
-                ? _buildGoogleMap()
-                : _buildStadiumsList(),
+            child: IndexedStack(
+              index: _isMapView ? 1 : 0,
+              children: [
+                _buildStadiumsList(),
+                _buildGoogleMap(),
+              ],
+            ),
           ),
         ],
       ),
@@ -101,7 +108,9 @@ class _StadiumsViewState extends State<StadiumsView> {
         ),
         label: Text(
           _isMapView ? 'List' : 'Map',
-          style: TextStyles.semiBold14(color: MyColors.white),
+          style: TextStyles.semiBold14(
+            color: MyColors.white,
+          ),
         ),
       ),
       floatingActionButtonLocation:
@@ -135,7 +144,9 @@ class _StadiumsViewState extends State<StadiumsView> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyles.regular14(color: MyColors.grey600),
+                hintStyle: TextStyles.regular14(
+                  color: MyColors.darkGrayColor,
+                ),
                 prefixIcon: Icon(
                   Icons.search,
                   color: MyColors.grey600,
@@ -254,7 +265,9 @@ class _StadiumsViewState extends State<StadiumsView> {
                   children: [
                     Text(
                       'July 2023',
-                      style: TextStyles.semiBold16(color: MyColors.black87),
+                      style: TextStyles.semiBold16(
+                        color: MyColors.black87,
+                      ),
                     ),
                     TextButton(
                       onPressed: () {
@@ -268,7 +281,9 @@ class _StadiumsViewState extends State<StadiumsView> {
                       },
                       child: Text(
                         'Clear All',
-                        style: TextStyles.medium14(color: MyColors.greenButton),
+                        style: TextStyles.medium14(
+                          color: MyColors.greenButton,
+                        ),
                       ),
                     ),
                   ],
@@ -312,7 +327,9 @@ class _StadiumsViewState extends State<StadiumsView> {
                 children: [
                   Text(
                     'Sat 08 Jul 12:30 am - 11:30 pm',
-                    style: TextStyles.medium14(color: MyColors.grey700),
+                    style: TextStyles.medium14(
+                      color: MyColors.darkGrayColor,
+                    ),
                   ),
                   SizedBox(height: AppDimens.h8),
                   Divider(
@@ -337,11 +354,15 @@ class _StadiumsViewState extends State<StadiumsView> {
                   children: [
                     Text(
                       '12 : 00 am',
-                      style: TextStyles.medium12(color: MyColors.grey600),
+                      style: TextStyles.medium12(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                     Text(
                       '11 : 30 pm',
-                      style: TextStyles.medium12(color: MyColors.grey600),
+                      style: TextStyles.medium12(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                   ],
                 ),
@@ -399,14 +420,77 @@ class _StadiumsViewState extends State<StadiumsView> {
 
   // Build Google Map View
   Widget _buildGoogleMap() {
-    return GoogleMap(
-      initialCameraPosition: const CameraPosition(
-        target: LatLng(30.0444, 31.2357), // Cairo, Egypt
-        zoom: 12.0,
-      ),
-      markers: _createCustomMarkers(),
-      mapType: MapType.normal,
-      onMapCreated: (GoogleMapController controller) {},
+    // Validate camera position
+    const defaultPosition = LatLng(
+      30.0444,
+      31.2357,
+    ); // Cairo, Egypt
+    const defaultZoom = 12.0;
+
+    // Ensure valid coordinates
+    final cameraPosition = CameraPosition(
+      target: defaultPosition,
+      zoom: defaultZoom.clamp(
+        0.0,
+        21.0,
+      ), // Clamp zoom to valid range
+    );
+
+    return Builder(
+      builder: (context) {
+        try {
+          return Container(
+            key: const ValueKey('stadiums_map_container'),
+            child: GoogleMap(
+              key: const ValueKey('stadiums_map'),
+              initialCameraPosition: cameraPosition,
+              markers: _createCustomMarkers(),
+              mapType: MapType.normal,
+              onMapCreated:
+                  (GoogleMapController controller) {
+                    if (mounted) {
+                      _mapController = controller;
+                    }
+                  },
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
+              mapToolbarEnabled: false,
+            ),
+          );
+        } catch (e) {
+          // Fallback UI if map fails to initialize
+          debugPrint('Google Map initialization error: $e');
+          return Container(
+            color: MyColors.grey100,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.map_outlined,
+                    size: AppDimens.iconSize60,
+                    color: MyColors.grey600,
+                  ),
+                  SizedBox(height: AppDimens.h16),
+                  Text(
+                    'Map unavailable',
+                    style: TextStyles.medium16(
+                      color: MyColors.darkGrayColor,
+                    ),
+                  ),
+                  SizedBox(height: AppDimens.h8),
+                  Text(
+                    'Please check your internet connection',
+                    style: TextStyles.regular14(
+                      color: MyColors.grey600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -507,7 +591,7 @@ class _SportFilterItem extends StatelessWidget {
                   ? MyColors.greenButton
                   : (isAddButton
                         ? MyColors.greenButton
-                        : MyColors.grey700),
+                        : MyColors.darkGrayColor),
             ),
           ),
         ],
@@ -538,7 +622,9 @@ class _DateFilterItem extends StatelessWidget {
         padding: AppPadding.h16v8,
         decoration: BoxDecoration(
           color: isSelected
-              ? MyColors.greenButton.withValues(alpha: AppDimens.opacity1)
+              ? MyColors.greenButton.withValues(
+                  alpha: AppDimens.opacity1,
+                )
               : MyColors.transparent,
           borderRadius: AppRadius.r8,
         ),
@@ -551,7 +637,7 @@ class _DateFilterItem extends StatelessWidget {
                 style: TextStyles.semiBold14(
                   color: isSelected
                       ? MyColors.greenButton
-                      : MyColors.grey600,
+                      : MyColors.darkGrayColor,
                 ),
               )
             else ...[
@@ -560,7 +646,7 @@ class _DateFilterItem extends StatelessWidget {
                 style: TextStyles.medium12(
                   color: isSelected
                       ? MyColors.greenButton
-                      : MyColors.grey600,
+                      : MyColors.darkGrayColor,
                 ),
               ),
               SizedBox(height: AppDimens.h2),
@@ -577,7 +663,9 @@ class _DateFilterItem extends StatelessWidget {
               Container(
                 margin: AppPadding.top4,
                 height: AppDimens.h2,
-                width: isAllDates ? AppDimens.w20 : AppDimens.w30,
+                width: isAllDates
+                    ? AppDimens.w20
+                    : AppDimens.w30,
                 decoration: BoxDecoration(
                   color: MyColors.greenButton,
                   borderRadius: AppRadius.r3,
@@ -621,7 +709,9 @@ class _StadiumCard extends StatelessWidget {
           borderRadius: AppRadius.r12,
           boxShadow: [
             BoxShadow(
-              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+              color: MyColors.black.withValues(
+                alpha: AppDimens.opacity05,
+              ),
               blurRadius: AppDimens.elevation8,
               offset: const Offset(0, 2),
             ),
@@ -644,7 +734,8 @@ class _StadiumCard extends StatelessWidget {
                         (context, error, stackTrace) {
                           return Container(
                             width: double.infinity,
-                            height: AppDimens.containerHeight180,
+                            height: AppDimens
+                                .containerHeight180,
                             color: MyColors.grey300,
                             child: Icon(
                               Icons.image,
@@ -672,15 +763,16 @@ class _StadiumCard extends StatelessWidget {
                       ),
                       label: Text(
                         'Map',
-                        style: TextStyles.semiBold12(color: MyColors.white),
+                        style: TextStyles.semiBold12(
+                          color: MyColors.white,
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             MyColors.greenButton,
                         padding: AppPadding.h16v10,
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              AppRadius.r20,
+                          borderRadius: AppRadius.r20,
                         ),
                       ),
                     ),
@@ -706,7 +798,9 @@ class _StadiumCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           name,
-                          style: TextStyles.bold16(color: MyColors.black87),
+                          style: TextStyles.bold16(
+                            color: MyColors.black87,
+                          ),
                         ),
                       ),
                       Row(
@@ -720,7 +814,9 @@ class _StadiumCard extends StatelessWidget {
                           SizedBox(width: AppDimens.w4),
                           Text(
                             rating.toStringAsFixed(2),
-                            style: TextStyles.semiBold14(color: MyColors.black87),
+                            style: TextStyles.semiBold14(
+                              color: MyColors.black87,
+                            ),
                           ),
                         ],
                       ),
@@ -739,7 +835,9 @@ class _StadiumCard extends StatelessWidget {
                       SizedBox(width: AppDimens.w4),
                       Text(
                         location,
-                        style: TextStyles.regular14(color: MyColors.grey600),
+                        style: TextStyles.regular14(
+                          color: MyColors.darkGrayColor,
+                        ),
                       ),
                     ],
                   ),
@@ -757,7 +855,9 @@ class _StadiumCard extends StatelessWidget {
                         children: [
                           Text(
                             tag,
-                            style: TextStyles.medium12(color: MyColors.grey700),
+                            style: TextStyles.medium12(
+                              color: MyColors.darkGrayColor,
+                            ),
                           ),
                           if (index < tags.length - 1) ...[
                             Padding(
@@ -778,7 +878,9 @@ class _StadiumCard extends StatelessWidget {
                   // Price Row
                   Text(
                     'Starting from ${price.toStringAsFixed(2)} EGP',
-                    style: TextStyles.semiBold14(color: MyColors.greenButton),
+                    style: TextStyles.semiBold14(
+                      color: MyColors.greenButton,
+                    ),
                   ),
                 ],
               ),

@@ -52,18 +52,29 @@ class MatchDetailsView extends StatelessWidget {
                               children: [
                                 Text(
                                   match.stadiumName,
-                                  style: TextStyles.bold18(color: MyColors.black87),
+                                  style: TextStyles.bold18(
+                                    color: MyColors.black87,
+                                  ),
                                 ),
-                                SizedBox(width: AppDimens.w8),
+                                SizedBox(
+                                  width: AppDimens.w8,
+                                ),
                                 Icon(
                                   Icons.star,
                                   color: MyColors.amber,
-                                  size: AppDimens.iconSize18,
+                                  size:
+                                      AppDimens.iconSize18,
                                 ),
-                                SizedBox(width: AppDimens.w4),
+                                SizedBox(
+                                  width: AppDimens.w4,
+                                ),
                                 Text(
                                   '(4.87)',
-                                  style: TextStyles.medium16(color: MyColors.black87),
+                                  style:
+                                      TextStyles.medium16(
+                                        color: MyColors
+                                            .black87,
+                                      ),
                                 ),
                               ],
                             ),
@@ -81,7 +92,8 @@ class MatchDetailsView extends StatelessWidget {
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(
                                 color: MyColors.greenButton,
-                                width: AppDimens.borderWidth1,
+                                width:
+                                    AppDimens.borderWidth1,
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: AppRadius.r8,
@@ -94,12 +106,19 @@ class MatchDetailsView extends StatelessWidget {
                               children: [
                                 Text(
                                   'View Stadium',
-                                  style: TextStyles.semiBold12(color: MyColors.greenButton),
+                                  style:
+                                      TextStyles.semiBold12(
+                                        color: MyColors
+                                            .greenButton,
+                                      ),
                                 ),
-                                SizedBox(width: AppDimens.w4),
+                                SizedBox(
+                                  width: AppDimens.w4,
+                                ),
                                 Icon(
                                   Icons.arrow_forward,
-                                  size: AppDimens.iconSize14,
+                                  size:
+                                      AppDimens.iconSize14,
                                   color:
                                       MyColors.greenButton,
                                 ),
@@ -114,13 +133,18 @@ class MatchDetailsView extends StatelessWidget {
                       // Tags Row
                       Text(
                         '5 X 5  |  Indoor',
-                        style: TextStyles.regular14(color: MyColors.grey600),
+                        style: TextStyles.regular14(
+                          color: MyColors.darkGrayColor,
+                        ),
                       ),
                     ],
                   ),
                 ),
 
-                Divider(height: AppDimens.dividerThickness1, color: MyColors.grey300),
+                Divider(
+                  height: AppDimens.dividerThickness1,
+                  color: MyColors.grey300,
+                ),
 
                 // The Date Section
                 Padding(
@@ -131,7 +155,9 @@ class MatchDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'The Date',
-                        style: TextStyles.bold16(color: MyColors.black87),
+                        style: TextStyles.bold16(
+                          color: MyColors.black87,
+                        ),
                       ),
                       SizedBox(height: AppDimens.h12),
                       Row(
@@ -140,13 +166,17 @@ class MatchDetailsView extends StatelessWidget {
                         children: [
                           Text(
                             match.date,
-                            style: TextStyles.medium14(color: MyColors.black87),
+                            style: TextStyles.medium14(
+                              color: MyColors.black87,
+                            ),
                           ),
                           Row(
                             children: [
                               Text(
                                 match.time,
-                                style: TextStyles.medium14(color: MyColors.black87),
+                                style: TextStyles.medium14(
+                                  color: MyColors.black87,
+                                ),
                               ),
                               SizedBox(width: AppDimens.w8),
                               Icon(
@@ -157,7 +187,9 @@ class MatchDetailsView extends StatelessWidget {
                               SizedBox(width: AppDimens.w8),
                               Text(
                                 '08:00 PM',
-                                style: TextStyles.medium14(color: MyColors.black87),
+                                style: TextStyles.medium14(
+                                  color: MyColors.black87,
+                                ),
                               ),
                             ],
                           ),
@@ -167,7 +199,10 @@ class MatchDetailsView extends StatelessWidget {
                   ),
                 ),
 
-                Divider(height: AppDimens.dividerThickness1, color: MyColors.grey300),
+                Divider(
+                  height: AppDimens.dividerThickness1,
+                  color: MyColors.grey300,
+                ),
 
                 // Note Section
                 Padding(
@@ -178,18 +213,25 @@ class MatchDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'Note',
-                        style: TextStyles.bold16(color: MyColors.black87),
+                        style: TextStyles.bold16(
+                          color: MyColors.black87,
+                        ),
                       ),
                       SizedBox(height: AppDimens.h12),
                       Text(
                         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: TextStyles.regular14(color: MyColors.grey600).copyWith(height: 1.5),
+                        style: TextStyles.regular14(
+                          color: MyColors.darkGrayColor,
+                        ).copyWith(height: 1.5),
                       ),
                     ],
                   ),
                 ),
 
-                Divider(height: AppDimens.dividerThickness1, color: MyColors.grey300),
+                Divider(
+                  height: AppDimens.dividerThickness1,
+                  color: MyColors.grey300,
+                ),
 
                 // The Team Section
                 Padding(
@@ -205,7 +247,9 @@ class MatchDetailsView extends StatelessWidget {
                         children: [
                           Text(
                             'The Team',
-                            style: TextStyles.bold16(color: MyColors.black87),
+                            style: TextStyles.bold16(
+                              color: MyColors.black87,
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
@@ -226,7 +270,9 @@ class MatchDetailsView extends StatelessWidget {
                             },
                             child: Text(
                               'View All',
-                              style: TextStyles.semiBold14(color: MyColors.greenButton),
+                              style: TextStyles.semiBold14(
+                                color: MyColors.greenButton,
+                              ),
                             ),
                           ),
                         ],
@@ -241,12 +287,15 @@ class MatchDetailsView extends StatelessWidget {
                           Row(
                             children: [
                               CircleAvatar(
-                                radius: AppDimens.avatarSize30,
+                                radius:
+                                    AppDimens.avatarSize30,
                                 backgroundImage: AssetImage(
                                   match.organizerAvatar,
                                 ),
                               ),
-                              SizedBox(width: AppDimens.w12),
+                              SizedBox(
+                                width: AppDimens.w12,
+                              ),
                               Column(
                                 crossAxisAlignment:
                                     CrossAxisAlignment
@@ -254,12 +303,22 @@ class MatchDetailsView extends StatelessWidget {
                                 children: [
                                   Text(
                                     match.organizerName,
-                                    style: TextStyles.bold15(color: MyColors.black87),
+                                    style:
+                                        TextStyles.bold15(
+                                          color: MyColors
+                                              .black87,
+                                        ),
                                   ),
-                                  SizedBox(height: AppDimens.h4),
+                                  SizedBox(
+                                    height: AppDimens.h4,
+                                  ),
                                   Text(
                                     'organizer'.tr(context),
-                                    style: TextStyles.medium12(color: MyColors.greenButton),
+                                    style:
+                                        TextStyles.medium12(
+                                          color: MyColors
+                                              .greenButton,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -275,10 +334,15 @@ class MatchDetailsView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               _buildParticipantStack(),
-                              SizedBox(height: AppDimens.h8),
+                              SizedBox(
+                                height: AppDimens.h8,
+                              ),
                               Text(
                                 '${match.currentPlayers} ${'out_of'.tr(context)} ${match.totalPlayers}',
-                                style: TextStyles.medium12(color: MyColors.grey600),
+                                style: TextStyles.medium12(
+                                  color: MyColors
+                                      .darkGrayColor,
+                                ),
                               ),
                             ],
                           ),
@@ -343,10 +407,14 @@ class MatchDetailsView extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  MyColors.black.withValues(alpha: AppDimens.opacity3),
+                  MyColors.black.withValues(
+                    alpha: AppDimens.opacity3,
+                  ),
                   MyColors.transparent,
                   MyColors.transparent,
-                  MyColors.black.withValues(alpha: AppDimens.opacity2),
+                  MyColors.black.withValues(
+                    alpha: AppDimens.opacity2,
+                  ),
                 ],
               ),
             ),
@@ -389,7 +457,9 @@ class MatchDetailsView extends StatelessWidget {
                 // Match Title
                 Text(
                   'Match',
-                  style: TextStyles.bold18(color: MyColors.white),
+                  style: TextStyles.bold18(
+                    color: MyColors.white,
+                  ),
                 ),
               ],
             ),
@@ -428,7 +498,9 @@ class MatchDetailsView extends StatelessWidget {
                 5,
                 (index) => Container(
                   margin: AppPadding.h4,
-                  width: index == 0 ? AppDimens.w24 : AppDimens.w8,
+                  width: index == 0
+                      ? AppDimens.w24
+                      : AppDimens.w8,
                   height: AppDimens.h8,
                   decoration: BoxDecoration(
                     color: index == 0
@@ -513,7 +585,9 @@ class MatchDetailsView extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '+$remainingCount',
-                    style: TextStyles.bold12(color: MyColors.white),
+                    style: TextStyles.bold12(
+                      color: MyColors.white,
+                    ),
                   ),
                 ),
               ),
@@ -531,7 +605,9 @@ class MatchDetailsView extends StatelessWidget {
         color: MyColors.white,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity1),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity1,
+            ),
             blurRadius: AppDimens.w10,
             offset: const Offset(0, -2),
           ),
@@ -547,12 +623,16 @@ class MatchDetailsView extends StatelessWidget {
               children: [
                 Text(
                   'For one',
-                  style: TextStyles.regular12(color: MyColors.grey600),
+                  style: TextStyles.regular12(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h4),
                 Text(
                   '${match.price.toStringAsFixed(0)} ${'egp'.tr(context)}',
-                  style: TextStyles.bold18(color: MyColors.greenButton),
+                  style: TextStyles.bold18(
+                    color: MyColors.greenButton,
+                  ),
                 ),
               ],
             ),
@@ -590,6 +670,8 @@ class MatchDetailsView extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: MyColors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r12,
                   ),

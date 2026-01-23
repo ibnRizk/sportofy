@@ -146,7 +146,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                                 hintText: 'Search',
                                 hintStyle: TextStyle(
                                   fontSize: 14.sp,
-                                  color: Colors.grey,
+                                  color: MyColors.darkGrayColor,
                                 ),
                                 border: InputBorder.none,
                               ),
@@ -278,14 +278,13 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedMembers.isNotEmpty
-                          ? MyColors.greenButton
-                          : Colors.grey[300],
+                      backgroundColor: MyColors.greenButton,
+                      disabledBackgroundColor: MyColors.grey300,
+                      disabledForegroundColor: MyColors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       elevation: 0,
-                      disabledBackgroundColor: Colors.grey[300],
                     ),
                     child: Text(
                       'Add Member',
@@ -294,7 +293,7 @@ class _AddTeamMemberSheetState extends State<AddTeamMemberSheet> {
                         fontWeight: FontWeight.bold,
                         color: _selectedMembers.isNotEmpty
                             ? Colors.white
-                            : Colors.grey[600],
+                            : MyColors.darkGrayColor,
                       ),
                     ),
                   ),
@@ -422,7 +421,7 @@ class _MemberTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
-                      color: Colors.grey,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                 ],

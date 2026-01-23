@@ -89,7 +89,7 @@ class ChatInputBar extends StatelessWidget {
                       controller: controller,
                       decoration: InputDecoration(
                         hintText: 'Message',
-                        hintStyle: TextStyles.regular14(color: MyColors.grey500),
+                        hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
                         border: InputBorder.none,
                         contentPadding: AppPadding.v10,
                         isDense: true,

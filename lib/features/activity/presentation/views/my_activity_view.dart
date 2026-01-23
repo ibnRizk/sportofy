@@ -107,7 +107,9 @@ class _MyActivityViewState extends State<MyActivityView>
         ),
         title: Text(
           'My Activity',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
         bottom: TabBar(

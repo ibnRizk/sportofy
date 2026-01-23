@@ -39,8 +39,27 @@ class _FilterSheetState extends State<FilterSheet> {
     setState(() {
       _selectedDurationIndex = 0;
       _priceRange = const RangeValues(10, 100);
-      _selectedStadiumTypes = List.filled(_stadiumTypes.length, false);
+      _selectedStadiumTypes = List.filled(
+        _stadiumTypes.length,
+        false,
+      );
     });
+  }
+
+  bool _hasAnyFilterSelected() {
+    // Check if any stadium type is selected
+    if (_selectedStadiumTypes.any((selected) => selected)) {
+      return true;
+    }
+    // Check if duration is not default (0)
+    if (_selectedDurationIndex != 0) {
+      return true;
+    }
+    // Check if price range is not default (10-100)
+    if (_priceRange.start != 10 || _priceRange.end != 100) {
+      return true;
+    }
+    return false;
   }
 
   void _applyFilters() {
@@ -101,19 +120,28 @@ class _FilterSheetState extends State<FilterSheet> {
           // Content
           Flexible(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // Match Duration Section
                   _buildMatchDurationSection(),
 
-                  Divider(height: 32.h, color: Colors.grey[300]),
+                  Divider(
+                    height: 32.h,
+                    color: Colors.grey[300],
+                  ),
 
                   // Price Range Section
                   _buildPriceRangeSection(),
 
-                  Divider(height: 32.h, color: Colors.grey[300]),
+                  Divider(
+                    height: 32.h,
+                    color: Colors.grey[300],
+                  ),
 
                   // Type of Stadium Section
                   _buildStadiumTypesSection(),
@@ -149,12 +177,15 @@ class _FilterSheetState extends State<FilterSheet> {
           children: _durations.asMap().entries.map((entry) {
             final index = entry.key;
             final duration = entry.value;
-            final isSelected = _selectedDurationIndex == index;
+            final isSelected =
+                _selectedDurationIndex == index;
 
             return Expanded(
               child: Padding(
                 padding: EdgeInsets.only(
-                  right: index < _durations.length - 1 ? 8.w : 0,
+                  right: index < _durations.length - 1
+                      ? 8.w
+                      : 0,
                 ),
                 child: _DurationButton(
                   label: duration,
@@ -246,7 +277,8 @@ class _FilterSheetState extends State<FilterSheet> {
             isChecked: _selectedStadiumTypes[index],
             onChanged: (value) {
               setState(() {
-                _selectedStadiumTypes[index] = value ?? false;
+                _selectedStadiumTypes[index] =
+                    value ?? false;
               });
             },
           ),
@@ -288,11 +320,19 @@ class _FilterSheetState extends State<FilterSheet> {
           Expanded(
             flex: 2,
             child: ElevatedButton(
-              onPressed: _applyFilters,
+              onPressed: _hasAnyFilterSelected()
+                  ? _applyFilters
+                  : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.greenButton,
+                backgroundColor: _hasAnyFilterSelected()
+                    ? MyColors.greenButton
+                    : MyColors.grey300,
                 foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 14.h),
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(
+                  vertical: 14.h,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),

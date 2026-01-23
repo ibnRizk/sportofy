@@ -118,6 +118,8 @@ class _PositionSelectionSheetState extends State<PositionSelectionSheet> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),

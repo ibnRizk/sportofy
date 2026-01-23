@@ -14,6 +14,7 @@ import 'package:sportify_app/features/profile/presentation/widgets/gender_select
 import 'package:sportify_app/features/profile/presentation/widgets/image_picker_sheet.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/position_selection_sheet.dart';
 import 'package:sportify_app/features/profile/presentation/widgets/sport_selection_sheet.dart';
+import 'package:sportify_app/features/booking/presentation/widgets/audience_sheet.dart';
 
 class EditProfileView extends StatefulWidget {
   const EditProfileView({super.key});
@@ -29,6 +30,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     text:
         'Lorem Ipsum is simply a printable and proforma text typesetting industry. Lorem Ipsum was the master of the industry Standard dummy text since the fifteenth century AD.',
   );
+  String _selectedAudience = 'Friends';
 
   @override
   void dispose() {
@@ -239,7 +241,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                         10.r,
                       ),
                       border: Border.all(
-                        color: Colors.grey.withValues(alpha:0.2),
+                        color: Colors.grey.withValues(
+                          alpha: 0.2,
+                        ),
                         width: 1,
                       ),
                     ),
@@ -267,7 +271,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                             '${_descriptionController.text.length}/1000',
                             style: TextStyle(
                               fontSize: 12.sp,
-                              color: Colors.grey,
+                              color: MyColors.darkGrayColor,
                             ),
                           ),
                         ),
@@ -292,7 +296,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                         10.r,
                       ),
                       border: Border.all(
-                        color: Colors.grey.withValues(alpha:0.2),
+                        color: Colors.grey.withValues(
+                          alpha: 0.2,
+                        ),
                         width: 1,
                       ),
                     ),
@@ -306,60 +312,91 @@ class _EditProfileViewState extends State<EditProfileView> {
                               Text(
                                 'Phone',
                                 style: TextStyle(
-                                  fontSize: 12.sp,
+                                  fontSize: 14.sp,
                                   fontWeight:
                                       FontWeight.w400,
-                                  color: Colors.grey,
+                                  color: MyColors
+                                      .darkGrayColor,
                                 ),
                               ),
                               SizedBox(height: 8.h),
                               Text(
                                 '010010001001',
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: 16.sp,
                                   fontWeight:
-                                      FontWeight.w600,
+                                      FontWeight.w500,
                                   color: Colors.black87,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                            vertical: 6.h,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey
-                                  .withValues(alpha:0.3),
+                        GestureDetector(
+                          onTap: () async {
+                            final result =
+                                await showModalBottomSheet<
+                                  String
+                                >(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor:
+                                      Colors.transparent,
+                                  builder: (context) =>
+                                      AudienceSheet(
+                                        selected:
+                                            _selectedAudience,
+                                      ),
+                                );
+                            if (result != null && mounted) {
+                              setState(() {
+                                _selectedAudience = result;
+                              });
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 6.h,
                             ),
-                            borderRadius:
-                                BorderRadius.circular(6.r),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.people_outline,
-                                size: 14.w,
-                                color: Colors.grey,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color:
+                                    MyColors.darkGrayColor,
                               ),
-                              SizedBox(width: 4.w),
-                              Text(
-                                'Friends',
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
+
+                              borderRadius:
+                                  BorderRadius.circular(
+                                    6.r,
+                                  ),
+                            ),
+                            child: Row(
+                              mainAxisSize:
+                                  MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.people_outline,
+                                  size: 14.w,
+                                  color: MyColors
+                                      .darkGrayColor,
                                 ),
-                              ),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                size: 16.w,
-                                color: Colors.grey,
-                              ),
-                            ],
+                                SizedBox(width: 4.w),
+                                Text(
+                                  _selectedAudience,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: MyColors
+                                        .darkGrayColor,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 16.w,
+                                  color: MyColors
+                                      .darkGrayColor,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -379,8 +416,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                           10.r,
                         ),
                         border: Border.all(
-                          color: Colors.grey.withValues(alpha:
-                            0.2,
+                          color: Colors.grey.withValues(
+                            alpha: 0.2,
                           ),
                           width: 1,
                         ),
@@ -394,7 +431,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
-                              color: Colors.grey,
+                              color: MyColors.darkGrayColor,
                             ),
                           ),
                           SizedBox(height: 8.h),
@@ -452,14 +489,16 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       ),
                                   border: Border.all(
                                     color: Colors.grey
-                                        .withValues(alpha:0.2),
+                                        .withValues(
+                                          alpha: 0.2,
+                                        ),
                                     width: 1,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black
-                                          .withValues(alpha:
-                                            0.03,
+                                          .withValues(
+                                            alpha: 0.03,
                                           ),
                                       blurRadius: 8,
                                       offset: const Offset(
@@ -477,10 +516,11 @@ class _EditProfileViewState extends State<EditProfileView> {
                                     Text(
                                       'Sport',
                                       style: TextStyle(
-                                        fontSize: 12.sp,
+                                        fontSize: 14.sp,
                                         fontWeight:
                                             FontWeight.w400,
-                                        color: Colors.grey,
+                                        color: MyColors
+                                            .darkGrayColor,
                                       ),
                                     ),
                                     SizedBox(height: 8.h),
@@ -491,10 +531,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                                             'Football',
                                             style: TextStyle(
                                               fontSize:
-                                                  14.sp,
+                                                  16.sp,
                                               fontWeight:
                                                   FontWeight
-                                                      .w600,
+                                                      .w500,
                                               color: Colors
                                                   .black87,
                                             ),
@@ -504,8 +544,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                                           Icons
                                               .arrow_forward_ios,
                                           size: 14.w,
-                                          color:
-                                              Colors.grey,
+                                          color: MyColors
+                                              .darkGrayColor,
                                         ),
                                       ],
                                     ),
@@ -525,12 +565,15 @@ class _EditProfileViewState extends State<EditProfileView> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey
-                                        .withValues(alpha:0.2),
+                                        .withValues(
+                                          alpha: 0.2,
+                                        ),
                                   ),
                                   child: Icon(
                                     Icons.close,
                                     size: 12.w,
-                                    color: Colors.grey,
+                                    color: MyColors
+                                        .darkGrayColor,
                                   ),
                                 ),
                               ),
@@ -567,13 +610,15 @@ class _EditProfileViewState extends State<EditProfileView> {
                                   ),
                               border: Border.all(
                                 color: Colors.grey
-                                    .withValues(alpha:0.2),
+                                    .withValues(alpha: 0.2),
                                 width: 1,
                               ),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black
-                                      .withValues(alpha:0.03),
+                                      .withValues(
+                                        alpha: 0.03,
+                                      ),
                                   blurRadius: 8,
                                   offset: const Offset(
                                     0,
@@ -589,10 +634,11 @@ class _EditProfileViewState extends State<EditProfileView> {
                                 Text(
                                   'Position',
                                   style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 14.sp,
                                     fontWeight:
                                         FontWeight.w400,
-                                    color: Colors.grey,
+                                    color: MyColors
+                                        .darkGrayColor,
                                   ),
                                 ),
                                 SizedBox(height: 8.h),
@@ -602,10 +648,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       child: Text(
                                         'Goalkeeper',
                                         style: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 16.sp,
                                           fontWeight:
                                               FontWeight
-                                                  .w600,
+                                                  .w500,
                                           color: Colors
                                               .black87,
                                         ),
@@ -615,7 +661,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       Icons
                                           .arrow_forward_ios,
                                       size: 14.w,
-                                      color: Colors.grey,
+                                      color: MyColors
+                                          .darkGrayColor,
                                     ),
                                   ],
                                 ),
@@ -673,8 +720,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                       Expanded(
                         child: Container(
                           height: 1,
-                          color: Colors.grey.withValues(alpha:
-                            0.3,
+                          color: Colors.grey.withValues(
+                            alpha: 0.3,
                           ),
                         ),
                       ),
@@ -711,7 +758,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                         10.r,
                       ),
                       border: Border.all(
-                        color: Colors.grey.withValues(alpha:0.2),
+                        color: Colors.grey.withValues(
+                          alpha: 0.2,
+                        ),
                         width: 1,
                       ),
                     ),
@@ -724,7 +773,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                         SizedBox(height: 12.h),
@@ -871,7 +920,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         '16 / 20 Member',
                         style: TextStyle(
                           fontSize: 12.sp,
-                          color: Colors.grey,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ],
@@ -920,7 +969,7 @@ class _EditProfileViewState extends State<EditProfileView> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -933,6 +982,8 @@ class _EditProfileViewState extends State<EditProfileView> {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.greenButton,
+            disabledBackgroundColor: MyColors.grey300,
+            disabledForegroundColor: MyColors.white,
             minimumSize: Size(double.infinity, 50.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.r),

@@ -20,7 +20,10 @@ class MyTeamView extends StatelessWidget {
               // SECTION A: CUSTOM APP BAR
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 12.h,
+                ),
                 child: Row(
                   children: [
                     // Back Arrow
@@ -42,7 +45,7 @@ class MyTeamView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
-                          color: Colors.black87,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ),
@@ -52,14 +55,17 @@ class MyTeamView extends StatelessWidget {
                         // TODO: Implement Leave Team Logic
                       },
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                        ),
                         minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap,
                       ),
                       child: Text(
                         'Leave Team',
                         style: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.red,
                         ),
@@ -75,25 +81,30 @@ class MyTeamView extends StatelessWidget {
               // SECTION B: TEAM HEADER
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
                 child: Row(
                   children: [
                     // Team Logo
                     CircleAvatar(
                       radius: 30.r,
-                      backgroundImage: AssetImage(ImgAssets.team3),
+                      backgroundImage: AssetImage(
+                        ImgAssets.team3,
+                      ),
                     ),
                     SizedBox(width: 12.w),
                     // Team Info
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Team Name',
                           style: TextStyle(
                             fontSize: 16.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                         SizedBox(height: 4.h),
@@ -127,27 +138,30 @@ class MyTeamView extends StatelessWidget {
               // SECTION C: MEMBERS GRID
               // ═══════════════════════════════════════════════
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
                 child: Column(
                   children: [
                     // Header
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Team Members',
                           style: TextStyle(
                             fontSize: 16.sp,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
                         ),
                         Text(
                           '17 member',
                           style: TextStyle(
-                            fontSize: 13.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                       ],
@@ -157,13 +171,16 @@ class MyTeamView extends StatelessWidget {
                     // Members Grid
                     GridView.builder(
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12.w,
-                        mainAxisSpacing: 16.h,
-                        childAspectRatio: 3.0, // Wide rectangles
-                      ),
+                      physics:
+                          const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12.w,
+                            mainAxisSpacing: 16.h,
+                            childAspectRatio:
+                                3.0, // Wide rectangles
+                          ),
                       itemCount: _mockMembers.length,
                       itemBuilder: (context, index) {
                         final member = _mockMembers[index];
@@ -209,7 +226,7 @@ class MyTeamView extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
@@ -220,9 +237,9 @@ class MyTeamView extends StatelessWidget {
               Text(
                 role,
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey,
+                  color: MyColors.darkGrayColor,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

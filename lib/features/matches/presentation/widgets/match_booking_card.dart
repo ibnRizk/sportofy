@@ -157,7 +157,7 @@ class MatchBookingCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w600,
-                          color: MyColors.greyText,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ],
@@ -203,7 +203,7 @@ class MatchBookingCard extends StatelessWidget {
                                 Icon(
                                   Icons.stadium_outlined,
                                   size: 16.w,
-                                  color: MyColors.greyText,
+                                  color: MyColors.darkGrayColor,
                                 ),
                                 SizedBox(width: 6.w),
                                 Expanded(
@@ -234,7 +234,7 @@ class MatchBookingCard extends StatelessWidget {
                                   Icons
                                       .calendar_today_outlined,
                                   size: 16.w,
-                                  color: MyColors.greyText,
+                                  color: MyColors.darkGrayColor,
                                 ),
                                 SizedBox(width: 6.w),
                                 Text(
@@ -260,7 +260,7 @@ class MatchBookingCard extends StatelessWidget {
                                   Icons
                                       .access_time_outlined,
                                   size: 16.w,
-                                  color: MyColors.greyText,
+                                  color: MyColors.darkGrayColor,
                                 ),
                                 SizedBox(width: 6.w),
                                 Text(

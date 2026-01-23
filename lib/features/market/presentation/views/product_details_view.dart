@@ -279,6 +279,8 @@ class _ProductDetailsViewState
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   foregroundColor: MyColors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r12,
                   ),

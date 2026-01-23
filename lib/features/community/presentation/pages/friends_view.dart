@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/injection_container.dart';
 
 // ═══════════════════════════════════════════════
@@ -59,6 +60,11 @@ class FriendsView extends StatelessWidget {
     FriendModel(
       name: 'Mohamed Abdallah',
       mutualFriends: '116 mutual friends',
+      avatarUrl: ImgAssets.userAvatar,
+    ),
+    FriendModel(
+      name: 'Hany Adel',
+      mutualFriends: null,
       avatarUrl: ImgAssets.userAvatar,
     ),
     FriendModel(
@@ -219,9 +225,7 @@ class FriendListTile extends StatelessWidget {
                 children: [
                   Text(
                     friend.name,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                    style: TextStyles.regular14(
                       color: context.colors.textColor,
                     ),
                   ),
@@ -229,9 +233,7 @@ class FriendListTile extends StatelessWidget {
                     SizedBox(height: 2.h),
                     Text(
                       friend.mutualFriends!,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
+                      style: TextStyles.regular10(
                         color: context.colors.textColor
                             .withValues(alpha: 0.5),
                       ),

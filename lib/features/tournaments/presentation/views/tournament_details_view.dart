@@ -23,14 +23,8 @@ class TournamentDetailsView extends StatelessWidget {
               icon: Container(
                 padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha:0.1),
-                      blurRadius: 8,
-                    ),
-                  ],
+                  boxShadow: [],
                 ),
                 child: Icon(
                   Icons.arrow_back,
@@ -49,8 +43,8 @@ class TournamentDetailsView extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha:
-                          0.1,
+                        color: Colors.black.withValues(
+                          alpha: 0.1,
                         ),
                         blurRadius: 8,
                       ),
@@ -88,8 +82,8 @@ class TournamentDetailsView extends StatelessWidget {
                     'About',
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.black87,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -114,8 +108,8 @@ class TournamentDetailsView extends StatelessWidget {
                         'Joined Teams',
                         style: TextStyle(
                           fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          fontWeight: FontWeight.w600,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                       TextButton(
@@ -140,13 +134,15 @@ class TournamentDetailsView extends StatelessWidget {
 
                   // Teams Progress
                   Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.end,
                     children: [
                       Text(
                         '8/16 Teams',
                         style: TextStyle(
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[700],
+                          fontWeight: FontWeight.w400,
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ],
@@ -162,83 +158,20 @@ class TournamentDetailsView extends StatelessWidget {
                       backgroundColor: Colors.grey[200],
                       valueColor:
                           AlwaysStoppedAnimation<Color>(
-                            MyColors.greenButton,
+                            MyColors.blue100,
                           ),
                     ),
                   ),
 
                   SizedBox(height: 16.h),
 
-                  // Team Cards List
-                  _TeamCard(
-                    teamName: 'Team Name',
-                    memberCount: '17 member',
-                    avatarImage: 'assets/images/team3.png',
-                    extraMembersCount: 6,
-                  ),
-                  SizedBox(height: 12.h),
-                  _TeamCard(
-                    teamName: 'Team Name',
-                    memberCount: '15 member',
-                    avatarImage: 'assets/images/team3.png',
-                    extraMembersCount: 4,
-                  ),
-
-                  SizedBox(height: 24.h),
-
-                  // Schedule Section - Navigate to MatchDetailsView which has the Schedule
-                  InkWell(
-                    onTap: () {
-                      context.push(
-                        Routes.matchDetailsRoute,
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(
-                      12.r,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(16.w),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                        borderRadius: BorderRadius.circular(
-                          12.r,
-                        ),
-                        border: Border.all(
-                          color: Colors.grey[200]!,
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Schedule',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16.sp,
-                            color: Colors.grey[600],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 24.h),
-
                   // The Date Section
                   Text(
                     'The Date',
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -254,7 +187,8 @@ class TournamentDetailsView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey[700],
+                                color:
+                                    MyColors.darkGrayColor,
                               ),
                             ),
                           ],
@@ -270,7 +204,8 @@ class TournamentDetailsView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey[700],
+                                color:
+                                    MyColors.darkGrayColor,
                               ),
                             ),
                           ],
@@ -286,8 +221,8 @@ class TournamentDetailsView extends StatelessWidget {
                     'Award',
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -295,8 +230,8 @@ class TournamentDetailsView extends StatelessWidget {
                     'A financial reward of 20,000 Egyptian pounds',
                     style: TextStyle(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.darkGrayColor,
                       height: 1.5,
                     ),
                   ),
@@ -316,7 +251,7 @@ class TournamentDetailsView extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -347,7 +282,7 @@ class TournamentDetailsView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 20.w),
+            SizedBox(width: 80.w),
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
@@ -367,6 +302,8 @@ class TournamentDetailsView extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       10.r,

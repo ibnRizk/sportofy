@@ -51,7 +51,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       context.read<AuthCubit>().validatePhoneNumber(
         phoneNumber,
       );
-      context.go(Routes.otpRoute, extra: phoneNumber);
+      context.push(Routes.otpRoute, extra: phoneNumber);
     }
   }
 
@@ -67,13 +67,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       appBar: AppBar(
         backgroundColor: context.colors.white,
         elevation: AppDimens.elevation0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: context.colors.black,
-          ),
-          onPressed: () => context.pop(),
-        ),
+
         title: Text(
           'login'.tr(context),
           style: TextStyles.semiBold18(

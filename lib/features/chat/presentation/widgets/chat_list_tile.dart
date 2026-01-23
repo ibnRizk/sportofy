@@ -93,7 +93,7 @@ class ChatListTile extends StatelessWidget {
                   // Last Message Preview (Truncated, Grey)
                   Text(
                     lastMessage,
-                    style: TextStyles.regular14(color: MyColors.grey600),
+                    style: TextStyles.regular14(color: MyColors.darkGrayColor),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -108,7 +108,7 @@ class ChatListTile extends StatelessWidget {
                 // Timestamp
                 Text(
                   timestamp,
-                  style: TextStyles.regular12(color: MyColors.grey600),
+                  style: TextStyles.regular12(color: MyColors.darkGrayColor),
                 ),
                 SizedBox(height: AppDimens.h4),
                 // Unread Badge (if unread messages exist)

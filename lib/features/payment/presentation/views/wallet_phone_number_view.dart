@@ -19,11 +19,30 @@ class _WalletPhoneNumberViewState
     extends State<WalletPhoneNumberView> {
   final TextEditingController _phoneController =
       TextEditingController();
+  bool _isPhoneValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneController.addListener(_validatePhone);
+  }
 
   @override
   void dispose() {
+    _phoneController.removeListener(_validatePhone);
     _phoneController.dispose();
     super.dispose();
+  }
+
+  void _validatePhone() {
+    final phone = _phoneController.text.trim();
+    // Egyptian phone validation: 11 digits starting with 01
+    final isValid = phone.length == 11 && phone.startsWith('01') && RegExp(r'^[0-9]+$').hasMatch(phone);
+    if (_isPhoneValid != isValid) {
+      setState(() {
+        _isPhoneValid = isValid;
+      });
+    }
   }
 
   @override
@@ -168,13 +187,7 @@ class _WalletPhoneNumberViewState
               width: double.infinity,
               height: AppDimens.buttonHeight50,
               child: ElevatedButton(
-                onPressed: () {
-                  // 1. Basic Validation
-                  if (_phoneController.text.isEmpty) {
-                    // Optionally show error message
-                    return;
-                  }
-
+                onPressed: _isPhoneValid ? () {
                   // 2. Capture root navigator context BEFORE popping
                   final rootNavigator = Navigator.of(
                     context,
@@ -203,9 +216,11 @@ class _WalletPhoneNumberViewState
                       }
                     },
                   );
-                },
+                } : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r10,
                   ),

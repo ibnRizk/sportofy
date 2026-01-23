@@ -342,7 +342,7 @@ class _ScheduleGrid extends StatelessWidget {
                 child: Center(
                   child: Text(
                     time,
-                    style: TextStyles.medium12(color: MyColors.grey700),
+                    style: TextStyles.medium12(color: MyColors.darkGrayColor),
                   ),
                 ),
               );
@@ -764,7 +764,7 @@ class _FindMemberForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText:
                   'EX: This game is for training only for age players between...',
-              hintStyle: TextStyles.regular14(color: MyColors.grey500),
+              hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
               border: OutlineInputBorder(
                 borderRadius: AppRadius.r8,
                 borderSide: BorderSide(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/add_sport_sheet.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/filter_sheet.dart';
 
@@ -17,12 +18,15 @@ class SharedFilterHeader extends StatefulWidget {
   });
 
   @override
-  State<SharedFilterHeader> createState() => _SharedFilterHeaderState();
+  State<SharedFilterHeader> createState() =>
+      _SharedFilterHeaderState();
 }
 
-class _SharedFilterHeaderState extends State<SharedFilterHeader> {
+class _SharedFilterHeaderState
+    extends State<SharedFilterHeader> {
   late TextEditingController _searchController;
-  int _selectedSportIndex = 0; // Football is selected by default
+  int _selectedSportIndex =
+      0; // Football is selected by default
   int _selectedDateIndex = 0; // "All Dates" is selected
   RangeValues _timeRange = const RangeValues(0.0, 1.0);
 
@@ -46,7 +50,8 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
   @override
   void initState() {
     super.initState();
-    _searchController = widget.searchController ?? TextEditingController();
+    _searchController =
+        widget.searchController ?? TextEditingController();
   }
 
   @override
@@ -101,13 +106,16 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
                     color: MyColors.greenButton,
                     size: 24.sp,
                   ),
-                  onPressed: widget.onFilterTap ??
+                  onPressed:
+                      widget.onFilterTap ??
                       () {
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) => const FilterSheet(),
+                          backgroundColor:
+                              Colors.transparent,
+                          builder: (context) =>
+                              const FilterSheet(),
                         );
                       },
                 ),
@@ -147,7 +155,8 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
               padding: EdgeInsets.symmetric(
                 horizontal: 20.w,
               ),
-              itemCount: _sports.length + 1, // +1 for "Add Sport"
+              itemCount:
+                  _sports.length + 1, // +1 for "Add Sport"
               itemBuilder: (context, index) {
                 if (index == _sports.length) {
                   // "Add Sport" item
@@ -158,17 +167,21 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
                       label: 'Add Sport',
                       isSelected: false,
                       isAddButton: true,
-                      onTap: widget.onAddSportTap ??
+                      onTap:
+                          widget.onAddSportTap ??
                           () {
                             showModalBottomSheet(
                               context: context,
                               isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) => const AddSportSheet(),
+                              backgroundColor:
+                                  Colors.transparent,
+                              builder: (context) =>
+                                  const AddSportSheet(),
                             ).then((selectedSports) {
                               // Handle the returned selected sports if needed
                               if (selectedSports != null &&
-                                  selectedSports is List<String>) {
+                                  selectedSports
+                                      is List<String>) {
                                 // Update the sports list or perform any action
                                 // For now, just a placeholder
                               }
@@ -183,7 +196,8 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
                   child: _SportFilterItem(
                     icon: _getSportIcon(_sports[index]),
                     label: _sports[index],
-                    isSelected: _selectedSportIndex == index,
+                    isSelected:
+                        _selectedSportIndex == index,
                     onTap: () {
                       setState(() {
                         _selectedSportIndex = index;
@@ -195,8 +209,11 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
             ),
           ),
 
-          SizedBox(height: 20.h),
-
+          SizedBox(height: AppDimens.h20),
+          Divider(
+            height: AppDimens.dividerThickness1,
+            color: MyColors.grey300,
+          ),
           // Date Filter Section
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -204,21 +221,25 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
               children: [
                 // Header Row
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'July 2023',
                       style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: MyColors.darkGrayColor,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() {
                           _selectedDateIndex = 0;
-                          _timeRange = const RangeValues(0.0, 1.0);
+                          _timeRange = const RangeValues(
+                            0.0,
+                            1.0,
+                          );
                         });
                       },
                       child: Text(
@@ -242,10 +263,13 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
                     itemCount: _dates.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.only(right: 12.w),
+                        padding: EdgeInsets.only(
+                          right: 12.w,
+                        ),
                         child: _DateFilterItem(
                           date: _dates[index],
-                          isSelected: _selectedDateIndex == index,
+                          isSelected:
+                              _selectedDateIndex == index,
                           onTap: () {
                             setState(() {
                               _selectedDateIndex = index;
@@ -269,7 +293,8 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
               children: [
                 // Time Header
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '12 : 00 am',
@@ -302,7 +327,7 @@ class _SharedFilterHeaderState extends State<SharedFilterHeader> {
                   activeColor: MyColors.greenButton,
                   inactiveColor: Colors.grey[300],
                   min: 0.0,
-                  max: 1.0,
+                  max: 1,
                 ),
               ],
             ),
@@ -344,14 +369,18 @@ class _SportFilterItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton ? Colors.grey[200] : Colors.grey[100]),
+                  : (isAddButton
+                        ? Colors.grey[200]
+                        : Colors.grey[100]),
               shape: BoxShape.circle,
             ),
             child: Icon(
               icon,
               color: isSelected
                   ? Colors.white
-                  : (isAddButton ? MyColors.greenButton : Colors.grey[700]),
+                  : (isAddButton
+                        ? MyColors.greenButton
+                        : Colors.grey[700]),
               size: 24.sp,
             ),
           ),
@@ -363,7 +392,9 @@ class _SportFilterItem extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton ? MyColors.greenButton : Colors.grey[700]),
+                  : (isAddButton
+                        ? MyColors.greenButton
+                        : Colors.grey[700]),
             ),
           ),
         ],

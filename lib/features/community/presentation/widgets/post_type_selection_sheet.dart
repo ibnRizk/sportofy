@@ -72,7 +72,7 @@ class PostTypeSelectionSheet extends StatelessWidget {
           // Description
           Text(
             'You can create your post as a project to request experience and help others or as a usual post to interact with other players and get to know them more',
-            style: TextStyles.regular14(color: MyColors.grey600).copyWith(height: 1.5),
+            style: TextStyles.regular14(color: MyColors.darkGrayColor).copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),
 
@@ -117,6 +117,8 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
                     foregroundColor: MyColors.white,
+                    disabledBackgroundColor: MyColors.grey300,
+                    disabledForegroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: AppRadius.r12,
                     ),

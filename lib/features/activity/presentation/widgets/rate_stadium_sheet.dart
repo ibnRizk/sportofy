@@ -128,15 +128,30 @@ class _RateStadiumSheetState
             width: double.infinity,
             height: AppDimens.buttonHeight50,
             child: ElevatedButton(
-              onPressed: () {
-                // Close this sheet and return the rating data
-                Navigator.pop(context, {
-                  'rating': _selectedRating,
-                  'comment': _commentController.text,
-                });
-              },
+              onPressed:
+                  (_selectedRating > 0 ||
+                      _commentController.text
+                          .trim()
+                          .isNotEmpty)
+                  ? () {
+                      // Close this sheet and return the rating data
+                      Navigator.pop(context, {
+                        'rating': _selectedRating,
+                        'comment': _commentController.text,
+                      });
+                    }
+                  : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.greenButton,
+                backgroundColor:
+                    (_selectedRating > 0 ||
+                        _commentController.text
+                            .trim()
+                            .isNotEmpty)
+                    ? MyColors.greenButton
+                    : MyColors.grey300,
+                foregroundColor: MyColors.white,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r10,
                 ),

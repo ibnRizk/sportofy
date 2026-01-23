@@ -190,20 +190,26 @@ class _AppointmentViewState extends State<AppointmentView> {
               width: double.infinity,
               height: AppDimens.buttonHeight50,
               child: ElevatedButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: MyColors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppRadius.top30,
-                    ),
-                    builder: (context) =>
-                        const BookingTypeSheet(),
-                  );
-                },
+                onPressed: _selectedTimeSlots.isNotEmpty
+                    ? () {
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: MyColors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: AppRadius.top30,
+                          ),
+                          builder: (context) =>
+                              const BookingTypeSheet(),
+                        );
+                      }
+                    : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: MyColors.greenButton,
+                  backgroundColor: _selectedTimeSlots.isNotEmpty
+                      ? MyColors.greenButton
+                      : MyColors.grey300,
                   foregroundColor: MyColors.white,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r10,
                   ),
@@ -353,7 +359,7 @@ class _TimeSlotsSectionState
         SizedBox(height: AppDimens.h4),
         Text(
           'you can only pick consecutive hours',
-          style: TextStyles.regular12(color: MyColors.grey600),
+          style: TextStyles.regular12(color: MyColors.darkGrayColor),
         ),
         SizedBox(height: AppDimens.h16),
 
@@ -375,7 +381,7 @@ class _TimeSlotsSectionState
                     SizedBox(width: AppDimens.w4),
                     Text(
                       'Pending hours',
-                      style: TextStyles.regular12(color: MyColors.grey700),
+                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
                     ),
                   ],
                 ),
@@ -391,7 +397,7 @@ class _TimeSlotsSectionState
                     SizedBox(width: AppDimens.w4),
                     Text(
                       'Resell hours',
-                      style: TextStyles.regular12(color: MyColors.grey700),
+                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
                     ),
                   ],
                 ),
@@ -913,7 +919,7 @@ class _FindMemberForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText:
                   'EX: This game is for training only for age players between...',
-              hintStyle: TextStyles.regular14(color: MyColors.grey500),
+              hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
               border: OutlineInputBorder(
                 borderRadius: AppRadius.r8,
                 borderSide: BorderSide(

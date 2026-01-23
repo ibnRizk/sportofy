@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
-class NotificationSettingsBottomSheet extends StatefulWidget {
+class NotificationSettingsBottomSheet
+    extends StatefulWidget {
   const NotificationSettingsBottomSheet({super.key});
 
   @override
@@ -26,7 +27,8 @@ class NotificationSettingsBottomSheet extends StatefulWidget {
           topRight: Radius.circular(25.r),
         ),
       ),
-      builder: (context) => const NotificationSettingsBottomSheet(),
+      builder: (context) =>
+          const NotificationSettingsBottomSheet(),
     );
   }
 }
@@ -55,11 +57,14 @@ class _NotificationSettingsBottomSheetState
           // ═══════════════════════════════════════════════
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 10.h, bottom: 20.h),
+              margin: EdgeInsets.only(
+                top: 10.h,
+                bottom: 20.h,
+              ),
               width: 40.w,
               height: 4.h,
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha:0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(2.r),
               ),
             ),
@@ -100,7 +105,7 @@ class _NotificationSettingsBottomSheetState
           // ═══════════════════════════════════════════════
           // NOTIFICATION OPTIONS
           // ═══════════════════════════════════════════════
-          
+
           // Messages Option
           _buildNotificationOption(
             iconPath: ImgAssets.icChat,
@@ -116,7 +121,7 @@ class _NotificationSettingsBottomSheetState
           // Divider
           Divider(
             thickness: 1,
-            color: Colors.grey.withValues(alpha:0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             height: 1,
             indent: 16.w,
             endIndent: 16.w,
@@ -148,7 +153,10 @@ class _NotificationSettingsBottomSheetState
     required ValueChanged<bool> onChanged,
   }) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20.w,
+        vertical: 16.h,
+      ),
       child: Row(
         children: [
           // Icon (SVG Asset)
@@ -177,10 +185,13 @@ class _NotificationSettingsBottomSheetState
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: MyColors.greenButton,
-            activeTrackColor: MyColors.greenButton.withValues(alpha:0.5),
+
+            activeTrackColor: MyColors.greenButton
+                .withValues(alpha: 0.5),
             inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.grey.withValues(alpha:0.3),
+            inactiveTrackColor: Colors.grey.withValues(
+              alpha: 0.3,
+            ),
           ),
         ],
       ),

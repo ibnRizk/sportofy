@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../config/locale/app_localizations.dart';
 import '../../injection_container.dart';
+import '../utils/app_colors.dart';
 import '../utils/app_dimens.dart';
 import '../utils/app_radius.dart';
 import '../utils/values/text_styles.dart';
@@ -11,7 +12,7 @@ import '../utils/values/text_styles.dart';
 class MyDefaultButton extends StatelessWidget {
   final String? btnText;
   final bool localeText;
-  final Function() onPressed;
+  final VoidCallback? onPressed;
   final Color? color;
   final Color? textColor;
   final bool isSelected;
@@ -26,7 +27,7 @@ class MyDefaultButton extends StatelessWidget {
     super.key,
     this.btnText,
     this.textStyle,
-    required this.onPressed,
+    this.onPressed,
     this.color,
     this.isSelected = true,
     this.localeText = false,
@@ -59,10 +60,21 @@ class MyDefaultButton extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor:
-              WidgetStateProperty.all<Color>(color ?? context.colors.main),
-          foregroundColor: WidgetStateProperty.all<Color>(
-            textColor ?? context.colors.upBackGround,
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (onPressed == null || states.contains(WidgetState.disabled)) {
+                return MyColors.grey300;
+              }
+              return color ?? context.colors.main;
+            },
+          ),
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (onPressed == null || states.contains(WidgetState.disabled)) {
+                return MyColors.white;
+              }
+              return textColor ?? context.colors.upBackGround;
+            },
           ),
         ),
         onPressed: onPressed,

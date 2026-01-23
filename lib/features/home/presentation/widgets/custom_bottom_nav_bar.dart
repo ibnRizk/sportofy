@@ -181,7 +181,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         color: MyColors.greenButton,
                       )
                     : TextStyles.regular11(
-                        color: MyColors.greyText,
+                        color: MyColors.darkGrayColor,
                       ),
                 textAlign: TextAlign.center,
               ),
@@ -204,7 +204,7 @@ class CustomBottomNavBar extends StatelessWidget {
             width: AppDimens.iconSize24,
             height: AppDimens.iconSize24,
             colorFilter: ColorFilter.mode(
-              isActive ? MyColors.greenButton : MyColors.greyText,
+              isActive ? MyColors.greenButton : MyColors.darkGrayColor,
               BlendMode.srcIn,
             ),
           );
@@ -235,7 +235,7 @@ class CustomBottomNavBar extends StatelessWidget {
           return Icon(
             fallbackIcon,
             size: AppDimens.iconSize24,
-            color: isActive ? MyColors.greenButton : MyColors.greyText,
+            color: isActive ? MyColors.greenButton : MyColors.darkGrayColor,
           );
         }
       },

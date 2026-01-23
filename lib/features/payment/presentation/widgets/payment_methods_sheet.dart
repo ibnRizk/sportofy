@@ -229,6 +229,8 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
+                disabledBackgroundColor: MyColors.grey300,
+                disabledForegroundColor: MyColors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: AppRadius.r10,
                 ),
@@ -308,7 +310,7 @@ class _PaymentMethodsSheetState extends State<PaymentMethodsSheet> {
                     SizedBox(height: AppDimens.h2),
                     Text(
                       subtitle,
-                      style: TextStyles.regular12(color: MyColors.grey600),
+                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
                     ),
                   ],
                 ],

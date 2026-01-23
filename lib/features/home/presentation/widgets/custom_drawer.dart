@@ -108,6 +108,8 @@ class CustomDrawer extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
+                  disabledBackgroundColor: MyColors.grey300,
+                  disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: AppRadius.r12,
                   ),
@@ -204,7 +206,7 @@ class CustomDrawer extends StatelessWidget {
                         children: [
                           Text(
                             'Hi, Ahmed Hassen',
-                            style: TextStyles.semiBold16(
+                            style: TextStyles.medium14(
                               color:
                                   context.colors.textColor,
                             ),
@@ -224,7 +226,7 @@ class CustomDrawer extends StatelessWidget {
                         },
                         child: Text(
                           'View profile',
-                          style: TextStyles.medium13(
+                          style: TextStyles.regular12(
                             color: MyColors.greenButton,
                           ),
                         ),
@@ -425,7 +427,7 @@ class CustomDrawer extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyles.regular15(
-                  color: context.colors.textColor,
+                  color: MyColors.darkGrayColor,
                 ),
               ),
             ),

@@ -26,7 +26,8 @@ class CommentsView extends StatefulWidget {
 }
 
 class _CommentsViewState extends State<CommentsView> {
-  final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _commentController =
+      TextEditingController();
   final FocusNode _commentFocusNode = FocusNode();
 
   // Mock comments data
@@ -156,18 +157,30 @@ class _CommentsViewState extends State<CommentsView> {
                   content: comment['content'],
                   timestamp: comment['timestamp'],
                   likesCount: comment['likesCount'],
-                  hasPreviousReplies: comment['hasPreviousReplies'] ?? false,
-                  previousRepliesCount: comment['previousRepliesCount'] ?? 0,
-                  replies: (comment['replies'] as List<Map<String, dynamic>>?)
-                      ?.map((reply) => CommentReply(
-                            id: reply['id'],
-                            authorName: reply['authorName'],
-                            authorAvatar: reply['authorAvatar'],
-                            content: reply['content'],
-                            timestamp: reply['timestamp'],
-                            likesCount: reply['likesCount'],
-                          ))
-                      .toList(),
+                  hasPreviousReplies:
+                      comment['hasPreviousReplies'] ??
+                      false,
+                  previousRepliesCount:
+                      comment['previousRepliesCount'] ?? 0,
+                  replies:
+                      (comment['replies']
+                              as List<
+                                Map<String, dynamic>
+                              >?)
+                          ?.map(
+                            (reply) => CommentReply(
+                              id: reply['id'],
+                              authorName:
+                                  reply['authorName'],
+                              authorAvatar:
+                                  reply['authorAvatar'],
+                              content: reply['content'],
+                              timestamp: reply['timestamp'],
+                              likesCount:
+                                  reply['likesCount'],
+                            ),
+                          )
+                          .toList(),
                 );
               },
             ),
@@ -219,20 +232,23 @@ class _CommentsViewState extends State<CommentsView> {
                       width: AppDimens.avatarSize20,
                       height: AppDimens.avatarSize20,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          Icons.thumb_up,
-                          size: AppDimens.iconSize12,
-                          color: MyColors.blue700,
-                        );
-                      },
+                      errorBuilder:
+                          (context, error, stackTrace) {
+                            return Icon(
+                              Icons.thumb_up,
+                              size: AppDimens.iconSize12,
+                              color: MyColors.blue700,
+                            );
+                          },
                     ),
                   ),
                 ),
                 SizedBox(width: AppDimens.w8),
                 Text(
                   '${widget.likedBy} and ${widget.likesCount} others',
-                  style: TextStyles.medium13(color: MyColors.black87),
+                  style: TextStyles.medium13(
+                    color: MyColors.black87,
+                  ),
                 ),
                 SizedBox(width: AppDimens.w4),
                 Icon(
@@ -265,7 +281,9 @@ class _CommentsViewState extends State<CommentsView> {
         left: AppDimens.w20,
         right: AppDimens.w20,
         top: AppDimens.h12,
-        bottom: MediaQuery.of(context).viewInsets.bottom + AppDimens.h12,
+        bottom:
+            MediaQuery.of(context).viewInsets.bottom +
+            AppDimens.h12,
       ),
       decoration: BoxDecoration(
         color: MyColors.white,
@@ -293,10 +311,14 @@ class _CommentsViewState extends State<CommentsView> {
                 child: TextField(
                   controller: _commentController,
                   focusNode: _commentFocusNode,
-                  style: TextStyles.regular14(color: MyColors.black87),
+                  style: TextStyles.regular14(
+                    color: MyColors.black87,
+                  ),
                   decoration: InputDecoration(
                     hintText: 'Write a comment ...',
-                    hintStyle: TextStyles.regular14(color: MyColors.grey600),
+                    hintStyle: TextStyles.regular14(
+                      color: MyColors.darkGrayColor,
+                    ),
                     border: InputBorder.none,
                     contentPadding: AppPadding.h16v12,
                     isDense: true,

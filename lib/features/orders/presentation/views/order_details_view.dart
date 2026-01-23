@@ -96,7 +96,7 @@ class OrderDetailsView extends StatelessWidget {
               ),
               Text(
                 'Order ID : 9287KJ',
-                style: TextStyles.regular13(color: MyColors.grey600),
+                style: TextStyles.regular13(color: MyColors.darkGrayColor),
               ),
             ],
           ),
@@ -127,7 +127,7 @@ class OrderDetailsView extends StatelessWidget {
                   ),
                   child: Text(
                     'Cancel Order',
-                    style: TextStyles.medium14(color: MyColors.grey400),
+                    style: TextStyles.medium14(color: MyColors.darkGrayColor),
                   ),
                 ),
               ),
@@ -318,12 +318,12 @@ class OrderDetailsView extends StatelessWidget {
                       SizedBox(height: AppDimens.h4),
                       Text(
                         '8 street 9, floor 5, department 15',
-                        style: TextStyles.regular13(color: MyColors.grey600),
+                        style: TextStyles.regular13(color: MyColors.darkGrayColor),
                       ),
                       SizedBox(height: AppDimens.h4),
                       Text(
                         'Mobile: 01101110101',
-                        style: TextStyles.regular13(color: MyColors.grey600),
+                        style: TextStyles.regular13(color: MyColors.darkGrayColor),
                       ),
                     ],
                   ),

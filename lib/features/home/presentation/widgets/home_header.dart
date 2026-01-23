@@ -45,7 +45,7 @@ class HomeHeader extends StatelessWidget {
                 Text(
                   'my_location'.tr(context),
                   style: TextStyles.regular12(
-                    color: MyColors.greyText,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 SizedBox(height: AppDimens.h2),

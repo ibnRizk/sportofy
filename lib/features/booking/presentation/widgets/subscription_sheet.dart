@@ -229,6 +229,8 @@ class SubscriptionSheet extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: MyColors.greenButton,
                       foregroundColor: Colors.white,
+                      disabledBackgroundColor: MyColors.grey300,
+                      disabledForegroundColor: MyColors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           12.r,

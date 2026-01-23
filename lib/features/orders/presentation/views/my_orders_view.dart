@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
-import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/orders/presentation/widgets/order_card.dart';
 
@@ -16,7 +16,12 @@ class MyOrdersView extends StatefulWidget {
 class _MyOrdersViewState extends State<MyOrdersView> {
   int _selectedFilterIndex = 0;
 
-  final List<String> _filters = ['All', 'Ordered', 'Shipped', 'Delivered'];
+  final List<String> _filters = [
+    'All',
+    'Ordered',
+    'Shipped',
+    'Delivered',
+  ];
 
   // Mock Data - Strictly matches the screenshot
   final List<Map<String, String>> _orders = [
@@ -63,21 +68,22 @@ class _MyOrdersViewState extends State<MyOrdersView> {
         ),
         title: Text(
           'My Orders',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
       ),
       body: Column(
         children: [
           // Filter Chips
+          SizedBox(height: AppDimens.h20),
           _buildFilterChips(),
 
           SizedBox(height: AppDimens.h20),
 
           // Order List
-          Expanded(
-            child: _buildOrderList(),
-          ),
+          Expanded(child: _buildOrderList()),
         ],
       ),
     );
@@ -85,12 +91,13 @@ class _MyOrdersViewState extends State<MyOrdersView> {
 
   Widget _buildFilterChips() {
     return SizedBox(
-      height: AppDimens.buttonHeight50,
+      height: AppDimens.buttonHeight40,
       child: ListView.separated(
         padding: AppPadding.h20,
         scrollDirection: Axis.horizontal,
         itemCount: _filters.length,
-        separatorBuilder: (context, index) => SizedBox(width: AppDimens.w10),
+        separatorBuilder: (context, index) =>
+            SizedBox(width: AppDimens.w10),
         itemBuilder: (context, index) {
           final isSelected = _selectedFilterIndex == index;
           return GestureDetector(
@@ -100,21 +107,33 @@ class _MyOrdersViewState extends State<MyOrdersView> {
               });
             },
             child: Container(
-              padding: AppPadding.h20v10,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 4.h,
+              ),
               decoration: BoxDecoration(
-                color: isSelected ? MyColors.greenButton : MyColors.white,
+                color: isSelected
+                    ? MyColors.greenButton
+                    : MyColors.white,
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
                       : MyColors.grey300,
                 ),
-                borderRadius: AppRadius.r20,
+                borderRadius: BorderRadius.circular(36.r),
               ),
               child: Center(
-                child: Text(
-                  _filters[index],
-                  style: TextStyles.medium14(
-                    color: isSelected ? MyColors.white : MyColors.grey600,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.w,
+                  ),
+                  child: Text(
+                    _filters[index],
+                    style: TextStyles.medium14(
+                      color: isSelected
+                          ? MyColors.white
+                          : MyColors.grey600,
+                    ),
                   ),
                 ),
               ),

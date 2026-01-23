@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
-import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
-import 'package:sportify_app/injection_container.dart';
 
 class MarketProductCard extends StatelessWidget {
   final String imageUrl;
@@ -38,93 +37,85 @@ class MarketProductCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: context.colors.white,
-          borderRadius: AppRadius.r12,
-          boxShadow: [
-            BoxShadow(
-              color: MyColors.black.withValues(alpha: AppDimens.opacity05),
-              blurRadius: AppDimens.elevation8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          color: MyColors.white,
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: AppRadius.top12,
-                  child: Image.asset(
-                    imageUrl,
-                    width: double.infinity,
-                    height: AppDimens.containerHeight150,
-                    fit: BoxFit.cover,
-                    cacheWidth:
-                        (AppDimens.containerHeight150 *
-                                MediaQuery.of(
-                                  context,
-                                ).devicePixelRatio)
-                            .toInt(),
-                    cacheHeight:
-                        (AppDimens.containerHeight150 *
-                                MediaQuery.of(
-                                  context,
-                                ).devicePixelRatio)
-                            .toInt(),
-                    errorBuilder:
-                        (context, error, stackTrace) {
-                          return Container(
-                            width: double.infinity,
-                            height: AppDimens.containerHeight150,
-                            color: MyColors.grey200,
-                            child: Icon(
-                              Icons.image,
-                              size: AppDimens.iconSize40,
-                              color: MyColors.grey400,
-                            ),
-                          );
-                        },
-                  ),
-                ),
-                // Quantity Selector Overlay
-                Positioned(
-                  bottom: AppDimens.h8,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: isInCart
-                        ? _buildQuantitySelector(context)
-                        : _buildAddButton(),
-                  ),
-                ),
-              ],
-            ),
-
-            // Product Info
-            Padding(
-              padding: AppPadding.p12,
-              child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+            // Product Image (60% of card)
+            Expanded(
+              flex: 6,
+              child: Stack(
                 children: [
-                  Text(
-                    name,
-                    style: TextStyles.semiBold14(
-                      color: context.colors.textColor,
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.r),
+                      topRight: Radius.circular(12.r),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    child: Image.asset(
+                      imageUrl,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder:
+                          (context, error, stackTrace) {
+                            return Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: MyColors.grey200,
+                              child: Icon(
+                                Icons.image,
+                                size: AppDimens.iconSize40,
+                                color: MyColors.grey400,
+                              ),
+                            );
+                          },
+                    ),
                   ),
-                  SizedBox(height: AppDimens.h4),
-                  Text(
-                    price,
-                    style: TextStyles.bold14(
-                      color: context.colors.textColor,
+                  // Action Row (Add/Counter)
+                  Positioned(
+                    bottom: AppDimens.h8,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: isInCart
+                          ? _buildQuantitySelector(context)
+                          : _buildAddButton(),
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            // Product Info (40% of card)
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: AppPadding.p12,
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyles.regular14(
+                        color: MyColors.darkGrayColor,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: AppDimens.h4),
+                    Text(
+                      price,
+                      style: TextStyles.semiBold16(
+                        color: MyColors.black87,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -135,22 +126,23 @@ class MarketProductCard extends StatelessWidget {
 
   Widget _buildQuantitySelector(BuildContext context) {
     return Container(
-      padding: AppPadding.h8v4,
+      margin: EdgeInsets.all(12.r),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.w45,
+        vertical: AppDimens.h4,
+      ),
       decoration: BoxDecoration(
-        color: context.colors.white,
-        borderRadius: AppRadius.r20,
-        boxShadow: [
-          BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity1),
-            blurRadius: AppDimens.elevation4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: MyColors.white,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: Colors.grey[300]!,
+          width: 1,
+        ),
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Delete/Remove Button
+          // Remove Button (Green)
           GestureDetector(
             onTap: quantity == 1 ? onDelete : onRemove,
             child: Icon(
@@ -158,25 +150,25 @@ class MarketProductCard extends StatelessWidget {
                   ? Icons.delete_outline
                   : Icons.remove,
               size: AppDimens.iconSize18,
-              color: context.colors.textColor,
+              color: MyColors.greenButton,
             ),
           ),
-          SizedBox(width: AppDimens.w12),
+          SizedBox(width: AppDimens.w8),
           // Quantity
           Text(
             quantity.toString(),
-            style: TextStyles.semiBold14(
-              color: context.colors.textColor,
+            style: TextStyles.medium14(
+              color: MyColors.darkGrayColor,
             ),
           ),
-          SizedBox(width: AppDimens.w12),
-          // Add Button
+          SizedBox(width: AppDimens.w8),
+          // Add Button (Green)
           GestureDetector(
             onTap: onAdd,
             child: Icon(
               Icons.add,
               size: AppDimens.iconSize18,
-              color: context.colors.textColor,
+              color: MyColors.greenButton,
             ),
           ),
         ],
@@ -188,19 +180,11 @@ class MarketProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: onAdd,
       child: Container(
-        padding: AppPadding.p8,
+        width: AppDimens.iconSize40,
+        height: AppDimens.iconSize40,
         decoration: BoxDecoration(
           color: MyColors.greenButton,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: MyColors.greenButton.withValues(
-                alpha: AppDimens.opacity3,
-              ),
-              blurRadius: AppDimens.elevation8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Icon(
           Icons.add,

@@ -6,7 +6,7 @@ import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/widgets/shared_filter_header.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:sportify_app/features/matches/presentation/widgets/match_booking_card.dart';
+import 'package:sportify_app/features/home/presentation/widgets/nearby_match_card.dart';
 
 class MatchesView extends StatelessWidget {
   const MatchesView({super.key});
@@ -36,14 +36,11 @@ class MatchesView extends StatelessWidget {
                 return ListView.separated(
                   padding: AppPadding.h20v16,
                   itemCount: state.nearbyMatches.length,
-                  separatorBuilder: (context, index) => SizedBox(height: AppDimens.h16),
+                  separatorBuilder: (context, index) =>
+                      SizedBox(height: AppDimens.h16),
                   itemBuilder: (context, index) {
-                    return MatchBookingCard(
+                    return NearbyMatchCard(
                       match: state.nearbyMatches[index],
-                      onJoinTap: () {
-                        // TODO: Handle join match action
-                        // Navigate to match details or join flow
-                      },
                     );
                   },
                 );
@@ -58,9 +55,13 @@ class MatchesView extends StatelessWidget {
           // Navigate to Stadium screen (index 3 in bottom navigation)
           if (context.mounted) {
             try {
-              context.read<HomeCubit>().changeBottomNavIndex(3);
+              context
+                  .read<HomeCubit>()
+                  .changeBottomNavIndex(3);
             } catch (e) {
-              debugPrint('Navigation error to stadium screen: $e');
+              debugPrint(
+                'Navigation error to stadium screen: $e',
+              );
             }
           }
         },
@@ -72,10 +73,13 @@ class MatchesView extends StatelessWidget {
         ),
         label: Text(
           'Create Match',
-          style: TextStyles.semiBold14(color: MyColors.white),
+          style: TextStyles.semiBold14(
+            color: MyColors.white,
+          ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerFloat,
     );
   }
 }
