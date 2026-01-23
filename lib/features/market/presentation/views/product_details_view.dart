@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
@@ -33,11 +35,12 @@ class _ProductDetailsViewState
   final List<String> _colors = ['Green', 'White'];
   final List<int> _sizes = [38, 39, 40, 41, 42, 43, 44];
 
-  // Mock product images
+  // Product images
   final List<String> _productImages = [
-    ImgAssets.smallShoes,
     ImgAssets.whiteShoes,
-    ImgAssets.shoes,
+    ImgAssets.whiteShoes1,
+    ImgAssets.whiteShoes2,
+    ImgAssets.whiteShoes3,
   ];
 
   @override
@@ -93,16 +96,21 @@ class _ProductDetailsViewState
                               ),
                             ),
                             SizedBox(width: AppDimens.w12),
-                            // Quantity Selector
+                            // Quantity Selector (like photo)
                             Container(
-                              padding: AppPadding.h8v4,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppDimens.w12,
+                                vertical: AppDimens.h8,
+                              ),
                               decoration: BoxDecoration(
-                                color: context.colors.white,
-                                borderRadius: AppRadius.r20,
+                                color: MyColors.white,
+                                borderRadius:
+                                    BorderRadius.circular(
+                                      8.r,
+                                    ),
                                 border: Border.all(
-                                  color: MyColors.grey300,
-                                  width: AppDimens
-                                      .borderWidth1,
+                                  color: Colors.grey[300]!,
+                                  width: 1,
                                 ),
                               ),
                               child: Row(
@@ -121,17 +129,29 @@ class _ProductDetailsViewState
                                         });
                                       }
                                     },
-                                    child: Icon(
-                                      _quantity == 1
-                                          ? Icons
-                                                .delete_outline
-                                          : Icons.remove,
-                                      size: AppDimens
-                                          .iconSize18,
-                                      color: context
-                                          .colors
-                                          .textColor,
-                                    ),
+                                    child: _quantity == 1
+                                        ? SvgPicture.asset(
+                                            ImgAssets
+                                                .icTrash,
+                                            width: AppDimens
+                                                .iconSize18,
+                                            height: AppDimens
+                                                .iconSize18,
+                                            colorFilter:
+                                                const ColorFilter.mode(
+                                                  MyColors
+                                                      .greenButton,
+                                                  BlendMode
+                                                      .srcIn,
+                                                ),
+                                          )
+                                        : Icon(
+                                            Icons.remove,
+                                            size: AppDimens
+                                                .iconSize18,
+                                            color: MyColors
+                                                .greenButton,
+                                          ),
                                   ),
                                   SizedBox(
                                     width: AppDimens.w12,
@@ -139,10 +159,9 @@ class _ProductDetailsViewState
                                   Text(
                                     _quantity.toString(),
                                     style:
-                                        TextStyles.semiBold14(
-                                          color: context
-                                              .colors
-                                              .textColor,
+                                        TextStyles.medium16(
+                                          color: MyColors
+                                              .darkGrayColor,
                                         ),
                                   ),
                                   SizedBox(
@@ -163,9 +182,8 @@ class _ProductDetailsViewState
                                       Icons.add,
                                       size: AppDimens
                                           .iconSize18,
-                                      color: context
-                                          .colors
-                                          .textColor,
+                                      color: MyColors
+                                          .greenButton,
                                     ),
                                   ),
                                 ],
@@ -180,35 +198,86 @@ class _ProductDetailsViewState
                           widget.product['price']
                                   as String? ??
                               '0 EGP',
-                          style: TextStyles.bold16(
+                          style: TextStyles.bold20(
                             color: context.colors.textColor,
                           ),
                         ),
 
-                        SizedBox(height: AppDimens.h32),
+                        SizedBox(height: AppDimens.h24),
 
-                        // Color Picker
-                        ColorPicker(
-                          colors: _colors,
-                          selectedColor: _selectedColor,
-                          onColorSelected: (color) {
-                            setState(() {
-                              _selectedColor = color;
-                            });
-                          },
+                        // Divider
+                        Divider(
+                          height: 1,
+                          thickness: 1,
+                          color: Colors.grey[200]!,
                         ),
 
-                        SizedBox(height: AppDimens.h32),
+                        SizedBox(height: AppDimens.h24),
 
-                        // Size Picker
-                        SizePicker(
-                          sizes: _sizes,
-                          selectedSize: _selectedSize,
-                          onSizeSelected: (size) {
-                            setState(() {
-                              _selectedSize = size;
-                            });
-                          },
+                        // Color Picker Section with Container
+                        Text(
+                          'Choose the color',
+                          style: TextStyles.bold16(
+                            color: context.colors.textColor,
+                          ),
+                        ),
+                        SizedBox(height: 16.h),
+                        Container(
+                          padding: EdgeInsets.all(
+                            AppDimens.w16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: MyColors.white,
+                            borderRadius:
+                                BorderRadius.circular(12.r),
+                            border: Border.all(
+                              color: Colors.grey[300]!,
+                              width: 1,
+                            ),
+                          ),
+                          child: ColorPicker(
+                            colors: _colors,
+                            selectedColor: _selectedColor,
+                            onColorSelected: (color) {
+                              setState(() {
+                                _selectedColor = color;
+                              });
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: AppDimens.h16),
+
+                        // Size Picker Section with Container
+                        Text(
+                          'Choose the Size',
+                          style: TextStyles.bold16(
+                            color: context.colors.textColor,
+                          ),
+                        ),
+                        SizedBox(height: AppDimens.h12),
+                        Container(
+                          padding: EdgeInsets.all(
+                            AppDimens.w16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: MyColors.white,
+                            borderRadius:
+                                BorderRadius.circular(12.r),
+                            border: Border.all(
+                              color: Colors.grey[300]!,
+                              width: 1,
+                            ),
+                          ),
+                          child: SizePicker(
+                            sizes: _sizes,
+                            selectedSize: _selectedSize,
+                            onSizeSelected: (size) {
+                              setState(() {
+                                _selectedSize = size;
+                              });
+                            },
+                          ),
                         ),
 
                         SizedBox(height: AppDimens.h32),
@@ -288,7 +357,7 @@ class _ProductDetailsViewState
                 ),
                 child: Text(
                   'Add to Cart',
-                  style: TextStyles.bold16(),
+                  style: TextStyles.semiBold20(),
                 ),
               ),
             ),
@@ -299,132 +368,129 @@ class _ProductDetailsViewState
   }
 
   Widget _buildImageSection() {
-    return Stack(
-      children: [
-        // Image Slider
-        SizedBox(
-          height: AppDimens.containerHeight350,
-          child: PageView.builder(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentImageIndex = index;
-              });
-            },
-            itemCount: _productImages.length,
-            itemBuilder: (context, index) {
-              final devicePixelRatio = MediaQuery.of(
-                context,
-              ).devicePixelRatio;
-              return Image.asset(
-                _productImages[index],
-                width: double.infinity,
-                fit: BoxFit.cover,
-                cacheWidth:
-                    (AppDimens.containerHeight350 *
-                            devicePixelRatio)
-                        .toInt(),
-                cacheHeight:
-                    (AppDimens.containerHeight350 *
-                            devicePixelRatio)
-                        .toInt(),
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: MyColors.grey200,
-                    child: Icon(
-                      Icons.image,
-                      size: AppDimens.iconSize50,
-                      color: MyColors.grey400,
-                    ),
-                  );
+    return Container(
+      color: MyColors.white,
+      child: Stack(
+        children: [
+          // Image Slider with White Background
+          Container(
+            height: AppDimens.containerHeight350,
+            color: MyColors.white,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentImageIndex = index;
+                });
+              },
+              itemCount: _productImages.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  color: MyColors.white,
+                  child: Image.asset(
+                    _productImages[index],
+                    width: double.infinity,
+                    fit: BoxFit.contain,
+                    errorBuilder:
+                        (context, error, stackTrace) {
+                          return Container(
+                            color: MyColors.grey200,
+                            child: Icon(
+                              Icons.image,
+                              size: AppDimens.iconSize50,
+                              color: MyColors.grey400,
+                            ),
+                          );
+                        },
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // Back Button
+          Positioned(
+            top: AppDimens.h40,
+            left: AppDimens.w20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.colors.white.withValues(
+                  alpha: AppDimens.opacity9,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: context.colors.textColor,
+                  size: AppDimens.iconSize24,
+                ),
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
                 },
-              );
-            },
-          ),
-        ),
-
-        // Back Button
-        Positioned(
-          top: AppDimens.h40,
-          left: AppDimens.w20,
-          child: Container(
-            decoration: BoxDecoration(
-              color: context.colors.white.withValues(
-                alpha: AppDimens.opacity9,
               ),
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: context.colors.textColor,
-                size: AppDimens.iconSize24,
-              ),
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
             ),
           ),
-        ),
 
-        // Share Button
-        Positioned(
-          top: AppDimens.h40,
-          right: AppDimens.w20,
-          child: Container(
-            decoration: BoxDecoration(
-              color: context.colors.white.withValues(
-                alpha: AppDimens.opacity9,
-              ),
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.share_outlined,
-                color: context.colors.textColor,
-                size: AppDimens.iconSize24,
-              ),
-              onPressed: () {
-                // TODO: Implement share
-              },
-            ),
-          ),
-        ),
-
-        // Page Indicator (Circular Dots)
-        Positioned(
-          bottom: AppDimens.h20,
-          left: 0,
-          right: 0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              _productImages.length,
-              (index) => Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: AppDimens.w4,
+          // Share Button
+          Positioned(
+            top: AppDimens.h40,
+            right: AppDimens.w20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.colors.white.withValues(
+                  alpha: AppDimens.opacity9,
                 ),
-                width: _currentImageIndex == index
-                    ? AppDimens.w10
-                    : AppDimens.w8,
-                height: _currentImageIndex == index
-                    ? AppDimens.h10
-                    : AppDimens.h8,
-                decoration: BoxDecoration(
-                  color: _currentImageIndex == index
-                      ? context.colors.white
-                      : context.colors.white.withValues(
-                          alpha: AppDimens.opacity5,
-                        ),
-                  shape: BoxShape.circle,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.share_outlined,
+                  color: context.colors.textColor,
+                  size: AppDimens.iconSize24,
+                ),
+                onPressed: () {
+                  // TODO: Implement share
+                },
+              ),
+            ),
+          ),
+
+          // Page Indicator (Circular Dots at bottom)
+          Positioned(
+            bottom: AppDimens.h20,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                _productImages.length,
+                (index) => Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: AppDimens.w4,
+                  ),
+                  width: _currentImageIndex == index
+                      ? AppDimens.w10
+                      : AppDimens.w8,
+                  height: _currentImageIndex == index
+                      ? AppDimens.h10
+                      : AppDimens.h8,
+                  decoration: BoxDecoration(
+                    color: _currentImageIndex == index
+                        ? MyColors.white
+                        : MyColors.white.withValues(
+                            alpha: AppDimens.opacity5,
+                          ),
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

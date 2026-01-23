@@ -142,6 +142,12 @@ class ImgAssets {
       'assets/images/small_shoes.png';
   static const String whiteShoes =
       'assets/images/white_shoes.png';
+  static const String whiteShoes1 =
+      'assets/images/white_shoes1.png';
+  static const String whiteShoes2 =
+      'assets/images/white_shoes2.png';
+  static const String whiteShoes3 =
+      'assets/images/white_shoes3.png';
   static const String shoes = 'assets/images/shoes.png';
   static const String deliverySuccess =
       'assets/images/delivery_success.png';
@@ -170,4 +176,7 @@ class ImgAssets {
       'assets/icons/Tournaments.svg';
   static const String icOrganized =
       'assets/icons/organized.svg';
+
+  // Action Icons
+  static const String icTrash = 'assets/icons/trash.svg';
 }

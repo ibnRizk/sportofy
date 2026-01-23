@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class CartItemTile extends StatelessWidget {
@@ -153,13 +155,21 @@ class CartItemTile extends StatelessWidget {
                   onTap: quantity == 1
                       ? onDelete
                       : onDecrease,
-                  child: Icon(
-                    quantity == 1
-                        ? Icons.delete_outline
-                        : Icons.remove,
-                    size: AppDimens.iconSize18,
-                    color: MyColors.greenButton,
-                  ),
+                  child: quantity == 1
+                      ? SvgPicture.asset(
+                          ImgAssets.icTrash,
+                          width: AppDimens.iconSize18,
+                          height: AppDimens.iconSize18,
+                          colorFilter: const ColorFilter.mode(
+                            MyColors.greenButton,
+                            BlendMode.srcIn,
+                          ),
+                        )
+                      : Icon(
+                          Icons.remove,
+                          size: AppDimens.iconSize18,
+                          color: MyColors.greenButton,
+                        ),
                 ),
                 SizedBox(height: AppDimens.h8),
                 // Quantity

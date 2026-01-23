@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 
 class ImagePickerSheet extends StatelessWidget {
   const ImagePickerSheet({super.key});
@@ -59,6 +61,7 @@ class ImagePickerSheet extends StatelessWidget {
               _OptionItem(
                 label: 'Remove Image',
                 icon: Icons.delete_outline,
+                iconPath: ImgAssets.icTrash,
                 color: Colors.red,
                 onTap: () {
                   // TODO: Implement remove logic
@@ -79,12 +82,14 @@ class ImagePickerSheet extends StatelessWidget {
 class _OptionItem extends StatelessWidget {
   final String label;
   final IconData icon;
+  final String? iconPath;
   final Color color;
   final VoidCallback onTap;
 
   const _OptionItem({
     required this.label,
     required this.icon,
+    this.iconPath,
     required this.color,
     required this.onTap,
   });
@@ -110,11 +115,21 @@ class _OptionItem extends StatelessWidget {
                   width: 1.5,
                 ),
               ),
-              child: Icon(
-                icon,
-                size: 24.sp,
-                color: color,
-              ),
+              child: iconPath != null
+                  ? SvgPicture.asset(
+                      iconPath!,
+                      width: 24.sp,
+                      height: 24.sp,
+                      colorFilter: ColorFilter.mode(
+                        color,
+                        BlendMode.srcIn,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      size: 24.sp,
+                      color: color,
+                    ),
             ),
 
             SizedBox(height: 8.h),

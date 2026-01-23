@@ -60,14 +60,7 @@ class _StadiumsViewState extends State<StadiumsView> {
       appBar: AppBar(
         backgroundColor: MyColors.white,
         elevation: AppDimens.elevation0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Icons.arrow_back,
-            color: MyColors.black,
-            size: AppDimens.iconSize24,
-          ),
-        ),
+
         title: Text(
           'Stadiums',
           style: TextStyles.semiBold18(

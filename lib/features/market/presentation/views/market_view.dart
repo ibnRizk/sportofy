@@ -10,6 +10,7 @@ import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/market/presentation/widgets/market_product_card.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class MarketView extends StatefulWidget {
   const MarketView({super.key});
@@ -22,7 +23,7 @@ class _MarketViewState extends State<MarketView> {
   final TextEditingController _searchController =
       TextEditingController();
   String _selectedCategory = 'Shoes';
-  int _cartItemCount = 3; // Mock cart count
+  // Mock cart count
 
   final List<String> _categories = [
     'Shoes',
@@ -87,10 +88,6 @@ class _MarketViewState extends State<MarketView> {
       if (productIndex != -1) {
         _products[productIndex]['quantity'] = newQuantity;
         // Update cart count
-        _cartItemCount = _products.fold(
-          0,
-          (sum, p) => sum + (p['quantity'] as int),
-        );
       }
     });
   }
@@ -104,22 +101,11 @@ class _MarketViewState extends State<MarketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.white,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: MyColors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            ImgAssets.icBack,
-            width: AppDimens.iconSize24,
-            height: AppDimens.iconSize24,
-            colorFilter: const ColorFilter.mode(
-              MyColors.darkGrayColor,
-              BlendMode.srcIn,
-            ),
-          ),
-          onPressed: () => context.pop(),
-        ),
+
         title: Text(
           'Market',
           style: TextStyles.semiBold18(
@@ -139,44 +125,22 @@ class _MarketViewState extends State<MarketView> {
                 width: AppDimens.iconSize40,
                 height: AppDimens.iconSize40,
                 decoration: BoxDecoration(
-                  color: MyColors.grey100,
+                  color: const Color.fromARGB(
+                    59,
+                    134,
+                    177,
+                    237,
+                  ),
                   shape: BoxShape.circle,
                 ),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Icon(
-                      Icons.shopping_cart_outlined,
-                      size: AppDimens.iconSize20,
-                      color: MyColors.darkGrayColor,
+                    SvgPicture.asset(
+                      'assets/icons/cart.svg',
+                      width: AppDimens.iconSize20,
+                      height: AppDimens.iconSize20,
                     ),
-                    if (_cartItemCount > 0)
-                      Positioned(
-                        right: AppDimens.w4,
-                        top: AppDimens.h4,
-                        child: Container(
-                          padding: AppPadding.p4,
-                          decoration: BoxDecoration(
-                            color: MyColors.red,
-                            shape: BoxShape.circle,
-                          ),
-                          constraints: BoxConstraints(
-                            minWidth: AppDimens.w16,
-                            minHeight: AppDimens.h16,
-                          ),
-                          child: Center(
-                            child: Text(
-                              _cartItemCount > 9
-                                  ? '9+'
-                                  : _cartItemCount
-                                        .toString(),
-                              style: TextStyles.bold10(
-                                color: MyColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               ),
@@ -312,8 +276,8 @@ class _MarketViewState extends State<MarketView> {
                   SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.7,
-                    crossAxisSpacing: AppDimens.w12,
-                    mainAxisSpacing: AppDimens.h16,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
                   ),
               itemCount: _filteredProducts.length,
               itemBuilder: (context, index) {

@@ -92,6 +92,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                 ),
                 _buildQuickActionItem(
                   icon: Icons.delete_outline,
+                  iconPath: ImgAssets.icTrash,
                   label: 'Delete Account',
                   iconColor: MyColors.red,
                   borderColor: MyColors.red,
@@ -219,6 +220,7 @@ class AccountSettingsBottomSheet extends StatelessWidget {
   /// Helper widget for Quick Action Items
   Widget _buildQuickActionItem({
     required IconData icon,
+    String? iconPath,
     required String label,
     required Color iconColor,
     required Color borderColor,
@@ -242,11 +244,23 @@ class AccountSettingsBottomSheet extends StatelessWidget {
                 width: AppDimens.borderWidth2,
               ),
             ),
-            child: Icon(
-              icon,
-              size: AppDimens.iconSize24,
-              color: iconColor,
-            ),
+            child: iconPath != null
+                ? Center(
+                    child: SvgPicture.asset(
+                      iconPath,
+                      width: AppDimens.iconSize24,
+                      height: AppDimens.iconSize24,
+                      colorFilter: ColorFilter.mode(
+                        iconColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  )
+                : Icon(
+                    icon,
+                    size: AppDimens.iconSize24,
+                    color: iconColor,
+                  ),
           ),
           SizedBox(height: AppDimens.h8),
           // Label Text
