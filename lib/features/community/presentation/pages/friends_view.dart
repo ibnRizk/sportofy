@@ -135,24 +135,21 @@ class FriendsView extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor
-                        .withValues(alpha: 0.2),
+                    color: context.colors.textColor,
                     width: 1,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor
-                        .withValues(alpha: 0.2),
+                    color: context.colors.textColor,
                     width: 1,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide(
-                    color: context.colors.textColor
-                        .withValues(alpha: 0.4),
+                    color: context.colors.textColor,
                     width: 1,
                   ),
                 ),
@@ -234,8 +231,7 @@ class FriendListTile extends StatelessWidget {
                     Text(
                       friend.mutualFriends!,
                       style: TextStyles.regular10(
-                        color: context.colors.textColor
-                            .withValues(alpha: 0.5),
+                        color: context.colors.textColor,
                       ),
                     ),
                   ],

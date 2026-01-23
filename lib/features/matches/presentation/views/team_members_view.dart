@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class TeamMembersView extends StatefulWidget {
   const TeamMembersView({super.key});
@@ -43,7 +44,7 @@ class _TeamMembersViewState extends State<TeamMembersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

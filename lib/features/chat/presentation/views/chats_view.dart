@@ -4,6 +4,7 @@ import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
@@ -87,7 +88,9 @@ class ChatsView extends StatelessWidget {
         ),
         title: Text(
           'Chat',
-          style: TextStyles.bold18(color: MyColors.black87),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
         actions: [
@@ -96,10 +99,13 @@ class ChatsView extends StatelessWidget {
             padding: AppPadding.right16,
             child: CircleAvatar(
               radius: AppDimens.avatarSize18,
-              backgroundImage: AssetImage(ImgAssets.userAvatar),
-              onBackgroundImageError: (exception, stackTrace) {
-                // Handle error silently
-              },
+              backgroundImage: AssetImage(
+                ImgAssets.userAvatar,
+              ),
+              onBackgroundImageError:
+                  (exception, stackTrace) {
+                    // Handle error silently
+                  },
             ),
           ),
         ],
@@ -122,7 +128,9 @@ class ChatsView extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
+                  hintStyle: TextStyles.regular14(
+                    color: MyColors.darkGrayColor,
+                  ),
                   prefixIcon: Icon(
                     Icons.search,
                     size: AppDimens.iconSize20,
@@ -173,7 +181,8 @@ class ChatsView extends StatelessWidget {
                 height: AppDimens.dividerThickness1,
                 thickness: AppDimens.dividerThickness1,
                 color: MyColors.grey200,
-                indent: AppDimens.w72, // Align with content (avatar + spacing)
+                indent: AppDimens
+                    .w72, // Align with content (avatar + spacing)
               ),
               itemBuilder: (context, index) {
                 final chat = _chats[index];
@@ -189,8 +198,10 @@ class ChatsView extends StatelessWidget {
                       Routes.personalChatRoute,
                       extra: {
                         'userName': chat['name'] as String,
-                        'userAvatar': chat['avatar'] as String,
-                        'isOnline': chat['isOnline'] as bool,
+                        'userAvatar':
+                            chat['avatar'] as String,
+                        'isOnline':
+                            chat['isOnline'] as bool,
                       },
                     );
                   },

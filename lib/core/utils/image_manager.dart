@@ -176,6 +176,7 @@ class ImgAssets {
       'assets/icons/Tournaments.svg';
   static const String icOrganized =
       'assets/icons/organized.svg';
+  static const String icTennis = 'assets/icons/tennis.svg';
 
   // Action Icons
   static const String icTrash = 'assets/icons/trash.svg';

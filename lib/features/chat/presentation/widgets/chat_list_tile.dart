@@ -5,6 +5,7 @@ import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class ChatListTile extends StatelessWidget {
   final String userAvatar;
@@ -29,7 +30,8 @@ class ChatListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap ??
+      onTap:
+          onTap ??
           () {
             // Navigate to personal chat
             context.push(
@@ -52,9 +54,10 @@ class ChatListTile extends StatelessWidget {
                 CircleAvatar(
                   radius: AppDimens.avatarSize30,
                   backgroundImage: AssetImage(userAvatar),
-                  onBackgroundImageError: (exception, stackTrace) {
-                    // Handle error silently
-                  },
+                  onBackgroundImageError:
+                      (exception, stackTrace) {
+                        // Handle error silently
+                      },
                 ),
                 // Online Indicator (if online)
                 if (isOnline)
@@ -80,12 +83,15 @@ class ChatListTile extends StatelessWidget {
             // Name and Message (Expanded)
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // User Name (Bold)
                   Text(
                     userName,
-                    style: TextStyles.bold16(color: MyColors.black87),
+                    style: TextStyles.medium14(
+                      color: context.colors.textColor,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -93,7 +99,9 @@ class ChatListTile extends StatelessWidget {
                   // Last Message Preview (Truncated, Grey)
                   Text(
                     lastMessage,
-                    style: TextStyles.regular14(color: MyColors.darkGrayColor),
+                    style: TextStyles.regular14(
+                      color: MyColors.darkGrayColor,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -108,7 +116,9 @@ class ChatListTile extends StatelessWidget {
                 // Timestamp
                 Text(
                   timestamp,
-                  style: TextStyles.regular12(color: MyColors.darkGrayColor),
+                  style: TextStyles.regular12(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h4),
                 // Unread Badge (if unread messages exist)
@@ -117,13 +127,20 @@ class ChatListTile extends StatelessWidget {
                     width: AppDimens.badgeSize24,
                     height: AppDimens.badgeSize24,
                     decoration: BoxDecoration(
-                      color: MyColors.lightBlue400,
+                      color: const Color.fromARGB(
+                        255,
+                        108,
+                        169,
+                        198,
+                      ),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Text(
                         unreadCount.toString(),
-                        style: TextStyles.bold11(color: MyColors.white),
+                        style: TextStyles.bold11(
+                          color: MyColors.white,
+                        ),
                       ),
                     ),
                   ),

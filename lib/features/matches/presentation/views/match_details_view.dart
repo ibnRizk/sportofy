@@ -3,6 +3,7 @@ import 'package:sportify_app/config/locale/app_localizations.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
@@ -22,7 +23,7 @@ class MatchDetailsView extends StatelessWidget {
         match.currentPlayers / match.totalPlayers;
 
     return Scaffold(
-      backgroundColor: MyColors.white,
+      backgroundColor: context.colors.backGround,
       body: Stack(
         children: [
           // Scrollable Content
@@ -53,28 +54,41 @@ class MatchDetailsView extends StatelessWidget {
                                 Text(
                                   match.stadiumName,
                                   style: TextStyles.bold18(
-                                    color: MyColors.black87,
+                                    color: MyColors
+                                        .darkGrayColor,
                                   ),
                                 ),
                                 SizedBox(
                                   width: AppDimens.w8,
                                 ),
-                                Icon(
-                                  Icons.star,
-                                  color: MyColors.amber,
-                                  size:
-                                      AppDimens.iconSize18,
-                                ),
-                                SizedBox(
-                                  width: AppDimens.w4,
-                                ),
-                                Text(
-                                  '(4.87)',
-                                  style:
-                                      TextStyles.medium16(
-                                        color: MyColors
-                                            .black87,
-                                      ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '(',
+                                      style:
+                                          TextStyles.medium16(
+                                            color: MyColors
+                                                .black87,
+                                          ),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: MyColors.amber,
+                                      size: AppDimens
+                                          .iconSize18,
+                                    ),
+                                    SizedBox(
+                                      width: AppDimens.w4,
+                                    ),
+                                    Text(
+                                      '4.87)',
+                                      style:
+                                          TextStyles.medium16(
+                                            color: MyColors
+                                                .black87,
+                                          ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -128,7 +142,7 @@ class MatchDetailsView extends StatelessWidget {
                         ],
                       ),
 
-                      SizedBox(height: AppDimens.h8),
+                      SizedBox(height: AppDimens.h2),
 
                       // Tags Row
                       Text(
@@ -155,8 +169,8 @@ class MatchDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'The Date',
-                        style: TextStyles.bold16(
-                          color: MyColors.black87,
+                        style: TextStyles.semiBold16(
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                       SizedBox(height: AppDimens.h12),
@@ -213,8 +227,8 @@ class MatchDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'Note',
-                        style: TextStyles.bold16(
-                          color: MyColors.black87,
+                        style: TextStyles.semiBold16(
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                       SizedBox(height: AppDimens.h12),
@@ -247,7 +261,7 @@ class MatchDetailsView extends StatelessWidget {
                         children: [
                           Text(
                             'The Team',
-                            style: TextStyles.bold16(
+                            style: TextStyles.semiBold16(
                               color: MyColors.black87,
                             ),
                           ),
@@ -304,9 +318,9 @@ class MatchDetailsView extends StatelessWidget {
                                   Text(
                                     match.organizerName,
                                     style:
-                                        TextStyles.bold15(
+                                        TextStyles.regular14(
                                           color: MyColors
-                                              .black87,
+                                              .darkGrayColor,
                                         ),
                                   ),
                                   SizedBox(
@@ -315,7 +329,7 @@ class MatchDetailsView extends StatelessWidget {
                                   Text(
                                     'organizer'.tr(context),
                                     style:
-                                        TextStyles.medium12(
+                                        TextStyles.semiBold12(
                                           color: MyColors
                                               .greenButton,
                                         ),
@@ -351,17 +365,34 @@ class MatchDetailsView extends StatelessWidget {
 
                       SizedBox(height: AppDimens.h16),
 
-                      // Progress Bar
+                      // Progress Bar with Gradient
                       ClipRRect(
                         borderRadius: AppRadius.r10,
-                        child: LinearProgressIndicator(
-                          value: progressPercentage,
-                          backgroundColor: MyColors.grey300,
-                          valueColor:
-                              const AlwaysStoppedAnimation<
-                                Color
-                              >(MyColors.greenButton),
-                          minHeight: AppDimens.h8,
+                        child: Container(
+                          height: AppDimens.h4,
+                          decoration: BoxDecoration(
+                            color: MyColors.grey300,
+                            borderRadius: AppRadius.r10,
+                          ),
+                          child: FractionallySizedBox(
+                            widthFactor: progressPercentage,
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    MyColors.blue,
+                                    MyColors.greenButton,
+                                  ],
+                                  begin:
+                                      Alignment.centerLeft,
+                                  end:
+                                      Alignment.centerRight,
+                                ),
+                                borderRadius: AppRadius.r10,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -392,7 +423,7 @@ class MatchDetailsView extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(ImgAssets.lightYard),
+                image: AssetImage(ImgAssets.nightYard),
                 fit: BoxFit.cover,
               ),
             ),
@@ -623,14 +654,14 @@ class MatchDetailsView extends StatelessWidget {
               children: [
                 Text(
                   'For one',
-                  style: TextStyles.regular12(
+                  style: TextStyles.regular14(
                     color: MyColors.darkGrayColor,
                   ),
                 ),
                 SizedBox(height: AppDimens.h4),
                 Text(
                   '${match.price.toStringAsFixed(0)} ${'egp'.tr(context)}',
-                  style: TextStyles.bold18(
+                  style: TextStyles.medium20(
                     color: MyColors.greenButton,
                   ),
                 ),

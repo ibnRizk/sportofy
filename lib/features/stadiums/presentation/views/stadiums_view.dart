@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -111,16 +112,25 @@ class _StadiumsViewState extends State<StadiumsView> {
     );
   }
 
-  IconData _getSportIcon(String sport) {
+  IconData? _getSportIcon(String sport) {
     switch (sport.toLowerCase()) {
       case 'football':
         return Icons.sports_soccer;
       case 'basketball':
         return Icons.sports_basketball;
       case 'tennis':
-        return Icons.sports_tennis;
+        return null; // Use SVG instead
       default:
         return Icons.sports;
+    }
+  }
+
+  String? _getSportIconPath(String sport) {
+    switch (sport.toLowerCase()) {
+      case 'tennis':
+        return ImgAssets.icTennis;
+      default:
+        return null;
     }
   }
 
@@ -166,13 +176,13 @@ class _StadiumsViewState extends State<StadiumsView> {
                 border: OutlineInputBorder(
                   borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: MyColors.grey300,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: MyColors.grey300,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -199,11 +209,7 @@ class _StadiumsViewState extends State<StadiumsView> {
                   // "Add Sport" item
                   return Padding(
                     padding: AppPadding.right12,
-                    child: _SportFilterItem(
-                      icon: Icons.add,
-                      label: 'Add Sport',
-                      isSelected: false,
-                      isAddButton: true,
+                    child: GestureDetector(
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
@@ -222,6 +228,33 @@ class _StadiumsViewState extends State<StadiumsView> {
                           }
                         });
                       },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width:
+                                AppDimens.containerWidth50,
+                            height:
+                                AppDimens.containerWidth50,
+                            decoration: BoxDecoration(
+                              color: MyColors.grey200,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: MyColors.greenButton,
+                              size: AppDimens.iconSize24,
+                            ),
+                          ),
+                          SizedBox(height: AppDimens.h6),
+                          Text(
+                            'Add Sport',
+                            style: TextStyles.medium12(
+                              color: MyColors.greenButton,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }
@@ -230,6 +263,9 @@ class _StadiumsViewState extends State<StadiumsView> {
                   padding: AppPadding.right12,
                   child: _SportFilterItem(
                     icon: _getSportIcon(_sports[index]),
+                    iconPath: _getSportIconPath(
+                      _sports[index],
+                    ),
                     label: _sports[index],
                     isSelected:
                         _selectedSportIndex == index,
@@ -258,8 +294,8 @@ class _StadiumsViewState extends State<StadiumsView> {
                   children: [
                     Text(
                       'July 2023',
-                      style: TextStyles.semiBold16(
-                        color: MyColors.black87,
+                      style: TextStyles.regular10(
+                        color: MyColors.darkGrayColor,
                       ),
                     ),
                     TextButton(
@@ -318,20 +354,32 @@ class _StadiumsViewState extends State<StadiumsView> {
               padding: AppPadding.h20,
               child: Column(
                 children: [
-                  Text(
-                    'Sat 08 Jul 12:30 am - 11:30 pm',
-                    style: TextStyles.medium14(
-                      color: MyColors.darkGrayColor,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Sat 08 Jul 12:30 am - 11:30 pm',
+                      style: TextStyles.medium14(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                   ),
                   SizedBox(height: AppDimens.h8),
-                  Divider(
-                    height: AppDimens.dividerThickness1,
-                    color: MyColors.grey300,
-                  ),
+                  // Divider(
+                  //   height: AppDimens.dividerThickness1,
+                  //   color: MyColors.grey300,
+                  // ),
                 ],
               ),
             ),
+
+          SizedBox(height: AppDimens.h20),
+
+          // Divider between dates and time
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: MyColors.grey300,
+          ),
 
           SizedBox(height: AppDimens.h20),
 
@@ -534,17 +582,17 @@ class _StadiumsViewState extends State<StadiumsView> {
 
 // Sport Filter Item Widget
 class _SportFilterItem extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
+  final String? iconPath;
   final String label;
   final bool isSelected;
-  final bool isAddButton;
   final VoidCallback onTap;
 
   const _SportFilterItem({
-    required this.icon,
+    this.icon,
+    this.iconPath,
     required this.label,
     required this.isSelected,
-    this.isAddButton = false,
     required this.onTap,
   });
 
@@ -561,19 +609,29 @@ class _SportFilterItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton
-                        ? MyColors.grey200
-                        : MyColors.grey100),
+                  : MyColors.grey100,
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              icon,
-              color: isSelected
-                  ? MyColors.white
-                  : (isAddButton
-                        ? MyColors.greenButton
-                        : MyColors.grey700),
-              size: AppDimens.iconSize24,
+            child: Center(
+              child: iconPath != null
+                  ? SvgPicture.asset(
+                      iconPath!,
+                      width: AppDimens.iconSize24,
+                      height: AppDimens.iconSize24,
+                      colorFilter: ColorFilter.mode(
+                        isSelected
+                            ? MyColors.white
+                            : MyColors.grey700,
+                        BlendMode.srcIn,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      color: isSelected
+                          ? MyColors.white
+                          : MyColors.grey700,
+                      size: AppDimens.iconSize24,
+                    ),
             ),
           ),
           SizedBox(height: AppDimens.h6),
@@ -582,9 +640,7 @@ class _SportFilterItem extends StatelessWidget {
             style: TextStyles.medium12(
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton
-                        ? MyColors.greenButton
-                        : MyColors.darkGrayColor),
+                  : MyColors.darkGrayColor,
             ),
           ),
         ],
@@ -625,13 +681,25 @@ class _DateFilterItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isAllDates)
-              Text(
-                'All',
-                style: TextStyles.semiBold14(
-                  color: isSelected
-                      ? MyColors.greenButton
-                      : MyColors.darkGrayColor,
-                ),
+              Column(
+                children: [
+                  Text(
+                    'All',
+                    style: TextStyles.regular14(
+                      color: isSelected
+                          ? MyColors.greenButton
+                          : MyColors.darkGrayColor,
+                    ),
+                  ),
+                  Text(
+                    ' Dates',
+                    style: TextStyles.regular14(
+                      color: isSelected
+                          ? MyColors.greenButton
+                          : MyColors.darkGrayColor,
+                    ),
+                  ),
+                ],
               )
             else ...[
               Text(
@@ -739,38 +807,8 @@ class _StadiumCard extends StatelessWidget {
                         },
                   ),
                 ),
+
                 // Map Button (floating at bottom-center of image)
-                Positioned(
-                  bottom: AppDimens.h12,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        // TODO: Navigate to map view
-                      },
-                      icon: Icon(
-                        Icons.map,
-                        size: AppDimens.iconSize16,
-                        color: MyColors.white,
-                      ),
-                      label: Text(
-                        'Map',
-                        style: TextStyles.semiBold12(
-                          color: MyColors.white,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            MyColors.greenButton,
-                        padding: AppPadding.h16v10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: AppRadius.r20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
 
@@ -791,8 +829,8 @@ class _StadiumCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           name,
-                          style: TextStyles.bold16(
-                            color: MyColors.black87,
+                          style: TextStyles.medium14(
+                            color: MyColors.darkGrayColor,
                           ),
                         ),
                       ),
@@ -828,7 +866,7 @@ class _StadiumCard extends StatelessWidget {
                       SizedBox(width: AppDimens.w4),
                       Text(
                         location,
-                        style: TextStyles.regular14(
+                        style: TextStyles.regular12(
                           color: MyColors.darkGrayColor,
                         ),
                       ),
@@ -871,7 +909,7 @@ class _StadiumCard extends StatelessWidget {
                   // Price Row
                   Text(
                     'Starting from ${price.toStringAsFixed(2)} EGP',
-                    style: TextStyles.semiBold14(
+                    style: TextStyles.regular14(
                       color: MyColors.greenButton,
                     ),
                   ),

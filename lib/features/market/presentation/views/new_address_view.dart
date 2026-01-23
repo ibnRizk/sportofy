@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/custom_text_field.dart';
 import 'package:sportify_app/features/market/presentation/widgets/phone_input_field.dart';
 
@@ -58,7 +59,7 @@ class _NewAddressViewState extends State<NewAddressView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

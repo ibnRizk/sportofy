@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class MyTeamView extends StatelessWidget {
   const MyTeamView({super.key});
@@ -10,7 +11,7 @@ class MyTeamView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

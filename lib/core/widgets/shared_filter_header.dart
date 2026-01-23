@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/add_sport_sheet.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/filter_sheet.dart';
 
@@ -62,16 +64,25 @@ class _SharedFilterHeaderState
     super.dispose();
   }
 
-  IconData _getSportIcon(String sport) {
+  IconData? _getSportIcon(String sport) {
     switch (sport.toLowerCase()) {
       case 'football':
         return Icons.sports_soccer;
       case 'basketball':
         return Icons.sports_basketball;
       case 'tennis':
-        return Icons.sports_tennis;
+        return null; // Use SVG instead
       default:
         return Icons.sports;
+    }
+  }
+
+  String? _getSportIconPath(String sport) {
+    switch (sport.toLowerCase()) {
+      case 'tennis':
+        return ImgAssets.icTennis;
+      default:
+        return null;
     }
   }
 
@@ -162,11 +173,7 @@ class _SharedFilterHeaderState
                   // "Add Sport" item
                   return Padding(
                     padding: EdgeInsets.only(right: 12.w),
-                    child: _SportFilterItem(
-                      icon: Icons.add,
-                      label: 'Add Sport',
-                      isSelected: false,
-                      isAddButton: true,
+                    child: GestureDetector(
                       onTap:
                           widget.onAddSportTap ??
                           () {
@@ -187,6 +194,33 @@ class _SharedFilterHeaderState
                               }
                             });
                           },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 50.w,
+                            height: 50.w,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: MyColors.greenButton,
+                              size: 24.sp,
+                            ),
+                          ),
+                          SizedBox(height: 6.h),
+                          Text(
+                            'Add Sport',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.greenButton,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }
@@ -195,6 +229,9 @@ class _SharedFilterHeaderState
                   padding: EdgeInsets.only(right: 12.w),
                   child: _SportFilterItem(
                     icon: _getSportIcon(_sports[index]),
+                    iconPath: _getSportIconPath(
+                      _sports[index],
+                    ),
                     label: _sports[index],
                     isSelected:
                         _selectedSportIndex == index,
@@ -286,6 +323,15 @@ class _SharedFilterHeaderState
 
           SizedBox(height: 20.h),
 
+          // Divider between dates and time
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: Colors.grey[200]!,
+          ),
+
+          SizedBox(height: 20.h),
+
           // Time Range Section
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -342,17 +388,17 @@ class _SharedFilterHeaderState
 
 // Sport Filter Item Widget
 class _SportFilterItem extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
+  final String? iconPath;
   final String label;
   final bool isSelected;
-  final bool isAddButton;
   final VoidCallback onTap;
 
   const _SportFilterItem({
-    required this.icon,
+    this.icon,
+    this.iconPath,
     required this.label,
     required this.isSelected,
-    this.isAddButton = false,
     required this.onTap,
   });
 
@@ -369,19 +415,29 @@ class _SportFilterItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton
-                        ? Colors.grey[200]
-                        : Colors.grey[100]),
+                  : Colors.grey[100],
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              icon,
-              color: isSelected
-                  ? Colors.white
-                  : (isAddButton
-                        ? MyColors.greenButton
-                        : Colors.grey[700]),
-              size: 24.sp,
+            child: Center(
+              child: iconPath != null
+                  ? SvgPicture.asset(
+                      iconPath!,
+                      width: 24.sp,
+                      height: 24.sp,
+                      colorFilter: ColorFilter.mode(
+                        isSelected
+                            ? Colors.white
+                            : Colors.grey[700]!,
+                        BlendMode.srcIn,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      color: isSelected
+                          ? Colors.white
+                          : Colors.grey[700],
+                      size: 24.sp,
+                    ),
             ),
           ),
           SizedBox(height: 6.h),
@@ -392,9 +448,7 @@ class _SportFilterItem extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: isSelected
                   ? MyColors.greenButton
-                  : (isAddButton
-                        ? MyColors.greenButton
-                        : Colors.grey[700]),
+                  : Colors.grey[700],
             ),
           ),
         ],

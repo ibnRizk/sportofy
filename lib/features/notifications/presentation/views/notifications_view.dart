@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/notifications/presentation/widgets/notification_tile.dart';
 
 class NotificationsView extends StatelessWidget {
@@ -12,28 +13,32 @@ class NotificationsView extends StatelessWidget {
     {
       'avatar': ImgAssets.mohamedAhmed,
       'name': 'Mohamed Saad',
-      'message': 'wants to share with you the price of reserving a stadium.',
+      'message':
+          'wants to share with you the price of reserving a stadium.',
       'time': '4h',
       'action': 'Share',
     },
     {
       'avatar': ImgAssets.salahMostafa,
       'name': 'Mohamed Saad',
-      'message': 'wants to share with you the price of a subscription to book an hour.',
+      'message':
+          'wants to share with you the price of a subscription to book an hour.',
       'time': '11h',
       'action': 'Share',
     },
     {
       'avatar': ImgAssets.mohamedAhmed,
       'name': 'Mohamed Saad',
-      'message': 'agreed to join you in today\'s match at 11.',
+      'message':
+          'agreed to join you in today\'s match at 11.',
       'time': '2d',
       'action': 'Pay',
     },
     {
       'avatar': ImgAssets.salahMostafa,
       'name': 'Mohamed Saad',
-      'message': 'the owner of the stadium (Stadium name), agreed to book the stadium with by paying cash.',
+      'message':
+          'the owner of the stadium (Stadium name), agreed to book the stadium with by paying cash.',
       'time': '1d',
       'action': null,
     },
@@ -61,7 +66,8 @@ class NotificationsView extends StatelessWidget {
     {
       'avatar': ImgAssets.salahMostafa,
       'name': 'Mohamed Karim',
-      'message': 'The tournament was entered by Mohamed Karim and you are a striker in his team.',
+      'message':
+          'The tournament was entered by Mohamed Karim and you are a striker in his team.',
       'time': '2d',
       'action': null,
     },
@@ -90,8 +96,8 @@ class NotificationsView extends StatelessWidget {
           'Notification',
           style: TextStyle(
             fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+            color: context.colors.textColor,
           ),
         ),
         centerTitle: false,
@@ -109,9 +115,9 @@ class NotificationsView extends StatelessWidget {
               child: Text(
                 'Requests',
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: context.colors.textColor,
                 ),
               ),
             ),
@@ -125,21 +131,30 @@ class NotificationsView extends StatelessWidget {
                 height: 1,
                 thickness: 1,
                 color: Colors.grey[200],
-                indent: 72.w, // Align with content (avatar + spacing)
+                indent: 72
+                    .w, // Align with content (avatar + spacing)
               ),
               itemBuilder: (context, index) {
                 final notification = _requests[index];
                 return NotificationTile(
-                  userAvatar: notification['avatar'] as String,
+                  userAvatar:
+                      notification['avatar'] as String,
                   userName: notification['name'] as String,
-                  message: notification['message'] as String,
+                  message:
+                      notification['message'] as String,
                   time: notification['time'] as String,
-                  actionButtonText: notification['action'] as String?,
-                  onActionTap: notification['action'] != null
+                  actionButtonText:
+                      notification['action'] as String?,
+                  onActionTap:
+                      notification['action'] != null
                       ? () {
                           // TODO: Handle action based on type
-                          final action = notification['action'] as String;
-                          debugPrint('Action tapped: $action');
+                          final action =
+                              notification['action']
+                                  as String;
+                          debugPrint(
+                            'Action tapped: $action',
+                          );
                         }
                       : null,
                 );

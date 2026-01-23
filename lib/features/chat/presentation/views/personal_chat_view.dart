@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
@@ -22,14 +23,19 @@ class PersonalChatView extends StatefulWidget {
   });
 
   @override
-  State<PersonalChatView> createState() => _PersonalChatViewState();
+  State<PersonalChatView> createState() =>
+      _PersonalChatViewState();
 }
 
-class _PersonalChatViewState extends State<PersonalChatView> {
-  final TextEditingController _messageController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
+class _PersonalChatViewState
+    extends State<PersonalChatView> {
+  final TextEditingController _messageController =
+      TextEditingController();
+  final ScrollController _scrollController =
+      ScrollController();
   bool _showAttachments = false;
-  bool _hasMessages = false; // Toggle this to test empty vs active states
+  bool _hasMessages =
+      false; // Toggle this to test empty vs active states
 
   // Mock messages for active conversation
   final List<Map<String, dynamic>> _messages = [
@@ -78,7 +84,8 @@ class _PersonalChatViewState extends State<PersonalChatView> {
     if (_messageController.text.trim().isEmpty) return;
 
     setState(() {
-      _hasMessages = true; // Switch to active conversation state
+      _hasMessages =
+          true; // Switch to active conversation state
       _messages.add({
         'message': _messageController.text.trim(),
         'type': MessageType.sent,
@@ -111,13 +118,15 @@ class _PersonalChatViewState extends State<PersonalChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.white,
+      backgroundColor: context.colors.backGround,
       appBar: _buildAppBar(),
       body: Column(
         children: [
           // Chat Body
           Expanded(
-            child: _hasMessages ? _buildActiveChat() : _buildEmptyChat(),
+            child: _hasMessages
+                ? _buildActiveChat()
+                : _buildEmptyChat(),
           ),
 
           // Attachment Panel (if visible)
@@ -168,11 +177,13 @@ class _PersonalChatViewState extends State<PersonalChatView> {
               CircleAvatar(
                 radius: AppDimens.avatarSize20,
                 backgroundImage: AssetImage(
-                  widget.userAvatar ?? ImgAssets.mohamedAhmed,
+                  widget.userAvatar ??
+                      ImgAssets.mohamedAhmed,
                 ),
-                onBackgroundImageError: (exception, stackTrace) {
-                  // Handle error silently
-                },
+                onBackgroundImageError:
+                    (exception, stackTrace) {
+                      // Handle error silently
+                    },
               ),
               // Online Indicator
               if (widget.isOnline)
@@ -201,11 +212,13 @@ class _PersonalChatViewState extends State<PersonalChatView> {
             children: [
               Text(
                 widget.userName ?? 'Mohamed Ahmed',
-                style: TextStyles.bold16(color: MyColors.black87),
+                style: TextStyles.medium14(
+                  color: context.colors.textColor,
+                ),
               ),
               Text(
                 widget.isOnline ? 'Active now' : 'Offline',
-                style: TextStyles.regular12(
+                style: TextStyles.regular14(
                   color: widget.isOnline
                       ? MyColors.greenButton
                       : MyColors.grey600,
@@ -224,7 +237,9 @@ class _PersonalChatViewState extends State<PersonalChatView> {
         margin: AppPadding.h40,
         padding: AppPadding.h24v32,
         decoration: BoxDecoration(
-          color: MyColors.cyan.withValues(alpha: AppDimens.opacity1),
+          color: MyColors.cyan.withValues(
+            alpha: AppDimens.opacity1,
+          ),
           borderRadius: AppRadius.r12,
         ),
         child: Column(
@@ -232,13 +247,17 @@ class _PersonalChatViewState extends State<PersonalChatView> {
           children: [
             Text(
               'No messages here yet...',
-              style: TextStyles.bold16(color: MyColors.darkGrayColor),
+              style: TextStyles.medium18(
+                color: MyColors.darkGrayColor,
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.h8),
             Text(
               'Send a first message',
-              style: TextStyles.regular14(color: MyColors.darkGrayColor),
+              style: TextStyles.regular18(
+                color: MyColors.darkGrayColor,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -251,7 +270,8 @@ class _PersonalChatViewState extends State<PersonalChatView> {
     return ListView.builder(
       controller: _scrollController,
       padding: AppPadding.v16,
-      itemCount: _messages.length + 1, // +1 for date separator
+      itemCount:
+          _messages.length + 1, // +1 for date separator
       itemBuilder: (context, index) {
         // Date Separator (first item)
         if (index == 0) {
@@ -260,7 +280,9 @@ class _PersonalChatViewState extends State<PersonalChatView> {
             child: Center(
               child: Text(
                 'MAY 01, 2014, 5:07 AM',
-                style: TextStyles.regular12(color: MyColors.darkGrayColor),
+                style: TextStyles.regular12(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
             ),
           );
@@ -273,8 +295,10 @@ class _PersonalChatViewState extends State<PersonalChatView> {
         return MessageBubble(
           message: message['message'] as String,
           type: message['type'] as MessageType,
-          userAvatar: message['type'] == MessageType.received
-              ? (widget.userAvatar ?? ImgAssets.mohamedAhmed)
+          userAvatar:
+              message['type'] == MessageType.received
+              ? (widget.userAvatar ??
+                    ImgAssets.mohamedAhmed)
               : ImgAssets.userAvatar,
           timestamp: message['timestamp'] as String,
         );

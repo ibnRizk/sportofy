@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/features/booking/presentation/widgets/audience_sheet.dart';
@@ -41,7 +42,7 @@ class _AppointmentGridViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.white,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         title: const Text('Appointment'),
         backgroundColor: MyColors.white,

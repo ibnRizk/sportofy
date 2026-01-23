@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -38,7 +39,9 @@ class PostTypeSelectionSheet extends StatelessWidget {
           // Title
           Text(
             'Create your post as',
-            style: TextStyles.bold18(color: MyColors.black87),
+            style: TextStyles.medium18(
+              color: MyColors.black87,
+            ),
             textAlign: TextAlign.center,
           ),
 
@@ -52,7 +55,7 @@ class PostTypeSelectionSheet extends StatelessWidget {
               borderRadius: AppRadius.r12,
             ),
             child: Image.asset(
-              ImgAssets.pana,
+              "assets/images/create_post.png",
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -70,10 +73,15 @@ class PostTypeSelectionSheet extends StatelessWidget {
           SizedBox(height: AppDimens.h24),
 
           // Description
-          Text(
-            'You can create your post as a project to request experience and help others or as a usual post to interact with other players and get to know them more',
-            style: TextStyles.regular14(color: MyColors.darkGrayColor).copyWith(height: 1.5),
-            textAlign: TextAlign.center,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 22.w),
+            child: Text(
+              'You can create your post as a project to request experience and help others or as a usual post to interact with other players and get to know them more',
+              style: TextStyles.regular16(
+                color: MyColors.darkGrayColor,
+              ).copyWith(height: 1.5),
+              textAlign: TextAlign.center,
+            ),
           ),
 
           SizedBox(height: AppDimens.h30),
@@ -100,7 +108,9 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   ),
                   child: Text(
                     'As Project',
-                    style: TextStyles.semiBold16(color: MyColors.greenButton),
+                    style: TextStyles.bold16(
+                      color: MyColors.greenButton,
+                    ),
                   ),
                 ),
               ),
@@ -117,7 +127,8 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.greenButton,
                     foregroundColor: MyColors.white,
-                    disabledBackgroundColor: MyColors.grey300,
+                    disabledBackgroundColor:
+                        MyColors.grey300,
                     disabledForegroundColor: MyColors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: AppRadius.r12,
@@ -127,7 +138,7 @@ class PostTypeSelectionSheet extends StatelessWidget {
                   ),
                   child: Text(
                     'As usual',
-                    style: TextStyles.semiBold16(),
+                    style: TextStyles.bold16(),
                   ),
                 ),
               ),
@@ -140,14 +151,15 @@ class PostTypeSelectionSheet extends StatelessWidget {
     );
   }
 
-  void _navigateToCreatePost(BuildContext context, String postType) {
+  void _navigateToCreatePost(
+    BuildContext context,
+    String postType,
+  ) {
     if (!context.mounted) return;
     try {
       context.push(
         Routes.createPostRoute,
-        extra: {
-          'postType': postType,
-        },
+        extra: {'postType': postType},
       );
     } catch (e) {
       debugPrint('Navigation error to CreatePostView: $e');

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class MatchDetailsView extends StatelessWidget {
   const MatchDetailsView({super.key});
@@ -9,7 +10,7 @@ class MatchDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       body: CustomScrollView(
         slivers: [
           // Hero Image with AppBar

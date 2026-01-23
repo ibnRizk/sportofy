@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/address_card.dart';
 import 'package:sportify_app/features/market/presentation/widgets/order_success_sheet.dart';
 import 'package:sportify_app/features/market/presentation/widgets/payment_option_tile.dart';
@@ -60,7 +61,7 @@ class _CheckoutSummaryViewState
         widget.addressData?['mobile'] ?? '01101110101';
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

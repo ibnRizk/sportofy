@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/reviews_sheet.dart';
 
 class StadiumDetailsView extends StatefulWidget {
@@ -37,7 +38,7 @@ class _StadiumDetailsViewState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       body: Stack(
         children: [
           // Scrollable Content

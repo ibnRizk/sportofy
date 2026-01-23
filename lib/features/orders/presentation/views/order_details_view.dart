@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 
@@ -11,7 +12,7 @@ class OrderDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.grey50,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: MyColors.white,
         elevation: AppDimens.elevation0,
@@ -25,7 +26,9 @@ class OrderDetailsView extends StatelessWidget {
         ),
         title: Text(
           'Order Details',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: context.colors.textColor,
+          ),
         ),
         centerTitle: false,
       ),
@@ -37,7 +40,9 @@ class OrderDetailsView extends StatelessWidget {
             // Section Title
             Text(
               'Arriving Date',
-              style: TextStyles.bold16(color: MyColors.black87),
+              style: TextStyles.semiBold16(
+                color: MyColors.black87,
+              ),
             ),
             SizedBox(height: AppDimens.h12),
 
@@ -49,7 +54,9 @@ class OrderDetailsView extends StatelessWidget {
             // Section 2: Delivery Location
             Text(
               'Delivery Location',
-              style: TextStyles.bold16(color: MyColors.black87),
+              style: TextStyles.semiBold16(
+                color: context.colors.textColor,
+              ),
             ),
             SizedBox(height: AppDimens.h12),
             _buildDeliveryLocationCard(),
@@ -59,7 +66,9 @@ class OrderDetailsView extends StatelessWidget {
             // Section 3: Order Summary
             Text(
               'Order Summary',
-              style: TextStyles.bold16(color: MyColors.black87),
+              style: TextStyles.bold16(
+                color: MyColors.black87,
+              ),
             ),
             SizedBox(height: AppDimens.h12),
             _buildOrderSummaryCard(),
@@ -77,7 +86,9 @@ class OrderDetailsView extends StatelessWidget {
         borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity05,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
@@ -92,11 +103,15 @@ class OrderDetailsView extends StatelessWidget {
             children: [
               Text(
                 'Arriving by 10 July',
-                style: TextStyles.bold15(color: MyColors.black87),
+                style: TextStyles.medium12(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               Text(
                 'Order ID : 9287KJ',
-                style: TextStyles.regular13(color: MyColors.darkGrayColor),
+                style: TextStyles.medium10(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
             ],
           ),
@@ -127,7 +142,9 @@ class OrderDetailsView extends StatelessWidget {
                   ),
                   child: Text(
                     'Cancel Order',
-                    style: TextStyles.medium14(color: MyColors.darkGrayColor),
+                    style: TextStyles.medium14(
+                      color: MyColors.grey,
+                    ),
                   ),
                 ),
               ),
@@ -174,21 +191,27 @@ class OrderDetailsView extends StatelessWidget {
               child: Text(
                 'Ordered',
                 textAlign: TextAlign.center,
-                style: TextStyles.medium13(color: activeColor),
+                style: TextStyles.medium13(
+                  color: activeColor,
+                ),
               ),
             ),
             Expanded(
               child: Text(
                 'Shipped',
                 textAlign: TextAlign.center,
-                style: TextStyles.medium13(color: activeColor),
+                style: TextStyles.medium13(
+                  color: activeColor,
+                ),
               ),
             ),
             Expanded(
               child: Text(
                 'Delivered',
                 textAlign: TextAlign.center,
-                style: TextStyles.medium13(color: inactiveColor),
+                style: TextStyles.medium13(
+                  color: inactiveColor,
+                ),
               ),
             ),
           ],
@@ -257,7 +280,9 @@ class OrderDetailsView extends StatelessWidget {
         borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity05,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
@@ -313,17 +338,23 @@ class OrderDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         'Cairo (Maadi)',
-                        style: TextStyles.bold15(color: MyColors.black87),
+                        style: TextStyles.bold15(
+                          color: MyColors.black87,
+                        ),
                       ),
                       SizedBox(height: AppDimens.h4),
                       Text(
                         '8 street 9, floor 5, department 15',
-                        style: TextStyles.regular13(color: MyColors.darkGrayColor),
+                        style: TextStyles.regular13(
+                          color: MyColors.darkGrayColor,
+                        ),
                       ),
                       SizedBox(height: AppDimens.h4),
                       Text(
                         'Mobile: 01101110101',
-                        style: TextStyles.regular13(color: MyColors.darkGrayColor),
+                        style: TextStyles.regular13(
+                          color: MyColors.darkGrayColor,
+                        ),
                       ),
                     ],
                   ),
@@ -344,7 +375,9 @@ class OrderDetailsView extends StatelessWidget {
         borderRadius: AppRadius.r12,
         boxShadow: [
           BoxShadow(
-            color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+            color: MyColors.black.withValues(
+              alpha: AppDimens.opacity05,
+            ),
             blurRadius: AppDimens.elevation8,
             offset: const Offset(0, 2),
           ),
@@ -380,12 +413,16 @@ class OrderDetailsView extends StatelessWidget {
               children: [
                 Text(
                   '1 X Adidas barricade',
-                  style: TextStyles.medium14(color: MyColors.black87),
+                  style: TextStyles.medium14(
+                    color: MyColors.black87,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h6),
                 Text(
                   '3200 EGP',
-                  style: TextStyles.bold16(color: MyColors.black87),
+                  style: TextStyles.bold16(
+                    color: MyColors.black87,
+                  ),
                 ),
                 SizedBox(height: AppDimens.h6),
                 Row(
@@ -394,14 +431,18 @@ class OrderDetailsView extends StatelessWidget {
                       width: AppDimens.w16,
                       height: AppDimens.w16,
                       decoration: BoxDecoration(
-                        color: MyColors.green.withValues(alpha: AppDimens.opacity8),
+                        color: MyColors.green.withValues(
+                          alpha: AppDimens.opacity8,
+                        ),
                         shape: BoxShape.circle,
                       ),
                     ),
                     SizedBox(width: AppDimens.w6),
                     Text(
                       '41',
-                      style: TextStyles.medium13(color: MyColors.black87),
+                      style: TextStyles.medium13(
+                        color: MyColors.black87,
+                      ),
                     ),
                   ],
                 ),

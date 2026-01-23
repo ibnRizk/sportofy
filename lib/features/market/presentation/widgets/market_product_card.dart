@@ -196,7 +196,7 @@ class MarketProductCard extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(AppDimens.w8),
             decoration: BoxDecoration(
-              color: MyColors.greenButton,
+              color: MyColors.white,
               borderRadius: BorderRadius.circular(8.r),
               boxShadow: [
                 BoxShadow(
@@ -211,7 +211,7 @@ class MarketProductCard extends StatelessWidget {
             child: Icon(
               Icons.add,
               size: AppDimens.iconSize20,
-              color: MyColors.white,
+              color: MyColors.greenButton,
             ),
           ),
         ),

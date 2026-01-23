@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/injection_container.dart';
 
 // Team Standing Model
 class _TeamStanding {
@@ -123,7 +124,7 @@ class RoundOf32View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

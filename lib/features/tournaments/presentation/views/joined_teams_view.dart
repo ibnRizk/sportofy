@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/injection_container.dart';
 
 class JoinedTeamsView extends StatelessWidget {
   const JoinedTeamsView({super.key});
@@ -18,7 +20,7 @@ class JoinedTeamsView extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -34,8 +36,8 @@ class JoinedTeamsView extends StatelessWidget {
           'Joined Teams',
           style: TextStyle(
             fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            color: MyColors.darkGrayColor,
           ),
         ),
         centerTitle: false,
@@ -43,14 +45,16 @@ class JoinedTeamsView extends StatelessWidget {
       body: ListView.separated(
         padding: EdgeInsets.all(20.w),
         itemCount: teams.length,
-        separatorBuilder: (context, index) => SizedBox(height: 10.h),
+        separatorBuilder: (context, index) =>
+            SizedBox(height: 10.h),
         itemBuilder: (context, index) {
           final team = teams[index];
           return _TeamCard(
             teamName: team['teamName'] as String,
             memberCount: team['memberCount'] as String,
             avatarImage: team['avatarImage'] as String,
-            extraMembersCount: team['extraMembersCount'] as int,
+            extraMembersCount:
+                team['extraMembersCount'] as int,
           );
         },
       ),
@@ -103,9 +107,9 @@ class _TeamCard extends StatelessWidget {
                 Text(
                   teamName,
                   style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -114,7 +118,7 @@ class _TeamCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey[600],
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
               ],
@@ -139,7 +143,9 @@ class _TeamCard extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 13.r,
-                          backgroundImage: AssetImage(avatarImage),
+                          backgroundImage: AssetImage(
+                            avatarImage,
+                          ),
                         ),
                       ),
                     ),
@@ -152,7 +158,9 @@ class _TeamCard extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 13.r,
-                          backgroundImage: AssetImage(avatarImage),
+                          backgroundImage: AssetImage(
+                            avatarImage,
+                          ),
                         ),
                       ),
                     ),
@@ -165,7 +173,9 @@ class _TeamCard extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 13.r,
-                          backgroundImage: AssetImage(avatarImage),
+                          backgroundImage: AssetImage(
+                            avatarImage,
+                          ),
                         ),
                       ),
                     ),

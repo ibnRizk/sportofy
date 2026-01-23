@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/tournaments/presentation/widgets/join_team_sheet.dart';
 
 class TournamentDetailsView extends StatelessWidget {
@@ -20,18 +21,12 @@ class TournamentDetailsView extends StatelessWidget {
             pinned: true,
             backgroundColor: Colors.white,
             leading: IconButton(
-              icon: Container(
-                padding: EdgeInsets.all(8.w),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [],
-                ),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20.w,
-                ),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 20.w,
               ),
+
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
@@ -78,161 +73,280 @@ class TournamentDetailsView extends StatelessWidget {
                     CrossAxisAlignment.start,
                 children: [
                   // About Section
-                  Text(
-                    'About',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.black87,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
-                      height: 1.5,
-                    ),
-                  ),
-
-                  SizedBox(height: 24.h),
-
-                  // Joined Teams Section
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Joined Teams',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: MyColors.darkGrayColor,
-                        ),
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.push(
-                            Routes.joinedTeamsRoute,
-                          );
-                        },
-                        child: Text(
-                          'View teams',
+                    ),
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'About',
                           style: TextStyle(
-                            fontSize: 13.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: MyColors.greenButton,
+                            color: MyColors.black87,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 8.h),
-
-                  // Teams Progress
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        '8/16 Teams',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: MyColors.darkGrayColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      10.r,
-                    ),
-                    child: LinearProgressIndicator(
-                      value: 0.5,
-                      minHeight: 8.h,
-                      backgroundColor: Colors.grey[200],
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(
-                            MyColors.blue100,
+                        SizedBox(height: 8.h),
+                        Text(
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[700],
+                            height: 1.5,
                           ),
+                        ),
+                      ],
                     ),
                   ),
 
                   SizedBox(height: 16.h),
 
-                  // The Date Section
-                  Text(
-                    'The Date',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.darkGrayColor,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Starting: 15 Aug 2023',
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color:
-                                    MyColors.darkGrayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Ending: 25 Aug 2023',
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color:
-                                    MyColors.darkGrayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  // Divider between About and Joined Teams
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey[300]!,
                   ),
 
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 16.h),
+
+                  // Joined Teams Section
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                          children: [
+                            Text(
+                              'Joined Teams',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.push(
+                                  Routes.joinedTeamsRoute,
+                                );
+                              },
+                              child: Text(
+                                'View teams',
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight:
+                                      FontWeight.w500,
+                                  color:
+                                      MyColors.greenButton,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 8.h),
+
+                        // Teams Progress
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              '8/16 Teams',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8.h),
+                        ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(10.r),
+                          child: Container(
+                            height: 8.h,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius:
+                                  BorderRadius.circular(
+                                    10.r,
+                                  ),
+                            ),
+                            child: FractionallySizedBox(
+                              widthFactor: 0.5,
+                              alignment:
+                                  Alignment.centerLeft,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      MyColors.blue,
+                                      MyColors.greenButton,
+                                    ],
+                                    begin: Alignment
+                                        .centerLeft,
+                                    end: Alignment
+                                        .centerRight,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(
+                                        10.r,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Divider between Joined Teams and The Date
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey[300]!,
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // The Date Section
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'The Date',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.darkGrayColor,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment
+                                        .start,
+                                children: [
+                                  Text(
+                                    'Starting: 15 Aug 2023',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight:
+                                          FontWeight.w400,
+                                      color: MyColors
+                                          .darkGrayColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment
+                                        .start,
+                                children: [
+                                  Text(
+                                    'Ending: 25 Aug 2023',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight:
+                                          FontWeight.w400,
+                                      color: MyColors
+                                          .darkGrayColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Divider between The Date and Award
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey[300]!,
+                  ),
+
+                  SizedBox(height: 16.h),
 
                   // Award Section
-                  Text(
-                    'Award',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColors.darkGrayColor,
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    'A financial reward of 20,000 Egyptian pounds',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.darkGrayColor,
-                      height: 1.5,
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Award',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.darkGrayColor,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          'A financial reward of 20,000 Egyptian pounds',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.darkGrayColor,
+                            height: 1.5,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 

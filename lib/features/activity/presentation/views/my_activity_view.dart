@@ -133,7 +133,7 @@ class _MyActivityViewState extends State<MyActivityView>
         children: [
           // Filter Chips Section (Dynamic based on tab)
           Container(
-            color: MyColors.white,
+            color: MyColors.grey100,
             padding: EdgeInsets.symmetric(vertical: 16.h),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,

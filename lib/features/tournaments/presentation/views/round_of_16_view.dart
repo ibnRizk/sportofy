@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/tournaments/presentation/widgets/tournament_match_widgets.dart';
 
 class _DateGroup {
@@ -125,7 +126,7 @@ class RoundOf16View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

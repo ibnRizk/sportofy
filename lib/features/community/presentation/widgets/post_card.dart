@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
@@ -7,7 +8,7 @@ import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final String authorName;
   final String authorAvatar;
   final String timestamp;
@@ -30,9 +31,34 @@ class PostCard extends StatelessWidget {
   });
 
   @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  bool _isLiked = false;
+  int _currentLikesCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentLikesCount = widget.likesCount;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: AppDimens.h16),
+      margin: EdgeInsets.symmetric(
+        horizontal: AppDimens.w16,
+        vertical: AppDimens.h8,
+      ),
+      decoration: BoxDecoration(
+        color: MyColors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: MyColors.grey300,
+          width: 1,
+        ),
+      ),
       padding: AppPadding.h20v16,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,15 +68,18 @@ class PostCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: AppDimens.avatarSize25,
-                backgroundImage: AssetImage(authorAvatar),
+                backgroundImage: AssetImage(
+                  widget.authorAvatar,
+                ),
               ),
               SizedBox(width: AppDimens.w12),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
                   children: [
                     Text(
-                      authorName,
+                      widget.authorName,
                       style: TextStyles.bold15(
                         color: MyColors.black87,
                       ),
@@ -59,12 +88,12 @@ class PostCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          timestamp,
+                          widget.timestamp,
                           style: TextStyles.regular12(
                             color: MyColors.grey600,
                           ),
                         ),
-                        if (isPublic) ...[
+                        if (widget.isPublic) ...[
                           SizedBox(width: AppDimens.w4),
                           Icon(
                             Icons.public,
@@ -84,7 +113,7 @@ class PostCard extends StatelessWidget {
 
           // Content Text
           Text(
-            content,
+            widget.content,
             style: TextStyles.regular14(
               color: MyColors.black87,
             ).copyWith(height: 1.5),
@@ -94,7 +123,8 @@ class PostCard extends StatelessWidget {
 
           // Social Stats Row
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               // Likes with overlapping icons
               Row(
@@ -110,7 +140,9 @@ class PostCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: MyColors.white,
-                            width: AppDimens.borderWidth1 + 0.5,
+                            width:
+                                AppDimens.borderWidth1 +
+                                0.5,
                           ),
                         ),
                         child: ClipOval(
@@ -119,16 +151,23 @@ class PostCard extends StatelessWidget {
                             width: AppDimens.badgeSize20,
                             height: AppDimens.badgeSize20,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: MyColors.blue100,
-                                child: Icon(
-                                  Icons.thumb_up,
-                                  size: AppDimens.badgeSize12,
-                                  color: MyColors.blue700,
-                                ),
-                              );
-                            },
+                            errorBuilder:
+                                (
+                                  context,
+                                  error,
+                                  stackTrace,
+                                ) {
+                                  return Container(
+                                    color: MyColors.blue100,
+                                    child: Icon(
+                                      Icons.thumb_up,
+                                      size: AppDimens
+                                          .badgeSize12,
+                                      color:
+                                          MyColors.blue700,
+                                    ),
+                                  );
+                                },
                           ),
                         ),
                       ),
@@ -142,7 +181,9 @@ class PostCard extends StatelessWidget {
                             color: MyColors.red100,
                             border: Border.all(
                               color: MyColors.white,
-                              width: AppDimens.borderWidth1 + 0.5,
+                              width:
+                                  AppDimens.borderWidth1 +
+                                  0.5,
                             ),
                           ),
                           child: Icon(
@@ -156,7 +197,7 @@ class PostCard extends StatelessWidget {
                   ),
                   SizedBox(width: AppDimens.w8),
                   Text(
-                    '$likedBy and $likesCount others',
+                    '${widget.likedBy} and $_currentLikesCount others',
                     style: TextStyles.medium13(
                       color: MyColors.black87,
                     ),
@@ -172,18 +213,22 @@ class PostCard extends StatelessWidget {
                     context.push(
                       Routes.commentsRoute,
                       extra: {
-                        'postId': 0, // TODO: Pass actual post ID
-                        'likedBy': likedBy,
-                        'likesCount': likesCount,
-                        'commentsCount': commentsCount,
+                        'postId':
+                            0, // TODO: Pass actual post ID
+                        'likedBy': widget.likedBy,
+                        'likesCount': _currentLikesCount,
+                        'commentsCount':
+                            widget.commentsCount,
                       },
                     );
                   } catch (e) {
-                    debugPrint('Navigation error to CommentsView: $e');
+                    debugPrint(
+                      'Navigation error to CommentsView: $e',
+                    );
                   }
                 },
                 child: Text(
-                  '$commentsCount comments',
+                  '${widget.commentsCount} comments',
                   style: TextStyles.medium13(
                     color: MyColors.black87,
                   ),
@@ -194,7 +239,7 @@ class PostCard extends StatelessWidget {
 
           SizedBox(height: AppDimens.h12),
 
-          // Divider
+          // Divider between engagement summary and action buttons
           Divider(
             height: AppDimens.dividerThickness1,
             color: MyColors.grey300,
@@ -208,72 +253,107 @@ class PostCard extends StatelessWidget {
             children: [
               // Like Button
               Expanded(
-                child: TextButton.icon(
-                  onPressed: () {
-                    // TODO: Handle like action
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isLiked = !_isLiked;
+                      if (_isLiked) {
+                        _currentLikesCount =
+                            _currentLikesCount + 1;
+                      } else {
+                        _currentLikesCount =
+                            _currentLikesCount - 1;
+                      }
+                    });
+                    // TODO: Handle like action API call
                   },
-                  icon: Icon(
-                    Icons.thumb_up_outlined,
-                    size: AppDimens.iconSize20,
-                    color: MyColors.grey700,
-                  ),
-                  label: Text(
-                    'Like',
-                    style: TextStyles.medium14(
-                      color: MyColors.grey700,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimens.h12,
+                    ),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _isLiked
+                              ? Icons.thumb_up
+                              : Icons.thumb_up_outlined,
+                          size: AppDimens.iconSize20,
+                          color: _isLiked
+                              ? MyColors.greenButton
+                              : MyColors.grey700,
+                        ),
+                        SizedBox(width: AppDimens.w8),
+                        Text(
+                          'Like',
+                          style: TextStyles.medium14(
+                            color: _isLiked
+                                ? MyColors.greenButton
+                                : MyColors.grey700,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
               // Vertical Divider between buttons
-              VerticalDivider(
-                width: AppDimens.borderWidth1,
-                thickness: AppDimens.dividerThickness1,
+              Container(
+                width: 1,
+                height: 40.h,
                 color: MyColors.grey300,
-                indent: AppDimens.h8,
-                endIndent: AppDimens.h8,
               ),
               // Comment Button
               Expanded(
-                child: TextButton.icon(
-                  onPressed: () {
+                child: InkWell(
+                  onTap: () {
                     // Navigate to comments screen
                     if (!context.mounted) return;
                     try {
                       context.push(
                         Routes.commentsRoute,
                         extra: {
-                          'postId': 0, // TODO: Pass actual post ID
-                          'likedBy': likedBy,
-                          'likesCount': likesCount,
-                          'commentsCount': commentsCount,
+                          'postId':
+                              0, // TODO: Pass actual post ID
+                          'likedBy': widget.likedBy,
+                          'likesCount': _currentLikesCount,
+                          'commentsCount':
+                              widget.commentsCount,
                         },
                       );
                     } catch (e) {
-                      debugPrint('Navigation error to CommentsView: $e');
+                      debugPrint(
+                        'Navigation error to CommentsView: $e',
+                      );
                     }
                   },
-                  icon: Icon(
-                    Icons.comment_outlined,
-                    size: AppDimens.iconSize20,
-                    color: MyColors.grey700,
-                  ),
-                  label: Text(
-                    'Comment',
-                    style: TextStyles.medium14(
-                      color: MyColors.grey700,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimens.h12,
+                    ),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.comment_outlined,
+                          size: AppDimens.iconSize20,
+                          color: MyColors.grey700,
+                        ),
+                        SizedBox(width: AppDimens.w8),
+                        Text(
+                          'Comment',
+                          style: TextStyles.medium14(
+                            color: MyColors.grey700,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ],
-          ),
-
-          // Divider under buttons
-          Divider(
-            height: AppDimens.dividerThickness1,
-            color: MyColors.grey300,
-            thickness: AppDimens.dividerThickness1,
           ),
         ],
       ),

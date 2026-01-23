@@ -37,7 +37,9 @@ class UserHeader extends StatelessWidget {
             children: [
               Text(
                 userName,
-                style: TextStyles.bold16(color: MyColors.black87),
+                style: TextStyles.medium14(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
               SizedBox(height: AppDimens.h8),
               // Privacy Dropdown
@@ -64,7 +66,9 @@ class UserHeader extends StatelessWidget {
                       SizedBox(width: AppDimens.w6),
                       Text(
                         selectedPrivacy,
-                        style: TextStyles.medium13(color: MyColors.black87),
+                        style: TextStyles.medium13(
+                          color: MyColors.black87,
+                        ),
                       ),
                       SizedBox(width: AppDimens.w4),
                       Icon(

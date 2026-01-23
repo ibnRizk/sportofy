@@ -37,7 +37,10 @@ class _WalletPhoneNumberViewState
   void _validatePhone() {
     final phone = _phoneController.text.trim();
     // Egyptian phone validation: 11 digits starting with 01
-    final isValid = phone.length == 11 && phone.startsWith('01') && RegExp(r'^[0-9]+$').hasMatch(phone);
+    final isValid =
+        phone.length == 11 &&
+        phone.startsWith('01') &&
+        RegExp(r'^[0-9]+$').hasMatch(phone);
     if (_isPhoneValid != isValid) {
       setState(() {
         _isPhoneValid = isValid;
@@ -62,9 +65,10 @@ class _WalletPhoneNumberViewState
         ),
         title: Text(
           'Wallet Phone Number',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.black,
+          ),
         ),
-        centerTitle: true,
       ),
       body: Padding(
         padding: AppPadding.h20,
@@ -76,7 +80,7 @@ class _WalletPhoneNumberViewState
             // Instruction Text
             Text(
               'Please enter the phone number registered with your mobile wallet',
-              style: TextStyles.medium16(
+              style: TextStyles.regular18(
                 color: MyColors.grey700,
               ).copyWith(height: 1.5),
             ),
@@ -174,7 +178,7 @@ class _WalletPhoneNumberViewState
             // Disclaimer Text
             Text(
               'Payment with mobile digital wallets is only available for Egypt',
-              style: TextStyles.regular12(
+              style: TextStyles.regular16(
                 color: MyColors.grey600,
               ),
               textAlign: TextAlign.center,
@@ -187,36 +191,42 @@ class _WalletPhoneNumberViewState
               width: double.infinity,
               height: AppDimens.buttonHeight50,
               child: ElevatedButton(
-                onPressed: _isPhoneValid ? () {
-                  // 2. Capture root navigator context BEFORE popping
-                  final rootNavigator = Navigator.of(
-                    context,
-                    rootNavigator: true,
-                  );
-                  final rootContext = rootNavigator.context;
+                onPressed: _isPhoneValid
+                    ? () {
+                        // 2. Capture root navigator context BEFORE popping
+                        final rootNavigator = Navigator.of(
+                          context,
+                          rootNavigator: true,
+                        );
+                        final rootContext =
+                            rootNavigator.context;
 
-                  // 3. Close the Wallet Screen
-                  Navigator.pop(context);
+                        // 3. Close the Wallet Screen
+                        Navigator.pop(context);
 
-                  // 4. Show Success Sheet after a short delay
-                  Future.delayed(
-                    const Duration(milliseconds: 300),
-                    () {
-                      if (rootContext.mounted) {
-                        showModalBottomSheet(
-                          context: rootContext,
-                          isScrollControlled: false,
-                          backgroundColor: MyColors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.top30,
-                          ),
-                          builder: (context) =>
-                              const PaymentSuccessSheet(),
+                        // 4. Show Success Sheet after a short delay
+                        Future.delayed(
+                          const Duration(milliseconds: 300),
+                          () {
+                            if (rootContext.mounted) {
+                              showModalBottomSheet(
+                                context: rootContext,
+                                isScrollControlled: false,
+                                backgroundColor:
+                                    MyColors.white,
+                                shape:
+                                    RoundedRectangleBorder(
+                                      borderRadius:
+                                          AppRadius.top30,
+                                    ),
+                                builder: (context) =>
+                                    const PaymentSuccessSheet(),
+                              );
+                            }
+                          },
                         );
                       }
-                    },
-                  );
-                } : null,
+                    : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.greenButton,
                   disabledBackgroundColor: MyColors.grey300,

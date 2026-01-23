@@ -5,6 +5,7 @@ import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
+import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_item_tile.dart';
 import 'package:sportify_app/features/market/presentation/widgets/cart_summary_section.dart';
 import 'package:sportify_app/features/market/presentation/widgets/delivery_address_sheet.dart';
@@ -91,7 +92,7 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.grey50,
+      backgroundColor: context.colors.backGround,
       appBar: AppBar(
         backgroundColor: MyColors.white,
         elevation: AppDimens.elevation0,

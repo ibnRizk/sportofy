@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
 
 class JoinRequestSheet extends StatelessWidget {
   final String organizerName;
@@ -44,15 +46,21 @@ class JoinRequestSheet extends StatelessWidget {
             SizedBox(height: 24.h),
 
             // Main Message
-            Text(
-              'Ask the founder to accept your request to enjoy the game together ✌️',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-                height: 1.5,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 22.w,
+                vertical: 10.h,
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                'Ask the founder to accept your request to enjoy the game together ✌️',
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
 
             SizedBox(height: 24.h),
@@ -69,7 +77,9 @@ class JoinRequestSheet extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: Colors.black.withValues(
+                      alpha: 0.05,
+                    ),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -80,7 +90,9 @@ class JoinRequestSheet extends StatelessWidget {
                   // Avatar
                   CircleAvatar(
                     radius: 30.r,
-                    backgroundImage: AssetImage(organizerAvatar),
+                    backgroundImage: AssetImage(
+                      organizerAvatar,
+                    ),
                   ),
 
                   SizedBox(width: 12.w),
@@ -88,14 +100,15 @@ class JoinRequestSheet extends StatelessWidget {
                   // Name and Role
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           organizerName,
                           style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black87,
                           ),
                         ),
@@ -120,10 +133,12 @@ class JoinRequestSheet extends StatelessWidget {
                       color: Colors.blue[50],
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      Icons.chat_bubble_outline,
-                      color: Colors.blue[700],
-                      size: 20.sp,
+                    child: Center(
+                      child: SvgPicture.asset(
+                        'assets/icons/massage.svg',
+                        width: 16.w,
+                        height: 16.h,
+                      ),
                     ),
                   ),
                 ],
@@ -136,9 +151,9 @@ class JoinRequestSheet extends StatelessWidget {
             Text(
               'If the founder of the team agrees to join you, the payment will be completed',
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
+                color: MyColors.darkGrayColor,
                 height: 1.5,
               ),
               textAlign: TextAlign.center,
@@ -156,11 +171,15 @@ class JoinRequestSheet extends StatelessWidget {
                   if (!context.mounted) return;
                   try {
                     // Close all sheets and navigate to home
-                    Navigator.of(context, rootNavigator: true)
-                        .popUntil((route) => route.isFirst);
+                    Navigator.of(
+                      context,
+                      rootNavigator: true,
+                    ).popUntil((route) => route.isFirst);
                     context.go(Routes.homeScreenRoute);
                   } catch (e) {
-                    debugPrint('Navigation error to home: $e');
+                    debugPrint(
+                      'Navigation error to home: $e',
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -168,7 +187,9 @@ class JoinRequestSheet extends StatelessWidget {
                   disabledBackgroundColor: MyColors.grey300,
                   disabledForegroundColor: MyColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
                   ),
                   elevation: 0,
                 ),

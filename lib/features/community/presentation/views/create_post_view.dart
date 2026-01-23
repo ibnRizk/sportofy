@@ -133,7 +133,9 @@ class _CreatePostViewState extends State<CreatePostView> {
       title: Text(
         option,
         style: isSelected
-            ? TextStyles.semiBold16(color: MyColors.greenButton)
+            ? TextStyles.semiBold16(
+                color: MyColors.greenButton,
+              )
             : TextStyles.regular16(color: MyColors.black87),
       ),
       trailing: isSelected
@@ -175,9 +177,11 @@ class _CreatePostViewState extends State<CreatePostView> {
         ),
         title: Text(
           'Create Post',
-          style: TextStyles.bold18(color: MyColors.black87),
+          style: TextStyles.semiBold18(
+            color: MyColors.black87,
+          ),
         ),
-        centerTitle: true,
+
         actions: [
           // Post Button
           Padding(
@@ -260,10 +264,14 @@ class _CreatePostViewState extends State<CreatePostView> {
                     focusNode: _focusNode,
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
-                    style: TextStyles.regular16(color: MyColors.black87),
+                    style: TextStyles.regular16(
+                      color: MyColors.black87,
+                    ),
                     decoration: InputDecoration(
                       hintText: 'What is in your mind ?',
-                      hintStyle: TextStyles.regular16(color: MyColors.darkGrayColor),
+                      hintStyle: TextStyles.regular16(
+                        color: MyColors.grey,
+                      ),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
