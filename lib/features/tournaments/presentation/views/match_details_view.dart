@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
-import 'package:sportify_app/injection_container.dart';
 
 class MatchDetailsView extends StatelessWidget {
   const MatchDetailsView({super.key});
@@ -10,7 +9,7 @@ class MatchDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colors.backGround,
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           // Hero Image with AppBar
@@ -18,64 +17,108 @@ class MatchDetailsView extends StatelessWidget {
             expandedHeight: 200.h,
             pinned: true,
             backgroundColor: Colors.white,
-            leading: IconButton(
-              icon: Container(
-                padding: EdgeInsets.all(8.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha:0.1),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20.w,
-                ),
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            actions: [
-              IconButton(
-                icon: Container(
-                  padding: EdgeInsets.all(8.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha:0.1),
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.share,
-                    color: Colors.black,
-                    size: 20.w,
-                  ),
-                ),
-                onPressed: () {
-                  // TODO: Implement share
-                },
-              ),
-            ],
+            automaticallyImplyLeading: false,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                'Tournament',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              background: Image.asset(
-                'assets/images/yard_playground.png',
-                fit: BoxFit.cover,
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    'assets/images/yard_playground.png',
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    // gradient for readability if needed
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.05),
+                        ],
+                        stops: [0.7, 1.0],
+                      ),
+                    ),
+                  ),
+                  // Custom Row app bar content
+                  Positioned(
+                    top:
+                        MediaQuery.of(context).padding.top +
+                        16.h,
+                    left: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                      ),
+                      child: Row(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Container(
+                              padding: EdgeInsets.all(8.w),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black
+                                        .withAlpha(25),
+                                    blurRadius: 8,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                                size: 20.w,
+                              ),
+                            ),
+                            onPressed: () =>
+                                Navigator.pop(context),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Tournament',
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              maxLines: 1,
+                              overflow:
+                                  TextOverflow.ellipsis,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Container(
+                              padding: EdgeInsets.all(8.w),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black
+                                        .withAlpha(25),
+                                    blurRadius: 8,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.share,
+                                color: Colors.black,
+                                size: 20.w,
+                              ),
+                            ),
+                            onPressed: () {
+                              // TODO: Implement share
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -85,7 +128,8 @@ class MatchDetailsView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(20.w),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   // About Section
                   Text(
@@ -151,22 +195,26 @@ class MatchDetailsView extends StatelessWidget {
                   // Round Options
                   _buildRoundOption(
                     'Round of 32',
-                    () => context.push(Routes.roundOf32Route),
+                    () =>
+                        context.push(Routes.roundOf32Route),
                   ),
                   SizedBox(height: 12.h),
                   _buildRoundOption(
                     'Round of 16',
-                    () => context.push(Routes.roundOf16Route),
+                    () =>
+                        context.push(Routes.roundOf16Route),
                   ),
                   SizedBox(height: 12.h),
                   _buildRoundOption(
                     'Round of 8',
-                    () => context.push(Routes.roundOf8Route),
+                    () =>
+                        context.push(Routes.roundOf8Route),
                   ),
                   SizedBox(height: 12.h),
                   _buildRoundOption(
                     'Semi final',
-                    () => context.push(Routes.semiFinalRoute),
+                    () =>
+                        context.push(Routes.semiFinalRoute),
                   ),
                   SizedBox(height: 12.h),
                   _buildRoundOption(
@@ -182,7 +230,10 @@ class MatchDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildRoundOption(String title, VoidCallback onTap) {
+  Widget _buildRoundOption(
+    String title,
+    VoidCallback onTap,
+  ) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10.r),
