@@ -19,7 +19,7 @@ class SizePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppDimens.buttonHeight50,
+      height: 35,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: sizes.length,
@@ -31,8 +31,8 @@ class SizePicker extends StatelessWidget {
           return GestureDetector(
             onTap: () => onSizeSelected(size),
             child: Container(
-              width: AppDimens.containerHeight50,
-              height: AppDimens.containerHeight50,
+              width: 39.h,
+
               decoration: BoxDecoration(
                 color: isSelected
                     ? MyColors.greenButton

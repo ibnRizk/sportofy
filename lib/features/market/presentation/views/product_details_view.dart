@@ -82,25 +82,28 @@ class _ProductDetailsViewState
                         Row(
                           crossAxisAlignment:
                               CrossAxisAlignment.start,
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
                           children: [
-                            Expanded(
-                              child: Text(
-                                widget.product['name']
-                                        as String? ??
-                                    'Product Name',
-                                style: TextStyles.bold18(
-                                  color: context
-                                      .colors
-                                      .textColor,
-                                ),
+                            Text(
+                              widget.product['name']
+                                      as String? ??
+                                  'Product Name',
+                              style: TextStyles.bold18(
+                                color: context
+                                    .colors
+                                    .textColor,
                               ),
                             ),
                             SizedBox(width: AppDimens.w12),
                             // Quantity Selector (like photo)
                             Container(
+                              width: 140
+                                  .w, // Fixed width as per image
                               padding: EdgeInsets.symmetric(
                                 horizontal: AppDimens.w12,
-                                vertical: AppDimens.h8,
+                                vertical: AppDimens.h4,
                               ),
                               decoration: BoxDecoration(
                                 color: MyColors.white,
@@ -114,14 +117,15 @@ class _ProductDetailsViewState
                                 ),
                               ),
                               child: Row(
-                                mainAxisSize:
-                                    MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
                                       if (_quantity > 1) {
                                         setState(() {
-                                          _quantity--;
+                                          _quantity == 0;
                                         });
                                       } else {
                                         setState(() {
@@ -145,16 +149,21 @@ class _ProductDetailsViewState
                                                       .srcIn,
                                                 ),
                                           )
-                                        : Icon(
-                                            Icons.remove,
-                                            size: AppDimens
+                                        : SvgPicture.asset(
+                                            ImgAssets
+                                                .icTrash,
+                                            width: AppDimens
                                                 .iconSize18,
-                                            color: MyColors
-                                                .greenButton,
+                                            height: AppDimens
+                                                .iconSize18,
+                                            colorFilter:
+                                                const ColorFilter.mode(
+                                                  MyColors
+                                                      .greenButton,
+                                                  BlendMode
+                                                      .srcIn,
+                                                ),
                                           ),
-                                  ),
-                                  SizedBox(
-                                    width: AppDimens.w12,
                                   ),
                                   Text(
                                     _quantity.toString(),
@@ -163,9 +172,6 @@ class _ProductDetailsViewState
                                           color: MyColors
                                               .darkGrayColor,
                                         ),
-                                  ),
-                                  SizedBox(
-                                    width: AppDimens.w12,
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -191,7 +197,6 @@ class _ProductDetailsViewState
                             ),
                           ],
                         ),
-                        SizedBox(height: AppDimens.h8),
 
                         // Price
                         Text(

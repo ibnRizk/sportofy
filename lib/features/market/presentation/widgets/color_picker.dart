@@ -28,13 +28,11 @@ class ColorPicker extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  width: 50.w,
-                  height: 50.w,
+                  width: 39.w,
+                  height: 39.w,
                   decoration: BoxDecoration(
                     color: _getColorFromString(color),
-                    borderRadius: BorderRadius.circular(
-                      8.r,
-                    ),
+                    shape: BoxShape.circle,
                     border: Border.all(
                       color: isSelected
                           ? const Color.fromARGB(
