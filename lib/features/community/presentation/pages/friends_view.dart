@@ -86,21 +86,31 @@ class FriendsView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: context.colors.white,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Icons.arrow_back,
-            color: context.colors.textColor,
-            size: 24.w,
-          ),
-        ),
-        title: Text(
-          'Friends',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-            color: context.colors.textColor,
-          ),
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.arrow_back,
+                color: context.colors.textColor,
+                size: 24.w,
+              ),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+            ),
+            SizedBox(width: 6.w),
+            Text(
+              'Friends',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: context.colors.textColor,
+              ),
+            ),
+          ],
         ),
         centerTitle: false,
       ),
@@ -120,16 +130,28 @@ class FriendsView extends StatelessWidget {
                   color: context.colors.textColor
                       .withValues(alpha: 0.4),
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 22.w,
-                  color: context.colors.textColor
-                      .withValues(alpha: 0.4),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(
+                    left: 16.w,
+                    right: 6.w,
+                    top: 5.h,
+                  ), // less horizontal space between icon and hint
+                  child: Icon(
+                    Icons.search,
+                    size: 22.w,
+                    color: context.colors.textColor
+                        .withValues(alpha: 0.4),
+                  ),
+                ),
+                prefixIconConstraints: BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
                 ),
                 filled: true,
                 fillColor: context.colors.white,
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
+                  horizontal:
+                      0, // ensure horizontal padding doesn't push hint from icon
                   vertical: 12.h,
                 ),
                 border: OutlineInputBorder(

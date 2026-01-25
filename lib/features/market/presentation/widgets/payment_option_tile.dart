@@ -7,7 +7,8 @@ class PaymentOptionTile extends StatelessWidget {
   final String value;
   final String iconPath;
   final String title;
-  final String? balanceText; // For Sportify Wallet: "100 EGP"
+  final String?
+  balanceText; // For Sportify Wallet: "100 EGP"
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -26,25 +27,27 @@ class PaymentOptionTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.h),
+        padding: EdgeInsets.symmetric(vertical: 22.h),
         child: Row(
           children: [
             // Payment Icon
             Image.asset(
               iconPath,
-              width: 24.w,
-              height: 24.w,
+              width: 20.w,
+              height: 20.w,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 24.w,
-                  height: 24.w,
+                  width: 20.w,
+                  height: 20.w,
                   decoration: BoxDecoration(
                     color: MyColors.grey200,
-                    borderRadius: BorderRadius.circular(4.r),
+                    borderRadius: BorderRadius.circular(
+                      4.r,
+                    ),
                   ),
                   child: Icon(
                     Icons.payment,
-                    size: 16.sp,
+                    size: 14.sp,
                     color: MyColors.grey600,
                   ),
                 );
@@ -53,15 +56,14 @@ class PaymentOptionTile extends StatelessWidget {
             SizedBox(width: 12.w),
 
             // Payment Name Text
-            Text(
-              title,
-              style: TextStyles.medium14(
-                color: MyColors.darkGrayColor,
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyles.medium14(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
             ),
-
-            // Spacer to push elements to the right
-            const Spacer(),
 
             // Balance Text (only for Sportify Wallet)
             if (balanceText != null) ...[
@@ -76,8 +78,8 @@ class PaymentOptionTile extends StatelessWidget {
 
             // Radio Button
             Container(
-              width: 20.w,
-              height: 20.w,
+              width: 18.w,
+              height: 18.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
@@ -93,8 +95,8 @@ class PaymentOptionTile extends StatelessWidget {
               child: isSelected
                   ? Center(
                       child: Container(
-                        width: 8.w,
-                        height: 8.w,
+                        width: 6.w,
+                        height: 6.w,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: MyColors.white,

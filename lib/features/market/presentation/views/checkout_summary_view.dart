@@ -21,6 +21,11 @@ class CheckoutSummaryView extends StatefulWidget {
 class _CheckoutSummaryViewState
     extends State<CheckoutSummaryView> {
   String _selectedPaymentMethod = 'wallet';
+  int _pointsToUse = 200;
+
+  // Mock values
+  final double _subtotal = 9600.0;
+  final double _deliveryFees = 50.0;
 
   // Payment methods data
   final List<Map<String, dynamic>> _paymentMethods = [
@@ -169,6 +174,80 @@ class _CheckoutSummaryViewState
                               },
                             );
                           },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 20.h),
+
+                  // Payment Summary Section
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                    ),
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: MyColors.white,
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        // Payment Summary Header
+                        Text(
+                          'Payment summary',
+                          style: TextStyles.semiBold16(
+                            color: MyColors.darkGrayColor,
+                          ),
+                        ),
+                        SizedBox(height: 16.h),
+                        // Subtotal
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                          children: [
+                            Text(
+                              'Subtotal',
+                              style: TextStyles.semiBold16(
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                            Text(
+                              '${_subtotal.toStringAsFixed(0)} EGP',
+                              style: TextStyles.semiBold16(
+                                color: MyColors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12.h),
+                        // Delivery Fees
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                          children: [
+                            Text(
+                              'Delivery Fees',
+                              style: TextStyles.semiBold16(
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                            Text(
+                              '${_deliveryFees.toStringAsFixed(0)} EGP',
+                              style: TextStyles.semiBold16(
+                                color: MyColors.black87,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
