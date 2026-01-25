@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
+import 'package:sportify_app/core/utils/app_colors.dart';
 
 class MatchDetailsView extends StatelessWidget {
   const MatchDetailsView({super.key});
@@ -168,23 +169,52 @@ class MatchDetailsView extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          'Starting: 15 Aug 2023',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey[700],
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Starting: ',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                            Text(
+                              '15 Aug 2023',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+
+                      SizedBox(width: 85.w),
+
                       Expanded(
-                        child: Text(
-                          'Ending: 25 Aug 2023',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey[700],
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Ending:',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    MyColors.darkGrayColor,
+                              ),
+                            ),
+                            Text(
+                              '25 Aug 2023',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
