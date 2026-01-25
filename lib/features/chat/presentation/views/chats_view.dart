@@ -73,6 +73,10 @@ class ChatsView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: MyColors.white,
         elevation: 0,
+        // leadingWidth:
+        //     AppDimens.w40, // Minimize leading width
+        titleSpacing:
+            0, // Minimize spacing between leading and title
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -91,7 +95,7 @@ class ChatsView extends StatelessWidget {
             color: MyColors.darkGrayColor,
           ),
         ),
-        centerTitle: false,
+
         actions: [
           // User Avatar (Trailing)
           Padding(
@@ -135,8 +139,15 @@ class ChatsView extends StatelessWidget {
                     size: AppDimens.iconSize20,
                     color: MyColors.grey500,
                   ),
+                  // prefixIconConstraints: BoxConstraints(
+                  //   minWidth: AppDimens.w40,
+                  //   minHeight: AppDimens.h40,
+                  // ),
                   border: InputBorder.none,
-                  contentPadding: AppPadding.h16v12,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppDimens.w16,
+                    vertical: AppDimens.h16,
+                  ),
                   isDense: true,
                 ),
               ),

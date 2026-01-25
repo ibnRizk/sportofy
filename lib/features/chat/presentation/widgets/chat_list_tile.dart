@@ -127,19 +127,14 @@ class ChatListTile extends StatelessWidget {
                     width: AppDimens.badgeSize24,
                     height: AppDimens.badgeSize24,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(
-                        255,
-                        108,
-                        169,
-                        198,
-                      ),
+                      color: Color(0xFFd8ebf2),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Text(
                         unreadCount.toString(),
-                        style: TextStyles.bold11(
-                          color: MyColors.white,
+                        style: TextStyles.regular12(
+                          color: MyColors.darkGrayColor,
                         ),
                       ),
                     ),
