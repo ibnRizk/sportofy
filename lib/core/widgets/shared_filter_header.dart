@@ -106,7 +106,7 @@ class _SharedFilterHeaderState
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: TextStyles.regular14(
-                  color: MyColors.darkGrayColor,
+                  color: MyColors.grey,
                 ),
                 // Minimize the gap between icon and hint text/same line:
                 prefixIcon: Padding(
@@ -117,7 +117,8 @@ class _SharedFilterHeaderState
                   child: Icon(
                     Icons.search,
                     color: MyColors.grey600,
-                    size: AppDimens.iconSize20, // slightly reduced icon size
+                    size: AppDimens
+                        .iconSize20, // slightly reduced icon size
                   ),
                 ),
                 prefixIconConstraints: const BoxConstraints(
@@ -137,7 +138,8 @@ class _SharedFilterHeaderState
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          backgroundColor: MyColors.transparent,
+                          backgroundColor:
+                              MyColors.transparent,
                           builder: (context) =>
                               const FilterSheet(),
                         );
@@ -170,18 +172,52 @@ class _SharedFilterHeaderState
           // Sports Filter
           SizedBox(
             height: 80.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
-              itemCount:
-                  _sports.length + 1, // +1 for "Add Sport"
-              itemBuilder: (context, index) {
-                if (index == _sports.length) {
-                  // "Add Sport" item
-                  return Padding(
-                    padding: EdgeInsets.only(right: 12.w),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Sports List (Scrollable on the left)
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(left: 20.w),
+                    itemCount: _sports.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          right: 12.w,
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: _SportFilterItem(
+                            icon: _getSportIcon(
+                              _sports[index],
+                            ),
+                            iconPath: _getSportIconPath(
+                              _sports[index],
+                            ),
+                            label: _sports[index],
+                            isSelected:
+                                _selectedSportIndex ==
+                                index,
+                            onTap: () {
+                              setState(() {
+                                _selectedSportIndex = index;
+                              });
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                // Add Sport (Fixed on the right)
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: 20.w,
+                      left: 12.w,
+                    ),
                     child: GestureDetector(
                       onTap:
                           widget.onAddSportTap ??
@@ -205,19 +241,13 @@ class _SharedFilterHeaderState
                           },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment:
+                            MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 50.w,
-                            height: 50.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: MyColors.greenButton,
-                              size: 24.sp,
-                            ),
+                          Icon(
+                            Icons.add,
+                            color: MyColors.greenButton,
+                            size: 24.sp,
                           ),
                           SizedBox(height: 6.h),
                           Text(
@@ -231,27 +261,9 @@ class _SharedFilterHeaderState
                         ],
                       ),
                     ),
-                  );
-                }
-
-                return Padding(
-                  padding: EdgeInsets.only(right: 12.w),
-                  child: _SportFilterItem(
-                    icon: _getSportIcon(_sports[index]),
-                    iconPath: _getSportIconPath(
-                      _sports[index],
-                    ),
-                    label: _sports[index],
-                    isSelected:
-                        _selectedSportIndex == index,
-                    onTap: () {
-                      setState(() {
-                        _selectedSportIndex = index;
-                      });
-                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
           ),
 
@@ -418,37 +430,25 @@ class _SportFilterItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 50.w,
-            height: 50.w,
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? MyColors.greenButton
-                  : Colors.grey[100],
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: iconPath != null
-                  ? SvgPicture.asset(
-                      iconPath!,
-                      width: 24.sp,
-                      height: 24.sp,
-                      colorFilter: ColorFilter.mode(
-                        isSelected
-                            ? Colors.white
-                            : Colors.grey[700]!,
-                        BlendMode.srcIn,
-                      ),
-                    )
-                  : Icon(
-                      icon,
-                      color: isSelected
-                          ? Colors.white
-                          : Colors.grey[700],
-                      size: 24.sp,
-                    ),
-            ),
-          ),
+          iconPath != null
+              ? SvgPicture.asset(
+                  iconPath!,
+                  width: 24.sp,
+                  height: 24.sp,
+                  colorFilter: ColorFilter.mode(
+                    isSelected
+                        ? MyColors.greenButton
+                        : Colors.grey[700]!,
+                    BlendMode.srcIn,
+                  ),
+                )
+              : Icon(
+                  icon,
+                  color: isSelected
+                      ? MyColors.greenButton
+                      : Colors.grey[700],
+                  size: 24.sp,
+                ),
           SizedBox(height: 6.h),
           Text(
             label,

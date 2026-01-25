@@ -220,16 +220,52 @@ class _StadiumsViewState extends State<StadiumsView> {
           // Sports Filter
           SizedBox(
             height: AppDimens.containerHeight80,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: AppPadding.h20,
-              itemCount:
-                  _sports.length + 1, // +1 for "Add Sport"
-              itemBuilder: (context, index) {
-                if (index == _sports.length) {
-                  // "Add Sport" item
-                  return Padding(
-                    padding: AppPadding.right12,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Sports List (Scrollable on the left)
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(
+                      left: AppDimens.w20,
+                    ),
+                    itemCount: _sports.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: AppPadding.right12,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: _SportFilterItem(
+                            icon: _getSportIcon(
+                              _sports[index],
+                            ),
+                            iconPath: _getSportIconPath(
+                              _sports[index],
+                            ),
+                            label: _sports[index],
+                            isSelected:
+                                _selectedSportIndex ==
+                                index,
+                            onTap: () {
+                              setState(() {
+                                _selectedSportIndex = index;
+                              });
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                // Add Sport (Fixed on the right)
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: AppDimens.w20,
+                      left: AppDimens.w12,
+                    ),
                     child: GestureDetector(
                       onTap: () {
                         showModalBottomSheet(
@@ -251,21 +287,13 @@ class _StadiumsViewState extends State<StadiumsView> {
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment:
+                            MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width:
-                                AppDimens.containerWidth50,
-                            height:
-                                AppDimens.containerWidth50,
-                            decoration: BoxDecoration(
-                              color: MyColors.grey200,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: MyColors.greenButton,
-                              size: AppDimens.iconSize24,
-                            ),
+                          Icon(
+                            Icons.add,
+                            color: MyColors.greenButton,
+                            size: AppDimens.iconSize24,
                           ),
                           SizedBox(height: AppDimens.h6),
                           Text(
@@ -277,27 +305,9 @@ class _StadiumsViewState extends State<StadiumsView> {
                         ],
                       ),
                     ),
-                  );
-                }
-
-                return Padding(
-                  padding: AppPadding.right12,
-                  child: _SportFilterItem(
-                    icon: _getSportIcon(_sports[index]),
-                    iconPath: _getSportIconPath(
-                      _sports[index],
-                    ),
-                    label: _sports[index],
-                    isSelected:
-                        _selectedSportIndex == index,
-                    onTap: () {
-                      setState(() {
-                        _selectedSportIndex = index;
-                      });
-                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
           ),
 
@@ -624,44 +634,32 @@ class _SportFilterItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: AppDimens.containerWidth50,
-            height: AppDimens.containerWidth50,
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? MyColors.greenButton
-                  : MyColors.grey100,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: iconPath != null
-                  ? SvgPicture.asset(
-                      iconPath!,
-                      width: AppDimens.iconSize24,
-                      height: AppDimens.iconSize24,
-                      colorFilter: ColorFilter.mode(
-                        isSelected
-                            ? MyColors.white
-                            : MyColors.grey700,
-                        BlendMode.srcIn,
-                      ),
-                    )
-                  : Icon(
-                      icon,
-                      color: isSelected
-                          ? MyColors.white
-                          : MyColors.grey700,
-                      size: AppDimens.iconSize24,
-                    ),
-            ),
-          ),
+          iconPath != null
+              ? SvgPicture.asset(
+                  iconPath!,
+                  width: AppDimens.iconSize24,
+                  height: AppDimens.iconSize24,
+                  colorFilter: ColorFilter.mode(
+                    isSelected
+                        ? MyColors.greenButton
+                        : MyColors.grey700,
+                    BlendMode.srcIn,
+                  ),
+                )
+              : Icon(
+                  icon,
+                  color: isSelected
+                      ? MyColors.greenButton
+                      : MyColors.grey700,
+                  size: AppDimens.iconSize24,
+                ),
           SizedBox(height: AppDimens.h6),
           Text(
             label,
             style: TextStyles.medium12(
               color: isSelected
                   ? MyColors.greenButton
-                  : MyColors.darkGrayColor,
+                  : MyColors.grey700,
             ),
           ),
         ],
