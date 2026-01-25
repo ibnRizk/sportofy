@@ -254,7 +254,6 @@ class CustomDrawer extends StatelessWidget {
               separatorBuilder: (context, index) => Divider(
                 height: AppDimens.dividerThickness1,
                 thickness: AppDimens.dividerThickness1,
-                indent: AppDimens.w60,
                 color: context.colors.textColor.withValues(
                   alpha: AppDimens.opacity05,
                 ),
@@ -413,8 +412,8 @@ class CustomDrawer extends StatelessWidget {
           children: [
             SvgPicture.asset(
               iconSvg,
-              width: AppDimens.iconSize24,
-              height: AppDimens.iconSize24,
+              width: AppDimens.iconSize32,
+              height: AppDimens.iconSize32,
               colorFilter: ColorFilter.mode(
                 context.colors.textColor.withValues(
                   alpha: AppDimens.opacity6,

@@ -49,17 +49,7 @@ class _OnboardingScreenState
             'Play and interact with others who share your talent',
       ),
       // Screen 3: Play and get points
-      OnboardingData(
-        images: [
-          'assets/images/onboarding3_1.png',
-          'assets/images/onboarding3_2.png',
-          'assets/images/onboarding3_3.png',
-          'assets/images/onboarding3_4.png',
-        ],
-        title: 'Play and get points',
-        body:
-            'Play and get points to get a discount on your purchases',
-      ),
+
       // Screen 4: The best sports equipment
       OnboardingData(
         images: [
@@ -67,6 +57,18 @@ class _OnboardingScreenState
           'assets/images/onboarding4_2.png',
           'assets/images/onboarding4_3.png',
         ],
+        title: 'Play and get points',
+        body:
+            'Play and get points to get a discount on your purchases',
+      ),
+      OnboardingData(
+        images: [
+          'assets/images/onboarding3_1.png',
+          'assets/images/onboarding3_2.png',
+          'assets/images/onboarding3_3.png',
+          'assets/images/onboarding3_4.png',
+        ],
+
         title: 'The best sports equipment',
         body: 'Get everything you need in our sports store',
       ),
@@ -84,7 +86,14 @@ class _OnboardingScreenState
   }
 
   void _skip() {
-    context.go(Routes.homeScreenRoute);
+    // Navigate immediately - go_router handles navigation efficiently
+    // No need for delays or callbacks that can cause perceived lag
+    if (!mounted || !context.mounted) return;
+    try {
+      context.go(Routes.homeScreenRoute);
+    } catch (e) {
+      debugPrint('Navigation error in skip: $e');
+    }
   }
 
   @override

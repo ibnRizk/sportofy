@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
-import 'package:sportify_app/core/utils/app_padding.dart';
 
 class JoinRequestSheet extends StatelessWidget {
   final String organizerName;

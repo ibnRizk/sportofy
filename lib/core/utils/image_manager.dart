@@ -105,7 +105,7 @@ class ImgAssets {
   static const String icMenuAbout =
       'assets/icons/About us.svg';
   static const String icMenuLanguage =
-      'assets/icons/not setting.svg';
+      'assets/icons/language.svg';
   static const String icMenuLogout =
       'assets/icons/log out.svg';
 

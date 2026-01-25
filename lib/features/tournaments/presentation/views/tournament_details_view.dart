@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
-import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/features/tournaments/presentation/widgets/join_team_sheet.dart';
 
 class TournamentDetailsView extends StatelessWidget {

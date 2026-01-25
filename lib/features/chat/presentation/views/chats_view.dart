@@ -4,7 +4,6 @@ import 'package:sportify_app/config/routes/app_routes.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
-import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';

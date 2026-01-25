@@ -30,8 +30,9 @@ class _HomeShellState extends State<HomeShell> {
   }
 
   Future<void> _checkLocationPermission() async {
-    // Wait a bit for UI to settle
-    await Future.delayed(const Duration(milliseconds: 800));
+    // Reduce delay to make navigation feel faster
+    // Check permission after UI is ready but don't block navigation
+    await Future.delayed(const Duration(milliseconds: 300));
     if (!mounted) return;
     if (!context.mounted) return;
     try {
