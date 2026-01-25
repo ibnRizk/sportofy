@@ -175,18 +175,19 @@ class _MarketViewState extends State<MarketView> {
                   hintStyle: TextStyles.regular14(
                     color: MyColors.darkGrayColor,
                   ),
-                  prefixIcon: Padding(
-                    padding: AppPadding.p12,
-                    child: Icon(
-                      Icons.search,
-                      size: AppDimens.iconSize20,
-                      color: MyColors.darkGrayColor,
-                    ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: AppDimens.iconSize20,
+                    color: MyColors.darkGrayColor,
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                    minWidth: AppDimens.w40,
+                    minHeight: AppDimens.h40,
                   ),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: AppDimens.w16,
-                    vertical: AppDimens.h12,
+                    vertical: AppDimens.h16,
                   ),
                   isDense: true,
                 ),
@@ -197,7 +198,7 @@ class _MarketViewState extends State<MarketView> {
 
           // Categories
           SizedBox(
-            height: 42.h,
+            height: 36.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(
@@ -217,7 +218,7 @@ class _MarketViewState extends State<MarketView> {
                     });
                   },
                   child: Container(
-                    padding: AppPadding.h20v12,
+                    padding: AppPadding.h20v4,
                     decoration: BoxDecoration(
                       color: isSelected
                           ? MyColors.greenButton

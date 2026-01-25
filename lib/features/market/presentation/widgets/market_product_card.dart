@@ -54,7 +54,7 @@ class MarketProductCard extends StatelessWidget {
                     imageUrl,
                     width: double.infinity,
                     height: 200.h,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     errorBuilder:
                         (context, error, stackTrace) {
                           return Container(
