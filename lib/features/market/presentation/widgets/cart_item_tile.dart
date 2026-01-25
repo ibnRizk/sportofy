@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
@@ -128,8 +129,8 @@ class CartItemTile extends StatelessWidget {
 
           // Quantity Selector
           Container(
-            width: 109,
-            height: 32,
+            width: 109.w,
+            height: 32.h,
             padding: AppPadding.h8v4,
             decoration: BoxDecoration(
               color: MyColors.white,
@@ -160,10 +161,11 @@ class CartItemTile extends StatelessWidget {
                           ImgAssets.icTrash,
                           width: AppDimens.iconSize18,
                           height: AppDimens.iconSize18,
-                          colorFilter: const ColorFilter.mode(
-                            MyColors.greenButton,
-                            BlendMode.srcIn,
-                          ),
+                          colorFilter:
+                              const ColorFilter.mode(
+                                MyColors.greenButton,
+                                BlendMode.srcIn,
+                              ),
                         )
                       : Icon(
                           Icons.remove,
