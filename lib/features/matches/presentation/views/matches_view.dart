@@ -20,7 +20,9 @@ class MatchesView extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Matches',
-          style: TextStyles.bold18(color: MyColors.black),
+          style: TextStyles.semiBold18(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         centerTitle: false,
       ),

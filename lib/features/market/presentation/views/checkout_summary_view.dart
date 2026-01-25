@@ -21,7 +21,6 @@ class CheckoutSummaryView extends StatefulWidget {
 class _CheckoutSummaryViewState
     extends State<CheckoutSummaryView> {
   String _selectedPaymentMethod = 'wallet';
-  int _pointsToUse = 200;
 
   // Mock values
   final double _subtotal = 9600.0;

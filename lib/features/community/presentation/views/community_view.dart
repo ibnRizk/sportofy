@@ -87,12 +87,18 @@ class _CommunityViewState extends State<CommunityView> {
             elevation: AppDimens.elevation0,
             pinned: true,
             floating: false,
-            expandedHeight: AppDimens.containerHeight120,
+            expandedHeight: AppDimens.containerHeight80,
             flexibleSpace: _buildCustomAppBar(),
+            toolbarHeight: 0,
           ),
 
           // Filter Tabs
-          SliverToBoxAdapter(child: _buildFilterTabs()),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(top: AppDimens.h2),
+              child: _buildFilterTabs(),
+            ),
+          ),
 
           // Players Near You Section
           SliverToBoxAdapter(child: _buildPlayersNearYou()),
@@ -155,9 +161,10 @@ class _CommunityViewState extends State<CommunityView> {
       padding: EdgeInsets.only(
         top:
             MediaQuery.of(context).padding.top +
-            AppDimens.h20,
+            AppDimens.h12,
         left: AppDimens.w20,
         right: AppDimens.w20,
+        bottom: AppDimens.h12,
       ),
       child: Row(
         children: [
@@ -177,35 +184,44 @@ class _CommunityViewState extends State<CommunityView> {
                 color: MyColors.white,
                 borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(
-                  color: Colors.grey[400]!,
+                  color: MyColors.darkGrayColor,
                   width: 1.5,
                 ),
               ),
-              child: TextField(
-                controller: _searchController,
-                style: TextStyles.regular14(
-                  color: MyColors.black87,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyles.regular14(
-                    color: MyColors.grey600,
-                  ),
-                  prefixIcon: Padding(
-                    padding: AppPadding.p12,
+              child: Row(
+                children: [
+                  SizedBox(width: AppDimens.w12),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 4.h),
                     child: Icon(
                       Icons.search,
                       size: AppDimens.iconSize20,
-                      color: MyColors.grey600,
+                      color: MyColors.darkGrayColor,
                     ),
                   ),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: AppDimens.w16,
-                    vertical: AppDimens.h10,
+                  SizedBox(width: AppDimens.w8),
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      style: TextStyles.regular14(
+                        color: MyColors.black87,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: TextStyles.regular14(
+                          color: MyColors.darkGrayColor,
+                        ),
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(
+                              vertical: AppDimens.h10,
+                            ),
+                      ),
+                    ),
                   ),
-                  isDense: true,
-                ),
+                  SizedBox(width: AppDimens.w12),
+                ],
               ),
             ),
           ),
