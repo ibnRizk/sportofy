@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
+import 'package:sportify_app/core/utils/app_padding.dart';
+import 'package:sportify_app/core/utils/app_radius.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/add_sport_sheet.dart';
 import 'package:sportify_app/features/stadiums/presentation/widgets/filter_sheet.dart';
@@ -94,28 +97,39 @@ class _SharedFilterHeaderState
         children: [
           // Search Bar
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 12.h,
-            ),
+            padding: AppPadding.h20v12,
             child: TextField(
               controller: _searchController,
+              style: TextStyles.regular14(
+                color: MyColors.darkGrayColor,
+              ),
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[600],
+                hintStyle: TextStyles.regular14(
+                  color: MyColors.darkGrayColor,
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey[600],
-                  size: 24.sp,
+                // Minimize the gap between icon and hint text/same line:
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(
+                    left: 12,
+                    right: 4,
+                  ), // less horizontal space
+                  child: Icon(
+                    Icons.search,
+                    color: MyColors.grey600,
+                    size: AppDimens.iconSize20, // slightly reduced icon size
+                  ),
+                ),
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                  maxHeight: 28,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.tune,
                     color: MyColors.greenButton,
-                    size: 24.sp,
+                    size: AppDimens.iconSize24,
                   ),
                   onPressed:
                       widget.onFilterTap ??
@@ -123,36 +137,31 @@ class _SharedFilterHeaderState
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          backgroundColor:
-                              Colors.transparent,
+                          backgroundColor: MyColors.transparent,
                           builder: (context) =>
                               const FilterSheet(),
                         );
                       },
                 ),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: MyColors.white,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: MyColors.darkGrayColor,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: AppRadius.r12,
                   borderSide: BorderSide(
                     color: MyColors.greenButton,
                   ),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 12.h,
                 ),
               ),
             ),

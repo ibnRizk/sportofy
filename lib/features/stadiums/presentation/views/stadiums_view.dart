@@ -145,15 +145,31 @@ class _StadiumsViewState extends State<StadiumsView> {
             padding: AppPadding.h20v12,
             child: TextField(
               controller: _searchController,
+              style: TextStyles.regular14(
+                color: MyColors.darkGrayColor,
+              ),
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: TextStyles.regular14(
-                  color: MyColors.darkGrayColor,
+                  color: MyColors.grey,
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: MyColors.grey600,
-                  size: AppDimens.iconSize24,
+                // Minimize the gap between icon and hint text/same line:
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(
+                    left: 12,
+                    right: 4,
+                  ), // less horizontal space
+                  child: Icon(
+                    Icons.search,
+                    color: MyColors.grey600,
+                    size: AppDimens
+                        .iconSize20, // slightly reduced icon size
+                  ),
+                ),
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                  maxHeight: 28,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
@@ -191,7 +207,12 @@ class _StadiumsViewState extends State<StadiumsView> {
                     color: MyColors.greenButton,
                   ),
                 ),
-                contentPadding: AppPadding.h16v12,
+                isDense:
+                    true, // This shrinks the vertical height and tightens the layout
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 2,
+                ), // tighter padding for less gap
               ),
             ),
           ),

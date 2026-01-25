@@ -121,10 +121,10 @@ class _StadiumDetailsViewState
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha:0.3),
+                    Colors.black.withValues(alpha: 0.3),
                     Colors.transparent,
                     Colors.transparent,
-                    Colors.black.withValues(alpha:0.2),
+                    Colors.black.withValues(alpha: 0.2),
                   ],
                 ),
               ),
@@ -142,10 +142,6 @@ class _StadiumDetailsViewState
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.white,
                     onPressed: () => Navigator.pop(context),
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.black
-                          .withValues(alpha:0.3),
-                    ),
                   ),
                   SizedBox(width: 12.w),
                   Text(
@@ -198,7 +194,9 @@ class _StadiumDetailsViewState
                     shape: BoxShape.circle,
                     color: _currentImageIndex == index
                         ? Colors.white
-                        : Colors.white.withValues(alpha:0.5),
+                        : Colors.white.withValues(
+                            alpha: 0.5,
+                          ),
                   ),
                 ),
               ),
@@ -374,7 +372,7 @@ class _StadiumDetailsViewState
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha:0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
