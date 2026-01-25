@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sportify_app/config/routes/app_routes.dart';
@@ -18,122 +19,75 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.grey100,
+      backgroundColor: Color(0xFFf6f6f6),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ═══════════════════════════════════════════════
-              // HEADER SECTION
+              // FIRST CONTAINER: BLUE BACKGROUND
               // ═══════════════════════════════════════════════
               Container(
-                padding: AppPadding.p20,
-                color: context.colors.white,
+                width: double.infinity,
+                height: 90.h,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimens.w4,
+                  vertical: AppDimens.h8,
+                ),
+                color: Color(0xFFEBF5F8),
+                child: Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () =>
+                          Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: AppDimens.iconSize24,
+                        color: MyColors.black87,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        AccountSettingsBottomSheet.show(
+                          context,
+                        );
+                      },
+                      icon: Icon(
+                        Icons.more_vert,
+                        size: AppDimens.iconSize24,
+                        color: MyColors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ═══════════════════════════════════════════════
+              // SECOND CONTAINER: WHITE BACKGROUND WITH CONTENT
+              // ═══════════════════════════════════════════════
+              Container(
+                padding: EdgeInsets.only(
+                  top: AppDimens.h20,
+                  left: AppDimens.w20,
+                  right: AppDimens.w20,
+                  bottom: AppDimens.h20,
+                ),
+                color: MyColors.white,
                 child: Column(
                   children: [
-                    // Top Row: Back Button + Menu
+                    // Badges Row
                     Row(
                       mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          onPressed: () =>
-                              Navigator.pop(context),
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: AppDimens.iconSize24,
-                            color: context.colors.textColor,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            AccountSettingsBottomSheet.show(
-                              context,
-                            );
-                          },
-                          icon: Icon(
-                            Icons.more_vert,
-                            size: AppDimens.iconSize24,
-                            color: context.colors.textColor,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: AppDimens.h8),
-
-                    // Profile Info Row
-                    Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                      children: [
-                        // Left Badge (336 coins)
                         _buildBadge(
                           icon: Icons.monetization_on,
                           text: '336',
                           color: Color(0xFF3C9BBE),
                         ),
-
-                        // Center: Avatar + Name
-                        Column(
-                          children: [
-                            Stack(
-                              children: [
-                                CircleAvatar(
-                                  radius: AppDimens
-                                      .avatarSize50,
-                                  backgroundImage:
-                                      AssetImage(
-                                        ImgAssets
-                                            .userAvatar,
-                                      ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    width: AppDimens.w32,
-                                    height: AppDimens.h32,
-                                    decoration:
-                                        const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle,
-                                          color: MyColors
-                                              .white,
-                                        ),
-                                    padding: AppPadding.p2,
-                                    child: Image.asset(
-                                      ImgAssets.egyptFlag,
-                                      width: AppDimens.w28,
-                                      height: AppDimens.h28,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: AppDimens.h12),
-                            Text(
-                              'Ahmed Hassan',
-                              style: TextStyles.medium14(
-                                color: context
-                                    .colors
-                                    .textColor,
-                              ),
-                            ),
-                            SizedBox(height: AppDimens.h4),
-                            Text(
-                              'ID: Rmk4C1',
-                              style: TextStyles.regular12(
-                                color: MyColors.greenButton,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        // Right Badge (24 age/gender)
                         _buildBadge(
                           icon: Icons.male,
                           text: '24',
@@ -142,46 +96,60 @@ class ProfileView extends StatelessWidget {
                       ],
                     ),
 
+                    SizedBox(height: AppDimens.h12),
+
+                    // Profile Name and ID
+                    Text(
+                      'Ahmed Hassan',
+                      style: TextStyles.bold18(
+                        color: MyColors.black87,
+                      ),
+                    ),
+                    SizedBox(height: AppDimens.h4),
+                    Text(
+                      'ID: Rmk4C1',
+                      style: TextStyles.regular12(
+                        color: MyColors.greenButton,
+                      ),
+                    ),
+
                     SizedBox(height: AppDimens.h20),
 
                     // Action Buttons
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: _buildOutlinedButton(
-                              icon: Icons.people_outline,
-                              text: '560 Friends',
-                              onTap: () {
-                                context.push(
-                                  Routes.friendsRoute,
-                                );
-                              },
-                            ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildOutlinedButton(
+                            icon: Icons.people_outline,
+                            text: '560 Friends',
+                            onTap: () {
+                              context.push(
+                                Routes.friendsRoute,
+                              );
+                            },
                           ),
-                          SizedBox(width: AppDimens.w12),
-                          Expanded(
-                            child: _buildOutlinedButton(
-                              icon: Icons.phone_outlined,
-                              text: 'Contact Info',
-                              onTap: () {
-                                ContactInfoBottomSheet.show(
-                                  context,
-                                  email:
-                                      'ahmedhassan123@gmail.com',
-                                  phone: '010010001001',
-                                  connectedDate:
-                                      'July 5, 2022',
-                                );
-                              },
-                            ),
+                        ),
+                        SizedBox(width: AppDimens.w12),
+                        Expanded(
+                          child: _buildOutlinedButton(
+                            icon: Icons.phone_outlined,
+                            text: 'Contact Info',
+                            onTap: () {
+                              ContactInfoBottomSheet.show(
+                                context,
+                                email:
+                                    'ahmedhassan123@gmail.com',
+                                phone: '010010001001',
+                                connectedDate:
+                                    'July 5, 2022',
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+
+                    SizedBox(height: AppDimens.h12),
                   ],
                 ),
               ),
@@ -189,10 +157,12 @@ class ProfileView extends StatelessWidget {
               SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
-              // HEIGHT & ADDRESS ROW
+              // HEIGHT & ADDRESS ROW (After Second Container)
               // ═══════════════════════════════════════════════
               Padding(
-                padding: AppPadding.h20,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimens.w20,
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -215,186 +185,211 @@ class ProfileView extends StatelessWidget {
               SizedBox(height: AppDimens.h12),
 
               // ═══════════════════════════════════════════════
-              // ABOUT ME SECTION
+              // REST OF CONTENT SECTION
               // ═══════════════════════════════════════════════
-              Padding(
-                padding: AppPadding.h20,
-                child: _buildProfileCard(
-                  child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'About me',
-                        style: TextStyles.semiBold16(
-                          color: context.colors.textColor,
-                        ),
-                      ),
-                      SizedBox(height: AppDimens.h12),
-                      Text(
-                        'Lorem Ipsum is simply a printable and proforma text typesetting industry. Lorem Ipsum was the master of the industry Standard dummy text since the fifteenth century AD.',
-                        style: TextStyles.regular14(
-                          color: context.colors.textColor
-                              .withValues(
-                                alpha: AppDimens.opacity6,
-                              ),
-                        ).copyWith(height: 1.5),
-                      ),
-                    ],
-                  ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimens.w20,
                 ),
-              ),
-
-              SizedBox(height: AppDimens.h12),
-
-              // ═══════════════════════════════════════════════
-              // SPORTS SECTION
-              // ═══════════════════════════════════════════════
-              Padding(
-                padding: AppPadding.h20,
-                child: _buildProfileCard(
-                  child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                color: Color(0xFFf6f6f6),
+                child: Column(
+                  children: [
+                    // ═══════════════════════════════════════════════
+                    // ABOUT ME SECTION
+                    // ═══════════════════════════════════════════════
+                    _buildProfileCard(
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sports',
+                            'About me',
                             style: TextStyles.semiBold16(
                               color:
                                   context.colors.textColor,
                             ),
                           ),
+                          SizedBox(height: AppDimens.h12),
                           Text(
-                            'Level 60',
-                            style: TextStyles.regular12(
+                            'Lorem Ipsum is simply a printable and proforma text typesetting industry. Lorem Ipsum was the master of the industry Standard dummy text since the fifteenth century AD.',
+                            style: TextStyles.regular14(
                               color: context
                                   .colors
                                   .textColor
                                   .withValues(
                                     alpha:
-                                        AppDimens.opacity5,
+                                        AppDimens.opacity6,
                                   ),
-                            ),
+                            ).copyWith(height: 1.5),
                           ),
                         ],
                       ),
-                      SizedBox(height: AppDimens.h12),
-                      // Custom Progress Bar with Blue to Green Gradient
-                      ClipRRect(
-                        borderRadius: AppRadius.r10,
-                        child: Container(
-                          height: AppDimens.h6,
-                          decoration: BoxDecoration(
-                            color: MyColors.grey.withValues(
-                              alpha: AppDimens.opacity2,
-                            ),
-                            borderRadius: AppRadius.r10,
-                          ),
-                          child: Stack(
+                    ),
+
+                    SizedBox(height: AppDimens.h12),
+
+                    // ═══════════════════════════════════════════════
+                    // SPORTS SECTION
+                    // ═══════════════════════════════════════════════
+                    _buildProfileCard(
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
                             children: [
-                              FractionallySizedBox(
-                                widthFactor: 0.6,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        MyColors
-                                            .blue, // Blue start
-                                        MyColors
-                                            .greenButton, // Green end
-                                      ],
-                                      begin: Alignment
-                                          .centerLeft,
-                                      end: Alignment
-                                          .centerRight,
+                              Text(
+                                'Sports',
+                                style:
+                                    TextStyles.semiBold16(
+                                      color: context
+                                          .colors
+                                          .textColor,
                                     ),
-                                    borderRadius:
-                                        AppRadius.r10,
-                                  ),
+                              ),
+                              Text(
+                                'Level 60',
+                                style: TextStyles.regular12(
+                                  color: context
+                                      .colors
+                                      .textColor
+                                      .withValues(
+                                        alpha: AppDimens
+                                            .opacity5,
+                                      ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      SizedBox(height: AppDimens.h16),
-                      Text(
-                        'Football : Goalkeeper',
-                        style: TextStyles.semiBold15(
-                          color: context.colors.textColor,
-                        ),
-                      ),
-                      SizedBox(height: AppDimens.h12),
-                      Row(
-                        children: [
-                          _buildStatItem(
-                            iconSvg: ImgAssets.icMatches,
-                            text: '53 Matches',
+                          SizedBox(height: AppDimens.h12),
+                          // Custom Progress Bar with Blue to Green Gradient
+                          ClipRRect(
+                            borderRadius: AppRadius.r10,
+                            child: Container(
+                              height: AppDimens.h6,
+                              decoration: BoxDecoration(
+                                color: MyColors.grey
+                                    .withValues(
+                                      alpha: AppDimens
+                                          .opacity2,
+                                    ),
+                                borderRadius: AppRadius.r10,
+                              ),
+                              child: Stack(
+                                children: [
+                                  FractionallySizedBox(
+                                    widthFactor: 0.6,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            MyColors
+                                                .blue, // Blue start
+                                            MyColors
+                                                .greenButton, // Green end
+                                          ],
+                                          begin: Alignment
+                                              .centerLeft,
+                                          end: Alignment
+                                              .centerRight,
+                                        ),
+                                        borderRadius:
+                                            AppRadius.r10,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          SizedBox(width: AppDimens.w16),
-                          _buildStatItem(
-                            iconSvg:
-                                ImgAssets.icTournaments,
-                            text: '13 Tournament',
+                          SizedBox(height: AppDimens.h16),
+                          Text(
+                            'Football : Goalkeeper',
+                            style: TextStyles.semiBold15(
+                              color:
+                                  context.colors.textColor,
+                            ),
                           ),
-                          SizedBox(width: AppDimens.w16),
-                          _buildStatItem(
-                            iconSvg: ImgAssets.icOrganized,
-                            text: '15 Organized',
+                          SizedBox(height: AppDimens.h12),
+                          Row(
+                            children: [
+                              _buildStatItem(
+                                iconSvg:
+                                    ImgAssets.icMatches,
+                                text: '53 Matches',
+                              ),
+                              SizedBox(
+                                width: AppDimens.w16,
+                              ),
+                              _buildStatItem(
+                                iconSvg:
+                                    ImgAssets.icTournaments,
+                                text: '13 Tournament',
+                              ),
+                              SizedBox(
+                                width: AppDimens.w16,
+                              ),
+                              _buildStatItem(
+                                iconSvg:
+                                    ImgAssets.icOrganized,
+                                text: '15 Organized',
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: AppDimens.h12),
-
-              // ═══════════════════════════════════════════════
-              // MY TEAMS SECTION
-              // ═══════════════════════════════════════════════
-              Padding(
-                padding: AppPadding.h20,
-                child: InkWell(
-                  onTap: () {
-                    context.push(Routes.myTeamRoute);
-                  },
-                  borderRadius: AppRadius.r12,
-                  child: _buildProfileCard(
-                    child: Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'My Teams',
-                          style: TextStyles.semiBold16(
-                            color: context.colors.textColor,
-                          ),
-                        ),
-                        SizedBox(height: AppDimens.h4),
-                        Text(
-                          'This teams to join the tournaments',
-                          style: TextStyles.regular10(
-                            color: context.colors.textColor
-                                .withValues(
-                                  alpha: AppDimens.opacity5,
-                                ),
-                          ),
-                        ),
-                        SizedBox(height: AppDimens.h16),
-                        _buildTeamItem(),
-                      ],
                     ),
-                  ),
+
+                    SizedBox(height: AppDimens.h12),
+
+                    // ═══════════════════════════════════════════════
+                    // MY TEAMS SECTION
+                    // ═══════════════════════════════════════════════
+                    InkWell(
+                      onTap: () {
+                        context.push(Routes.myTeamRoute);
+                      },
+                      borderRadius: AppRadius.r12,
+                      child: _buildProfileCard(
+                        child: Column(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'My Teams',
+                              style: TextStyles.semiBold16(
+                                color: context
+                                    .colors
+                                    .textColor,
+                              ),
+                            ),
+                            SizedBox(height: AppDimens.h4),
+                            Text(
+                              'This teams to join the tournaments',
+                              style: TextStyles.regular10(
+                                color: context
+                                    .colors
+                                    .textColor
+                                    .withValues(
+                                      alpha: AppDimens
+                                          .opacity5,
+                                    ),
+                              ),
+                            ),
+                            SizedBox(height: AppDimens.h16),
+                            _buildTeamItem(),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: AppDimens.h20),
+                  ],
                 ),
               ),
-
-              SizedBox(height: AppDimens.h20),
             ],
           ),
         ),
