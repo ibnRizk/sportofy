@@ -5,7 +5,7 @@ import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
 
-class CartSummarySection extends StatelessWidget {
+class CartSummarySection extends StatefulWidget {
   final double subtotal;
   final double deliveryFees;
   final VoidCallback onCheckout;
@@ -17,7 +17,14 @@ class CartSummarySection extends StatelessWidget {
     required this.onCheckout,
   });
 
-  double get total => subtotal + deliveryFees;
+  @override
+  State<CartSummarySection> createState() => _CartSummarySectionState();
+}
+
+class _CartSummarySectionState extends State<CartSummarySection> {
+  bool _isExpanded = true;
+
+  double get total => widget.subtotal + widget.deliveryFees;
 
   @override
   Widget build(BuildContext context) {
@@ -38,72 +45,96 @@ class CartSummarySection extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Payment Summary Header
-          Icon(
-            Icons.keyboard_arrow_down,
-            color: MyColors.greenButton,
-            size: AppDimens.iconSize24,
-          ),
-          SizedBox(width: AppDimens.w8),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Payment summary',
-              style: TextStyles.semiBold16(
-                color: MyColors.darkGrayColor,
+          // Payment Summary Header with Clickable Arrow
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isExpanded = !_isExpanded;
+                  });
+                },
+                child: Icon(
+                  _isExpanded
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_up,
+                  color: MyColors.greenButton,
+                  size: AppDimens.iconSize24,
+                ),
               ),
+            ],
+          ),
+          SizedBox(height: AppDimens.h8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Payment summary',
+                style: TextStyles.semiBold16(
+                  color: MyColors.darkGrayColor,
+                ),
+              ),
+              Text(
+                '${total.toStringAsFixed(0)} EGP',
+                style: TextStyles.semiBold16(
+                  color: MyColors.darkGrayColor,
+                ),
+              ),
+            ],
+          ),
+          
+          // Expandable Content
+          if (_isExpanded) ...[
+            SizedBox(height: AppDimens.h16),
+            // Subtotal
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Subtotal',
+                  style: TextStyles.semiBold16(
+                    color: MyColors.darkGrayColor,
+                  ),
+                ),
+                Text(
+                  '${widget.subtotal.toStringAsFixed(0)} EGP',
+                  style: TextStyles.semiBold16(
+                    color: MyColors.black87,
+                  ),
+                ),
+              ],
             ),
-          ),
-          SizedBox(height: AppDimens.h16),
-
-          // Subtotal
-          Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Subtotal',
-                style: TextStyles.semiBold16(
-                  color: MyColors.darkGrayColor,
+            SizedBox(height: AppDimens.h12),
+            // Delivery Fees
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Delivery Fees',
+                  style: TextStyles.semiBold16(
+                    color: MyColors.darkGrayColor,
+                  ),
                 ),
-              ),
-              Text(
-                '${subtotal.toStringAsFixed(0)} EGP',
-                style: TextStyles.semiBold16(
-                  color: MyColors.black87,
+                Text(
+                  '${widget.deliveryFees.toStringAsFixed(0)} EGP',
+                  style: TextStyles.semiBold16(
+                    color: MyColors.black87,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppDimens.h12),
-
-          // Delivery Fees
-          Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Delivery Fees',
-                style: TextStyles.semiBold16(
-                  color: MyColors.darkGrayColor,
-                ),
-              ),
-              Text(
-                '${deliveryFees.toStringAsFixed(0)} EGP',
-                style: TextStyles.semiBold16(
-                  color: MyColors.black87,
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
+          
           SizedBox(height: AppDimens.h20),
-
           // Checkout Button
           SizedBox(
             width: double.infinity,
             height: AppDimens.buttonHeight50,
             child: ElevatedButton(
-              onPressed: onCheckout,
+              onPressed: widget.onCheckout,
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyColors.greenButton,
                 foregroundColor: MyColors.white,

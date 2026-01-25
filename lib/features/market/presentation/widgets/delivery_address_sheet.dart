@@ -63,8 +63,6 @@ class DeliveryAddressSheet extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 20.h),
-
           // Address Options
           Column(
             children: [
