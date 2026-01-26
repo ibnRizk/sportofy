@@ -174,8 +174,10 @@ class ImgAssets {
   // Sports Icons
   static const String icTournaments =
       'assets/icons/Tournaments.svg';
+  static const String icTournaments1 =
+      'assets/icons/Star.svg';
   static const String icOrganized =
-      'assets/icons/organized.svg';
+      'assets/icons/organized1.png';
   static const String icTennis = 'assets/icons/tennis.svg';
 
   // Action Icons

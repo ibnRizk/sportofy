@@ -221,87 +221,128 @@ class ProfileView extends StatelessWidget {
                               SizedBox(
                                 height: AppDimens.h12,
                               ),
-                              // Custom Progress Bar with Blue to Green Gradient
-                              ClipRRect(
-                                borderRadius: AppRadius.r10,
-                                child: Container(
-                                  height: AppDimens.h6,
-                                  decoration: BoxDecoration(
-                                    color: MyColors.grey
-                                        .withValues(
-                                          alpha: AppDimens
-                                              .opacity2,
+                              // Details Container (Light Blue Background)
+                              Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.only(
+                                  left: 16.w,
+                                  right: 16.w,
+                                  bottom: 16.r,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                    0xFFF5FAFC,
+                                  ), // Light Blue Background
+                                  borderRadius:
+                                      BorderRadius.circular(
+                                        12.r,
+                                      ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                  children: [
+                                    // Custom Progress Bar with Blue to Green Gradient (Inside Container at Top)
+                                    ClipRRect(
+                                      borderRadius:
+                                          AppRadius.r10,
+                                      child: Container(
+                                        height:
+                                            AppDimens.h6,
+                                        decoration: BoxDecoration(
+                                          color: MyColors
+                                              .grey
+                                              .withValues(
+                                                alpha: AppDimens
+                                                    .opacity2,
+                                              ),
+                                          borderRadius:
+                                              AppRadius.r10,
                                         ),
-                                    borderRadius:
-                                        AppRadius.r10,
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      FractionallySizedBox(
-                                        widthFactor: 0.6,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                MyColors
-                                                    .blue, // Blue start
-                                                MyColors
-                                                    .greenButton, // Green end
-                                              ],
-                                              begin: Alignment
-                                                  .centerLeft,
-                                              end: Alignment
-                                                  .centerRight,
+                                        child: Stack(
+                                          children: [
+                                            FractionallySizedBox(
+                                              widthFactor:
+                                                  0.6,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      MyColors
+                                                          .blue, // Blue start
+                                                      MyColors
+                                                          .greenButton, // Green end
+                                                    ],
+                                                    begin: Alignment
+                                                        .centerLeft,
+                                                    end: Alignment
+                                                        .centerRight,
+                                                  ),
+                                                  borderRadius:
+                                                      AppRadius
+                                                          .r10,
+                                                ),
+                                              ),
                                             ),
-                                            borderRadius:
-                                                AppRadius
-                                                    .r10,
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: AppDimens.h16,
-                              ),
-                              Text(
-                                'Football : Goalkeeper',
-                                style:
-                                    TextStyles.semiBold15(
-                                      color: context
-                                          .colors
-                                          .textColor,
                                     ),
-                              ),
-                              SizedBox(
-                                height: AppDimens.h12,
-                              ),
-                              Row(
-                                children: [
-                                  _buildStatItem(
-                                    iconSvg:
-                                        ImgAssets.icMatches,
-                                    text: '53 Matches',
-                                  ),
-                                  SizedBox(
-                                    width: AppDimens.w16,
-                                  ),
-                                  _buildStatItem(
-                                    iconSvg: ImgAssets
-                                        .icTournaments,
-                                    text: '13 Tournament',
-                                  ),
-                                  SizedBox(
-                                    width: AppDimens.w16,
-                                  ),
-                                  _buildStatItem(
-                                    iconSvg: ImgAssets
-                                        .icOrganized,
-                                    text: '15 Organized',
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: AppDimens.h16,
+                                    ),
+                                    Text(
+                                      'Football : Goalkeeper',
+                                      style:
+                                          TextStyles.semiBold15(
+                                            color: context
+                                                .colors
+                                                .textColor,
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: AppDimens.h12,
+                                    ),
+                                    Row(
+                                      children: [
+                                        _buildStatItem(
+                                          iconSvg: ImgAssets
+                                              .icMatches,
+                                          text:
+                                              '53 Matches',
+                                        ),
+                                        SizedBox(
+                                          width:
+                                              AppDimens.w16,
+                                        ),
+                                        _buildStatItem(
+                                          iconSvg: ImgAssets
+                                              .icTournaments1,
+                                          color:
+                                              Color.fromARGB(
+                                                255,
+                                                242,
+                                                219,
+                                                15,
+                                              ),
+                                          text:
+                                              '13 Tournament',
+                                        ),
+                                        SizedBox(
+                                          width:
+                                              AppDimens.w16,
+                                        ),
+                                        _buildStatItem(
+                                          iconSvg: ImgAssets
+                                              .icOrganized,
+                                          text:
+                                              '15 Organized',
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -631,19 +672,36 @@ class ProfileView extends StatelessWidget {
   Widget _buildStatItem({
     required String iconSvg,
     required String text,
+    Color? color,
   }) {
+    // Check if this is a PNG file (like organized1.png) - use Image.asset instead of SvgPicture
+    final bool isPngFile = iconSvg.endsWith('.png');
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SvgPicture.asset(
-          iconSvg,
-          width: AppDimens.iconSize18,
-          height: AppDimens.iconSize18,
-          colorFilter: ColorFilter.mode(
-            MyColors.black54,
-            BlendMode.srcIn,
-          ),
-        ),
+        isPngFile
+            ? Image.asset(
+                iconSvg,
+                width: AppDimens.iconSize18,
+                height: AppDimens.iconSize18,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.image,
+                    size: AppDimens.iconSize18,
+                    color: MyColors.grey400,
+                  );
+                },
+              )
+            : SvgPicture.asset(
+                iconSvg,
+                width: AppDimens.iconSize18,
+                height: AppDimens.iconSize18,
+                colorFilter: ColorFilter.mode(
+                  color ?? MyColors.black54,
+                  BlendMode.srcIn,
+                ),
+              ),
         SizedBox(width: AppDimens.w4),
         Text(
           text,
