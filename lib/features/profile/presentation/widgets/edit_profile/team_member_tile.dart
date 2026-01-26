@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
+import 'package:sportify_app/core/utils/values/text_styles.dart';
 
 class TeamMemberTile extends StatelessWidget {
   final String name;
@@ -20,63 +21,77 @@ class TeamMemberTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.r), // Reduced padding to prevent overflow
+      padding: EdgeInsets.all(8.r),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
         border: Border.all(
-          color: Colors.grey.withValues(alpha:0.2),
+          color: Colors.grey.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
-      child: Row(
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          // Avatar
-          CircleAvatar(
-            radius: 18.r, // Slightly smaller avatar
-            backgroundImage: AssetImage(avatarPath ?? ImgAssets.userAvatar),
+          // Main Content Row
+          Row(
+            children: [
+              // Avatar
+              CircleAvatar(
+                radius: 18.r,
+                backgroundImage: AssetImage(avatarPath ?? ImgAssets.userAvatar),
+              ),
+              SizedBox(width: 8.w),
+              // Name and Role
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.medium10(
+                        color: MyColors.darkGrayColor,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      role,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.regular10(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 8.w), // Reduced spacing
-          // Name and Role
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  name,
-                  maxLines: 1, // Prevent text wrapping
-                  overflow: TextOverflow.ellipsis, // Truncate with ...
-                  style: TextStyle(
-                    fontSize: 13.sp, // Slightly smaller font
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+          // Remove Button in Corner (Top Right)
+          Positioned(
+            top: -4.h,
+            right: -4.w,
+            child: GestureDetector(
+              onTap: onRemove,
+              child: Container(
+                width: 20.w,
+                height: 20.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.grey.withValues(alpha: 0.3),
+                    width: 1,
                   ),
                 ),
-                SizedBox(height: 2.h),
-                Text(
-                  role,
-                  maxLines: 1, // Prevent text wrapping
-                  overflow: TextOverflow.ellipsis, // Truncate with ...
-                  style: TextStyle(
-                    fontSize: 11.sp, // Slightly smaller font
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.darkGrayColor,
-                  ),
+                child: Icon(
+                  Icons.close,
+                  size: 12.w,
+                  color: MyColors.darkGrayColor,
                 ),
-              ],
+              ),
             ),
-          ),
-          // Remove Button
-          IconButton(
-            onPressed: onRemove,
-            icon: Icon(
-              Icons.cancel,
-              size: 18.w, // Slightly smaller icon
-              color: MyColors.darkGrayColor,
-            ),
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
           ),
         ],
       ),

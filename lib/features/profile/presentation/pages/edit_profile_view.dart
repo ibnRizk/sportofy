@@ -714,18 +714,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                   // MY TEAM
                   // ═══════════════════════════════════════════════
                   Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                     children: [
                       const SectionTitle(title: 'My Team'),
-                      SizedBox(width: 16.w),
-                      Expanded(
-                        child: Container(
-                          height: 1,
-                          color: Colors.grey.withValues(
-                            alpha: 0.3,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.w),
                       TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
