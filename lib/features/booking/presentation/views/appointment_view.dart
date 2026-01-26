@@ -632,7 +632,7 @@ class _TeamSelector extends StatelessWidget {
       children: [
         Text(
           'Team Member',
-          style: TextStyles.semiBold18(
+          style: TextStyles.semiBold16(
             color: MyColors.black87,
           ),
         ),
