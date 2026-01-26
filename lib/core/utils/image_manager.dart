@@ -182,4 +182,5 @@ class ImgAssets {
 
   // Action Icons
   static const String icTrash = 'assets/icons/trash.svg';
+  static const String icSun = 'assets/icons/Sun.svg';
 }

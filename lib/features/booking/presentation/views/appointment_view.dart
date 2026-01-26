@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sportify_app/core/utils/app_colors.dart';
 import 'package:sportify_app/core/utils/app_dimens.dart';
 import 'package:sportify_app/core/utils/app_padding.dart';
 import 'package:sportify_app/injection_container.dart';
 import 'package:sportify_app/core/utils/app_radius.dart';
 import 'package:sportify_app/core/utils/values/text_styles.dart';
+import 'package:sportify_app/core/utils/image_manager.dart';
 import 'package:sportify_app/features/booking/presentation/views/appointment_grid_view.dart';
 import 'package:sportify_app/features/booking/presentation/widgets/booking_type_sheet.dart';
 import 'package:sportify_app/features/booking/presentation/widgets/audience_sheet.dart';
@@ -205,7 +208,8 @@ class _AppointmentViewState extends State<AppointmentView> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _selectedTimeSlots.isNotEmpty
+                  backgroundColor:
+                      _selectedTimeSlots.isNotEmpty
                       ? MyColors.greenButton
                       : MyColors.grey300,
                   foregroundColor: MyColors.white,
@@ -270,7 +274,9 @@ class _BookingCalendar extends StatelessWidget {
           ),
           child: Text(
             'July 2023',
-            style: TextStyles.semiBold16(color: MyColors.white),
+            style: TextStyles.semiBold16(
+              color: MyColors.white,
+            ),
           ),
         ),
 
@@ -282,7 +288,9 @@ class _BookingCalendar extends StatelessWidget {
             borderRadius: AppRadius.bottom12,
             boxShadow: [
               BoxShadow(
-                color: MyColors.black.withValues(alpha: AppDimens.opacity05),
+                color: MyColors.black.withValues(
+                  alpha: AppDimens.opacity05,
+                ),
                 blurRadius: AppDimens.elevation8,
                 offset: const Offset(0, 2),
               ),
@@ -355,21 +363,27 @@ class _TimeSlotsSectionState
         // Header
         Text(
           'Available Time',
-          style: TextStyles.semiBold18(color: MyColors.black87),
+          style: TextStyles.semiBold16(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         SizedBox(height: AppDimens.h4),
         Text(
           'you can only pick consecutive hours',
-          style: TextStyles.regular12(color: MyColors.darkGrayColor),
+          style: TextStyles.regular12(
+            color: MyColors.darkGrayColor,
+          ),
         ),
         SizedBox(height: AppDimens.h16),
 
         // Legend and Toggle
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Legend
-            Row(
+            // Legend (Column layout)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -382,11 +396,13 @@ class _TimeSlotsSectionState
                     SizedBox(width: AppDimens.w4),
                     Text(
                       'Pending hours',
-                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
+                      style: TextStyles.regular12(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(width: AppDimens.w16),
+                SizedBox(height: AppDimens.h8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -398,22 +414,23 @@ class _TimeSlotsSectionState
                     SizedBox(width: AppDimens.w4),
                     Text(
                       'Resell hours',
-                      style: TextStyles.regular12(color: MyColors.darkGrayColor),
+                      style: TextStyles.regular12(
+                        color: MyColors.darkGrayColor,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
 
-            // Toggle Switch
-            Switch(
+            // Custom Toggle Switch
+            _CustomSwitch(
               value: _showResellHours,
               onChanged: (value) {
                 setState(() {
                   _showResellHours = value;
                 });
               },
-              activeColor: MyColors.greenButton,
             ),
           ],
         ),
@@ -422,7 +439,7 @@ class _TimeSlotsSectionState
 
         // Time Slots Grid
         Wrap(
-          spacing: AppDimens.w12,
+          spacing: AppDimens.w16,
           runSpacing: AppDimens.h12,
           children: List.generate(_timeSlots.length, (
             index,
@@ -523,7 +540,12 @@ class _TimeChip extends StatelessWidget {
           GestureDetector(
             onTap: isDisabled ? null : onTap,
             child: Container(
-              padding: AppPadding.h12v12,
+              width: 97.w,
+              height: 32.h,
+              padding: EdgeInsets.symmetric(
+                horizontal: 4.w,
+                vertical: 2.h,
+              ),
               decoration: BoxDecoration(
                 color: isSelected
                     ? MyColors.greenButton.withValues(
@@ -535,6 +557,7 @@ class _TimeChip extends StatelessWidget {
                                 ? MyColors.amber50
                                 : MyColors.white)),
                 borderRadius: AppRadius.r8,
+
                 border: Border.all(
                   color: isSelected
                       ? MyColors.greenButton
@@ -542,14 +565,15 @@ class _TimeChip extends StatelessWidget {
                             ? MyColors.grey300
                             : (isPending
                                   ? MyColors.amber700
-                                  : MyColors.grey300)),
+                                  : MyColors
+                                        .darkGrayColor)),
                   width: AppDimens.borderWidth1,
                 ),
               ),
               child: Center(
                 child: Text(
                   timeRange,
-                  style: TextStyles.medium12(
+                  style: TextStyles.regular12(
                     color: isSelected
                         ? MyColors.greenButton
                         : (isDisabled
@@ -608,7 +632,9 @@ class _TeamSelector extends StatelessWidget {
       children: [
         Text(
           'Team Member',
-          style: TextStyles.semiBold18(color: MyColors.black87),
+          style: TextStyles.semiBold18(
+            color: MyColors.black87,
+          ),
         ),
         SizedBox(height: AppDimens.h16),
 
@@ -709,7 +735,9 @@ class _TeamOption extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: TextStyles.medium16(color: MyColors.black87),
+                style: TextStyles.regular14(
+                  color: MyColors.darkGrayColor,
+                ),
               ),
             ),
 
@@ -804,7 +832,9 @@ class _FindMemberForm extends StatelessWidget {
             children: [
               Text(
                 'Show match to',
-                style: TextStyles.medium14(color: MyColors.black87),
+                style: TextStyles.medium14(
+                  color: MyColors.black87,
+                ),
               ),
               const Spacer(),
               InkWell(
@@ -845,7 +875,9 @@ class _FindMemberForm extends StatelessWidget {
                       SizedBox(width: AppDimens.w6),
                       Text(
                         showMatchTo,
-                        style: TextStyles.medium14(color: MyColors.greenButton),
+                        style: TextStyles.medium14(
+                          color: MyColors.greenButton,
+                        ),
                       ),
                       SizedBox(width: AppDimens.w4),
                       Icon(
@@ -865,45 +897,109 @@ class _FindMemberForm extends StatelessWidget {
           // Group Age Section
           Text(
             'Group Age',
-            style: TextStyles.semiBold14(color: MyColors.black87),
+            style: TextStyles.semiBold14(
+              color: MyColors.black87,
+            ),
           ),
           SizedBox(height: AppDimens.h12),
 
           // Age Groups Checkboxes (2-column grid)
-          Wrap(
-            spacing: AppDimens.w12,
-            runSpacing: AppDimens.h12,
-            children:
-                [
-                  'Less than 25',
-                  '25 - 35',
-                  'More than 35',
-                  'All',
-                ].map((group) {
-                  final isSelected = selectedAgeGroups
-                      .contains(group);
-                  return SizedBox(
-                    width:
-                        (MediaQuery.of(context).size.width -
-                            AppDimens.w72) /
-                        AppDimens.w2,
-                    child: CheckboxListTile(
-                      title: Text(
-                        group,
-                        style: TextStyles.regular14(color: MyColors.black87),
-                      ),
-                      value: isSelected,
-                      onChanged: (value) {
-                        onAgeGroupToggled(group);
-                      },
-                      controlAffinity:
-                          ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      activeColor: MyColors.greenButton,
-                      dense: true,
+          Row(
+            children: [
+              Expanded(
+                child: CheckboxListTile(
+                  checkColor: MyColors.white,
+                  title: Text(
+                    'Less than 25',
+                    style: TextStyles.regular14(
+                      color: MyColors.black87,
                     ),
-                  );
-                }).toList(),
+                  ),
+                  value: selectedAgeGroups.contains(
+                    'Less than 25',
+                  ),
+                  onChanged: (value) {
+                    onAgeGroupToggled('Less than 25');
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  activeColor: MyColors.greenButton,
+                  dense: true,
+                ),
+              ),
+              SizedBox(width: AppDimens.w12),
+              Expanded(
+                child: CheckboxListTile(
+                  checkColor: MyColors.white,
+                  title: Text(
+                    '25 - 35',
+                    style: TextStyles.regular14(
+                      color: MyColors.black87,
+                    ),
+                  ),
+                  value: selectedAgeGroups.contains(
+                    '25 - 35',
+                  ),
+                  onChanged: (value) {
+                    onAgeGroupToggled('25 - 35');
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  activeColor: MyColors.greenButton,
+                  dense: true,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppDimens.h12),
+          Row(
+            children: [
+              Expanded(
+                child: CheckboxListTile(
+                  checkColor: MyColors.white,
+                  title: Text(
+                    'More than 35',
+                    style: TextStyles.regular14(
+                      color: MyColors.black87,
+                    ),
+                  ),
+                  value: selectedAgeGroups.contains(
+                    'More than 35',
+                  ),
+                  onChanged: (value) {
+                    onAgeGroupToggled('More than 35');
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  activeColor: MyColors.greenButton,
+                  dense: true,
+                ),
+              ),
+              SizedBox(width: AppDimens.w12),
+              Expanded(
+                child: CheckboxListTile(
+                  checkColor: MyColors.white,
+                  title: Text(
+                    'All',
+                    style: TextStyles.regular14(
+                      color: MyColors.black87,
+                    ),
+                  ),
+                  value: selectedAgeGroups.contains('All'),
+                  onChanged: (value) {
+                    onAgeGroupToggled('All');
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  activeColor: MyColors.greenButton,
+                  dense: true,
+                ),
+              ),
+            ],
           ),
 
           SizedBox(height: AppDimens.h24),
@@ -911,7 +1007,9 @@ class _FindMemberForm extends StatelessWidget {
           // Special Note Field
           Text(
             'Special Note',
-            style: TextStyles.semiBold14(color: MyColors.black87),
+            style: TextStyles.semiBold14(
+              color: MyColors.black87,
+            ),
           ),
           SizedBox(height: AppDimens.h8),
           TextFormField(
@@ -920,7 +1018,9 @@ class _FindMemberForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText:
                   'EX: This game is for training only for age players between...',
-              hintStyle: TextStyles.regular14(color: MyColors.darkGrayColor),
+              hintStyle: TextStyles.regular14(
+                color: MyColors.darkGrayColor,
+              ),
               border: OutlineInputBorder(
                 borderRadius: AppRadius.r8,
                 borderSide: BorderSide(
@@ -969,7 +1069,9 @@ class _CounterRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: TextStyles.medium14(color: MyColors.black87),
+            style: TextStyles.regular14(
+              color: MyColors.black87,
+            ),
           ),
         ),
         Row(
@@ -978,7 +1080,7 @@ class _CounterRow extends StatelessWidget {
             // Decrement Button
             IconButton(
               icon: Icon(
-                Icons.remove_circle_outline,
+                Icons.remove,
                 color: MyColors.greenButton,
                 size: AppDimens.iconSize24,
               ),
@@ -986,17 +1088,19 @@ class _CounterRow extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
             ),
-            SizedBox(width: AppDimens.w12),
+            SizedBox(width: AppDimens.w4),
             // Value
             Text(
               value.toString(),
-              style: TextStyles.semiBold16(color: MyColors.black87),
+              style: TextStyles.semiBold16(
+                color: MyColors.black87,
+              ),
             ),
-            SizedBox(width: AppDimens.w12),
+            SizedBox(width: AppDimens.w4),
             // Increment Button
             IconButton(
               icon: Icon(
-                Icons.add_circle_outline,
+                Icons.add,
                 color: MyColors.greenButton,
                 size: AppDimens.iconSize24,
               ),
@@ -1007,6 +1111,142 @@ class _CounterRow extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+// Custom Switch Widget
+class _CustomSwitch extends StatefulWidget {
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const _CustomSwitch({
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  State<_CustomSwitch> createState() =>
+      _CustomSwitchState();
+}
+
+class _CustomSwitchState extends State<_CustomSwitch>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _animation = Tween<double>(begin: 0.0, end: 1.0)
+        .animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: Curves.easeInOut,
+          ),
+        );
+    if (widget.value) {
+      _controller.value = 1.0;
+    }
+  }
+
+  @override
+  void didUpdateWidget(_CustomSwitch oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value != oldWidget.value) {
+      if (widget.value) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => widget.onChanged(!widget.value),
+      child: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) {
+          return Container(
+            width: 50.w,
+            height: 28.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.r),
+              gradient: LinearGradient(
+                colors: [
+                  const Color(
+                    0xFF83D2EF,
+                  ), // More saturated blue on left
+                  const Color(0xFFCEE1E8), // Middle blue
+                  const Color(
+                    0xFFAEE2F5,
+                  ), // Pale blue on right
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(
+                    alpha: 0.1,
+                  ),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                // Thumb (Circular button with sun icon)
+                Positioned(
+                  left: _animation.value * (50.w - 24.w),
+                  top: 2.h,
+                  child: Container(
+                    width: 24.w,
+                    height: 24.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xFF83D2EF),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(
+                            alpha: 0.1,
+                          ),
+                          blurRadius: 2,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        ImgAssets.icSun,
+                        width: 14.w,
+                        height: 14.w,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
